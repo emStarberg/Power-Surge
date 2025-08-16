@@ -10,6 +10,7 @@ public partial class Camera : Camera2D
 	{
 		Zoom = new Vector2(2.5f,2.5f);
 		_player = GetParent().GetNode<Node2D>("Player");
+		Offset = Offset = new Vector2(0, -25);
 	}
 
 	public override void _PhysicsProcess(double delta)
