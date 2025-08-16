@@ -1,9 +1,80 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkdmfnx1klvpl"]
+[gd_scene load_steps=20 format=4 uid="uid://dkdmfnx1klvpl"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerMove.cs" id="1_8gdma"]
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_eelgj"]
+[ext_resource type="Script" path="res://Scenes/Testing/Background.cs" id="2_pksf1"]
 [ext_resource type="Texture2D" uid="uid://bt1mjmi5nff37" path="res://Assets/Tilemaps/GrassDirt.png" id="3_easoc"]
 [ext_resource type="Script" path="res://Scenes/Testing/Camera.cs" id="4_lafv0"]
+[ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="5_fccfq"]
+[ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="5_ytlcl"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0s4mp"]
+texture = ExtResource("3_easoc")
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+4:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+15:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+4:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+4:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kf3db"]
+texture = ExtResource("5_ytlcl")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_48xti"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_0s4mp")
+sources/1 = SubResource("TileSetAtlasSource_kf3db")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mftlj"]
 atlas = ExtResource("1_eelgj")
@@ -63,67 +134,22 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ux6b6"]
-radius = 8.0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0s4mp"]
-texture = ExtResource("3_easoc")
-0:0/0 = 0
-1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-2:0/0 = 0
-4:0/0 = 0
-6:0/0 = 0
-7:0/0 = 0
-9:0/0 = 0
-10:0/0 = 0
-12:0/0 = 0
-13:0/0 = 0
-15:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-4:1/0 = 0
-6:1/0 = 0
-7:1/0 = 0
-9:1/0 = 0
-10:1/0 = 0
-12:1/0 = 0
-13:1/0 = 0
-15:1/0 = 0
-16:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-4:2/0 = 0
-6:3/0 = 0
-7:3/0 = 0
-9:3/0 = 0
-10:3/0 = 0
-12:3/0 = 0
-13:3/0 = 0
-15:3/0 = 0
-16:3/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-4:4/0 = 0
-6:4/0 = 0
-7:4/0 = 0
-9:4/0 = 0
-10:4/0 = 0
-12:4/0 = 0
-13:4/0 = 0
-15:4/0 = 0
-16:4/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_48xti"]
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_0s4mp")
+radius = 7.0
 
 [node name="Node2D" type="Node2D"]
 
+[node name="LuminescentPlains" type="Sprite2D" parent="."]
+position = Vector2(258, 128)
+texture = ExtResource("5_fccfq")
+script = ExtResource("2_pksf1")
+CameraPath = NodePath("../Camera")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAMAAwAAQAAAAAAAAANAAwAAQABAAAAAAAOAAwAAQABAAAAAAAPAAwAAQABAAAAAAAQAAwAAQACAAAAAAAQAA0AAQACAAEAAAAQAA4AAQACAAEAAAAPAA0AAQABAAEAAAAOAA0AAQABAAEAAAANAA0AAQABAAEAAAANAA4AAQABAAEAAAAOAA4AAQABAAEAAAAPAA4AAQABAAEAAAAMAA0AAQAAAAEAAAAMAA4AAQAAAAEAAAACAA4AAQAAAAAAAAACAA8AAQAAAAEAAAADAA8AAQABAAEAAAAEAA8AAQABAAEAAAAFAA8AAQABAAEAAAAGAA8AAQACAAEAAAAGAA4AAQACAAAAAAAFAA4AAQABAAAAAAAEAA4AAQABAAAAAAADAA4AAQABAAAAAAA=")
+tile_set = SubResource("TileSet_48xti")
+
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(143, 76)
+position = Vector2(231, 175)
 script = ExtResource("1_8gdma")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="Player"]
@@ -134,12 +160,8 @@ autoplay = "default"
 frame_progress = 0.24014
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Player"]
-visible = false
+position = Vector2(1, -1)
 shape = SubResource("CircleShape2D_ux6b6")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray(0, 0, 8, 0, 6, 0, 0, 0, 1, 0, 0, 0, 0, 0, 9, 0, 6, 0, 0, 0, 1, 0, 0, 0, 0, 0, 10, 0, 6, 0, 0, 0, 1, 0, 0, 0, 0, 0, 7, 0, 6, 0, 0, 0, 1, 0, 0, 0, 0, 0)
-tile_set = SubResource("TileSet_48xti")
 
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("4_lafv0")
