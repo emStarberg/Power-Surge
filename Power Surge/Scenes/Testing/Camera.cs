@@ -8,7 +8,7 @@ public partial class Camera : Camera2D
 
 	public override void _Ready()
 	{
-		Zoom = new Vector2(2.5f,2.5f);
+		Zoom = new Vector2(3f,3f);
 		_player = GetParent().GetNode<Node2D>("Player");
 		Offset = Offset = new Vector2(0, -25);
 	}
