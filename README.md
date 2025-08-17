@@ -8,7 +8,6 @@ A 2D platformer about resource management, created in Godot
 ## Repository Rules
 - Try not to push directly to main unless it is an edit to README .gitignore etc. Use a new branch when working on a feature and then merge
 - Write descriptive commit messages, and reference any issues they contribute towards
-- Remember to pull
 - Let others know if you are making changes to a file that they could be working on simultaneously
 
 ## Writing Scripts in Godot
