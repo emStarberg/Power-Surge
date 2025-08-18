@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Background : Node2D
 {
-	[Export] public NodePath CameraPath; // Assign your Camera2D node in the inspector
+	[Export] public NodePath CameraPath;
 	private Camera2D _camera;
 
 	public override void _Ready()
