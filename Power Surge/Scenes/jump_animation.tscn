@@ -47,7 +47,8 @@ animations = [{
 }]
 
 [node name="Jump Animation" type="AnimatedSprite2D"]
-position = Vector2(168, 130)
+position = Vector2(170, 128)
+scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_loefu")
 frame_progress = 0.13337
 script = ExtResource("2_avhy3")
