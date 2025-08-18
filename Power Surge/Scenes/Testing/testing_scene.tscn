@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=28 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/Background.cs" id="2_p1rgw"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="5_qte2r"]
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="6_4nrw7"]
+[ext_resource type="Script" path="res://Scripts/CircuitBug.cs" id="7_fgpbj"]
+[ext_resource type="Texture2D" uid="uid://ckuettnld20c6" path="res://Assets/Characters/Circuit Bug Run - Spritesheet.png" id="7_ttbwi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o82n"]
 texture = ExtResource("6_4nrw7")
@@ -80,17 +82,62 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1bk2"]
 radius = 8.06226
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ritr"]
+size = Vector2(16, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khrmu"]
+atlas = ExtResource("7_ttbwi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx1rj"]
+atlas = ExtResource("7_ttbwi")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pihde"]
+atlas = ExtResource("7_ttbwi")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcvrf"]
+atlas = ExtResource("7_ttbwi")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yewsj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khrmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx1rj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pihde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcvrf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ym2w"]
+size = Vector2(6, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_otjnf"]
+size = Vector2(3.5, 12)
+
 [node name="Node2D" type="Node2D"]
 position = Vector2(416, 228)
 
-[node name="LuminescentPlains" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, -3)
 texture = ExtResource("1_bops4")
 script = ExtResource("2_p1rgw")
-CameraPath = NodePath("../Camera2D")
+CameraPath = NodePath("../Camera")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD8/wIAAAAAAAAAAAD9/wIAAAABAAAAAAD+/wIAAAABAAAAAAD//wIAAAABAAAAAAAAAAIAAAABAAAAAAABAAIAAAABAAAAAAACAAIAAAABAAAAAAADAAIAAAABAAAAAAAEAAIAAAABAAAAAAAFAAIAAAACAAAAAAA=")
+[node name="Ground" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD8/wIAAAAAAAAAAAD9/wIAAAABAAAAAAD+/wIAAAABAAAAAAD//wIAAAABAAAAAAAAAAIAAAABAAAAAAABAAIAAAABAAAAAAACAAIAAAABAAAAAAADAAIAAAABAAAAAAAEAAIAAAABAAAAAAAFAAIAAAACAAAAAAD9/wUAAAABAAAAAAD+/wUAAAABAAAAAAD//wUAAAABAAAAAAAAAAUAAAABAAAAAAABAAUAAAABAAAAAAACAAUAAAABAAAAAAADAAUAAAABAAAAAAAEAAUAAAABAAAAAAAFAAUAAAABAAAAAAAGAAUAAAABAAAAAAAHAAUAAAABAAAAAAAIAAUAAAABAAAAAAAJAAUAAAABAAAAAAAKAAUAAAABAAAAAAALAAUAAAABAAAAAAAMAAUAAAABAAAAAAANAAUAAAABAAAAAAAOAAUAAAABAAAAAAAPAAUAAAABAAAAAAAQAAUAAAACAAAAAADy/wQAAAAAAAAAAADz/wQAAAABAAAAAAD0/wQAAAABAAAAAAD1/wQAAAABAAAAAAD2/wQAAAABAAAAAAD3/wQAAAABAAAAAAD4/wQAAAABAAAAAAD5/wQAAAACAAAAAAD6/wUAAAAAAAAAAAD7/wUAAAABAAAAAAD8/wUAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_0hka7")
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_animFolder")]
@@ -110,6 +157,32 @@ frame_progress = 0.643787
 position = Vector2(2, -2)
 shape = SubResource("CircleShape2D_k1bk2")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 position = Vector2(2, -2)
 script = ExtResource("5_qte2r")
+
+[node name="Circuit Bug" type="CharacterBody2D" parent="."]
+script = ExtResource("7_fgpbj")
+
+[node name="Collider" type="CollisionShape2D" parent="Circuit Bug"]
+position = Vector2(126, 74)
+shape = SubResource("RectangleShape2D_8ritr")
+
+[node name="Run" type="AnimatedSprite2D" parent="Circuit Bug"]
+position = Vector2(126, 72)
+sprite_frames = SubResource("SpriteFrames_yewsj")
+autoplay = "default"
+frame_progress = 0.273588
+
+[node name="Area Check Barriers" type="Area2D" parent="Circuit Bug"]
+position = Vector2(126, 74)
+
+[node name="Check Barriers" type="CollisionShape2D" parent="Circuit Bug/Area Check Barriers"]
+position = Vector2(-7, -0.5)
+shape = SubResource("RectangleShape2D_7ym2w")
+
+[node name="Invisible Barrier" type="Area2D" parent="."]
+position = Vector2(-52, 72)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Invisible Barrier"]
+shape = SubResource("RectangleShape2D_otjnf")
