@@ -6,11 +6,21 @@ public partial class PlayerMove : CharacterBody2D
 	[Export] public float JumpStrength = -300f; // Jump velocity
 	[Export] public float Gravity = 1000f; // Gravity force      
 	[Export] public float MaxFallSpeed = 1000f; // Terminal velocity
+	[Export] public Node2D _animFolder;
+	private Vector2 velocity;
+	private AnimatedSprite2D IdleAnim, JumpAnim, DeathAnim, HurtAnim;
+	private PackedScene JumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn");
+
+	public override void _Ready()
+	{
+		//JumpAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Jump");
+		IdleAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Idle");
+		IdleAnim.Play(); 
+	}
+
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = Velocity;
-
 		// Apply gravity to Y velocity.
 		velocity.Y += Gravity * (float)delta;
 
@@ -30,16 +40,25 @@ public partial class PlayerMove : CharacterBody2D
 		// Handle jump
 		if (Input.IsActionJustPressed("input_jump"))
 		{
-			if (IsOnFloor())
-			{
-				GD.Print("here");
-				// Jump
-				velocity.Y = JumpStrength; 
-			}
+			Jump(); // Jump
 		}
 		// Update velocity
 		Velocity = velocity;
 		// Move
 		MoveAndSlide();
+	}
+
+
+
+	public void Jump()
+	{
+		if (IsOnFloor())
+		{
+			velocity.Y = JumpStrength;
+			Node jumpAnimInstance = JumpAnimation.Instantiate();
+			((Node2D)jumpAnimInstance).GlobalPosition = GlobalPosition;
+			GetTree().Root.AddChild(jumpAnimInstance);
+		}
+		
 	}
 }
