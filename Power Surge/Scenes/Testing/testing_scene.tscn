@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=50 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="6_4nrw7"]
 [ext_resource type="Script" path="res://Scripts/CircuitBug.cs" id="7_fgpbj"]
 [ext_resource type="Texture2D" uid="uid://ckuettnld20c6" path="res://Assets/Characters/Circuit Bug Run - Spritesheet.png" id="7_ttbwi"]
+[ext_resource type="Texture2D" uid="uid://b61u24calio1c" path="res://Assets/Characters/Circuit bug Attack - Spritesheet.png" id="9_h2kbw"]
 [ext_resource type="PackedScene" uid="uid://bv5pb2xbhiyhu" path="res://Scenes/invisible_barrier.tscn" id="9_v77q8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o82n"]
@@ -122,8 +123,153 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol1ik"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mccrd"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3ww1"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dibg"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rga5b"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4tdl"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycq71"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqymi"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aaq5k"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0msl"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml4pw"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftwtb"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4qf5"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pn8fg"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wny4r"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jad55"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ia0jt"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3m88"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spfmo"]
+atlas = ExtResource("9_h2kbw")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_blg6x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol1ik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mccrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3ww1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dibg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rga5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4tdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycq71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqymi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aaq5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0msl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml4pw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftwtb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4qf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pn8fg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wny4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jad55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ia0jt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3m88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spfmo")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ym2w"]
 size = Vector2(6, 9)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_r6i4u"]
+a = Vector2(-75, 1)
+b = Vector2(0, 1)
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(416, 228)
@@ -160,30 +306,45 @@ position = Vector2(2, -2)
 script = ExtResource("5_qte2r")
 
 [node name="Circuit Bug" type="CharacterBody2D" parent="."]
+position = Vector2(130, 72)
 script = ExtResource("7_fgpbj")
 
 [node name="Collider" type="CollisionShape2D" parent="Circuit Bug"]
-position = Vector2(126, 74)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_8ritr")
 
 [node name="Animations" type="Node2D" parent="Circuit Bug"]
 
 [node name="Anim_Run" type="AnimatedSprite2D" parent="Circuit Bug/Animations"]
-position = Vector2(126, 72)
 sprite_frames = SubResource("SpriteFrames_yewsj")
 autoplay = "default"
 frame_progress = 0.273588
 
-[node name="Area Check Barriers" type="Area2D" parent="Circuit Bug"]
-position = Vector2(126, 74)
+[node name="Anim_Attack" type="AnimatedSprite2D" parent="Circuit Bug/Animations"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_blg6x")
+frame = 8
+frame_progress = 0.550982
 
-[node name="Check Barriers" type="CollisionShape2D" parent="Circuit Bug/Area Check Barriers"]
-position = Vector2(-7, -0.5)
+[node name="Barrier Detection" type="Area2D" parent="Circuit Bug"]
+position = Vector2(-7, 1)
+
+[node name="Barrier Detection" type="CollisionShape2D" parent="Circuit Bug/Barrier Detection"]
 shape = SubResource("RectangleShape2D_7ym2w")
+
+[node name="Player Detection" type="Area2D" parent="Circuit Bug"]
+position = Vector2(-7, 1)
+
+[node name="Player Detection" type="CollisionShape2D" parent="Circuit Bug/Player Detection"]
+position = Vector2(0, -1)
+shape = SubResource("SegmentShape2D_r6i4u")
 
 [node name="Invisible Barrier2" parent="." groups=["Barrier"] instance=ExtResource("9_v77q8")]
 position = Vector2(144, 72)
 
 [node name="Invisible Barrier" parent="." groups=["Barrier"] instance=ExtResource("9_v77q8")]
 
-[connection signal="area_entered" from="Circuit Bug/Area Check Barriers" to="Circuit Bug" method="OnAreaEntered"]
+[connection signal="animation_finished" from="Circuit Bug/Animations/Anim_Attack" to="Circuit Bug" method="OnAttackAnimFinished"]
+[connection signal="area_entered" from="Circuit Bug/Barrier Detection" to="Circuit Bug" method="OnAreaEntered"]
+[connection signal="body_entered" from="Circuit Bug/Player Detection" to="Circuit Bug" method="OnPlayerDetectionEntered"]
+[connection signal="body_exited" from="Circuit Bug/Player Detection" to="Circuit Bug" method="OnPlayerDetectionExited"]
