@@ -22,3 +22,42 @@ lead them to _The World Engine_. Small enemies named circuit bugs patrol the are
 ### _The Circuit Labs_
 Once through the underground tunnel found at the end of The _Luminescent Plains_, the player comes accross an abandoned lab, once dedicated to researching _The World Engine_. Here, the lab's security system has been taken over, creating some new dangerous enemies for the player. The final level is a boss fight against ERR0R, a mutant mech-like robot composed of computers and lab equipment.
 
+
+## Section 3 - General Gameplay
+The game is a classic 16-bit 2D platformer. 
+### Cutscenes
+There are non-animated cutscenes at the beginning, end, and between sections. These will have dialogue that is only text-based with no sound.
+### Player Communication
+Throughout the levels, dialogue boxes will pop up where the protagonist and other members of the team will comment on what is happening, helping guide the player and build some lore.
+
+## Section 4 - Player Mechanics
+### Basic Controls
+- Move left/right = a/d or leftarrow/rightarrow
+- Jump = w or up arrow. Double Jump = w or up arrow while in mid-air
+- Attack = spacebar
+- Choose attack = +/-
+- Dash = lshift
+
+### Power
+The player has one stat - power, it ranges from 0% to 100%.
+
+Power is lost with every move (except just moving left or right), and is also lost when hit by enemy attacks.
+
+Power can be regained by using rechargers or power packs placed throughout the level
+
+If the power level reaches 0%, the player dies and must restart the level
+
+### Power Surge Mode
+The player enters Power Surge mode when the power level exceeds 100%.
+Power Surge mode increases the speed and jump height of the player as well as access to a new attack.
+When the player enters Power Surge mode a timer starts, and if it finishes before the power level returns to 100% or less, the player dies.
+
+
+### Attacks
+| Name              | Description                                                                                   | Power Usage |   |   |
+|-------------------|-----------------------------------------------------------------------------------------------|-------------|---|---|
+| Weak Pulse        | A short, weak attack used for activating generators. Does a small amount of damage to enemies | 10%         |   |   |
+| Strong Blast      | A powerful, ranged attack, useful for taking out small enemies in one hit.                    | 20%         |   |   |
+| Power Surge Blast | A very powerful, ranged attack for doing large amounts of damage to multiple enemies          | Half        |   |   |
+
+
