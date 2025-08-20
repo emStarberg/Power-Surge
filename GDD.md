@@ -74,8 +74,26 @@ The player can die in 2 different ways:
 - Running out of power
 
 
-## World Objects
+## Section 4 - World Objects
 There are lots of different objects to interact with throughout the levels;
+| Name               | Function                                                |
+|--------------------|---------------------------------------------------------|
+| Energy Deposit     | +10% power when walked over                             |
+| Battery Pack       | +20% power when walked over                             |
+| Electrical Surge   | +40% power when walked over                             |
+| Recharger          | +5% power when stood by                                 |
+| Engine Fragment    | Collectible Item                                        |
+| Generator          | Linked to another object which it powers when activated |
+| Moving Platform    | Platform that moves, powered by generator               |
+| Retractable Bridge | Bridge that retracts when not powered by generator      |
+| Stone Bridge       | Collapses when walked over                              |
+| Piston             | Crushes the player, reduces power by 30%                |
+| Spring             | Propels the player high into the air when walked over   |
+| Energy Shield      | Blocks the Player's path until deactivated              |
+| Magnetic Wall      | Allows the player to climb it                           |
+
+## Section 5 - Enemies
+There are various enemies scattered across the world:
 | Name               | Function                                                |
 |--------------------|---------------------------------------------------------|
 | Energy Deposit     | +10% power when walked over                             |
