@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=57 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Background.cs" id="2_p1rgw"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="5_qte2r"]
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="6_4nrw7"]
+[ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player Death - Spritesheet.png" id="6_dsmcn"]
 [ext_resource type="Script" path="res://Scripts/CircuitBug.cs" id="7_fgpbj"]
 [ext_resource type="Texture2D" uid="uid://ckuettnld20c6" path="res://Assets/Characters/Circuit Bug Run - Spritesheet.png" id="7_ttbwi"]
 [ext_resource type="Texture2D" uid="uid://b61u24calio1c" path="res://Assets/Characters/Circuit bug Attack - Spritesheet.png" id="9_h2kbw"]
@@ -79,6 +80,49 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 12.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm0ph"]
+atlas = ExtResource("6_dsmcn")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbwco"]
+atlas = ExtResource("6_dsmcn")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfh7p"]
+atlas = ExtResource("6_dsmcn")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0vi2"]
+atlas = ExtResource("6_dsmcn")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1unc"]
+atlas = ExtResource("6_dsmcn")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5tfhu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mm0ph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbwco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfh7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0vi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1unc")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1bk2"]
@@ -297,6 +341,15 @@ sprite_frames = SubResource("SpriteFrames_2exqc")
 autoplay = "default"
 frame_progress = 0.643787
 
+[node name="Anim_Death" type="AnimatedSprite2D" parent="Player/Animations"]
+visible = false
+position = Vector2(1, 0)
+rotation = 3.14409
+scale = Vector2(1.3999, 1.3999)
+sprite_frames = SubResource("SpriteFrames_5tfhu")
+frame = 4
+frame_progress = 1.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(2, -2)
 shape = SubResource("CircleShape2D_k1bk2")
@@ -344,6 +397,7 @@ position = Vector2(144, 72)
 
 [node name="Invisible Barrier" parent="." groups=["Barrier"] instance=ExtResource("9_v77q8")]
 
+[connection signal="animation_finished" from="Player/Animations/Anim_Death" to="Player" method="OnDeathAnimFinished"]
 [connection signal="animation_finished" from="Circuit Bug/Animations/Anim_Attack" to="Circuit Bug" method="OnAttackAnimFinished"]
 [connection signal="area_entered" from="Circuit Bug/Barrier Detection" to="Circuit Bug" method="OnAreaEntered"]
 [connection signal="body_entered" from="Circuit Bug/Player Detection" to="Circuit Bug" method="OnPlayerDetectionEntered"]
