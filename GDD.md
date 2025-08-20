@@ -54,10 +54,40 @@ When the player enters Power Surge mode a timer starts, and if it finishes befor
 
 
 ### Attacks
-| Name              | Description                                                                                   | Power Usage |   |   |
-|-------------------|-----------------------------------------------------------------------------------------------|-------------|---|---|
-| Weak Pulse        | A short, weak attack used for activating generators. Does a small amount of damage to enemies | 10%         |   |   |
-| Strong Blast      | A powerful, ranged attack, useful for taking out small enemies in one hit.                    | 20%         |   |   |
-| Power Surge Blast | A very powerful, ranged attack for doing large amounts of damage to multiple enemies          | Half        |   |   |
+| Name              | Description                                                                                   | Power Usage 
+|-------------------|-----------------------------------------------------------------------------------------------|-------------
+| Weak Pulse        | A short, weak attack used for activating generators. Does a small amount of damage to enemies | 10%          
+| Strong Blast      | A powerful, ranged attack, useful for taking out small enemies in one hit.                    | 20%            
+| Power Surge Blast | A very powerful, ranged attack for doing large amounts of damage to multiple enemies          | Half  
+| Surround Blast    | A moderately powerful attack that damages enemies surrounding the player                      | 20%
+
+### Other Abilities
+| Name              | Power Usage
+|-------------------|--------------
+| Jump              | 3%
+| Dash              | 5%
+| Shield            | 3%/s
+
+### Death
+The player can die in 2 different ways:
+- Falling off the edge of the level
+- Running out of power
 
 
+## World Objects
+There are lots of different objects to interact with throughout the levels;
+| Name               | Function                                                |
+|--------------------|---------------------------------------------------------|
+| Energy Deposit     | +10% power when walked over                             |
+| Battery Pack       | +20% power when walked over                             |
+| Electrical Surge   | +40% power when walked over                             |
+| Recharger          | +5% power when stood by                                 |
+| Engine Fragment    | Collectible Item                                        |
+| Generator          | Linked to another object which it powers when activated |
+| Moving Platform    | Platform that moves, powered by generator               |
+| Retractable Bridge | Bridge that retracts when not powered by generator      |
+| Stone Bridge       | Collapses when walked over                              |
+| Piston             | Crushes the player, reduces power by 30%                |
+| Spring             | Propels the player high into the air when walked over   |
+| Energy Shield      | Blocks the Player's path until deactivated              |
+| Magnetic Wall      | Allows the player to climb it                           |
