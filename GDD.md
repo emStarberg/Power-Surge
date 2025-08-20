@@ -94,18 +94,12 @@ There are lots of different objects to interact with throughout the levels;
 
 ## Section 5 - Enemies
 There are various enemies scattered across the world:
-| Name               | Function                                                |
-|--------------------|---------------------------------------------------------|
-| Energy Deposit     | +10% power when walked over                             |
-| Battery Pack       | +20% power when walked over                             |
-| Electrical Surge   | +40% power when walked over                             |
-| Recharger          | +5% power when stood by                                 |
-| Engine Fragment    | Collectible Item                                        |
-| Generator          | Linked to another object which it powers when activated |
-| Moving Platform    | Platform that moves, powered by generator               |
-| Retractable Bridge | Bridge that retracts when not powered by generator      |
-| Stone Bridge       | Collapses when walked over                              |
-| Piston             | Crushes the player, reduces power by 30%                |
-| Spring             | Propels the player high into the air when walked over   |
-| Energy Shield      | Blocks the Player's path until deactivated              |
-| Magnetic Wall      | Allows the player to climb it                           |
+| Name             | Function                                                      | Description                                                     | Health |
+|------------------|---------------------------------------------------------------|-----------------------------------------------------------------|--------|
+| Circuit Bug      | Projectile attack. -10% power                                 | Small, fast moving robotic insect                               | 1      |
+| Voltage Sentinel | Short ranged smash attack. -15% power                         | Humanoid robotic guardian designed to protect the circuit labs  | 3      |
+| Energy Puddle    | Doesn't move. -5% power when stepped on                       | Small puddles of unstable electricity that appear on the ground | -      |
+| Laser Turret     | Projectile attack. -15% power                                 | Turrets leftover from the lab's security system                 | 2      |
+| Wild Spark       | Multi-directional shock. -20% power                           | A mysterious electrical entity                                  | 2      |
+| Shocking Cloud   | On contact, -35% power                                        | An energy storm that floats                                     | -      |
+| Enforcer         | Projectile attack. -20% power. Close-range smash. -30% power. | A large, quadruped robot                                        | 4      |
