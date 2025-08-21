@@ -9,6 +9,7 @@ public partial class ProjectileCB : Area2D
 	private float Speed = 300f;
 	private AnimatedSprite2D ExplodeAnim;
 	private Sprite2D Sprite;
+
 	public override void _Ready()
 	{
 		ExplodeAnim = GetNode<AnimatedSprite2D>("Explosion");
@@ -35,13 +36,19 @@ public partial class ProjectileCB : Area2D
 	}
 
 	public void OnBodyEntered(Node2D body)
-	{
-		if (!body.IsInGroup("Enemy"))
-		{
-			Explode();
-		}
-		
-	}
+{
+    if (!body.IsInGroup("Enemy"))
+    {
+        Explode();
+        if (body.Name == "Player")
+        {
+            if (body is PlayerMove player)
+            {
+                player.Hurt(20, 2f, 0.1f);
+            }
+        }
+    }
+}
 
 	public void Explode()
 	{
