@@ -1,62 +1,86 @@
 using Godot;
 using System;
-using System.Security.Cryptography;
 
 public partial class CircuitBug : CharacterBody2D
 {
 	public const float Speed = 50.0f;
 	private Vector2 velocity;
-	private string Direction = "left"; // Direction facing
+	private string Direction = "left";
 	private AnimatedSprite2D RunAnim, AttackAnim, CurrentAnimation;
 	private bool IsRunning = true;
 	private bool PlayerDetected = false;
 	private PackedScene Projectile = GD.Load<PackedScene>("Scenes/projectile_cb.tscn");
 	private RayCast2D groundRay;
+	private RayCast2D wallRay;
+	private RayCast2D playerRay;
+	
 
 	public override void _Ready()
 	{
+		playerRay = GetNode<RayCast2D>("PlayerRay");
 		groundRay = GetNode<RayCast2D>("GroundRay");
+		wallRay = GetNode<RayCast2D>("WallRay");
 		RunAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Run");
 		AttackAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Attack");
 		CurrentAnimation = RunAnim;
 		CurrentAnimation.Play();
 
-		// Connect the frame changed signal
 		AttackAnim.FrameChanged += OnAttackAnimFrameChanged;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		// Add gravity
+		// Gravity
 		if (!IsOnFloor())
-		{
 			velocity += GetGravity() * (float)delta;
-		}
 
 		if (IsRunning)
 		{
 			// Move based on direction
 			if (Direction == "right")
-			{
 				velocity = new Vector2(Speed, Velocity.Y);
-			}
-			else if (Direction == "left")
-			{
+			else
 				velocity = new Vector2(-Speed, Velocity.Y);
-			}
 
-			// Update raycast position ahead of bug
-			
 
-			// Check if ground is detected
-			groundRay.ForceRaycastUpdate();
-			if (!groundRay.IsColliding())
+			// Check for wall ahead
+			wallRay.ForceRaycastUpdate();
+			if (wallRay.IsColliding())
 			{
-				// No ground ahead, turn around
 				Direction = Direction == "right" ? "left" : "right";
 				Scale = new Vector2(-Scale.X, Scale.Y);
 			}
+
+			// Check for ground ahead
+			groundRay.ForceRaycastUpdate();
+			if (!groundRay.IsColliding())
+			{
+				Direction = Direction == "right" ? "left" : "right";
+				Scale = new Vector2(-Scale.X, Scale.Y);
+			}
+
+			
 		}
+
+		// Player detection via raycast
+			playerRay.ForceRaycastUpdate();
+			if (playerRay.IsColliding() && playerRay.GetCollider() is Node2D collider && collider.Name == "Player")
+			{
+				if (!PlayerDetected)
+				{
+					GD.Print("Player detected by raycast");
+					Attack();
+					PlayerDetected = true;
+				}
+			}
+			else
+			{
+				if (PlayerDetected)
+				{
+					GD.Print("Player lost by raycast");
+					PlayerDetected = false;
+				}
+			}
 
 		Velocity = velocity;
 		MoveAndSlide();
@@ -70,37 +94,6 @@ public partial class CircuitBug : CharacterBody2D
 		IsRunning = false;
 		// Stop
 		velocity = new Vector2(0, 0);
-	}
-
-	public void OnBodyEntered(Area2D body)
-	{
-		// Check if area is in the "Ground" group
-		if (body.IsInGroup("Ground"))
-		{
-			// Change direction
-			Direction = Direction == "right" ? "left" : "right";
-			// Flip horizontally
-			Scale = new Vector2(-Scale.X, Scale.Y);
-		}
-	}
-
-	public void OnPlayerDetectionEntered(Node2D body)
-	{
-		if (body.Name == "Player")
-		{
-			GD.Print("Player entered");
-			Attack();
-			PlayerDetected = true;
-		}
-	}
-
-	public void OnPlayerDetectionExited(Node2D body)
-	{
-		if (body.Name == "Player")
-		{
-			GD.Print("Player exited");
-			PlayerDetected = false;
-		}
 	}
 
 	public void OnAttackAnimFinished()
