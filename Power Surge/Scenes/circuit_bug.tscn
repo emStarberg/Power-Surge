@@ -196,17 +196,21 @@ shape = SubResource("RectangleShape2D_8ritr")
 [node name="Animations" type="Node2D" parent="."]
 
 [node name="Anim_Run" type="AnimatedSprite2D" parent="Animations"]
+position = Vector2(1.5, -1.5)
+scale = Vector2(1.1875, 1.1875)
 sprite_frames = SubResource("SpriteFrames_yewsj")
 autoplay = "default"
 frame_progress = 0.273588
 
 [node name="Anim_Attack" type="AnimatedSprite2D" parent="Animations"]
 visible = false
+position = Vector2(1.5, -1.5)
+scale = Vector2(1.1875, 1.1875)
 sprite_frames = SubResource("SpriteFrames_blg6x")
 frame = 8
 frame_progress = 0.550982
 
-[node name="GroundRay" type="RayCast2D" parent="."]
+[node name="GroundRay" type="RayCast2D" parent="." groups=["Enemy"]]
 position = Vector2(-13, 7)
 
 [node name="WallRay" type="RayCast2D" parent="."]

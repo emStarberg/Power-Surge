@@ -7,8 +7,12 @@ public partial class ProjectileCB : Area2D
 	private String Direction;
 	private bool DoMove = false;
 	private float Speed = 300f;
+	private AnimatedSprite2D ExplodeAnim;
+	private Sprite2D Sprite;
 	public override void _Ready()
 	{
+		ExplodeAnim = GetNode<AnimatedSprite2D>("Explosion");
+		Sprite = GetNode<Sprite2D>("Sprite");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,7 +31,30 @@ public partial class ProjectileCB : Area2D
 	{
 		Direction = dir;
 		DoMove = true;
+
+	}
+
+	public void OnBodyEntered(Node2D body)
+	{
+		if (!body.IsInGroup("Enemy"))
+		{
+			Explode();
+		}
 		
+	}
+
+	public void Explode()
+	{
+		DoMove = false;
+		Sprite.Visible = false;
+		ExplodeAnim.Visible = true;
+		ExplodeAnim.Play();
+	}
+
+	public void OnExplodeAnimationFinished()
+	{
+		// Destroy self
+		QueueFree();
 	}
 
 }
