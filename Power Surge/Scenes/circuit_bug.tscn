@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dso2d7b5ykmol"]
+[gd_scene load_steps=30 format=3 uid="uid://dso2d7b5ykmol"]
 
 [ext_resource type="Script" path="res://Scripts/CircuitBug.cs" id="1_pjp8a"]
 [ext_resource type="Texture2D" uid="uid://ckuettnld20c6" path="res://Assets/Characters/Circuit Bug Run - Spritesheet.png" id="2_hrnt5"]
@@ -184,13 +184,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ym2w"]
-size = Vector2(6, 9)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_r6i4u"]
-a = Vector2(-75, 1)
-b = Vector2(0, 1)
-
 [node name="Circuit Bug" type="CharacterBody2D"]
 position = Vector2(130, 72)
 collision_mask = 3
@@ -203,32 +196,28 @@ shape = SubResource("RectangleShape2D_8ritr")
 [node name="Animations" type="Node2D" parent="."]
 
 [node name="Anim_Run" type="AnimatedSprite2D" parent="Animations"]
+position = Vector2(1.5, -1.5)
+scale = Vector2(1.1875, 1.1875)
 sprite_frames = SubResource("SpriteFrames_yewsj")
 autoplay = "default"
 frame_progress = 0.273588
 
 [node name="Anim_Attack" type="AnimatedSprite2D" parent="Animations"]
 visible = false
+position = Vector2(1.5, -1.5)
+scale = Vector2(1.1875, 1.1875)
 sprite_frames = SubResource("SpriteFrames_blg6x")
 frame = 8
 frame_progress = 0.550982
 
-[node name="Barrier Detection" type="Area2D" parent="."]
-position = Vector2(-8, 1)
-collision_mask = 3
+[node name="GroundRay" type="RayCast2D" parent="." groups=["Enemy"]]
+position = Vector2(-13, 7)
 
-[node name="Barrier Detection" type="CollisionShape2D" parent="Barrier Detection"]
-shape = SubResource("RectangleShape2D_7ym2w")
+[node name="WallRay" type="RayCast2D" parent="."]
+target_position = Vector2(-14, 1)
 
-[node name="Player Detection" type="Area2D" parent="."]
-position = Vector2(-7, 1)
-
-[node name="Player Detection" type="CollisionShape2D" parent="Player Detection"]
-position = Vector2(0, -1)
-shape = SubResource("SegmentShape2D_r6i4u")
+[node name="PlayerRay" type="RayCast2D" parent="."]
+position = Vector2(-6, 2)
+target_position = Vector2(-76, -1)
 
 [connection signal="animation_finished" from="Animations/Anim_Attack" to="." method="OnAttackAnimFinished"]
-[connection signal="area_entered" from="Barrier Detection" to="." method="OnAreaEntered"]
-[connection signal="body_entered" from="Barrier Detection" to="." method="OnBodyEntered"]
-[connection signal="body_entered" from="Player Detection" to="." method="OnPlayerDetectionEntered"]
-[connection signal="body_exited" from="Player Detection" to="." method="OnPlayerDetectionExited"]

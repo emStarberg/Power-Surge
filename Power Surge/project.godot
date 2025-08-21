@@ -19,6 +19,10 @@ config/icon="res://Assets/Default/icon.svg"
 
 project/assembly_name="Power-Surge"
 
+[global_group]
+
+Enemy=""
+
 [input]
 
 input_jump={
