@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=42 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="6_4nrw7"]
 [ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player Death - Spritesheet.png" id="6_dsmcn"]
 [ext_resource type="Texture2D" uid="uid://bitip81tn2v63" path="res://Assets/Characters/Shield - Spritesheet.png" id="7_bssvx"]
+[ext_resource type="Texture2D" uid="uid://bptbc7jd1antf" path="res://Assets/Characters/Player Hurt - Spritesheet.png" id="7_qba23"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="9_xf330"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o82n"]
@@ -124,6 +125,49 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko2hj"]
+atlas = ExtResource("7_qba23")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1twj1"]
+atlas = ExtResource("7_qba23")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4kih"]
+atlas = ExtResource("7_qba23")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4f21w"]
+atlas = ExtResource("7_qba23")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qm3s6"]
+atlas = ExtResource("7_qba23")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6hyil"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko2hj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1twj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4kih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4f21w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qm3s6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1bk2"]
 radius = 8.06226
 
@@ -202,7 +246,7 @@ _animFolder = NodePath("Animations")
 
 [node name="Anim_Idle" type="AnimatedSprite2D" parent="Player/Animations"]
 position = Vector2(2, -2)
-scale = Vector2(1.25, 1.25)
+scale = Vector2(1.05, 1.05)
 sprite_frames = SubResource("SpriteFrames_2exqc")
 autoplay = "default"
 frame_progress = 0.643787
@@ -215,6 +259,12 @@ scale = Vector2(1.3999, 1.3999)
 sprite_frames = SubResource("SpriteFrames_5tfhu")
 frame = 4
 frame_progress = 1.0
+
+[node name="Anim_Hurt" type="AnimatedSprite2D" parent="Player/Animations"]
+visible = false
+position = Vector2(2, -2)
+scale = Vector2(1.04, 1.04)
+sprite_frames = SubResource("SpriteFrames_6hyil")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(2, -2)
@@ -244,3 +294,4 @@ script = ExtResource("5_qte2r")
 [node name="Circuit Bug" parent="." groups=["Enemy"] instance=ExtResource("9_xf330")]
 
 [connection signal="animation_finished" from="Player/Animations/Anim_Death" to="Player" method="OnDeathAnimFinished"]
+[connection signal="animation_finished" from="Player/Animations/Anim_Hurt" to="Player" method="OnHurtAnimFinished"]

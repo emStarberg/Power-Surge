@@ -18,9 +18,12 @@ public partial class PlayerMove : CharacterBody2D
 	private bool Alive = true;
 	public override void _Ready()
 	{
+		// Set up animations
+		HurtAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Hurt");
 		DeathAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Death");
 		IdleAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Idle");
 		IdleAnim.Play();
+		// Set up shield
 		Shield = GetNode<StaticBody2D>("Shield");
 		Shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
 	}
@@ -121,6 +124,13 @@ public partial class PlayerMove : CharacterBody2D
 		DeathAnim.Play();
 	}
 
+	public void Hurt(float damage)
+	{
+		IdleAnim.Visible = false;
+		HurtAnim.Visible = true;
+		HurtAnim.Play();
+	}
+
 	/// <Summary>
 	/// Resets level once death animation finished
 	/// </Summary>
@@ -128,16 +138,25 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		DeathAnim.Visible = false;
 		// Create timer to wait before reloading
-		Timer timer = new(){
+		Timer timer = new()
+		{
 			WaitTime = 0.6f,
 			OneShot = true
 		};
 		AddChild(timer);
-		timer.Timeout += () => {
+		timer.Timeout += () =>
+		{
 			// Reload scene
 			var scenePath = GetTree().CurrentScene.SceneFilePath;
 			GetTree().ChangeSceneToFile(scenePath);
 		};
 		timer.Start();
+	}
+
+	public void OnHurtAnimFinished()
+	{
+		HurtAnim.Visible = false;
+		HurtAnim.Stop();
+		IdleAnim.Visible = true;
 	}
 }
