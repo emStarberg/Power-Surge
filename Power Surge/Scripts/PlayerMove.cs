@@ -10,17 +10,24 @@ public partial class PlayerMove : CharacterBody2D
 	[Export] public float MaxFallSpeed = 1000f; // Terminal velocity
 	[Export] public Node2D _animFolder;
 	private Vector2 velocity;
-	private AnimatedSprite2D IdleAnim, DeathAnim, HurtAnim;
+	private AnimatedSprite2D IdleAnim, DeathAnim, HurtAnim, DashAnim;
 	private StaticBody2D Shield;
 	private PackedScene JumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn");
+	private PackedScene DashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn");
 	private int NumJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground is hit
 	private float FallTime = 0f; // For checking if the player has fallen off the map
 	private bool Alive = true;
+	private bool IsDashing = false;
+	private float DashTime = 0f;
+	private float DashDuration = 0.2f; // seconds
+	private float DashSpeed = 800f;    // dash speed
+	float Direction = 0.0f;
 	public override void _Ready()
 	{
 		// Set up animations
 		HurtAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Hurt");
 		DeathAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Death");
+		DashAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Dash");
 		IdleAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Idle");
 		IdleAnim.Play();
 		// Set up shield
@@ -33,50 +40,62 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		if (Alive)
 		{
-			// Apply gravity to Y velocity.
-			velocity.Y += Gravity * (float)delta;
-			// Clamp vertical velocity to terminal velocity.
-			velocity.Y = Mathf.Min(velocity.Y, MaxFallSpeed);
-
-			// Get input direction
-			float direction = 0.0f;
-			if (Input.IsActionPressed("input_left"))
-				direction -= 1.0f;
-			if (Input.IsActionPressed("input_right"))
-				direction += 1.0f;
-
-			// Handle horizontal movement
-			velocity.X = direction * Speed;
-
-			// Handle jump
-			if (Input.IsActionJustPressed("input_jump"))
+			if (Input.IsActionJustPressed("input_dash"))
 			{
-				Jump(); // Jump
+				Dash();
 			}
-
-			// Check how long the player has fallen for
-			if (!IsOnFloor())
+			if (IsDashing)
 			{
-				FallTime += (float)delta;
+				velocity.X = Direction * DashSpeed;
+				velocity.Y = 0; // Optional: ignore gravity during dash
 			}
 			else
-				FallTime = 0f;
-
-			if (FallTime > 3f)
 			{
-				Die();
-			}
+				// Apply gravity to Y velocity.
+				velocity.Y += Gravity * (float)delta;
+				// Clamp vertical velocity to terminal velocity.
+				velocity.Y = Mathf.Min(velocity.Y, MaxFallSpeed);
 
-			if (Input.IsActionJustPressed("input_shield"))
-			{
-				GetNode<StaticBody2D>("Shield").Visible = true;
-				Shield.GetNode<CollisionShape2D>("Collider").Disabled = false;
-			}
+				// Get input direction
+				Direction = 0.0f;
+				if (Input.IsActionPressed("input_left"))
+					Direction -= 1.0f;
+				if (Input.IsActionPressed("input_right"))
+					Direction += 1.0f;
 
-			if (Input.IsActionJustReleased("input_shield"))
-			{
-				Shield.Visible = false;
-				Shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
+				// Handle horizontal movement
+				velocity.X = Direction * Speed;
+
+				// Handle jump
+				if (Input.IsActionJustPressed("input_jump"))
+				{
+					Jump(); // Jump
+				}
+
+				// Check how long the player has fallen for
+				if (!IsOnFloor())
+				{
+					FallTime += (float)delta;
+				}
+				else
+					FallTime = 0f;
+
+				if (FallTime > 3f)
+				{
+					Die();
+				}
+
+				if (Input.IsActionJustPressed("input_shield"))
+				{
+					GetNode<StaticBody2D>("Shield").Visible = true;
+					Shield.GetNode<CollisionShape2D>("Collider").Disabled = false;
+				}
+
+				if (Input.IsActionJustReleased("input_shield"))
+				{
+					Shield.Visible = false;
+					Shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
+				}
 			}
 
 			// Update velocity
@@ -157,10 +176,41 @@ public partial class PlayerMove : CharacterBody2D
 		timer.Start();
 	}
 
+	public void Dash()
+	{
+		if (!IsDashing && Alive)
+		{
+			IdleAnim.Visible = false;
+			IsDashing = true;
+			DashAnim.Visible = true;
+			DashAnim.Play();
+			Node dashAnimInstance = DashAnimation.Instantiate();
+			((Node2D)dashAnimInstance).GlobalPosition = GlobalPosition;
+			if (Direction == 1)
+			{
+				DashAnim.FlipH = false;
+				((Node2D)dashAnimInstance).Scale = new Vector2(-1, 1); // Flip horizontally
+			}
+			else
+			{
+				DashAnim.FlipH = true;
+			}
+			GetTree().Root.AddChild(dashAnimInstance);
+		}
+	}
+
 	public void OnHurtAnimFinished()
 	{
 		HurtAnim.Visible = false;
 		HurtAnim.Stop();
+		IdleAnim.Visible = true;
+	}
+
+	public void OnDashAnimFinished()
+	{
+		IsDashing = false;
+		velocity.X = 0; // Stop horizontal movement after dash
+		DashAnim.Visible = false;
 		IdleAnim.Visible = true;
 	}
 }
