@@ -124,11 +124,15 @@ public partial class PlayerMove : CharacterBody2D
 		DeathAnim.Play();
 	}
 
-	public void Hurt(float damage)
+	public void Hurt(float damage, float shakeAmount, float shakeDuration)
 	{
 		IdleAnim.Visible = false;
 		HurtAnim.Visible = true;
 		HurtAnim.Play();
+
+		// Camera shake
+		var camera = GetParent().GetNode<Camera>("Camera");
+		camera.Shake(shakeAmount, shakeDuration);
 	}
 
 	/// <Summary>

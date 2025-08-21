@@ -44,7 +44,7 @@ public partial class ProjectileCB : Area2D
         {
             if (body is PlayerMove player)
             {
-                player.Hurt(20);
+                player.Hurt(20, 2f, 0.1f);
             }
         }
     }
