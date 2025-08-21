@@ -4,6 +4,8 @@ using System.Security.Cryptography;
 
 public partial class CircuitBug : CharacterBody2D
 {
+	[Export] public float Gravity = 500f; // Gravity force      
+	[Export] public float MaxFallSpeed = 1000f; // Terminal velocity
 	public const float Speed = 50.0f;
 	private Vector2 velocity;
 	private string Direction = "left"; // Direction facing
@@ -27,21 +29,21 @@ public partial class CircuitBug : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		// Add gravity
-		if (!IsOnFloor())
-		{
-			velocity += GetGravity() * (float)delta;
-		}
+		// Apply gravity to Y velocity.
+			velocity.Y += Gravity * (float)delta;
+			// Clamp vertical velocity to terminal velocity.
+			velocity.Y = Mathf.Min(velocity.Y, MaxFallSpeed);
 
 		if (IsRunning)
 		{
 			// Move based on direction
 			if (Direction == "right")
 			{
-				velocity = new Vector2(Speed, Velocity.Y);
+				velocity.X = Speed;
 			}
 			else if (Direction == "left")
 			{
-				velocity = new Vector2(-Speed, Velocity.Y);
+				velocity.X = -Speed;
 			}
 		}
 
@@ -59,10 +61,9 @@ public partial class CircuitBug : CharacterBody2D
 		velocity = new Vector2(0, 0);
 	}
 
-	public void OnAreaEntered(Area2D area)
+	public void OnBodyEntered(Node2D body)
 	{
-		// Check if area is in the "Barrier" group
-		if (area.IsInGroup("Barrier"))
+		if (body.IsInGroup("Ground"))
 		{
 			// Change direction
 			Direction = Direction == "right" ? "left" : "right";
