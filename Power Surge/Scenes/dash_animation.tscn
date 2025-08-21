@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://cb70c00m1bc4m"]
+
+[ext_resource type="Texture2D" uid="uid://davnc7oxtr5md" path="res://Assets/Characters/Player Dash (Explosion) - Spritesheet.png" id="1_c24mq"]
+[ext_resource type="Script" path="res://Scripts/DashAnimation.cs" id="2_52rhg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6qut"]
+atlas = ExtResource("1_c24mq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t5om"]
+atlas = ExtResource("1_c24mq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yv1r"]
+atlas = ExtResource("1_c24mq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wstwl"]
+atlas = ExtResource("1_c24mq")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cdmj"]
+atlas = ExtResource("1_c24mq")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_au5ly"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6qut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1t5om")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yv1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wstwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cdmj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="dash_animation" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_au5ly")
+script = ExtResource("2_52rhg")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
