@@ -11,16 +11,18 @@ public partial class PlayerMove : CharacterBody2D
 	[Export] public Node2D _animFolder;
 	private Vector2 velocity;
 	private AnimatedSprite2D IdleAnim, DeathAnim, HurtAnim;
+	private StaticBody2D Shield;
 	private PackedScene JumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn");
 	private int NumJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground is hit
 	private float FallTime = 0f; // For checking if the player has fallen off the map
 	private bool Alive = true;
 	public override void _Ready()
 	{
-		//JumpAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Jump");
-		IdleAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Idle");
 		DeathAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Death");
+		IdleAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Idle");
 		IdleAnim.Play();
+		Shield = GetNode<StaticBody2D>("Shield");
+		Shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
 	}
 
 
@@ -60,6 +62,18 @@ public partial class PlayerMove : CharacterBody2D
 			if (FallTime > 3f)
 			{
 				Die();
+			}
+
+			if (Input.IsActionJustPressed("input_shield"))
+			{
+				GetNode<StaticBody2D>("Shield").Visible = true;
+				Shield.GetNode<CollisionShape2D>("Collider").Disabled = false;
+			}
+
+			if (Input.IsActionJustReleased("input_shield"))
+			{
+				Shield.Visible = false;
+				Shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
 			}
 
 			// Update velocity
