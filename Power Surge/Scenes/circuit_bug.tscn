@@ -227,6 +227,9 @@ position = Vector2(-7, 1)
 position = Vector2(0, -1)
 shape = SubResource("SegmentShape2D_r6i4u")
 
+[node name="GroundRay" type="RayCast2D" parent="."]
+position = Vector2(-13, 7)
+
 [connection signal="animation_finished" from="Animations/Anim_Attack" to="." method="OnAttackAnimFinished"]
 [connection signal="area_entered" from="Barrier Detection" to="." method="OnAreaEntered"]
 [connection signal="body_entered" from="Barrier Detection" to="." method="OnBodyEntered"]

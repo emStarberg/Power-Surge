@@ -4,8 +4,6 @@ using System.Security.Cryptography;
 
 public partial class CircuitBug : CharacterBody2D
 {
-	[Export] public float Gravity = 500f; // Gravity force      
-	[Export] public float MaxFallSpeed = 1000f; // Terminal velocity
 	public const float Speed = 50.0f;
 	private Vector2 velocity;
 	private string Direction = "left"; // Direction facing
@@ -13,10 +11,11 @@ public partial class CircuitBug : CharacterBody2D
 	private bool IsRunning = true;
 	private bool PlayerDetected = false;
 	private PackedScene Projectile = GD.Load<PackedScene>("Scenes/projectile_cb.tscn");
-
+	private RayCast2D groundRay;
 
 	public override void _Ready()
 	{
+		groundRay = GetNode<RayCast2D>("GroundRay");
 		RunAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Run");
 		AttackAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Attack");
 		CurrentAnimation = RunAnim;
@@ -29,21 +28,33 @@ public partial class CircuitBug : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		// Add gravity
-		// Apply gravity to Y velocity.
-			velocity.Y += Gravity * (float)delta;
-			// Clamp vertical velocity to terminal velocity.
-			velocity.Y = Mathf.Min(velocity.Y, MaxFallSpeed);
+		if (!IsOnFloor())
+		{
+			velocity += GetGravity() * (float)delta;
+		}
 
 		if (IsRunning)
 		{
 			// Move based on direction
 			if (Direction == "right")
 			{
-				velocity.X = Speed;
+				velocity = new Vector2(Speed, Velocity.Y);
 			}
 			else if (Direction == "left")
 			{
-				velocity.X = -Speed;
+				velocity = new Vector2(-Speed, Velocity.Y);
+			}
+
+			// Update raycast position ahead of bug
+			
+
+			// Check if ground is detected
+			groundRay.ForceRaycastUpdate();
+			if (!groundRay.IsColliding())
+			{
+				// No ground ahead, turn around
+				Direction = Direction == "right" ? "left" : "right";
+				Scale = new Vector2(-Scale.X, Scale.Y);
 			}
 		}
 
@@ -61,8 +72,9 @@ public partial class CircuitBug : CharacterBody2D
 		velocity = new Vector2(0, 0);
 	}
 
-	public void OnBodyEntered(Node2D body)
+	public void OnBodyEntered(Area2D body)
 	{
+		// Check if area is in the "Ground" group
 		if (body.IsInGroup("Ground"))
 		{
 			// Change direction
