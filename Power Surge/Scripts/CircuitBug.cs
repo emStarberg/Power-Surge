@@ -6,10 +6,11 @@ public partial class CircuitBug : CharacterBody2D
 {
 	public const float Speed = 50.0f;
 	private Vector2 velocity;
-	private string direction = "left"; // Direction facing
+	private string Direction = "left"; // Direction facing
 	private AnimatedSprite2D RunAnim, AttackAnim, CurrentAnimation;
 	private bool IsRunning = true;
 	private bool PlayerDetected = false;
+	private PackedScene Projectile = GD.Load<PackedScene>("Scenes/projectile_cb.tscn");
 
 
 	public override void _Ready()
@@ -18,6 +19,9 @@ public partial class CircuitBug : CharacterBody2D
 		AttackAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Attack");
 		CurrentAnimation = RunAnim;
 		CurrentAnimation.Play();
+
+		// Connect the frame changed signal
+		AttackAnim.FrameChanged += OnAttackAnimFrameChanged;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -31,11 +35,11 @@ public partial class CircuitBug : CharacterBody2D
 		if (IsRunning)
 		{
 			// Move based on direction
-			if (direction == "right")
+			if (Direction == "right")
 			{
 				velocity = new Vector2(Speed, Velocity.Y);
 			}
-			else if (direction == "left")
+			else if (Direction == "left")
 			{
 				velocity = new Vector2(-Speed, Velocity.Y);
 			}
@@ -55,12 +59,13 @@ public partial class CircuitBug : CharacterBody2D
 		velocity = new Vector2(0, 0);
 	}
 
-	public void OnAreaEntered(Area2D area){
+	public void OnAreaEntered(Area2D area)
+	{
 		// Check if area is in the "Barrier" group
 		if (area.IsInGroup("Barrier"))
 		{
 			// Change direction
-			direction = direction == "right" ? "left" : "right";
+			Direction = Direction == "right" ? "left" : "right";
 			// Flip horizontally
 			Scale = new Vector2(-Scale.X, Scale.Y);
 		}
@@ -107,4 +112,28 @@ public partial class CircuitBug : CharacterBody2D
 		CurrentAnimation.Visible = true;
 		CurrentAnimation.Play();
 	}
+	private bool projectileSpawnedThisAttack = false;
+	private void OnAttackAnimFrameChanged()
+{
+	// Only spawn once per attack animation
+	if (AttackAnim.Frame == 13 && !projectileSpawnedThisAttack)
+	{
+		projectileSpawnedThisAttack = true;
+
+		Node projectileInstance = Projectile.Instantiate();
+		((Node2D)projectileInstance).GlobalPosition = GlobalPosition;
+		GetTree().Root.CallDeferred("add_child", projectileInstance);
+
+		if (projectileInstance is ProjectileCB projectileScript)
+		{
+			projectileScript.Fire(Direction);
+		}
+	}
+
+	// Reset flag when animation loops or finishes
+	if (AttackAnim.Frame == 0)
+	{
+		projectileSpawnedThisAttack = false;
+	}
+}
 }
