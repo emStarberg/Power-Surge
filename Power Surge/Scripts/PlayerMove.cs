@@ -118,7 +118,13 @@ public partial class PlayerMove : CharacterBody2D
 					shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
 				}
 			}
+			// Update label to correct percentage
 			percentageLabel.Text = PowerMeter.Value.ToString() + "%";
+			// If run out of power, die
+			if (power <= 0)
+			{
+				Die();
+			}
 
 			// Update velocity
 			Velocity = velocity;
@@ -147,6 +153,7 @@ public partial class PlayerMove : CharacterBody2D
 			GetTree().Root.AddChild(jumpAnimInstance);
 			// Increase no. of jumps, for counting double jumps
 			numJumps++;
+			DecreasePower(2);
 		}
 	}
 
@@ -178,7 +185,7 @@ public partial class PlayerMove : CharacterBody2D
 		// Camera shake
 		var camera = GetParent().GetNode<Camera>("Camera");
 		camera.Shake(shakeAmount, shakeDuration);
-		power -= damage;
+		DecreasePower(damage);
 	}
 
 	/// <Summary>
@@ -226,6 +233,7 @@ public partial class PlayerMove : CharacterBody2D
 			}
 			GetTree().Root.AddChild(dashAnimInstance);
 		}
+		DecreasePower(3);
 	}
 
 	/// <Summary>
@@ -235,7 +243,10 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		hurtAnim.Visible = false;
 		hurtAnim.Stop();
-		idleAnim.Visible = true;
+		if (alive)
+		{
+			idleAnim.Visible = true;
+		}
 	}
 
 	/// <Summary>
@@ -247,5 +258,13 @@ public partial class PlayerMove : CharacterBody2D
 		velocity.X = 0; // Stop horizontal movement after dash
 		dashAnim.Visible = false;
 		idleAnim.Visible = true;
+	}
+	/// <summary>
+	/// Decrease player power level
+	/// </summary>
+	/// <param name="amount">Amount to decrease by</param>
+	public void DecreasePower(int amount)
+	{
+		power -= amount;
 	}
 }
