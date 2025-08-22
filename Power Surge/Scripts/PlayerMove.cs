@@ -12,6 +12,9 @@ public partial class PlayerMove : CharacterBody2D
 	[Export] public float Gravity = 1000f; // Gravity force      
 	[Export] public float MaxFallSpeed = 1000f; // Terminal velocity
 	[Export] public Node2D animFolder; // Folder where animations are kept
+	[Export] public int MaxPower = 200; // Maximum power level 200%
+	[Export] public TextureProgressBar powerMeter; // Power meter
+	private int power = 100; // Percentage of power left
 	private Vector2 velocity; // For changing player's Velocity property
 	private AnimatedSprite2D idleAnim, deathAnim, hurtAnim, dashAnim; // Player's animations
 	private StaticBody2D shield; // Player's shield ability when activated
@@ -23,6 +26,7 @@ public partial class PlayerMove : CharacterBody2D
 	private bool isDashing = false; // Whether the player is currently dashing
 	private float dashSpeed = 800f; // Speed of dash
 	private float direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
+
 
 	public override void _Ready()
 	{
@@ -41,6 +45,14 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		if (alive)
 		{
+			if (power < 100)
+			{
+				powerMeter.Value = power;
+			}
+			else
+			{
+				powerMeter.Value = 100;
+			}
 			// Check whether to dash
 			if (Input.IsActionJustPressed("input_dash"))
 			{
@@ -154,7 +166,7 @@ public partial class PlayerMove : CharacterBody2D
 	/// <param name="damage"> Damage player should take </param>
 	/// <param name="shakeAmount"> Camera shake amount </param>
 	/// <param name="shakeDuration">Camera shake duration</param>
-	public void Hurt(float damage, float shakeAmount, float shakeDuration)
+	public void Hurt(int damage, float shakeAmount, float shakeDuration)
 	{
 		idleAnim.Visible = false;
 		hurtAnim.Visible = true;
@@ -163,6 +175,7 @@ public partial class PlayerMove : CharacterBody2D
 		// Camera shake
 		var camera = GetParent().GetNode<Camera>("Camera");
 		camera.Shake(shakeAmount, shakeDuration);
+		power -= damage;
 	}
 
 	/// <Summary>
