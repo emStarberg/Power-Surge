@@ -36,7 +36,6 @@ public partial class PlayerMove : CharacterBody2D
 		Shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
 	}
 
-
 	public override void _PhysicsProcess(double delta)
 	{
 		if (Alive)
@@ -113,9 +112,9 @@ public partial class PlayerMove : CharacterBody2D
 	}
 
 
-	/// <Summary>
+	/// <summary>
 	/// Makes the player jump directly upwards with an animation
-	/// </Summary>
+	/// </summary>
 	public void Jump()
 	{
 		if (IsOnFloor() || NumJumps < 2)
@@ -150,9 +149,12 @@ public partial class PlayerMove : CharacterBody2D
 		DeathAnim.Play();
 	}
 
-	/// <Summary>
+	/// <summary>
 	/// Play an animation and take damage when hit by enemy attack
-	/// </Summary>
+	/// </summary>
+	/// <param name="damage"> Damage player should take </param>
+	/// <param name="shakeAmount"> Camera shake amount </param>
+	/// <param name="shakeDuration">Camera shake duration</param>
 	public void Hurt(float damage, float shakeAmount, float shakeDuration)
 	{
 		IdleAnim.Visible = false;
