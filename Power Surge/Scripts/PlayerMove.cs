@@ -1,53 +1,58 @@
 using Godot;
-/**
-	Contains methods for all player controls and animations
-*/
+//------------------------------------------------------------------------------
+// <summary>
+//   methods for all player controls and animations
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class PlayerMove : CharacterBody2D
 {
 	[Export] public float Speed = 200f; // Movement speed          
 	[Export] public float JumpStrength = -300f; // Jump velocity
 	[Export] public float Gravity = 1000f; // Gravity force      
 	[Export] public float MaxFallSpeed = 1000f; // Terminal velocity
-	[Export] public Node2D _animFolder;
-	private Vector2 velocity;
-	private AnimatedSprite2D IdleAnim, DeathAnim, HurtAnim, DashAnim;
-	private StaticBody2D Shield;
-	private PackedScene JumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn");
-	private PackedScene DashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn");
-	private int NumJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground is hit
-	private float FallTime = 0f; // For checking if the player has fallen off the map
-	private bool Alive = true;
-	private bool IsDashing = false;
-	private float DashTime = 0f;
-	private float DashDuration = 0.2f; // seconds
-	private float DashSpeed = 800f;    // dash speed
-	float Direction = 0.0f;
+	[Export] public Node2D animFolder; // Folder where animations are kept
+	private Vector2 velocity; // For changing player's Velocity property
+	private AnimatedSprite2D idleAnim, deathAnim, hurtAnim, dashAnim; // Player's animations
+	private StaticBody2D shield; // Player's shield ability when activated
+	private PackedScene jumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn"); // For spawning jump animations
+	private PackedScene dashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn"); // For spawning dash animations
+	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground is hit
+	private float fallTime = 0f; // For checking if the player has fallen off the map
+	private bool alive = true; // True if the player has died
+	private bool isDashing = false; // Whether the player is currently dashing
+	private float dashSpeed = 800f; // Speed of dash
+	private float direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
+
 	public override void _Ready()
 	{
 		// Set up animations
-		HurtAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Hurt");
-		DeathAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Death");
-		DashAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Dash");
-		IdleAnim = _animFolder.GetNode<AnimatedSprite2D>("Anim_Idle");
-		IdleAnim.Play();
+		hurtAnim = animFolder.GetNode<AnimatedSprite2D>("Anim_Hurt");
+		deathAnim = animFolder.GetNode<AnimatedSprite2D>("Anim_Death");
+		dashAnim = animFolder.GetNode<AnimatedSprite2D>("Anim_Dash");
+		idleAnim = animFolder.GetNode<AnimatedSprite2D>("Anim_Idle");
+		idleAnim.Play();
 		// Set up shield
-		Shield = GetNode<StaticBody2D>("Shield");
-		Shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
+		shield = GetNode<StaticBody2D>("Shield");
+		shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
 	}
-
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (Alive)
+		if (alive)
 		{
+			// Check whether to dash
 			if (Input.IsActionJustPressed("input_dash"))
 			{
+				// Begin dash
 				Dash();
 			}
-			if (IsDashing)
+			if (isDashing)
 			{
-				velocity.X = Direction * DashSpeed;
-				velocity.Y = 0; // Optional: ignore gravity during dash
+				// Continue dashing until animation has finished
+				velocity.X = direction * dashSpeed;
+				// Ignore gravity during dash
+				velocity.Y = 0;
 			}
 			else
 			{
@@ -57,44 +62,46 @@ public partial class PlayerMove : CharacterBody2D
 				velocity.Y = Mathf.Min(velocity.Y, MaxFallSpeed);
 
 				// Get input direction
-				Direction = 0.0f;
+				direction = 0.0f;
 				if (Input.IsActionPressed("input_left"))
-					Direction -= 1.0f;
+					direction -= 1.0f;
 				if (Input.IsActionPressed("input_right"))
-					Direction += 1.0f;
+					direction += 1.0f;
 
 				// Handle horizontal movement
-				velocity.X = Direction * Speed;
+				velocity.X = direction * Speed;
 
 				// Handle jump
 				if (Input.IsActionJustPressed("input_jump"))
 				{
-					Jump(); // Jump
+					Jump();
 				}
 
 				// Check how long the player has fallen for
 				if (!IsOnFloor())
 				{
-					FallTime += (float)delta;
+					fallTime += (float)delta;
 				}
 				else
-					FallTime = 0f;
+					fallTime = 0f;
 
-				if (FallTime > 3f)
+				if (fallTime > 3f)
 				{
+					// Die after 3 seconds of fall time
 					Die();
 				}
 
 				if (Input.IsActionJustPressed("input_shield"))
 				{
+					// Activate shield
 					GetNode<StaticBody2D>("Shield").Visible = true;
-					Shield.GetNode<CollisionShape2D>("Collider").Disabled = false;
+					shield.GetNode<CollisionShape2D>("Collider").Disabled = false;
 				}
-
 				if (Input.IsActionJustReleased("input_shield"))
 				{
-					Shield.Visible = false;
-					Shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
+					// Deactivate shield
+					shield.Visible = false;
+					shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
 				}
 			}
 
@@ -105,29 +112,27 @@ public partial class PlayerMove : CharacterBody2D
 		}
 	}
 
-
-	/// <Summary>
+	/// <summary>
 	/// Makes the player jump directly upwards with an animation
-	/// </Summary>
+	/// </summary>
 	public void Jump()
 	{
-		if (IsOnFloor() || NumJumps < 2)
+		if (IsOnFloor() || numJumps < 2)
 		{
 			// Reset number of jumps if on floor
 			if (IsOnFloor())
 			{
-				NumJumps = 0;
+				numJumps = 0;
 			}
 			// Increase Y velocity
 			velocity.Y = JumpStrength;
 			// Create jump animation
-			Node jumpAnimInstance = JumpAnimation.Instantiate();
+			Node jumpAnimInstance = jumpAnimation.Instantiate();
 			((Node2D)jumpAnimInstance).GlobalPosition = GlobalPosition;
 			GetTree().Root.AddChild(jumpAnimInstance);
 			// Increase no. of jumps, for counting double jumps
-			NumJumps++;
+			numJumps++;
 		}
-
 	}
 
 	/// <Summary>
@@ -135,19 +140,25 @@ public partial class PlayerMove : CharacterBody2D
 	/// </Summary>
 	public void Die()
 	{
-		Alive = false;
+		alive = false;
 		GD.Print("Dead!");
-		IdleAnim.Stop();
-		IdleAnim.Visible = false;
-		DeathAnim.Visible = true;
-		DeathAnim.Play();
+		idleAnim.Stop();
+		idleAnim.Visible = false;
+		deathAnim.Visible = true;
+		deathAnim.Play();
 	}
 
+	/// <summary>
+	/// Play an animation and take damage when hit by enemy attack
+	/// </summary>
+	/// <param name="damage"> Damage player should take </param>
+	/// <param name="shakeAmount"> Camera shake amount </param>
+	/// <param name="shakeDuration">Camera shake duration</param>
 	public void Hurt(float damage, float shakeAmount, float shakeDuration)
 	{
-		IdleAnim.Visible = false;
-		HurtAnim.Visible = true;
-		HurtAnim.Play();
+		idleAnim.Visible = false;
+		hurtAnim.Visible = true;
+		hurtAnim.Play();
 
 		// Camera shake
 		var camera = GetParent().GetNode<Camera>("Camera");
@@ -159,7 +170,7 @@ public partial class PlayerMove : CharacterBody2D
 	/// </Summary>
 	public void OnDeathAnimFinished()
 	{
-		DeathAnim.Visible = false;
+		deathAnim.Visible = false;
 		// Create timer to wait before reloading
 		Timer timer = new()
 		{
@@ -175,42 +186,50 @@ public partial class PlayerMove : CharacterBody2D
 		};
 		timer.Start();
 	}
-
+	/// <Summary>
+	/// The player "dashes" left or right depending on the direction they're facing
+	/// </Summary>
 	public void Dash()
 	{
-		if (!IsDashing && Alive)
+		if (!isDashing && alive)
 		{
-			IdleAnim.Visible = false;
-			IsDashing = true;
-			DashAnim.Visible = true;
-			DashAnim.Play();
-			Node dashAnimInstance = DashAnimation.Instantiate();
+			idleAnim.Visible = false;
+			isDashing = true;
+			dashAnim.Visible = true;
+			dashAnim.Play();
+			Node dashAnimInstance = dashAnimation.Instantiate();
 			((Node2D)dashAnimInstance).GlobalPosition = GlobalPosition;
-			if (Direction == 1)
+			if (direction == 1)
 			{
-				DashAnim.FlipH = false;
+				dashAnim.FlipH = false;
 				((Node2D)dashAnimInstance).Scale = new Vector2(-1, 1); // Flip horizontally
 			}
 			else
 			{
-				DashAnim.FlipH = true;
+				dashAnim.FlipH = true;
 			}
 			GetTree().Root.AddChild(dashAnimInstance);
 		}
 	}
 
+	/// <Summary>
+	/// When hurt animation has finished, resume idle animation
+	/// </Summary>
 	public void OnHurtAnimFinished()
 	{
-		HurtAnim.Visible = false;
-		HurtAnim.Stop();
-		IdleAnim.Visible = true;
+		hurtAnim.Visible = false;
+		hurtAnim.Stop();
+		idleAnim.Visible = true;
 	}
 
+	/// <Summary>
+	/// When dash animation has finished, stop moving and resume idle animation
+	/// </Summary>
 	public void OnDashAnimFinished()
 	{
-		IsDashing = false;
+		isDashing = false;
 		velocity.X = 0; // Stop horizontal movement after dash
-		DashAnim.Visible = false;
-		IdleAnim.Visible = true;
+		dashAnim.Visible = false;
+		idleAnim.Visible = true;
 	}
 }

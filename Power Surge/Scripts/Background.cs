@@ -1,15 +1,20 @@
 using Godot;
-
+//------------------------------------------------------------------------------
+// <summary>
+//   Makes the background follow the camera
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class Background : Node2D
 {
-	[Export] public NodePath CameraPath;
+	[Export] public NodePath cameraPath;
 	private Camera2D _camera;
 
 	public override void _Ready()
 	{
-		if (CameraPath != null)
+		if (cameraPath != null)
 		{
-			_camera = GetNode<Camera2D>(CameraPath);
+			_camera = GetNode<Camera2D>(cameraPath);
 		}
 	}
 
@@ -17,8 +22,7 @@ public partial class Background : Node2D
 	{
 		if (_camera != null)
 		{
-			// Match background position to camera position
-			GlobalPosition = _camera.GlobalPosition +_camera.Offset;
+			GlobalPosition = _camera.GlobalPosition + _camera.Offset;
 		}
 	}
 }

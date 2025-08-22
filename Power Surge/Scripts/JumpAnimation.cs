@@ -1,5 +1,10 @@
 using Godot;
-using System;
+//------------------------------------------------------------------------------
+// <summary>
+//   Jump animation that spawns when the player jumps
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 
 public partial class JumpAnimation : AnimatedSprite2D
 {
@@ -12,7 +17,6 @@ public partial class JumpAnimation : AnimatedSprite2D
 	/// </Summary>
 	public void _on_animation_finished()
 	{
-		// Destroy self
 		QueueFree();
 	}
 }

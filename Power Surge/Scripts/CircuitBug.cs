@@ -1,31 +1,33 @@
 using Godot;
 using System;
-
+//------------------------------------------------------------------------------
+// <summary>
+//   Controls the Circuit Bug enemy
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class CircuitBug : CharacterBody2D
 {
-	public const float Speed = 50.0f;
-	private Vector2 velocity;
-	private string Direction = "left";
-	private AnimatedSprite2D RunAnim, AttackAnim, CurrentAnimation;
-	private bool IsRunning = true;
-	private bool PlayerDetected = false;
-	private PackedScene Projectile = GD.Load<PackedScene>("Scenes/projectile_cb.tscn");
-	private RayCast2D groundRay;
-	private RayCast2D wallRay;
-	private RayCast2D playerRay;
-	
+	public const float Speed = 50.0f; // Movement speed
+	private Vector2 velocity; // For updating Velocity property
+	private string direction = "left"; // Direction bug is facing
+	private AnimatedSprite2D runAnim, attackAnim, currentAnimation; // Bug animations
+	private bool isRunning = true; // Whether bug is running
+	private bool playerDetected = false; // Whether player has been detected
+	private PackedScene projectile = GD.Load<PackedScene>("Scenes/projectile_cb.tscn"); // For spawning projectiles
+	private RayCast2D groundRay, wallRay, playerRay; // Ground detection, wall/object detection, player detection
 
 	public override void _Ready()
 	{
 		playerRay = GetNode<RayCast2D>("PlayerRay");
 		groundRay = GetNode<RayCast2D>("GroundRay");
 		wallRay = GetNode<RayCast2D>("WallRay");
-		RunAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Run");
-		AttackAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Attack");
-		CurrentAnimation = RunAnim;
-		CurrentAnimation.Play();
+		runAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Run");
+		attackAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Attack");
+		currentAnimation = runAnim;
+		currentAnimation.Play();
 
-		AttackAnim.FrameChanged += OnAttackAnimFrameChanged;
+		attackAnim.FrameChanged += OnAttackAnimFrameChanged;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -34,20 +36,19 @@ public partial class CircuitBug : CharacterBody2D
 		if (!IsOnFloor())
 			velocity += GetGravity() * (float)delta;
 
-		if (IsRunning)
+		if (isRunning)
 		{
 			// Move based on direction
-			if (Direction == "right")
+			if (direction == "right")
 				velocity = new Vector2(Speed, Velocity.Y);
 			else
 				velocity = new Vector2(-Speed, Velocity.Y);
-
 
 			// Check for wall ahead
 			wallRay.ForceRaycastUpdate();
 			if (wallRay.IsColliding())
 			{
-				Direction = Direction == "right" ? "left" : "right";
+				direction = direction == "right" ? "left" : "right";
 				Scale = new Vector2(-Scale.X, Scale.Y);
 			}
 
@@ -55,91 +56,102 @@ public partial class CircuitBug : CharacterBody2D
 			groundRay.ForceRaycastUpdate();
 			if (!groundRay.IsColliding())
 			{
-				Direction = Direction == "right" ? "left" : "right";
+				direction = direction == "right" ? "left" : "right";
 				Scale = new Vector2(-Scale.X, Scale.Y);
 			}
-
-			
 		}
 
 		// Player detection via raycast
-			playerRay.ForceRaycastUpdate();
-			if (playerRay.IsColliding() && playerRay.GetCollider() is Node2D collider && collider.Name == "Player")
+		playerRay.ForceRaycastUpdate();
+		if (playerRay.IsColliding() && playerRay.GetCollider() is Node2D collider && collider.Name == "Player")
+		{
+			if (!playerDetected)
 			{
-				if (!PlayerDetected)
-				{
-					GD.Print("Player detected by raycast");
-					Attack();
-					PlayerDetected = true;
-				}
+				GD.Print("Player detected by raycast");
+				Attack();
+				playerDetected = true;
 			}
-			else
+		}
+		else
+		{
+			if (playerDetected)
 			{
-				if (PlayerDetected)
-				{
-					GD.Print("Player lost by raycast");
-					PlayerDetected = false;
-				}
+				GD.Print("Player lost by raycast");
+				playerDetected = false;
 			}
+		}
 
 		Velocity = velocity;
 		MoveAndSlide();
 	}
 
+	/// <summary>
+	/// Use projectile attack
+	/// </summary>
 	public void Attack()
 	{
 		GD.Print("attack");
-		SetAnimation(AttackAnim);
-		RunAnim.Visible = false;
-		IsRunning = false;
+		SetAnimation(attackAnim);
+		runAnim.Visible = false;
+		isRunning = false;
 		// Stop
 		velocity = new Vector2(0, 0);
 	}
 
+	/// <summary>
+	/// Resume running if player no longer detected after attack animation finished
+	/// </summary>
 	public void OnAttackAnimFinished()
 	{
-		if (!PlayerDetected)
+		if (!playerDetected)
 		{
 			// Return to running
-			SetAnimation(RunAnim);
-			AttackAnim.Visible = false;
-			IsRunning = true;
+			SetAnimation(runAnim);
+			attackAnim.Visible = false;
+			isRunning = true;
 		}
 		else
 		{
+			// Attack again if player still detected
 			Attack();
 		}
 	}
-
-
+	/// <summary>
+	/// Set the current animation plaing
+	/// </summary>
+	/// <param name="anim">Animation to play</param>
 	public void SetAnimation(AnimatedSprite2D anim)
 	{
-		CurrentAnimation = anim;
-		CurrentAnimation.Visible = true;
-		CurrentAnimation.Play();
+		currentAnimation = anim;
+		currentAnimation.Visible = true;
+		currentAnimation.Play();
 	}
-	private bool projectileSpawnedThisAttack = false;
+	
+	private bool projectileSpawnedThisAttack = false; // Prevents spawning > 1 projectile per animation
+	/// <summary>
+	/// Spawn a projectile on 13th frame to line up with animation
+	/// </summary>
 	private void OnAttackAnimFrameChanged()
-{
-	// Only spawn once per attack animation
-	if (AttackAnim.Frame == 13 && !projectileSpawnedThisAttack)
 	{
-		projectileSpawnedThisAttack = true;
-
-		Node projectileInstance = Projectile.Instantiate();
-		((Node2D)projectileInstance).GlobalPosition = GlobalPosition;
-		GetTree().Root.CallDeferred("add_child", projectileInstance);
-
-		if (projectileInstance is ProjectileCB projectileScript)
+		if (attackAnim.Frame == 13 && !projectileSpawnedThisAttack)
 		{
-			projectileScript.Fire(Direction);
+			projectileSpawnedThisAttack = true;
+			// Spawn new projectile
+			Node projectileInstance = projectile.Instantiate();
+			((Node2D)projectileInstance).GlobalPosition = GlobalPosition;
+			GetTree().Root.CallDeferred("add_child", projectileInstance);
+
+			if (projectileInstance is ProjectileCB projectileScript)
+			{
+				// Fire projectile
+				projectileScript.Fire(direction);
+			}
+		}
+
+		// Reset flag when animation loops or finishes
+		if (attackAnim.Frame == 0)
+		{
+			projectileSpawnedThisAttack = false;
 		}
 	}
-
-	// Reset flag when animation loops or finishes
-	if (AttackAnim.Frame == 0)
-	{
-		projectileSpawnedThisAttack = false;
-	}
-}
 }
