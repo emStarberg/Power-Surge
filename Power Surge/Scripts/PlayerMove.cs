@@ -8,20 +8,18 @@ public partial class PlayerMove : CharacterBody2D
 	[Export] public float JumpStrength = -300f; // Jump velocity
 	[Export] public float Gravity = 1000f; // Gravity force      
 	[Export] public float MaxFallSpeed = 1000f; // Terminal velocity
-	[Export] public Node2D _animFolder;
-	private Vector2 velocity;
-	private AnimatedSprite2D IdleAnim, DeathAnim, HurtAnim, DashAnim;
-	private StaticBody2D Shield;
-	private PackedScene JumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn");
-	private PackedScene DashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn");
+	[Export] public Node2D _animFolder; // Folder where animations are kept
+	private Vector2 velocity; // For changing player's Velocity property
+	private AnimatedSprite2D IdleAnim, DeathAnim, HurtAnim, DashAnim; // Player's animations
+	private StaticBody2D Shield; // Player's shield ability when activated
+	private PackedScene JumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn"); // For spawning jump animations
+	private PackedScene DashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn"); // For spawning dash animations
 	private int NumJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground is hit
 	private float FallTime = 0f; // For checking if the player has fallen off the map
-	private bool Alive = true;
-	private bool IsDashing = false;
-	private float DashTime = 0f;
-	private float DashDuration = 0.2f; // seconds
-	private float DashSpeed = 800f;    // dash speed
-	float Direction = 0.0f;
+	private bool Alive = true; // True if the player has died
+	private bool IsDashing = false; // Whether the player is currently dashing
+	private float DashSpeed = 800f; // Speed of dash
+	float Direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
 	public override void _Ready()
 	{
 		// Set up animations
@@ -40,14 +38,18 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		if (Alive)
 		{
+			// Check whether to dash
 			if (Input.IsActionJustPressed("input_dash"))
 			{
+				// Begin dash
 				Dash();
 			}
 			if (IsDashing)
 			{
+				// Continue dashing until animation has finished
 				velocity.X = Direction * DashSpeed;
-				velocity.Y = 0; // Optional: ignore gravity during dash
+				// Ignore gravity during dash
+				velocity.Y = 0;
 			}
 			else
 			{
@@ -69,7 +71,7 @@ public partial class PlayerMove : CharacterBody2D
 				// Handle jump
 				if (Input.IsActionJustPressed("input_jump"))
 				{
-					Jump(); // Jump
+					Jump();
 				}
 
 				// Check how long the player has fallen for
@@ -82,17 +84,19 @@ public partial class PlayerMove : CharacterBody2D
 
 				if (FallTime > 3f)
 				{
+					// Die after 3 seconds of fall time
 					Die();
 				}
 
 				if (Input.IsActionJustPressed("input_shield"))
 				{
+					// Activate shield
 					GetNode<StaticBody2D>("Shield").Visible = true;
 					Shield.GetNode<CollisionShape2D>("Collider").Disabled = false;
 				}
-
 				if (Input.IsActionJustReleased("input_shield"))
 				{
+					// Deactivate shield
 					Shield.Visible = false;
 					Shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
 				}
@@ -143,6 +147,9 @@ public partial class PlayerMove : CharacterBody2D
 		DeathAnim.Play();
 	}
 
+	/// <Summary>
+	/// Play an animation and take damage when hit by enemy attack
+	/// </Summary>
 	public void Hurt(float damage, float shakeAmount, float shakeDuration)
 	{
 		IdleAnim.Visible = false;
@@ -175,7 +182,9 @@ public partial class PlayerMove : CharacterBody2D
 		};
 		timer.Start();
 	}
-
+	/// <Summary>
+	/// The player "dashes" left or right depending on the direction they're facing
+	/// </Summary>
 	public void Dash()
 	{
 		if (!IsDashing && Alive)
@@ -199,13 +208,19 @@ public partial class PlayerMove : CharacterBody2D
 		}
 	}
 
+	/// <Summary>
+	/// When hurt animation has finished, resume idle animation
+	/// </Summary>
 	public void OnHurtAnimFinished()
 	{
 		HurtAnim.Visible = false;
 		HurtAnim.Stop();
 		IdleAnim.Visible = true;
 	}
-
+	
+	/// <Summary>
+	/// When dash animation has finished, stop moving and resume idle animation
+	/// </Summary>
 	public void OnDashAnimFinished()
 	{
 		IsDashing = false;
