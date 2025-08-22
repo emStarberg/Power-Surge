@@ -1,6 +1,10 @@
 using Godot;
-using System;
-
+//------------------------------------------------------------------------------
+// <summary>
+//   Dash animation that spawns when player dashes
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class DashAnimation : AnimatedSprite2D
 {
 	public override void _Ready()
