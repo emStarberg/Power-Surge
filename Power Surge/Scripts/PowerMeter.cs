@@ -49,27 +49,18 @@ public partial class PowerMeter : TextureProgressBar
 	{
 		if (Value > 83.3)
 		{
-			loopWaitTime = 0.1f;
+			loopWaitTime = 0.8f;
 		}
 		else if (Value > 66.6f)
 		{
-			loopWaitTime = 0.4f;
-		}
-		else if (Value > 50f)
-		{
-			loopWaitTime = 1.0f;
+			loopWaitTime = 1.5f;
 		}
 		else if (Value > 33.3f)
 		{
-			loopWaitTime = 1.7f;
-		}
-		else if (Value > 16.6f)
+			loopWaitTime = 2f;
+		}else
 		{
-			loopWaitTime = 2.2f;
-		}
-		else
-		{
-			loopWaitTime = 2.8f;
+			loopWaitTime = 3.5f;
 		}
 
 		loopTimer.WaitTime = loopWaitTime;

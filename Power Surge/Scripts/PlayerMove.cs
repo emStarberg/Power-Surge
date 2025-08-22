@@ -13,7 +13,8 @@ public partial class PlayerMove : CharacterBody2D
 	[Export] public float MaxFallSpeed = 1000f; // Terminal velocity
 	[Export] public Node2D animFolder; // Folder where animations are kept
 	[Export] public int MaxPower = 200; // Maximum power level 200%
-	[Export] public TextureProgressBar powerMeter; // Power meter
+	[Export] public TextureProgressBar PowerMeter; // Power meter
+	[Export] public Label percentageLabel;
 	private int power = 100; // Percentage of power left
 	private Vector2 velocity; // For changing player's Velocity property
 	private AnimatedSprite2D idleAnim, deathAnim, hurtAnim, dashAnim; // Player's animations
@@ -39,6 +40,7 @@ public partial class PlayerMove : CharacterBody2D
 		// Set up shield
 		shield = GetNode<StaticBody2D>("Shield");
 		shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -47,11 +49,11 @@ public partial class PlayerMove : CharacterBody2D
 		{
 			if (power < 100)
 			{
-				powerMeter.Value = power;
+				PowerMeter.Value = power;
 			}
 			else
 			{
-				powerMeter.Value = 100;
+				PowerMeter.Value = 100;
 			}
 			// Check whether to dash
 			if (Input.IsActionJustPressed("input_dash"))
@@ -116,6 +118,7 @@ public partial class PlayerMove : CharacterBody2D
 					shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
 				}
 			}
+			percentageLabel.Text = PowerMeter.Value.ToString() + "%";
 
 			// Update velocity
 			Velocity = velocity;
