@@ -1,12 +1,17 @@
 using Godot;
-
+//------------------------------------------------------------------------------
+// <summary>
+//   Projectile spawned when Circuit Bug attacks
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class ProjectileCB : Area2D
 {
-    private string direction;
-    private bool doMove = false;
-    private float speed = 300f;
-    private AnimatedSprite2D explodeAnim;
-    private Sprite2D sprite;
+	private string direction; // Direction to fire in
+    private bool doMove = false; // Whether to move
+    private float speed = 300f; // Move speed of projectile
+    private AnimatedSprite2D explodeAnim; // Animation to play when contact made
+    private Sprite2D sprite; // Projectile sprite
 
     public override void _Ready()
     {
@@ -24,13 +29,19 @@ public partial class ProjectileCB : Area2D
                 Position += new Vector2(speed * (float)delta, 0);
         }
     }
-
+	/// <summary>
+	/// Fire projectile in given direction
+	/// </summary>
+	/// <param name="dir">Direction to move in</param>
     public void Fire(string dir)
     {
         direction = dir;
         doMove = true;
     }
-
+	/// <summary>
+	/// When collides with other object
+	/// </summary>
+	/// <param name="body">Object collided with</param>
     public void OnBodyEntered(Node2D body)
     {
         if (!body.IsInGroup("Enemy"))
@@ -45,7 +56,9 @@ public partial class ProjectileCB : Area2D
             }
         }
     }
-
+	/// <summary>
+	/// Play explosion animation
+	/// </summary>
     public void Explode()
     {
         doMove = false;
@@ -53,7 +66,7 @@ public partial class ProjectileCB : Area2D
         explodeAnim.Visible = true;
         explodeAnim.Play();
     }
-
+	// Destroy self after explosion
     public void OnExplodeAnimationFinished()
     {
         QueueFree();
