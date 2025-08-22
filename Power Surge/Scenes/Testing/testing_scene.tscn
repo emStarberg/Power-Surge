@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=53 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="9_xf330"]
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
+[ext_resource type="Script" path="res://Scripts/PowerMeter.cs" id="14_6nksn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o82n"]
 texture = ExtResource("6_4nrw7")
@@ -366,13 +367,14 @@ offset_bottom = 40.0
 
 [node name="Power Meter" type="TextureProgressBar" parent="UI/Control"]
 layout_mode = 0
-offset_left = 508.0
+offset_left = 510.0
 offset_top = 577.0
-offset_right = 556.0
+offset_right = 558.0
 offset_bottom = 617.0
 scale = Vector2(3.58495, 3.58495)
 texture_under = ExtResource("12_rpok1")
 texture_progress = ExtResource("13_5nmc8")
+script = ExtResource("14_6nksn")
 
 [connection signal="animation_finished" from="Player/Animations/Anim_Death" to="Player" method="OnDeathAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Anim_Hurt" to="Player" method="OnHurtAnimFinished"]
