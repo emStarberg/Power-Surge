@@ -12,7 +12,6 @@ public partial class JumpAnimation : AnimatedSprite2D
 	/// </Summary>
 	public void _on_animation_finished()
 	{
-		// Destroy self
 		QueueFree();
 	}
 }
