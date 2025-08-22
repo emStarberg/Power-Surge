@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://cr8f3adpxwjal"]
+
+[ext_resource type="Texture2D" uid="uid://caxkmh65lkf26" path="res://Assets/UI/Power Meter - Spark - Spritesheet.png" id="1_u2ibk"]
+[ext_resource type="Script" path="res://Scripts/UISpark.cs" id="2_exb12"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpkd3"]
+atlas = ExtResource("1_u2ibk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3l74"]
+atlas = ExtResource("1_u2ibk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wxl3"]
+atlas = ExtResource("1_u2ibk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgu5b"]
+atlas = ExtResource("1_u2ibk")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhclk"]
+atlas = ExtResource("1_u2ibk")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_82itx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpkd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3l74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wxl3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgu5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhclk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpkd3")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="UI Spark" type="AnimatedSprite2D"]
+position = Vector2(44, 349)
+scale = Vector2(3.96528, 3.91369)
+sprite_frames = SubResource("SpriteFrames_82itx")
+frame = 6
+frame_progress = 1.0
+script = ExtResource("2_exb12")

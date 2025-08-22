@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=53 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -11,7 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://bptbc7jd1antf" path="res://Assets/Characters/Player Hurt - Spritesheet.png" id="7_qba23"]
 [ext_resource type="Texture2D" uid="uid://3wb48qr8yjh1" path="res://Assets/Characters/Player Dash - Spritesheet.png" id="8_88nyf"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="9_xf330"]
-[ext_resource type="PackedScene" path="res://Scenes/dash_animation.tscn" id="12_hlba2"]
+[ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
+[ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
+[ext_resource type="Script" path="res://Scripts/PowerMeter.cs" id="14_6nksn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o82n"]
 texture = ExtResource("6_4nrw7")
@@ -290,9 +292,11 @@ cameraPath = NodePath("../Camera")
 tile_map_data = PackedByteArray("AAD8/wIAAAAAAAAAAAD9/wIAAAABAAAAAAD+/wIAAAABAAAAAAD//wIAAAABAAAAAAAAAAIAAAABAAAAAAABAAIAAAABAAAAAAACAAIAAAABAAAAAAADAAIAAAABAAAAAAAEAAIAAAABAAAAAAAFAAIAAAACAAAAAAD9/wUAAAABAAAAAAD+/wUAAAABAAAAAAD//wUAAAABAAAAAAAAAAUAAAABAAAAAAABAAUAAAABAAAAAAACAAUAAAABAAAAAAADAAUAAAABAAAAAAAEAAUAAAABAAAAAAAFAAUAAAABAAAAAAAGAAUAAAABAAAAAAAHAAUAAAABAAAAAAAIAAUAAAABAAAAAAAJAAUAAAABAAAAAAAKAAUAAAABAAAAAAALAAUAAAABAAAAAAAMAAUAAAABAAAAAAANAAUAAAABAAAAAAAOAAUAAAABAAAAAAAPAAUAAAABAAAAAAAQAAUAAAACAAAAAADy/wQAAAAAAAAAAADz/wQAAAABAAAAAAD0/wQAAAABAAAAAAD1/wQAAAABAAAAAAD2/wQAAAABAAAAAAD3/wQAAAABAAAAAAD4/wQAAAABAAAAAAD5/wQAAAACAAAAAAD6/wUAAAABAAAAAAD7/wUAAAABAAAAAAD8/wUAAAABAAAAAAD5/wUAAAABAAAAAAD4/wUAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_0hka7")
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animFolder")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animFolder", "PowerMeter", "percentageLabel")]
 script = ExtResource("1_cila0")
 animFolder = NodePath("Animations")
+PowerMeter = NodePath("../UI/Control/Power Meter")
+percentageLabel = NodePath("../UI/Control/Percentage Label")
 
 [node name="Animations" type="Node2D" parent="Player"]
 
@@ -354,7 +358,51 @@ script = ExtResource("5_qte2r")
 
 [node name="Circuit Bug" parent="." groups=["Enemy"] instance=ExtResource("9_xf330")]
 
-[node name="dash_animation" parent="." instance=ExtResource("12_hlba2")]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Power Meter" type="TextureProgressBar" parent="UI/Control"]
+layout_mode = 0
+offset_left = 509.0
+offset_top = 577.0
+offset_right = 557.0
+offset_bottom = 617.0
+scale = Vector2(3.58495, 3.58495)
+texture_under = ExtResource("12_rpok1")
+texture_progress = ExtResource("13_5nmc8")
+script = ExtResource("14_6nksn")
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 14.536
+anchor_top = 7.268
+anchor_right = 14.536
+anchor_bottom = 7.268
+offset_left = -682.665
+offset_top = -292.952
+offset_right = -667.665
+offset_bottom = -285.952
+color = Color(0.223103, 0.223103, 0.223103, 1)
+
+[node name="Percentage Label" type="Label" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 14.75
+anchor_top = 14.275
+anchor_right = 14.75
+anchor_bottom = 14.275
+offset_left = -21.0001
+offset_right = 20.9999
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 16
+text = "100%"
+horizontal_alignment = 1
 
 [connection signal="animation_finished" from="Player/Animations/Anim_Death" to="Player" method="OnDeathAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Anim_Hurt" to="Player" method="OnHurtAnimFinished"]
