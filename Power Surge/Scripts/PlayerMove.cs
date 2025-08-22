@@ -1,7 +1,10 @@
 using Godot;
-/**
-	Contains methods for all player controls and animations
-*/
+//------------------------------------------------------------------------------
+// <summary>
+//   methods for all player controls and animations
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class PlayerMove : CharacterBody2D
 {
 	[Export] public float Speed = 200f; // Movement speed          
@@ -217,7 +220,7 @@ public partial class PlayerMove : CharacterBody2D
 		HurtAnim.Stop();
 		IdleAnim.Visible = true;
 	}
-	
+
 	/// <Summary>
 	/// When dash animation has finished, stop moving and resume idle animation
 	/// </Summary>

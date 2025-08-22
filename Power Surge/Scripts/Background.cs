@@ -1,5 +1,10 @@
 using Godot;
-
+//------------------------------------------------------------------------------
+// <summary>
+//   Makes the background follow the camera
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class Background : Node2D
 {
 	[Export] public NodePath CameraPath;
