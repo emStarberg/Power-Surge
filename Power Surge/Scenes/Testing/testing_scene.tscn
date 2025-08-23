@@ -368,11 +368,11 @@ offset_bottom = 40.0
 
 [node name="Power Meter" type="TextureProgressBar" parent="UI/Control"]
 layout_mode = 0
-offset_left = 509.0
-offset_top = 577.0
-offset_right = 557.0
-offset_bottom = 617.0
-scale = Vector2(3.58495, 3.58495)
+offset_left = 518.0
+offset_top = 580.0
+offset_right = 566.0
+offset_bottom = 620.0
+scale = Vector2(2.96117, 2.96117)
 texture_under = ExtResource("12_rpok1")
 texture_progress = ExtResource("13_5nmc8")
 script = ExtResource("14_6nksn")
@@ -397,8 +397,8 @@ anchor_left = 14.75
 anchor_top = 14.275
 anchor_right = 14.75
 anchor_bottom = 14.275
-offset_left = -21.0001
-offset_right = 20.9999
+offset_left = -25.0001
+offset_right = 16.9999
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 16
 text = "100%"

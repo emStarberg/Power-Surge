@@ -13,7 +13,7 @@ public partial class Camera : Camera2D
 	private Node2D _player; // Reference to player node
 	private float shakeAmount, shakeTime = 0f; // Parameters for camera shake effect
 	private Random random = new(); // Random number for generating shake effect
-	private Vector2 baseOffset = new Vector2(0, -25); // Camera offset from player pos
+	private Vector2 baseOffset = new Vector2(0, -15); // Camera offset from player pos
 
 	public override void _Ready()
 	{
