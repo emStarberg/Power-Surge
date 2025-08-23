@@ -119,7 +119,7 @@ public partial class PlayerMove : CharacterBody2D
 				}
 			}
 			// Update label to correct percentage
-			percentageLabel.Text = PowerMeter.Value.ToString() + "%";
+			percentageLabel.Text = power + "%";
 			// If run out of power, die
 			if (power <= 0)
 			{
@@ -266,5 +266,10 @@ public partial class PlayerMove : CharacterBody2D
 	public void DecreasePower(int amount)
 	{
 		power -= amount;
+	}
+
+	public void IncreasePower(int amount)
+	{
+		power += amount;
 	}
 }
