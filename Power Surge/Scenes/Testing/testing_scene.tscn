@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=54 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -14,8 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
 [ext_resource type="Script" path="res://Scripts/PowerMeter.cs" id="14_6nksn"]
-[ext_resource type="Script" path="res://Scripts/BatteryPack.cs" id="15_pjavb"]
-[ext_resource type="Texture2D" uid="uid://cnc2euv4wlbra" path="res://Assets/Objects/Battery Pack.png" id="17_mohno"]
+[ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o82n"]
 texture = ExtResource("6_4nrw7")
@@ -281,10 +280,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pdnd8"]
-radius = 4.0
-height = 14.0
-
 [node name="Node2D" type="Node2D"]
 position = Vector2(416, 228)
 
@@ -315,9 +310,9 @@ frame_progress = 0.643787
 
 [node name="Anim_Death" type="AnimatedSprite2D" parent="Player/Animations"]
 visible = false
-position = Vector2(1, 0)
+position = Vector2(2, -2)
 rotation = 3.14409
-scale = Vector2(1.3999, 1.3999)
+scale = Vector2(1.06182, 1.06182)
 sprite_frames = SubResource("SpriteFrames_5tfhu")
 frame = 4
 frame_progress = 1.0
@@ -379,7 +374,7 @@ offset_left = 518.0
 offset_top = 580.0
 offset_right = 566.0
 offset_bottom = 620.0
-scale = Vector2(2.96117, 2.96117)
+scale = Vector2(3.24117, 3.24117)
 texture_under = ExtResource("12_rpok1")
 texture_progress = ExtResource("13_5nmc8")
 script = ExtResource("14_6nksn")
@@ -404,28 +399,16 @@ anchor_left = 14.75
 anchor_top = 14.275
 anchor_right = 14.75
 anchor_bottom = 14.275
-offset_left = -25.0
-offset_right = 17.0
-offset_bottom = 23.0
+offset_left = -20.0
+offset_top = 1.0
+offset_right = 22.0
+offset_bottom = 24.0
 theme_override_font_sizes/font_size = 16
 text = "100%"
 horizontal_alignment = 1
 
-[node name="Battery Pack" type="Area2D" parent="."]
-position = Vector2(-169, 53)
-script = ExtResource("15_pjavb")
-
-[node name="Sprite2D" type="Sprite2D" parent="Battery Pack"]
-position = Vector2(3, 4.00001)
-scale = Vector2(1.04394, 1.05266)
-texture = ExtResource("17_mohno")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Battery Pack"]
-position = Vector2(3, 4)
-scale = Vector2(1.12, 1.11999)
-shape = SubResource("CapsuleShape2D_pdnd8")
+[node name="Battery Pack" parent="." instance=ExtResource("15_yy038")]
 
 [connection signal="animation_finished" from="Player/Animations/Anim_Death" to="Player" method="OnDeathAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Anim_Hurt" to="Player" method="OnHurtAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Anim_Dash" to="Player" method="OnDashAnimFinished"]
-[connection signal="body_entered" from="Battery Pack" to="Battery Pack" method="OnBodyEntered"]
