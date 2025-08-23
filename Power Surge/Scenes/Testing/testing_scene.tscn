@@ -440,7 +440,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Power Meter" type="TextureProgressBar" parent="UI/Control"]
+[node name="Power Meter" type="TextureProgressBar" parent="UI/Control" node_paths=PackedStringArray("Camera")]
 layout_mode = 0
 offset_left = 518.0
 offset_top = 580.0
@@ -450,6 +450,7 @@ scale = Vector2(3.24117, 3.24117)
 texture_under = ExtResource("12_rpok1")
 texture_progress = ExtResource("13_5nmc8")
 script = ExtResource("14_6nksn")
+Camera = NodePath("../../../Camera")
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
 layout_mode = 1

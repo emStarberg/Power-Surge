@@ -9,6 +9,7 @@ using System.Collections.Generic;
 //------------------------------------------------------------------------------
 public partial class PowerMeter : TextureProgressBar
 {
+	[Export] public Camera Camera;
 	// All possible animation positions
 	private Vector2 pos1 = new(2, 10);
 	private Vector2 pos2 = new(10, 10);
@@ -64,7 +65,7 @@ public partial class PowerMeter : TextureProgressBar
 				StartSparkSequence();
 			}
 		}
-}
+	}
 
 	/// <summary>
 	/// Change time between animations depending on power level
@@ -146,11 +147,17 @@ public partial class PowerMeter : TextureProgressBar
 		{
 			powerSurgeAnim.Visible = true;
 			powerSurgeAnim.Play();
+			Camera.Shake(10, 0.2f);
 		}
 		else
 		{
 			powerSurgeAnim.Visible = false;
 			powerSurgeAnim.Stop();
 		}
+	}
+
+	public bool GetPowerSurgeMode()
+	{
+		return powerSurgeMode;
 	}
 }

@@ -52,15 +52,22 @@ public partial class PlayerMove : CharacterBody2D
 				PowerMeter.Value = power;
 				if (PowerMeter is PowerMeter powerMeter)
 				{
-					powerMeter.SetPowerSurgeMode(false);
+					if (powerMeter.GetPowerSurgeMode())
+					{
+						powerMeter.SetPowerSurgeMode(false);
+					}
 				}
-			}
+				
+				}
 			else
 			{
 				PowerMeter.Value = 100;
 				if (PowerMeter is PowerMeter powerMeter)
 				{
-					powerMeter.SetPowerSurgeMode(true);
+					if (!powerMeter.GetPowerSurgeMode())
+					{
+						powerMeter.SetPowerSurgeMode(true);
+					}
 				}
 
 			}
