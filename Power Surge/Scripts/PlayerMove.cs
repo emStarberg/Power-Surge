@@ -47,13 +47,22 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		if (alive)
 		{
-			if (power < 100)
+			if (power <= 100)
 			{
 				PowerMeter.Value = power;
+				if (PowerMeter is PowerMeter powerMeter)
+				{
+					powerMeter.SetPowerSurgeMode(false);
+				}
 			}
 			else
 			{
 				PowerMeter.Value = 100;
+				if (PowerMeter is PowerMeter powerMeter)
+				{
+					powerMeter.SetPowerSurgeMode(true);
+				}
+
 			}
 			// Check whether to dash
 			if (Input.IsActionJustPressed("input_dash"))
@@ -267,7 +276,10 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		power -= amount;
 	}
-
+	/// <summary>
+	/// Increase player power level
+	/// </summary>
+	/// <param name="amount"></param>
 	public void IncreasePower(int amount)
 	{
 		power += amount;

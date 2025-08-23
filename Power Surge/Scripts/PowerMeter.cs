@@ -23,12 +23,15 @@ public partial class PowerMeter : TextureProgressBar
 	private int sparkIndex = 0;
 	private Timer sparkTimer;
 	private Timer loopTimer;
+	private AnimatedSprite2D powerSurgeAnim;
+	private bool powerSurgeMode = false;
 
 	public override void _Ready()
 	{
+		powerSurgeAnim = GetNode<AnimatedSprite2D>("Power Surge");
 		sparkPositions = new List<Vector2> { pos1, pos2, pos3, pos4, pos5, pos6 };
 		sparkThresholds = new List<float> { 0f, 16.6f, 33.3f, 50f, 66.6f, 83.3f };
-		
+
 		sparkTimer = new Timer();
 		sparkTimer.WaitTime = 0.2f;
 		sparkTimer.OneShot = false;
@@ -40,20 +43,37 @@ public partial class PowerMeter : TextureProgressBar
 		loopTimer.OneShot = true;
 		AddChild(loopTimer);
 		loopTimer.Timeout += OnLoopTimerTimeout;
-
-		StartSparkSequence();
 	}
 
 	public override void _Process(double delta)
 	{
 		UpdateLoopWaitTime();
-	}
+
+		// Stop timers and animations if powerSurgeMode is true
+		if (powerSurgeMode)
+		{
+			if (sparkTimer != null && !sparkTimer.IsStopped())
+				sparkTimer.Stop();
+			if (loopTimer != null && !loopTimer.IsStopped())
+				loopTimer.Stop();
+		}
+		else
+		{
+			if (sparkTimer != null && loopTimer != null && sparkTimer.IsStopped() && loopTimer.IsStopped())
+			{
+				StartSparkSequence();
+			}
+		}
+}
 
 	/// <summary>
 	/// Change time between animations depending on power level
 	/// </summary>
 	private void UpdateLoopWaitTime()
 	{
+		if (loopTimer == null)
+			return;
+
 		if (Value > 83.3)
 		{
 			loopWaitTime = 0.8f;
@@ -65,7 +85,8 @@ public partial class PowerMeter : TextureProgressBar
 		else if (Value > 33.3f)
 		{
 			loopWaitTime = 2f;
-		}else
+		}
+		else
 		{
 			loopWaitTime = 3.5f;
 		}
@@ -116,5 +137,20 @@ public partial class PowerMeter : TextureProgressBar
 		((Node2D)sparkInstance).Position = pos;
 		((Node2D)sparkInstance).Scale = new Vector2(0.65f, 0.65f);
 		CallDeferred("add_child", sparkInstance);
+	}
+
+	public void SetPowerSurgeMode(bool b)
+	{
+		powerSurgeMode = b;
+		if (b)
+		{
+			powerSurgeAnim.Visible = true;
+			powerSurgeAnim.Play();
+		}
+		else
+		{
+			powerSurgeAnim.Visible = false;
+			powerSurgeAnim.Stop();
+		}
 	}
 }
