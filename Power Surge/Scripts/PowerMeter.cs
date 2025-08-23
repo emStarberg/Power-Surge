@@ -1,18 +1,23 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-
+//------------------------------------------------------------------------------
+// <summary>
+//   Power meter displaying how much power the player has left. Has a spark animation that gets more frequent the more power there is
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class PowerMeter : TextureProgressBar
 {
+	// All possible animation positions
 	private Vector2 pos1 = new(2, 10);
 	private Vector2 pos2 = new(10, 10);
 	private Vector2 pos3 = new(18, 10);
 	private Vector2 pos4 = new(26, 10);
 	private Vector2 pos5 = new(34, 10);
 	private Vector2 pos6 = new(42, 10);
-	private PackedScene sparkAnimation = GD.Load<PackedScene>("Scenes/ui_spark.tscn");
+	private PackedScene sparkAnimation = GD.Load<PackedScene>("Scenes/ui_spark.tscn");// For spawning animations along the power meter
 	private float loopWaitTime;
-
 	private List<Vector2> sparkPositions;
 	private List<float> sparkThresholds;
 	private int sparkIndex = 0;
@@ -44,7 +49,9 @@ public partial class PowerMeter : TextureProgressBar
 		UpdateLoopWaitTime();
 	}
 
-
+	/// <summary>
+	/// Change time between animations depending on power level
+	/// </summary>
 	private void UpdateLoopWaitTime()
 	{
 		if (Value > 83.3)
@@ -65,13 +72,17 @@ public partial class PowerMeter : TextureProgressBar
 
 		loopTimer.WaitTime = loopWaitTime;
 	}
-
+	/// <summary>
+	/// Start displaying the spark animations
+	/// </summary>
 	private void StartSparkSequence()
 	{
 		sparkIndex = 0;
 		sparkTimer.Start();
 	}
-
+	/// <summary>
+	/// Spawn animation with correct timing
+	/// </summary>
 	private void OnSparkTimerTimeout()
 	{
 		if (sparkIndex < sparkPositions.Count)
@@ -88,12 +99,17 @@ public partial class PowerMeter : TextureProgressBar
 			loopTimer.Start();
 		}
 	}
-
+	/// <summary>
+	/// Start animation spawns with corect timing
+	/// </summary>
 	private void OnLoopTimerTimeout()
 	{
 		StartSparkSequence();
 	}
-
+	/// <summary>
+	/// Spawn spark animation
+	/// </summary>
+	/// <param name="pos">Position to spawn in</param>
 	private void SpawnSpark(Vector2 pos)
 	{
 		Node sparkInstance = sparkAnimation.Instantiate();
