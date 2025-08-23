@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=56 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
 [ext_resource type="Script" path="res://Scripts/PowerMeter.cs" id="14_6nksn"]
+[ext_resource type="Script" path="res://Scripts/BatteryPack.cs" id="15_pjavb"]
+[ext_resource type="Texture2D" uid="uid://cnc2euv4wlbra" path="res://Assets/Objects/Battery Pack.png" id="17_mohno"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o82n"]
 texture = ExtResource("6_4nrw7")
@@ -279,11 +281,15 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pdnd8"]
+radius = 4.0
+height = 14.0
+
 [node name="Node2D" type="Node2D"]
 position = Vector2(416, 228)
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(-1, -5)
 texture = ExtResource("1_bops4")
 script = ExtResource("2_p1rgw")
 cameraPath = NodePath("../Camera")
@@ -404,6 +410,20 @@ theme_override_font_sizes/font_size = 16
 text = "100%"
 horizontal_alignment = 1
 
+[node name="Battery Pack" type="Area2D" parent="."]
+position = Vector2(-169, 53)
+script = ExtResource("15_pjavb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Battery Pack"]
+position = Vector2(3, 4)
+shape = SubResource("CapsuleShape2D_pdnd8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Battery Pack"]
+position = Vector2(2.60849, 4.39152)
+scale = Vector2(0.923941, 0.923941)
+texture = ExtResource("17_mohno")
+
 [connection signal="animation_finished" from="Player/Animations/Anim_Death" to="Player" method="OnDeathAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Anim_Hurt" to="Player" method="OnHurtAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Anim_Dash" to="Player" method="OnDashAnimFinished"]
+[connection signal="body_entered" from="Battery Pack" to="Battery Pack" method="OnBodyEntered"]
