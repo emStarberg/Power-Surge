@@ -30,6 +30,7 @@ public partial class BatteryPack : Area2D
 			if (body is PlayerMove player)
 			{
 				player.IncreasePower(20);
+				QueueFree();
 			}
 		}
 	}
