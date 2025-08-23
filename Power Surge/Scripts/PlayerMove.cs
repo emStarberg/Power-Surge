@@ -149,7 +149,7 @@ public partial class PlayerMove : CharacterBody2D
 			velocity.Y = JumpStrength;
 			// Create jump animation
 			Node jumpAnimInstance = jumpAnimation.Instantiate();
-			((Node2D)jumpAnimInstance).GlobalPosition = GlobalPosition;
+			((Node2D)jumpAnimInstance).GlobalPosition = GlobalPosition + new Vector2(2, 0);
 			GetTree().Root.AddChild(jumpAnimInstance);
 			// Increase no. of jumps, for counting double jumps
 			numJumps++;
