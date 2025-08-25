@@ -57,8 +57,8 @@ public partial class PlayerMove : CharacterBody2D
 						powerMeter.SetPowerSurgeMode(false);
 					}
 				}
-				
-				}
+
+			}
 			else
 			{
 				PowerMeter.Value = 100;
@@ -180,8 +180,7 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		alive = false;
 		GD.Print("Dead!");
-		idleAnim.Stop();
-		idleAnim.Visible = false;
+		HideAllAnimations();
 		deathAnim.Visible = true;
 		deathAnim.Play();
 	}
@@ -273,7 +272,11 @@ public partial class PlayerMove : CharacterBody2D
 		isDashing = false;
 		velocity.X = 0; // Stop horizontal movement after dash
 		dashAnim.Visible = false;
-		idleAnim.Visible = true;
+		if (alive)
+		{
+			idleAnim.Visible = true;
+		}
+		
 	}
 	/// <summary>
 	/// Decrease player power level
@@ -290,5 +293,15 @@ public partial class PlayerMove : CharacterBody2D
 	public void IncreasePower(int amount)
 	{
 		power += amount;
+	}
+	/// <summary>
+	/// Set Visible = false on all animatedsprite2d
+	/// </summary>
+	private void HideAllAnimations()
+	{
+		dashAnim.Visible = false;
+		deathAnim.Visible = false;
+		idleAnim.Visible = false;
+		hurtAnim.Visible = false;
 	}
 }
