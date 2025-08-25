@@ -46,7 +46,12 @@ public partial class PlayerMove : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		if (alive)
-		{
+		{	
+			// Don't allow negative numbers
+			if (power < 0)
+			{
+				power = 0;
+			}
 			if (power <= 100)
 			{
 				PowerMeter.Value = power;
@@ -61,6 +66,7 @@ public partial class PlayerMove : CharacterBody2D
 			}
 			else
 			{
+				// PowerMeter is limited to 100, and displays a new sprite when power is greater than 100
 				PowerMeter.Value = 100;
 				if (PowerMeter is PowerMeter powerMeter)
 				{
@@ -71,11 +77,17 @@ public partial class PlayerMove : CharacterBody2D
 				}
 
 			}
+
+			
 			// Check whether to dash
 			if (Input.IsActionJustPressed("input_dash"))
 			{
-				// Begin dash
-				Dash();
+				// No stationary dashes
+				if (velocity.X != 0)
+				{
+					// Begin dash
+					Dash();
+				}
 			}
 			if (isDashing)
 			{
@@ -108,7 +120,7 @@ public partial class PlayerMove : CharacterBody2D
 				}
 
 				// Check how long the player has fallen for
-				if (!IsOnFloor())
+				if (!IsOnFloor() && !isDashing)
 				{
 					fallTime += (float)delta;
 				}
