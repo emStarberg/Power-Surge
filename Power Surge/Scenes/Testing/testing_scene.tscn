@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=65 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
 [ext_resource type="Script" path="res://Scripts/PowerMeter.cs" id="14_6nksn"]
+[ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="15_o8qng"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o82n"]
@@ -280,6 +281,77 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
+atlas = ExtResource("15_o8qng")
+region = Rect2(0, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po4dr"]
+atlas = ExtResource("15_o8qng")
+region = Rect2(64, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khk2e"]
+atlas = ExtResource("15_o8qng")
+region = Rect2(128, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur40f"]
+atlas = ExtResource("15_o8qng")
+region = Rect2(192, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw600"]
+atlas = ExtResource("15_o8qng")
+region = Rect2(256, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3ymf"]
+atlas = ExtResource("15_o8qng")
+region = Rect2(0, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1xml"]
+atlas = ExtResource("15_o8qng")
+region = Rect2(64, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmvv5"]
+atlas = ExtResource("15_o8qng")
+region = Rect2(128, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4akcd"]
+atlas = ExtResource("15_o8qng")
+region = Rect2(192, 16, 64, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6k6qr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuf5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po4dr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khk2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur40f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lw600")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3ymf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1xml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmvv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4akcd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
+
 [node name="Node2D" type="Node2D"]
 position = Vector2(416, 228)
 
@@ -368,7 +440,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Power Meter" type="TextureProgressBar" parent="UI/Control"]
+[node name="Power Meter" type="TextureProgressBar" parent="UI/Control" node_paths=PackedStringArray("Camera")]
 layout_mode = 0
 offset_left = 518.0
 offset_top = 580.0
@@ -378,6 +450,7 @@ scale = Vector2(3.24117, 3.24117)
 texture_under = ExtResource("12_rpok1")
 texture_progress = ExtResource("13_5nmc8")
 script = ExtResource("14_6nksn")
+Camera = NodePath("../../../Camera")
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
 layout_mode = 1
@@ -391,6 +464,13 @@ offset_top = -292.952
 offset_right = -667.665
 offset_bottom = -285.952
 color = Color(0.223103, 0.223103, 0.223103, 1)
+
+[node name="Power Surge" type="AnimatedSprite2D" parent="UI/Control/Power Meter"]
+visible = false
+position = Vector2(22.2142, 8.0218)
+sprite_frames = SubResource("SpriteFrames_6k6qr")
+frame = 7
+frame_progress = 0.560931
 
 [node name="Percentage Label" type="Label" parent="UI/Control"]
 layout_mode = 1
