@@ -22,6 +22,7 @@ lead them to _The World Conductor_. Small enemies named circuit bugs patrol the 
 ### _The Circuit Labs_
 Once through the underground tunnel found at the end of The _Luminescent Plains_, the player comes accross an abandoned lab, once dedicated to researching _The World Conductor_. Here, the lab's security system has been taken over, creating some new dangerous enemies for the player. The final level is a boss fight against ERR0R, a mutant mech-like robot composed of computers and lab equipment.
 
+To be updated with other 2 sections...
 
 ## Section 3 - General Gameplay
 The game is a classic 16-bit 2D platformer. 
