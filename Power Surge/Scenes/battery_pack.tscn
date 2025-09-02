@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://2h0wurv4vddk"]
 
-[ext_resource type="Script" path="res://Scripts/BatteryPack.cs" id="1_jq2s5"]
+[ext_resource type="Script" uid="uid://dot5u3t5ycmxf" path="res://Scripts/BatteryPack.cs" id="1_jq2s5"]
 [ext_resource type="Texture2D" uid="uid://cnc2euv4wlbra" path="res://Assets/Objects/Battery Pack.png" id="2_lvwoi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pdnd8"]
