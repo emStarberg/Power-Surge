@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=74 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bitip81tn2v63" path="res://Assets/Characters/Shield - Spritesheet.png" id="7_bssvx"]
 [ext_resource type="Texture2D" uid="uid://bptbc7jd1antf" path="res://Assets/Characters/Player Hurt - Spritesheet.png" id="7_qba23"]
 [ext_resource type="Texture2D" uid="uid://3wb48qr8yjh1" path="res://Assets/Characters/Player Dash - Spritesheet.png" id="8_88nyf"]
+[ext_resource type="Texture2D" uid="uid://c7icuep804gm0" path="res://Assets/Characters/Weak Pulse - Spritesheet.png" id="9_2yo0d"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="9_xf330"]
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
@@ -224,6 +225,69 @@ animations = [{
 "speed": 18.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yo0d"]
+atlas = ExtResource("9_2yo0d")
+region = Rect2(0, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5kwj"]
+atlas = ExtResource("9_2yo0d")
+region = Rect2(0, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_baem7"]
+atlas = ExtResource("9_2yo0d")
+region = Rect2(0, 48, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjn53"]
+atlas = ExtResource("9_2yo0d")
+region = Rect2(0, 64, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acifj"]
+atlas = ExtResource("9_2yo0d")
+region = Rect2(0, 112, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqaec"]
+atlas = ExtResource("9_2yo0d")
+region = Rect2(0, 80, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bp46n"]
+atlas = ExtResource("9_2yo0d")
+region = Rect2(0, 96, 64, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bp46n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yo0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5kwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_baem7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjn53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acifj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjn53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acifj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqaec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bp46n")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1bk2"]
 radius = 8.06226
 
@@ -365,9 +429,8 @@ cameraPath = NodePath("../Camera")
 tile_map_data = PackedByteArray("AAD8/wIAAAAAAAAAAAD9/wIAAAABAAAAAAD+/wIAAAABAAAAAAD//wIAAAABAAAAAAAAAAIAAAABAAAAAAABAAIAAAABAAAAAAACAAIAAAABAAAAAAADAAIAAAABAAAAAAAEAAIAAAABAAAAAAAFAAIAAAACAAAAAAD9/wUAAAABAAAAAAD+/wUAAAABAAAAAAD//wUAAAABAAAAAAAAAAUAAAABAAAAAAABAAUAAAABAAAAAAACAAUAAAABAAAAAAADAAUAAAABAAAAAAAEAAUAAAABAAAAAAAFAAUAAAABAAAAAAAGAAUAAAABAAAAAAAHAAUAAAABAAAAAAAIAAUAAAABAAAAAAAJAAUAAAABAAAAAAAKAAUAAAABAAAAAAALAAUAAAABAAAAAAAMAAUAAAABAAAAAAANAAUAAAABAAAAAAAOAAUAAAABAAAAAAAPAAUAAAABAAAAAAAQAAUAAAACAAAAAADy/wQAAAAAAAAAAADz/wQAAAABAAAAAAD0/wQAAAABAAAAAAD1/wQAAAABAAAAAAD2/wQAAAABAAAAAAD3/wQAAAABAAAAAAD4/wQAAAABAAAAAAD5/wQAAAACAAAAAAD6/wUAAAABAAAAAAD7/wUAAAABAAAAAAD8/wUAAAABAAAAAAD5/wUAAAABAAAAAAD4/wUAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_0hka7")
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animFolder", "PowerMeter", "percentageLabel")]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel")]
 script = ExtResource("1_cila0")
-animFolder = NodePath("Animations")
 PowerMeter = NodePath("../UI/Control/Power Meter")
 percentageLabel = NodePath("../UI/Control/Percentage Label")
 
@@ -402,6 +465,21 @@ scale = Vector2(1.04002, 1.04002)
 sprite_frames = SubResource("SpriteFrames_w32m1")
 frame = 5
 frame_progress = 1.0
+
+[node name="Attacks" type="Node2D" parent="Player/Animations"]
+
+[node name="Anim_WeakPulseRight" type="AnimatedSprite2D" parent="Player/Animations/Attacks"]
+visible = false
+position = Vector2(41, -3)
+rotation = 3.14022
+sprite_frames = SubResource("SpriteFrames_bp46n")
+frame = 8
+frame_progress = 1.0
+
+[node name="Anim_WeakPulseLeft" type="AnimatedSprite2D" parent="Player/Animations/Attacks"]
+visible = false
+position = Vector2(-32, -1)
+sprite_frames = SubResource("SpriteFrames_bp46n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(2, -2)
@@ -492,3 +570,5 @@ horizontal_alignment = 1
 [connection signal="animation_finished" from="Player/Animations/Anim_Death" to="Player" method="OnDeathAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Anim_Hurt" to="Player" method="OnHurtAnimFinished"]
 [connection signal="animation_finished" from="Player/Animations/Anim_Dash" to="Player" method="OnDashAnimFinished"]
+[connection signal="animation_finished" from="Player/Animations/Attacks/Anim_WeakPulseRight" to="Player" method="OnWeakPulseAnimFinished"]
+[connection signal="animation_finished" from="Player/Animations/Attacks/Anim_WeakPulseLeft" to="Player" method="OnWeakPulseAnimFinished"]
