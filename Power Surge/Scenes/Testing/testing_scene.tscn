@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
-[ext_resource type="Script" path="res://Scripts/PlayerMove.cs" id="1_cila0"]
-[ext_resource type="Script" path="res://Scripts/Background.cs" id="2_p1rgw"]
-[ext_resource type="Script" path="res://Scripts/Camera.cs" id="5_qte2r"]
+[ext_resource type="Script" uid="uid://dr47mlmgvnewi" path="res://Scripts/PlayerMove.cs" id="1_cila0"]
+[ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Background.cs" id="2_p1rgw"]
+[ext_resource type="Script" uid="uid://rfodace5xyiq" path="res://Scripts/Camera.cs" id="5_qte2r"]
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="6_4nrw7"]
 [ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player Death - Spritesheet.png" id="6_dsmcn"]
 [ext_resource type="Texture2D" uid="uid://bitip81tn2v63" path="res://Assets/Characters/Shield - Spritesheet.png" id="7_bssvx"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="9_xf330"]
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
-[ext_resource type="Script" path="res://Scripts/PowerMeter.cs" id="14_6nksn"]
+[ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/PowerMeter.cs" id="14_6nksn"]
 [ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="15_o8qng"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
 

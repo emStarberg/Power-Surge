@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://dso2d7b5ykmol"]
 
-[ext_resource type="Script" path="res://Scripts/CircuitBug.cs" id="1_pjp8a"]
+[ext_resource type="Script" uid="uid://cwcle1kyugf2e" path="res://Scripts/CircuitBug.cs" id="1_pjp8a"]
 [ext_resource type="Texture2D" uid="uid://ckuettnld20c6" path="res://Assets/Characters/Circuit Bug Run - Spritesheet.png" id="2_hrnt5"]
 [ext_resource type="Texture2D" uid="uid://b61u24calio1c" path="res://Assets/Characters/Circuit bug Attack - Spritesheet.png" id="3_862px"]
 
