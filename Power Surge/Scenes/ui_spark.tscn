@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cr8f3adpxwjal"]
 
 [ext_resource type="Texture2D" uid="uid://caxkmh65lkf26" path="res://Assets/UI/Power Meter - Spark - Spritesheet.png" id="1_u2ibk"]
-[ext_resource type="Script" uid="uid://dmsiky1xhud7g" path="res://Scripts/UISpark.cs" id="2_exb12"]
+[ext_resource type="Script" uid="uid://dmsiky1xhud7g" path="res://Scripts/UI/UISpark.cs" id="2_exb12"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cpkd3"]
 atlas = ExtResource("1_u2ibk")

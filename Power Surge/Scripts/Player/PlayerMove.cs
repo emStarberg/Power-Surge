@@ -17,17 +17,18 @@ public partial class PlayerMove : CharacterBody2D
 	[Export] public Label percentageLabel; // Label under power meter
 	private int power = 100; // Percentage of power left
 	private Vector2 velocity; // For changing player's Velocity property
-	private AnimatedSprite2D currentAnim, idleAnim, deathAnim, hurtAnim, dashAnim, weakPulseAnimRight, weakPulseAnimLeft, strongBlastAnim; // Player's animations
+	private AnimatedSprite2D currentAnim, idleAnim, deathAnim, hurtAnim, dashAnim; // Player's animations
 	private StaticBody2D shield; // Player's shield ability when activated
 	private PackedScene jumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn"); // For spawning jump animations
 	private PackedScene dashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn"); // For spawning dash animations
+	private PackedScene strongBlast = GD.Load<PackedScene>("Scenes/strong_blast.tscn");
 	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground hit
 	private float fallTime = 0f; // For checking if the player has fallen off the map
 	private bool alive = true; // True if player has died
 	private bool isDashing = false; // Whether player is dashing
 	private float dashSpeed = 800f; // Speed of dash
 	private float direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
-	private string attackSelected = "weak pulse";
+	private string attackSelected = "strong blast";
 	private string facing = "left";
 
 
@@ -38,8 +39,6 @@ public partial class PlayerMove : CharacterBody2D
 		deathAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Death");
 		dashAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Dash");
 		idleAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Idle");
-		weakPulseAnimLeft = GetNode<AnimatedSprite2D>("Animations/Attacks/Anim_WeakPulseLeft");
-		weakPulseAnimRight = GetNode<AnimatedSprite2D>("Animations/Attacks/Anim_WeakPulseRight");
 		currentAnim = idleAnim;
 		currentAnim.Play();
 
@@ -351,24 +350,19 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		if (attackSelected == "weak pulse")
 		{
-			GD.Print(facing);
-			if (facing == "left")
+			
+		}
+
+		if (attackSelected == "strong blast")
+		{
+			Node attackInstance = strongBlast.Instantiate();
+			((StrongBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0, -2);
+			GetTree().Root.AddChild(attackInstance);
+			if (attackInstance is StrongBlast b)
 			{
-				weakPulseAnimLeft.Visible = true;
-				weakPulseAnimLeft.Play();
-			}
-			else
-			{
-				weakPulseAnimRight.Visible = true;
-				weakPulseAnimRight.Play();
-				
+				// Fire projectile
+				b.Activate(facing);
 			}
 		}
-	}
-
-	public void OnWeakPulseAnimFinished()
-	{
-		weakPulseAnimLeft.Visible = false;
-		weakPulseAnimRight.Visible = false;
 	}
 }
