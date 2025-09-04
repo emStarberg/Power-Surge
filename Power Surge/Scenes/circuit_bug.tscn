@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://dso2d7b5ykmol"]
+[gd_scene load_steps=37 format=3 uid="uid://dso2d7b5ykmol"]
 
 [ext_resource type="Script" uid="uid://cwcle1kyugf2e" path="res://Scripts/Enemies/CircuitBug.cs" id="1_pjp8a"]
 [ext_resource type="Texture2D" uid="uid://ckuettnld20c6" path="res://Assets/Characters/Circuit Bug Run - Spritesheet.png" id="2_hrnt5"]
 [ext_resource type="Texture2D" uid="uid://b61u24calio1c" path="res://Assets/Characters/Circuit bug Attack - Spritesheet.png" id="3_862px"]
+[ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player Death - Spritesheet.png" id="4_8trt3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ritr"]
 size = Vector2(16, 12)
@@ -184,6 +185,49 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7yx0"]
+atlas = ExtResource("4_8trt3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl3up"]
+atlas = ExtResource("4_8trt3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks312"]
+atlas = ExtResource("4_8trt3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln3mu"]
+atlas = ExtResource("4_8trt3")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cucx"]
+atlas = ExtResource("4_8trt3")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3qb22"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7yx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hl3up")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ks312")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ln3mu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cucx")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
 [node name="Circuit Bug" type="CharacterBody2D"]
 position = Vector2(130, 72)
 collision_mask = 3
@@ -210,6 +254,10 @@ sprite_frames = SubResource("SpriteFrames_blg6x")
 frame = 8
 frame_progress = 0.550982
 
+[node name="Anim_Death" type="AnimatedSprite2D" parent="Animations"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_3qb22")
+
 [node name="GroundRay" type="RayCast2D" parent="." groups=["Enemy"]]
 position = Vector2(-13, 7)
 
@@ -221,3 +269,4 @@ position = Vector2(-6, 2)
 target_position = Vector2(-76, -1)
 
 [connection signal="animation_finished" from="Animations/Anim_Attack" to="." method="OnAttackAnimFinished"]
+[connection signal="animation_finished" from="Animations/Anim_Death" to="." method="OnDeathAnimFinished"]
