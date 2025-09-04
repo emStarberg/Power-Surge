@@ -55,12 +55,12 @@ When the player enters Power Surge mode a timer starts, and if it finishes befor
 
 
 ### Attacks
-| Name              | Description                                                                                   | Power Usage 
-|-------------------|-----------------------------------------------------------------------------------------------|-------------
-| Weak Pulse        | A short, weak attack used for activating generators. Does a small amount of damage to enemies | 10%          
-| Strong Blast      | A powerful, ranged attack, useful for taking out small enemies in one hit.                    | 20%            
-| Power Surge Blast | A very powerful, ranged attack for doing large amounts of damage to multiple enemies          | Half  
-| Surround Blast    | A moderately powerful attack that damages enemies surrounding the player                      | 20%
+| Name              | Description                                                                                   | Power Usage | Damage
+|-------------------|-----------------------------------------------------------------------------------------------|-------------|--------
+| Weak Pulse        | A short, weak attack used for activating generators. Does a small amount of damage to enemies | 10%         | 10
+| Strong Blast      | A powerful, ranged attack, useful for taking out small enemies in one hit.                    | 20%         | 20  
+| Power Surge Blast | A very powerful, ranged attack for doing large amounts of damage to multiple enemies          | Half        | 40 
+| Surround Blast    | A moderately powerful attack that damages enemies surrounding the player                      | 20%         | 15
 
 ### Other Abilities
 | Name              | Power Usage
@@ -95,12 +95,12 @@ There are lots of different objects to interact with throughout the levels;
 
 ## Section 5 - Enemies
 There are various enemies scattered across the world:
-| Name             | Function                                                      | Description                                                     | Health |
-|------------------|---------------------------------------------------------------|-----------------------------------------------------------------|--------|
-| Circuit Bug      | Projectile attack. -10% power                                 | Small, fast moving robotic insect                               | 1      |
-| Voltage Sentinel | Short ranged smash attack. -15% power                         | Humanoid robotic guardian designed to protect the circuit labs  | 3      |
-| Energy Puddle    | Doesn't move. -5% power when stepped on                       | Small puddles of unstable electricity that appear on the ground | -      |
-| Laser Turret     | Projectile attack. -15% power                                 | Turrets leftover from the lab's security system                 | 2      |
-| Wild Spark       | Multi-directional shock. -20% power                           | A mysterious electrical entity                                  | 2      |
-| Shocking Cloud   | On contact, -35% power                                        | An energy storm that floats                                     | -      |
-| Enforcer         | Projectile attack. -20% power. Close-range smash. -30% power. | A large, quadruped robot                                        | 4      |
+| Name             | Function                                                      | Description                                                     | Health  |
+|------------------|---------------------------------------------------------------|-----------------------------------------------------------------|---------|
+| Circuit Bug      | Projectile attack. -10% power                                 | Small, fast moving robotic insect                               | 10      |
+| Voltage Sentinel | Short ranged smash attack. -15% power                         | Humanoid robotic guardian designed to protect the circuit labs  | 30      |
+| Energy Puddle    | Doesn't move. -5% power when stepped on                       | Small puddles of unstable electricity that appear on the ground | -       |
+| Laser Turret     | Projectile attack. -15% power                                 | Turrets leftover from the lab's security system                 | 20      |
+| Wild Spark       | Multi-directional shock. -20% power                           | A mysterious electrical entity                                  | 20      |
+| Shocking Cloud   | On contact, -35% power                                        | An energy storm that floats                                     | -       |
+| Enforcer         | Projectile attack. -20% power. Close-range smash. -30% power. | A large, quadruped robot                                        | 40      |
