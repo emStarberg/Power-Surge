@@ -1,19 +1,14 @@
-[gd_scene load_steps=65 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=24 format=4 uid="uid://c07snwm6iwu0b"]
 
-[ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="1_2t2u7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
-[ext_resource type="Script" uid="uid://dr47mlmgvnewi" path="res://Scripts/PlayerMove.cs" id="1_cila0"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Background.cs" id="2_p1rgw"]
+[ext_resource type="PackedScene" uid="uid://bwvj50vhjjac7" path="res://Scenes/player.tscn" id="4_ymafl"]
 [ext_resource type="Script" uid="uid://rfodace5xyiq" path="res://Scripts/Camera.cs" id="5_qte2r"]
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="6_4nrw7"]
-[ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player Death - Spritesheet.png" id="6_dsmcn"]
-[ext_resource type="Texture2D" uid="uid://bitip81tn2v63" path="res://Assets/Characters/Shield - Spritesheet.png" id="7_bssvx"]
-[ext_resource type="Texture2D" uid="uid://bptbc7jd1antf" path="res://Assets/Characters/Player Hurt - Spritesheet.png" id="7_qba23"]
-[ext_resource type="Texture2D" uid="uid://3wb48qr8yjh1" path="res://Assets/Characters/Player Dash - Spritesheet.png" id="8_88nyf"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="9_xf330"]
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
-[ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/PowerMeter.cs" id="14_6nksn"]
+[ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="14_6nksn"]
 [ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="15_o8qng"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
 
@@ -30,256 +25,6 @@ texture = ExtResource("6_4nrw7")
 [sub_resource type="TileSet" id="TileSet_0hka7"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5o82n")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w7e4r"]
-atlas = ExtResource("1_2t2u7")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yvkhp"]
-atlas = ExtResource("1_2t2u7")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_agav3"]
-atlas = ExtResource("1_2t2u7")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ah0ju"]
-atlas = ExtResource("1_2t2u7")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xldjj"]
-atlas = ExtResource("1_2t2u7")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dsm1r"]
-atlas = ExtResource("1_2t2u7")
-region = Rect2(32, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pb3sr"]
-atlas = ExtResource("1_2t2u7")
-region = Rect2(0, 32, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2exqc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w7e4r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yvkhp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_agav3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ah0ju")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xldjj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dsm1r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pb3sr")
-}],
-"loop": true,
-"name": &"default",
-"speed": 12.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mm0ph"]
-atlas = ExtResource("6_dsmcn")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rbwco"]
-atlas = ExtResource("6_dsmcn")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yfh7p"]
-atlas = ExtResource("6_dsmcn")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b0vi2"]
-atlas = ExtResource("6_dsmcn")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x1unc"]
-atlas = ExtResource("6_dsmcn")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_5tfhu"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mm0ph")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rbwco")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yfh7p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b0vi2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x1unc")
-}],
-"loop": false,
-"name": &"default",
-"speed": 10.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ko2hj"]
-atlas = ExtResource("7_qba23")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1twj1"]
-atlas = ExtResource("7_qba23")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t4kih"]
-atlas = ExtResource("7_qba23")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4f21w"]
-atlas = ExtResource("7_qba23")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qm3s6"]
-atlas = ExtResource("7_qba23")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_6hyil"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ko2hj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1twj1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t4kih")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4f21w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qm3s6")
-}],
-"loop": false,
-"name": &"default",
-"speed": 12.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eo310"]
-atlas = ExtResource("8_88nyf")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mdpdx"]
-atlas = ExtResource("8_88nyf")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p6q5f"]
-atlas = ExtResource("8_88nyf")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ji158"]
-atlas = ExtResource("8_88nyf")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mwycp"]
-atlas = ExtResource("8_88nyf")
-region = Rect2(16, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5c53k"]
-atlas = ExtResource("8_88nyf")
-region = Rect2(32, 32, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_w32m1"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eo310")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mdpdx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p6q5f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ji158")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mwycp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5c53k")
-}],
-"loop": false,
-"name": &"default",
-"speed": 18.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_k1bk2"]
-radius = 8.06226
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2yycr"]
-radius = 17.0
-height = 34.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hkhip"]
-atlas = ExtResource("7_bssvx")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7h8kf"]
-atlas = ExtResource("7_bssvx")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gw576"]
-atlas = ExtResource("7_bssvx")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_37lwr"]
-atlas = ExtResource("7_bssvx")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lf0cx"]
-atlas = ExtResource("7_bssvx")
-region = Rect2(32, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gbdi8"]
-atlas = ExtResource("7_bssvx")
-region = Rect2(64, 32, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_da8wy"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hkhip")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7h8kf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gw576")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_37lwr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lf0cx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gbdi8")
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
-}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
 atlas = ExtResource("15_o8qng")
@@ -365,65 +110,9 @@ cameraPath = NodePath("../Camera")
 tile_map_data = PackedByteArray("AAD8/wIAAAAAAAAAAAD9/wIAAAABAAAAAAD+/wIAAAABAAAAAAD//wIAAAABAAAAAAAAAAIAAAABAAAAAAABAAIAAAABAAAAAAACAAIAAAABAAAAAAADAAIAAAABAAAAAAAEAAIAAAABAAAAAAAFAAIAAAACAAAAAAD9/wUAAAABAAAAAAD+/wUAAAABAAAAAAD//wUAAAABAAAAAAAAAAUAAAABAAAAAAABAAUAAAABAAAAAAACAAUAAAABAAAAAAADAAUAAAABAAAAAAAEAAUAAAABAAAAAAAFAAUAAAABAAAAAAAGAAUAAAABAAAAAAAHAAUAAAABAAAAAAAIAAUAAAABAAAAAAAJAAUAAAABAAAAAAAKAAUAAAABAAAAAAALAAUAAAABAAAAAAAMAAUAAAABAAAAAAANAAUAAAABAAAAAAAOAAUAAAABAAAAAAAPAAUAAAABAAAAAAAQAAUAAAACAAAAAADy/wQAAAAAAAAAAADz/wQAAAABAAAAAAD0/wQAAAABAAAAAAD1/wQAAAABAAAAAAD2/wQAAAABAAAAAAD3/wQAAAABAAAAAAD4/wQAAAABAAAAAAD5/wQAAAACAAAAAAD6/wUAAAABAAAAAAD7/wUAAAABAAAAAAD8/wUAAAABAAAAAAD5/wUAAAABAAAAAAD4/wUAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_0hka7")
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animFolder", "PowerMeter", "percentageLabel")]
-script = ExtResource("1_cila0")
-animFolder = NodePath("Animations")
+[node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel") instance=ExtResource("4_ymafl")]
 PowerMeter = NodePath("../UI/Control/Power Meter")
 percentageLabel = NodePath("../UI/Control/Percentage Label")
-
-[node name="Animations" type="Node2D" parent="Player"]
-
-[node name="Anim_Idle" type="AnimatedSprite2D" parent="Player/Animations"]
-position = Vector2(2, -2)
-scale = Vector2(1.05, 1.05)
-sprite_frames = SubResource("SpriteFrames_2exqc")
-autoplay = "default"
-frame_progress = 0.643787
-
-[node name="Anim_Death" type="AnimatedSprite2D" parent="Player/Animations"]
-visible = false
-position = Vector2(2, -2)
-rotation = 3.14409
-scale = Vector2(1.06182, 1.06182)
-sprite_frames = SubResource("SpriteFrames_5tfhu")
-frame = 4
-frame_progress = 1.0
-
-[node name="Anim_Hurt" type="AnimatedSprite2D" parent="Player/Animations"]
-visible = false
-position = Vector2(2, -2)
-scale = Vector2(1.04, 1.04)
-sprite_frames = SubResource("SpriteFrames_6hyil")
-
-[node name="Anim_Dash" type="AnimatedSprite2D" parent="Player/Animations"]
-visible = false
-position = Vector2(2, -2)
-scale = Vector2(1.04002, 1.04002)
-sprite_frames = SubResource("SpriteFrames_w32m1")
-frame = 5
-frame_progress = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(2, -2)
-shape = SubResource("CircleShape2D_k1bk2")
-
-[node name="Shield" type="StaticBody2D" parent="Player"]
-visible = false
-position = Vector2(0, -1)
-collision_layer = 2
-
-[node name="Collider" type="CollisionShape2D" parent="Player/Shield"]
-position = Vector2(2, -2)
-scale = Vector2(1.12, 1.2)
-shape = SubResource("CapsuleShape2D_2yycr")
-
-[node name="Anim_Shield" type="AnimatedSprite2D" parent="Player/Shield"]
-position = Vector2(1.99998, -2)
-scale = Vector2(1.09375, 1.09375)
-sprite_frames = SubResource("SpriteFrames_da8wy")
-autoplay = "default"
-frame = 5
-frame_progress = 0.348018
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(2, -2)
@@ -488,7 +177,3 @@ text = "100%"
 horizontal_alignment = 1
 
 [node name="Battery Pack" parent="." instance=ExtResource("15_yy038")]
-
-[connection signal="animation_finished" from="Player/Animations/Anim_Death" to="Player" method="OnDeathAnimFinished"]
-[connection signal="animation_finished" from="Player/Animations/Anim_Hurt" to="Player" method="OnHurtAnimFinished"]
-[connection signal="animation_finished" from="Player/Animations/Anim_Dash" to="Player" method="OnDashAnimFinished"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://0v3wuwa2wbjd"]
 
-[ext_resource type="Script" uid="uid://bi8gyn1ajlcw4" path="res://Scripts/ProjectileCB.cs" id="1_3x12l"]
+[ext_resource type="Script" uid="uid://bi8gyn1ajlcw4" path="res://Scripts/Enemies/ProjectileCB.cs" id="1_3x12l"]
 [ext_resource type="Texture2D" uid="uid://o5tc3os16h5s" path="res://Assets/Characters/Circuit bug - Projectile.png" id="2_512mq"]
 [ext_resource type="Texture2D" uid="uid://cndd6taxvrma1" path="res://Assets/Characters/Projectile CB - Explode - Spritesheet.png" id="3_y43ov"]
 

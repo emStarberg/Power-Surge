@@ -1,3 +1,4 @@
+using System;
 using Godot;
 //------------------------------------------------------------------------------
 // <summary>
@@ -11,32 +12,36 @@ public partial class PlayerMove : CharacterBody2D
 	[Export] public float JumpStrength = -300f; // Jump velocity
 	[Export] public float Gravity = 1000f; // Gravity force      
 	[Export] public float MaxFallSpeed = 1000f; // Terminal velocity
-	[Export] public Node2D animFolder; // Folder where animations are kept
 	[Export] public int MaxPower = 200; // Maximum power level 200%
 	[Export] public TextureProgressBar PowerMeter; // Power meter
-	[Export] public Label percentageLabel;
+	[Export] public Label percentageLabel; // Label under power meter
 	private int power = 100; // Percentage of power left
 	private Vector2 velocity; // For changing player's Velocity property
-	private AnimatedSprite2D idleAnim, deathAnim, hurtAnim, dashAnim; // Player's animations
+	private AnimatedSprite2D currentAnim, idleAnim, deathAnim, hurtAnim, dashAnim; // Player's animations
 	private StaticBody2D shield; // Player's shield ability when activated
 	private PackedScene jumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn"); // For spawning jump animations
 	private PackedScene dashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn"); // For spawning dash animations
-	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground is hit
+	private PackedScene strongBlast = GD.Load<PackedScene>("Scenes/strong_blast.tscn");
+	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground hit
 	private float fallTime = 0f; // For checking if the player has fallen off the map
-	private bool alive = true; // True if the player has died
-	private bool isDashing = false; // Whether the player is currently dashing
+	private bool alive = true; // True if player has died
+	private bool isDashing = false; // Whether player is dashing
 	private float dashSpeed = 800f; // Speed of dash
 	private float direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
+	private string attackSelected = "strong blast";
+	private string facing = "left";
 
 
 	public override void _Ready()
 	{
 		// Set up animations
-		hurtAnim = animFolder.GetNode<AnimatedSprite2D>("Anim_Hurt");
-		deathAnim = animFolder.GetNode<AnimatedSprite2D>("Anim_Death");
-		dashAnim = animFolder.GetNode<AnimatedSprite2D>("Anim_Dash");
-		idleAnim = animFolder.GetNode<AnimatedSprite2D>("Anim_Idle");
-		idleAnim.Play();
+		hurtAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Hurt");
+		deathAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Death");
+		dashAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Dash");
+		idleAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Idle");
+		currentAnim = idleAnim;
+		currentAnim.Play();
+
 		// Set up shield
 		shield = GetNode<StaticBody2D>("Shield");
 		shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
@@ -46,7 +51,7 @@ public partial class PlayerMove : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		if (alive)
-		{	
+		{
 			// Don't allow negative numbers
 			if (power < 0)
 			{
@@ -78,7 +83,7 @@ public partial class PlayerMove : CharacterBody2D
 
 			}
 
-			
+
 			// Check whether to dash
 			if (Input.IsActionJustPressed("input_dash"))
 			{
@@ -102,13 +107,20 @@ public partial class PlayerMove : CharacterBody2D
 				velocity.Y += Gravity * (float)delta;
 				// Clamp vertical velocity to terminal velocity.
 				velocity.Y = Mathf.Min(velocity.Y, MaxFallSpeed);
-
+				direction = 0;
 				// Get input direction
-				direction = 0.0f;
 				if (Input.IsActionPressed("input_left"))
+				{
 					direction -= 1.0f;
+					facing = "left";
+				}
+					
 				if (Input.IsActionPressed("input_right"))
+				{
 					direction += 1.0f;
+					facing = "right";
+				}
+					
 
 				// Handle horizontal movement
 				velocity.X = direction * Speed;
@@ -145,6 +157,11 @@ public partial class PlayerMove : CharacterBody2D
 					shield.Visible = false;
 					shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
 				}
+			}
+
+			if (Input.IsActionJustPressed("input_attack"))
+			{
+				Attack();
 			}
 			// Update label to correct percentage
 			percentageLabel.Text = power + "%";
@@ -205,9 +222,7 @@ public partial class PlayerMove : CharacterBody2D
 	/// <param name="shakeDuration">Camera shake duration</param>
 	public void Hurt(int damage, float shakeAmount, float shakeDuration)
 	{
-		idleAnim.Visible = false;
-		hurtAnim.Visible = true;
-		hurtAnim.Play();
+		SwitchAnim(hurtAnim);
 
 		// Camera shake
 		var camera = GetParent().GetNode<Camera>("Camera");
@@ -243,9 +258,8 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		if (!isDashing && alive)
 		{
-			idleAnim.Visible = false;
+			SwitchAnim(dashAnim);
 			isDashing = true;
-			dashAnim.Visible = true;
 			dashAnim.Play();
 			Node dashAnimInstance = dashAnimation.Instantiate();
 			((Node2D)dashAnimInstance).GlobalPosition = GlobalPosition;
@@ -268,11 +282,13 @@ public partial class PlayerMove : CharacterBody2D
 	/// </Summary>
 	public void OnHurtAnimFinished()
 	{
-		hurtAnim.Visible = false;
-		hurtAnim.Stop();
 		if (alive)
 		{
-			idleAnim.Visible = true;
+			SwitchAnim(idleAnim);
+		}
+		else
+		{
+			hurtAnim.Visible = false;
 		}
 	}
 
@@ -283,12 +299,16 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		isDashing = false;
 		velocity.X = 0; // Stop horizontal movement after dash
-		dashAnim.Visible = false;
+
 		if (alive)
 		{
-			idleAnim.Visible = true;
+			SwitchAnim(idleAnim);
 		}
-		
+		else
+		{
+			dashAnim.Visible = false;
+		}
+
 	}
 	/// <summary>
 	/// Decrease player power level
@@ -315,5 +335,34 @@ public partial class PlayerMove : CharacterBody2D
 		deathAnim.Visible = false;
 		idleAnim.Visible = false;
 		hurtAnim.Visible = false;
+	}
+
+	private void SwitchAnim(AnimatedSprite2D to)
+	{
+		currentAnim.Visible = false;
+		currentAnim.Stop();
+		currentAnim = to; 
+		currentAnim.Visible = true;
+		currentAnim.Play();
+	}
+
+	private void Attack()
+	{
+		if (attackSelected == "weak pulse")
+		{
+			
+		}
+
+		if (attackSelected == "strong blast")
+		{
+			Node attackInstance = strongBlast.Instantiate();
+			((StrongBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0, -2);
+			GetTree().Root.AddChild(attackInstance);
+			if (attackInstance is StrongBlast b)
+			{
+				// Fire projectile
+				b.Activate(facing);
+			}
+		}
 	}
 }
