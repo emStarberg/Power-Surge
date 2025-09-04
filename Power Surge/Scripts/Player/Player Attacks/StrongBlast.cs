@@ -9,6 +9,7 @@ public partial class StrongBlast : Area2D
 	private AnimatedSprite2D animatedSprite;
 	private bool doMove = false;
 	private float speed = 350f;
+	private float damage = 20;
 
 	public override void _Ready()
 	{
@@ -72,6 +73,11 @@ public partial class StrongBlast : Area2D
 		if (body.Name != "Player")
 		{
 			Stop();
+			// Hurt enemy
+			if (body is Enemy enemy)
+			{
+				enemy.Hurt(damage);
+			}
 		}
 		
 	}
