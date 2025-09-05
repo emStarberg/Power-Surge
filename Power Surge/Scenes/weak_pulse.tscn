@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://b66ijs5g0ijg2"]
+
+[ext_resource type="Script" uid="uid://b1g7bterss425" path="res://Scripts/Player/Player Attacks/WeakPulse.cs" id="1_x56c3"]
+[ext_resource type="Texture2D" uid="uid://c7icuep804gm0" path="res://Assets/Characters/Weak Pulse - Spritesheet.png" id="2_owxpe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oihly"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxa5h"]
+atlas = ExtResource("2_owxpe")
+region = Rect2(0, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_quw1p"]
+atlas = ExtResource("2_owxpe")
+region = Rect2(0, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l584x"]
+atlas = ExtResource("2_owxpe")
+region = Rect2(0, 112, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lj3g3"]
+atlas = ExtResource("2_owxpe")
+region = Rect2(0, 64, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xkn8"]
+atlas = ExtResource("2_owxpe")
+region = Rect2(0, 80, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymdui"]
+atlas = ExtResource("2_owxpe")
+region = Rect2(0, 96, 64, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d3rkf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxa5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_quw1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l584x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lj3g3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l584x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xkn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymdui")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Weak Pulse" type="Area2D"]
+script = ExtResource("1_x56c3")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oihly")
+
+[node name="Anim_WeakPulse" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d3rkf")
+frame = 6
+frame_progress = 1.0
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="animation_finished" from="Anim_WeakPulse" to="." method="OnAnimationFinished"]

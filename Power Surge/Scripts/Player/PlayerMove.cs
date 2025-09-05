@@ -22,13 +22,14 @@ public partial class PlayerMove : CharacterBody2D
 	private PackedScene jumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn"); // For spawning jump animations
 	private PackedScene dashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn"); // For spawning dash animations
 	private PackedScene strongBlast = GD.Load<PackedScene>("Scenes/strong_blast.tscn");
+	private PackedScene weakPulse = GD.Load<PackedScene>("Scenes/weak_pulse.tscn");
 	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground hit
 	private float fallTime = 0f; // For checking if the player has fallen off the map
 	private bool alive = true; // True if player has died
 	private bool isDashing = false; // Whether player is dashing
 	private float dashSpeed = 800f; // Speed of dash
 	private float direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
-	private string attackSelected = "strong blast";
+	private string attackSelected = "weak pulse";
 	private string facing = "left";
 
 
@@ -114,13 +115,13 @@ public partial class PlayerMove : CharacterBody2D
 					direction -= 1.0f;
 					facing = "left";
 				}
-					
+
 				if (Input.IsActionPressed("input_right"))
 				{
 					direction += 1.0f;
 					facing = "right";
 				}
-					
+
 
 				// Handle horizontal movement
 				velocity.X = direction * Speed;
@@ -175,6 +176,11 @@ public partial class PlayerMove : CharacterBody2D
 			Velocity = velocity;
 			// Move
 			MoveAndSlide();
+			
+			if (Input.IsActionJustPressed("input_attack"))
+			{
+				Attack();
+			}
 		}
 	}
 
@@ -350,17 +356,22 @@ public partial class PlayerMove : CharacterBody2D
 	{
 		if (attackSelected == "weak pulse")
 		{
-			
+			Node attackInstance = weakPulse.Instantiate();
+			((WeakPulse)attackInstance).GlobalPosition = GlobalPosition;
+			AddChild(attackInstance);
+			if (attackInstance is WeakPulse b)
+			{
+				b.Activate(facing);
+			}
 		}
 
 		if (attackSelected == "strong blast")
 		{
 			Node attackInstance = strongBlast.Instantiate();
 			((StrongBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0, -2);
-			GetTree().Root.AddChild(attackInstance);
+			AddChild(attackInstance);
 			if (attackInstance is StrongBlast b)
 			{
-				// Fire projectile
 				b.Activate(facing);
 			}
 		}
