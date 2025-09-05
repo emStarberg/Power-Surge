@@ -36,12 +36,12 @@ public partial class WeakPulse : Node2D
 
 		if (direction == "right")
 		{
-			offset = new Vector2(40, 0);
+			offset = new Vector2(22, 0);
 			animatedSprite.FlipH = true;
 		}
 		else
 		{
-			offset = new Vector2(-35, 0);
+			offset = new Vector2(-20, 0);
 		}
 
 		GlobalPosition = ((Node2D)GetParent()).GlobalPosition + offset;
