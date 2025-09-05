@@ -1,57 +1,62 @@
-[gd_scene load_steps=11 format=3 uid="uid://b66ijs5g0ijg2"]
+[gd_scene load_steps=12 format=3 uid="uid://b66ijs5g0ijg2"]
 
 [ext_resource type="Script" uid="uid://b1g7bterss425" path="res://Scripts/Player/Player Attacks/WeakPulse.cs" id="1_x56c3"]
 [ext_resource type="Texture2D" uid="uid://c7icuep804gm0" path="res://Assets/Characters/Weak Pulse - Spritesheet.png" id="2_owxpe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oihly"]
+size = Vector2(28.5, 7)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kxa5h"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x56c3"]
 atlas = ExtResource("2_owxpe")
-region = Rect2(0, 0, 64, 16)
+region = Rect2(0, 0, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_quw1p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_owxpe"]
 atlas = ExtResource("2_owxpe")
-region = Rect2(0, 16, 64, 16)
+region = Rect2(0, 16, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l584x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o3x2"]
 atlas = ExtResource("2_owxpe")
-region = Rect2(0, 112, 64, 16)
+region = Rect2(0, 32, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lj3g3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ed3gb"]
 atlas = ExtResource("2_owxpe")
-region = Rect2(0, 64, 64, 16)
+region = Rect2(0, 64, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0xkn8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ump8t"]
 atlas = ExtResource("2_owxpe")
-region = Rect2(0, 80, 64, 16)
+region = Rect2(0, 112, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ymdui"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pejp"]
 atlas = ExtResource("2_owxpe")
-region = Rect2(0, 96, 64, 16)
+region = Rect2(0, 80, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_330ii"]
+atlas = ExtResource("2_owxpe")
+region = Rect2(0, 96, 32, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d3rkf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kxa5h")
+"texture": SubResource("AtlasTexture_x56c3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_quw1p")
+"texture": SubResource("AtlasTexture_owxpe")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l584x")
+"texture": SubResource("AtlasTexture_1o3x2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lj3g3")
+"texture": SubResource("AtlasTexture_ed3gb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l584x")
+"texture": SubResource("AtlasTexture_ump8t")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0xkn8")
+"texture": SubResource("AtlasTexture_0pejp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ymdui")
+"texture": SubResource("AtlasTexture_330ii")
 }],
 "loop": false,
 "name": &"default",
@@ -62,6 +67,7 @@ animations = [{
 script = ExtResource("1_x56c3")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(2.25, 1)
 shape = SubResource("RectangleShape2D_oihly")
 
 [node name="Anim_WeakPulse" type="AnimatedSprite2D" parent="."]
