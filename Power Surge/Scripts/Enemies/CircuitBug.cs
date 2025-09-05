@@ -17,6 +17,7 @@ public partial class CircuitBug : Enemy
 	private bool playerDetected = false; // Whether player has been detected
 	private PackedScene projectile = GD.Load<PackedScene>("Scenes/projectile_cb.tscn"); // For spawning projectiles
 	private RayCast2D groundRay, wallRay, playerRay; // Ground detection, wall/object detection, player detection
+	
 
 	public override void _Ready()
 	{
@@ -29,7 +30,14 @@ public partial class CircuitBug : Enemy
 		currentAnimation = runAnim;
 		currentAnimation.Play();
 
+		hurtCooldownTimer = new Timer();
+		hurtCooldownTimer.WaitTime = 0.5f;
+		hurtCooldownTimer.OneShot = true;
+		AddChild(hurtCooldownTimer);
+		hurtCooldownTimer.Timeout += OnHurtCooldownTimeout;
+
 		attackAnim.FrameChanged += OnAttackAnimFrameChanged;
+		deathAnim.AnimationFinished += OnDeathAnimFinished;
 
 		health = 10;
 	}
@@ -101,7 +109,6 @@ public partial class CircuitBug : Enemy
 	{
 		GD.Print("attack");
 		SwitchAnim(attackAnim);
-		runAnim.Visible = false;
 		isRunning = false;
 		// Stop
 		velocity = new Vector2(0, 0);

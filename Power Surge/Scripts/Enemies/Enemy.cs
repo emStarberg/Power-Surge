@@ -12,6 +12,8 @@ public abstract partial class Enemy : CharacterBody2D
 	protected float health;
 	protected AnimatedSprite2D currentAnimation;
 	protected AnimatedSprite2D deathAnim;
+	protected bool canBeHurt = true;
+	protected Timer hurtCooldownTimer;
 
 	/// <summary>
 	/// Called when enemy is hit by an attack
@@ -19,6 +21,9 @@ public abstract partial class Enemy : CharacterBody2D
 	/// <param name="amount">Amount of health to subtract</param>
 	public void Hurt(float amount)
 	{
+		if (!canBeHurt)
+			return;
+
 		health -= amount;
 		if (health <= 0)
 		{
@@ -27,7 +32,11 @@ public abstract partial class Enemy : CharacterBody2D
 		else
 		{
 			FlashHurtEffect();
+			canBeHurt = false;
+			hurtCooldownTimer.Start();
 		}
+		
+		
 
 	}
 	/// <summary>
@@ -36,7 +45,7 @@ public abstract partial class Enemy : CharacterBody2D
 	public virtual void Die()
 	{
 		isAlive = false;
-		GD.Print("dead");
+		GD.Print("deathAnim: " + deathAnim);
 		SwitchAnim(deathAnim);
 
 	}
@@ -49,7 +58,7 @@ public abstract partial class Enemy : CharacterBody2D
 	{
 		return health;
 	}
-	
+
 	/// <summary>
 	/// Flash with red overlay when hurt
 	/// </summary>
@@ -67,7 +76,7 @@ public abstract partial class Enemy : CharacterBody2D
 		}
 
 	}
-	
+
 	/// <summary>
 	/// Switch between AnimatedSprite2D
 	/// </summary>
@@ -77,7 +86,17 @@ public abstract partial class Enemy : CharacterBody2D
 		currentAnimation.Visible = false;
 		currentAnimation.Stop();
 		currentAnimation = to;
-		//currentAnimation.Visible = true;
-		//currentAnimation.Play();
+
+		currentAnimation.Visible = true;
+		currentAnimation.Play();
+	}
+	
+	/// <summary>
+	/// Called when the hurt cooldown timer finishes.
+	/// Allows CircuitBug to be hurt again.
+	/// </summary>
+	protected void OnHurtCooldownTimeout()
+	{
+		canBeHurt = true;
 	}
 }
