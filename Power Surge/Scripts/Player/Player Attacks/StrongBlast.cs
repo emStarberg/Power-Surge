@@ -1,21 +1,35 @@
 using Godot;
 using System;
-using System.Diagnostics.CodeAnalysis;
+
+//------------------------------------------------------------------------------
+// <summary>
+//   Represents the player's strong blast attack.
+//   Handles movement, animation, and collision logic for the attack.
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 
 public partial class StrongBlast : Area2D
 {
-	public string AttackName { get; set; } = "Strong Blast";
 	private string direction;
 	private AnimatedSprite2D animatedSprite;
 	private bool doMove = false;
 	private float speed = 350f;
 	private float damage = 20;
 
+	/// <summary>
+	/// Called when the node enters the scene tree.
+	/// Initializes the animated sprite reference.
+	/// </summary>
 	public override void _Ready()
 	{
 		animatedSprite = GetNode<AnimatedSprite2D>("Anim_StrongBlast");
 	}
 
+	/// <summary>
+	/// Handles movement logic each frame if the attack is active.
+	/// Moves the blast left or right depending on direction.
+	/// </summary>
 	public override void _Process(double delta)
 	{
 		if (doMove)
@@ -27,8 +41,14 @@ public partial class StrongBlast : Area2D
 		}
 	}
 
+	/// <summary>
+	/// Activates the attack, sets direction, and starts the animation.
+	/// Positions the blast and flips the sprite if needed.
+	/// </summary>
 	public void Activate(string dir)
 	{
+		GlobalPosition = ((Node2D)GetParent()).GlobalPosition + new Vector2(0, -2);
+
 		doMove = true;
 		direction = dir;
 		if (dir == "right")
@@ -40,6 +60,10 @@ public partial class StrongBlast : Area2D
 		animatedSprite.Play();
 	}
 
+	/// <summary>
+	/// Handles animation transitions and cleanup when the animation finishes.
+	/// Switches to moving animation or frees the node if contact animation finishes.
+	/// </summary>
 	public void OnAnimFinished()
 	{
 		if (animatedSprite.Animation == "start")
@@ -53,6 +77,10 @@ public partial class StrongBlast : Area2D
 		}
 	}
 
+	/// <summary>
+	/// Stops movement and plays the contact animation.
+	/// Adjusts sprite position based on direction.
+	/// </summary>
 	public void Stop()
 	{
 		doMove = false;
@@ -68,6 +96,10 @@ public partial class StrongBlast : Area2D
 		animatedSprite.Play();
 	}
 
+	/// <summary>
+	/// Handles collision with other bodies, applies damage to enemies.
+	/// Stops and calls Hurt on enemy if applicable.
+	/// </summary>
 	public void OnBodyEntered(Node2D body)
 	{
 		if (body.Name != "Player")
@@ -81,6 +113,4 @@ public partial class StrongBlast : Area2D
 		}
 		
 	}
-
-
 }

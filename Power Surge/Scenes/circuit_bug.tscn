@@ -1,9 +1,9 @@
-[gd_scene load_steps=37 format=3 uid="uid://dso2d7b5ykmol"]
+[gd_scene load_steps=38 format=3 uid="uid://dso2d7b5ykmol"]
 
 [ext_resource type="Script" uid="uid://cwcle1kyugf2e" path="res://Scripts/Enemies/CircuitBug.cs" id="1_pjp8a"]
 [ext_resource type="Texture2D" uid="uid://ckuettnld20c6" path="res://Assets/Characters/Circuit Bug Run - Spritesheet.png" id="2_hrnt5"]
 [ext_resource type="Texture2D" uid="uid://b61u24calio1c" path="res://Assets/Characters/Circuit bug Attack - Spritesheet.png" id="3_862px"]
-[ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player Death - Spritesheet.png" id="4_8trt3"]
+[ext_resource type="Texture2D" uid="uid://cndd6taxvrma1" path="res://Assets/Characters/Projectile CB - Explode - Spritesheet.png" id="4_8trt3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ritr"]
 size = Vector2(16, 12)
@@ -205,6 +205,10 @@ region = Rect2(0, 16, 16, 16)
 atlas = ExtResource("4_8trt3")
 region = Rect2(16, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qb22"]
+atlas = ExtResource("4_8trt3")
+region = Rect2(32, 16, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_3qb22"]
 animations = [{
 "frames": [{
@@ -222,6 +226,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2cucx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qb22")
 }],
 "loop": false,
 "name": &"default",
