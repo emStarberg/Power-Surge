@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1yw2hs5uhn7j"
-path="res://.godot/imported/Strong Blast (Explode) - Spritesheet.png-7413b5bf247b59dedd01e756e359b4cd.ctex"
+uid="uid://di40w74upbuep"
+path="res://.godot/imported/weak pulse.png-bdc298840b58923108e8edb0f5c0c295.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Strong Blast (Explode) - Spritesheet.png"
-dest_files=["res://.godot/imported/Strong Blast (Explode) - Spritesheet.png-7413b5bf247b59dedd01e756e359b4cd.ctex"]
+source_file="res://Assets/UI/Icons/weak pulse.png"
+dest_files=["res://.godot/imported/weak pulse.png-bdc298840b58923108e8edb0f5c0c295.ctex"]
 
 [params]
 

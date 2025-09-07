@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=25 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Background.cs" id="2_p1rgw"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://rfodace5xyiq" path="res://Scripts/Camera.cs" id="5_qte2r"]
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="6_4nrw7"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="9_xf330"]
+[ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="11_g2vln"]
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
 [ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="14_6nksn"]
@@ -126,8 +127,10 @@ scale = Vector2(1.11998, 1.11998)
 [node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -5.0
+offset_top = -24.0
+offset_right = 35.0
+offset_bottom = 16.0
 
 [node name="Power Meter" type="TextureProgressBar" parent="UI/Control" node_paths=PackedStringArray("Camera")]
 layout_mode = 0
@@ -175,5 +178,13 @@ offset_bottom = 24.0
 theme_override_font_sizes/font_size = 16
 text = "100%"
 horizontal_alignment = 1
+
+[node name="Attacks-ui" type="Sprite2D" parent="UI/Control"]
+position = Vector2(92, 604)
+scale = Vector2(4, 4)
+texture = ExtResource("11_g2vln")
+
+[node name="Attack Sprite" type="Sprite2D" parent="UI/Control/Attacks-ui"]
+position = Vector2(0, -0.25)
 
 [node name="Battery Pack" parent="." instance=ExtResource("15_yy038")]

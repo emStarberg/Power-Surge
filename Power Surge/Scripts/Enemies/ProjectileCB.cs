@@ -49,7 +49,7 @@ public partial class ProjectileCB : Area2D
 			Explode();
 			if (body.Name == "Player")
 			{
-				if (body is PlayerMove player)
+				if (body is Player player)
 				{
 					player.Hurt(20, 2f, 0.1f);
 				}

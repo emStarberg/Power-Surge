@@ -6,7 +6,7 @@ using System;
 ///   Handles activation, animation, and cleanup for the attack.
 /// </summary>
 /// <author>Emily Braithwaite</author>
-public partial class WeakPulse : Node2D
+public partial class WeakPulse : Node2D, IPlayerAttack
 {
 	public float damage = 5;
 	private string direction;

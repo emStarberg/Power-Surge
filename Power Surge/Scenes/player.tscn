@@ -1,12 +1,12 @@
 [gd_scene load_steps=52 format=3 uid="uid://bwvj50vhjjac7"]
 
-[ext_resource type="Script" uid="uid://dr47mlmgvnewi" path="res://Scripts/Player/PlayerMove.cs" id="1_3smsa"]
-[ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player-Spritesheet.png" id="2_8erm5"]
-[ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player Death - Spritesheet.png" id="3_f1ek2"]
-[ext_resource type="Texture2D" uid="uid://bptbc7jd1antf" path="res://Assets/Characters/Player Hurt - Spritesheet.png" id="4_tx1dd"]
-[ext_resource type="Texture2D" uid="uid://3wb48qr8yjh1" path="res://Assets/Characters/Player Dash - Spritesheet.png" id="5_gymyn"]
-[ext_resource type="Texture2D" uid="uid://c7icuep804gm0" path="res://Assets/Characters/Weak Pulse - Spritesheet.png" id="6_pu2lt"]
-[ext_resource type="Texture2D" uid="uid://bitip81tn2v63" path="res://Assets/Characters/Shield - Spritesheet.png" id="7_ukyrk"]
+[ext_resource type="Script" uid="uid://dr47mlmgvnewi" path="res://Scripts/Player/Player.cs" id="1_3smsa"]
+[ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player/Player-Spritesheet.png" id="2_8erm5"]
+[ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player/Player Death - Spritesheet.png" id="3_f1ek2"]
+[ext_resource type="Texture2D" uid="uid://bptbc7jd1antf" path="res://Assets/Characters/Player/Player Hurt - Spritesheet.png" id="4_tx1dd"]
+[ext_resource type="Texture2D" uid="uid://3wb48qr8yjh1" path="res://Assets/Characters/Player/Player Dash - Spritesheet.png" id="5_gymyn"]
+[ext_resource type="Texture2D" uid="uid://c7icuep804gm0" path="res://Assets/Characters/Player/Attacks/Weak Pulse - Spritesheet.png" id="6_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://bitip81tn2v63" path="res://Assets/Characters/Player/Shield - Spritesheet.png" id="7_ukyrk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w7e4r"]
 atlas = ExtResource("2_8erm5")

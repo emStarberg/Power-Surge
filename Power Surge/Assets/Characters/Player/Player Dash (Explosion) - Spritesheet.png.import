@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o5tc3os16h5s"
-path="res://.godot/imported/Circuit bug - Projectile.png-91da727b24aded4af18967e7b7a28c3d.ctex"
+uid="uid://davnc7oxtr5md"
+path="res://.godot/imported/Player Dash (Explosion) - Spritesheet.png-d98a4d1480cf82797fb65ff8d39d5128.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Circuit bug - Projectile.png"
-dest_files=["res://.godot/imported/Circuit bug - Projectile.png-91da727b24aded4af18967e7b7a28c3d.ctex"]
+source_file="res://Assets/Characters/Player/Player Dash (Explosion) - Spritesheet.png"
+dest_files=["res://.godot/imported/Player Dash (Explosion) - Spritesheet.png-d98a4d1480cf82797fb65ff8d39d5128.ctex"]
 
 [params]
 

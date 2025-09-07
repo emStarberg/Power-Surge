@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using Godot;
 //------------------------------------------------------------------------------
 // <summary>
@@ -6,7 +8,7 @@ using Godot;
 // </summary>
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
-public partial class PlayerMove : CharacterBody2D
+public partial class Player : CharacterBody2D
 {
 	[Export] public float Speed = 200f; // Movement speed          
 	[Export] public float JumpStrength = -300f; // Jump velocity
@@ -29,8 +31,11 @@ public partial class PlayerMove : CharacterBody2D
 	private bool isDashing = false; // Whether player is dashing
 	private float dashSpeed = 800f; // Speed of dash
 	private float direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
+	private string[] attackNames = { "weak pulse", "strong blast" }; // List of player attacks
 	private string attackSelected = "weak pulse";
+	private int attackIndex = 0;
 	private string facing = "left";
+	private Sprite2D attackIcon;
 
 
 	public override void _Ready()
@@ -46,6 +51,9 @@ public partial class PlayerMove : CharacterBody2D
 		// Set up shield
 		shield = GetNode<StaticBody2D>("Shield");
 		shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
+
+		attackIcon = GetParent().GetNode<Sprite2D>("UI/Control/Attacks-ui/Attack Sprite");
+		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/weak pulse.png");
 
 	}
 
@@ -164,6 +172,16 @@ public partial class PlayerMove : CharacterBody2D
 			{
 				Attack();
 			}
+
+			if (Input.IsActionJustPressed("input_cycle_forward"))
+			{
+				CycleAttack("forward");
+			}
+
+			if (Input.IsActionJustPressed("input_cycle_backward"))
+			{
+				CycleAttack("backward");
+			}
 			// Update label to correct percentage
 			percentageLabel.Text = power + "%";
 			// If run out of power, die
@@ -176,7 +194,7 @@ public partial class PlayerMove : CharacterBody2D
 			Velocity = velocity;
 			// Move
 			MoveAndSlide();
-			
+
 			if (Input.IsActionJustPressed("input_attack"))
 			{
 				Attack();
@@ -343,17 +361,25 @@ public partial class PlayerMove : CharacterBody2D
 		hurtAnim.Visible = false;
 	}
 
+	/// <summary>
+	/// Switch from current AnimatedSprite2D to another
+	/// </summary>
+	/// <param name="to">Animation to switch to</param>
 	private void SwitchAnim(AnimatedSprite2D to)
 	{
 		currentAnim.Visible = false;
 		currentAnim.Stop();
-		currentAnim = to; 
+		currentAnim = to;
 		currentAnim.Visible = true;
 		currentAnim.Play();
 	}
 
+	/// <summary>
+	/// Use selected attack
+	/// </summary>
 	private void Attack()
 	{
+		// WEAK PULSE
 		if (attackSelected == "weak pulse")
 		{
 			Node attackInstance = weakPulse.Instantiate();
@@ -365,6 +391,7 @@ public partial class PlayerMove : CharacterBody2D
 			}
 		}
 
+		// STRONG BLAST
 		if (attackSelected == "strong blast")
 		{
 			Node attackInstance = strongBlast.Instantiate();
@@ -375,5 +402,34 @@ public partial class PlayerMove : CharacterBody2D
 				b.Activate(facing);
 			}
 		}
+	}
+
+	/// <summary>
+	/// Switches between attacks
+	/// </summary>
+	/// <param name="direction"></param>
+	private void CycleAttack(string direction)
+	{
+		int index = Array.IndexOf(attackNames, attackSelected);
+		if (direction == "forward")
+		{
+			index++;
+			if (index >= attackNames.Length)
+			{
+				index = 0;
+			}
+		}
+		else if (direction == "backward")
+		{
+			index--;
+			if (index < 0)
+			{
+				index = attackNames.Length - 1;
+			}
+		}
+
+
+		attackSelected = attackNames[index];
+		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/" + attackSelected + ".png");
 	}
 }

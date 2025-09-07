@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b66ijs5g0ijg2"]
 
 [ext_resource type="Script" uid="uid://b1g7bterss425" path="res://Scripts/Player/Player Attacks/WeakPulse.cs" id="1_x56c3"]
-[ext_resource type="Texture2D" uid="uid://c7icuep804gm0" path="res://Assets/Characters/Weak Pulse - Spritesheet.png" id="2_owxpe"]
+[ext_resource type="Texture2D" uid="uid://c7icuep804gm0" path="res://Assets/Characters/Player/Attacks/Weak Pulse - Spritesheet.png" id="2_owxpe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oihly"]
 size = Vector2(28.5, 7)

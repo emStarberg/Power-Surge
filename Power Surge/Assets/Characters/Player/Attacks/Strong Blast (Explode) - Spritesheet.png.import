@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cndd6taxvrma1"
-path="res://.godot/imported/Projectile CB - Explode - Spritesheet.png-a8cd570b452792a77d4ad235c9bee59b.ctex"
+uid="uid://b1yw2hs5uhn7j"
+path="res://.godot/imported/Strong Blast (Explode) - Spritesheet.png-00669937634e5a83692bc2f80d4a9fb0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Projectile CB - Explode - Spritesheet.png"
-dest_files=["res://.godot/imported/Projectile CB - Explode - Spritesheet.png-a8cd570b452792a77d4ad235c9bee59b.ctex"]
+source_file="res://Assets/Characters/Player/Attacks/Strong Blast (Explode) - Spritesheet.png"
+dest_files=["res://.godot/imported/Strong Blast (Explode) - Spritesheet.png-00669937634e5a83692bc2f80d4a9fb0.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bptbc7jd1antf"
-path="res://.godot/imported/Player Hurt - Spritesheet.png-9061075ace1dcd3f337d8f2f0105cc1c.ctex"
+uid="uid://ckuettnld20c6"
+path="res://.godot/imported/Circuit Bug Run - Spritesheet.png-da5cdfda3ed83d2a9da7c62c34754117.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Player Hurt - Spritesheet.png"
-dest_files=["res://.godot/imported/Player Hurt - Spritesheet.png-9061075ace1dcd3f337d8f2f0105cc1c.ctex"]
+source_file="res://Assets/Characters/Enemies/Circuit Bug/Circuit Bug Run - Spritesheet.png"
+dest_files=["res://.godot/imported/Circuit Bug Run - Spritesheet.png-da5cdfda3ed83d2a9da7c62c34754117.ctex"]
 
 [params]
 

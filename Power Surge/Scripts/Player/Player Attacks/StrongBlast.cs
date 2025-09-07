@@ -9,7 +9,7 @@ using System;
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
 
-public partial class StrongBlast : Area2D
+public partial class StrongBlast : Area2D, IPlayerAttack
 {
 	private string direction;
 	private AnimatedSprite2D animatedSprite;

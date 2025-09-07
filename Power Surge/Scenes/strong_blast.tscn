@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://b17yu3txr7pm"]
 
-[ext_resource type="Texture2D" uid="uid://b1yw2hs5uhn7j" path="res://Assets/Characters/Strong Blast (Explode) - Spritesheet.png" id="1_4tqxi"]
+[ext_resource type="Texture2D" uid="uid://b1yw2hs5uhn7j" path="res://Assets/Characters/Player/Attacks/Strong Blast (Explode) - Spritesheet.png" id="1_4tqxi"]
 [ext_resource type="Script" uid="uid://kk3boxwtxfw7" path="res://Scripts/Player/Player Attacks/StrongBlast.cs" id="1_ldyde"]
-[ext_resource type="Texture2D" uid="uid://br45h2sifalw5" path="res://Assets/Characters/Strong Blast - Spritesheet.png" id="2_ldyde"]
+[ext_resource type="Texture2D" uid="uid://br45h2sifalw5" path="res://Assets/Characters/Player/Attacks/Strong Blast - Spritesheet.png" id="2_ldyde"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
 atlas = ExtResource("1_4tqxi")
