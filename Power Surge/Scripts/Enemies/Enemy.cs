@@ -35,10 +35,8 @@ public abstract partial class Enemy : CharacterBody2D
 			canBeHurt = false;
 			hurtCooldownTimer.Start();
 		}
-		
-		
-
 	}
+	
 	/// <summary>
 	/// Called when health = 0
 	/// </summary>

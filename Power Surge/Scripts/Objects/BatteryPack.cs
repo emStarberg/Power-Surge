@@ -6,7 +6,7 @@ using System;
 // </summary>
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
-public partial class BatteryPack : Area2D
+public partial class BatteryPack : Area2D, IWorldObject
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -27,7 +27,7 @@ public partial class BatteryPack : Area2D
 		// Check collision is with player
 		if (body.Name == "Player")
 		{
-			if (body is PlayerMove player)
+			if (body is Player player)
 			{
 				player.IncreasePower(20);
 				QueueFree();

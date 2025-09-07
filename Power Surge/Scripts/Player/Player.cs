@@ -8,7 +8,7 @@ using Godot;
 // </summary>
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
-public partial class PlayerMove : CharacterBody2D
+public partial class Player : CharacterBody2D
 {
 	[Export] public float Speed = 200f; // Movement speed          
 	[Export] public float JumpStrength = -300f; // Jump velocity
