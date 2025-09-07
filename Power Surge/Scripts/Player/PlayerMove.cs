@@ -35,6 +35,7 @@ public partial class PlayerMove : CharacterBody2D
 	private string attackSelected = "weak pulse";
 	private int attackIndex = 0;
 	private string facing = "left";
+	private Sprite2D attackIcon;
 
 
 	public override void _Ready()
@@ -50,6 +51,9 @@ public partial class PlayerMove : CharacterBody2D
 		// Set up shield
 		shield = GetNode<StaticBody2D>("Shield");
 		shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
+
+		attackIcon = GetParent().GetNode<Sprite2D>("UI/Control/Attacks-ui/Attack Sprite");
+		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/weak pulse.png");
 
 	}
 
@@ -423,8 +427,9 @@ public partial class PlayerMove : CharacterBody2D
 				index = attackNames.Length - 1;
 			}
 		}
-		
-		
+
+
 		attackSelected = attackNames[index];
+		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/" + attackSelected + ".png");
 	}
 }

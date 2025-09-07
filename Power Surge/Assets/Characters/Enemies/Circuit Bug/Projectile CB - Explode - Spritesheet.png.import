@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u1y57kfmcvs4"
-path="res://.godot/imported/Player Death - Spritesheet.png-26831cc49df40d4f55ebf00e8449586d.ctex"
+uid="uid://cndd6taxvrma1"
+path="res://.godot/imported/Projectile CB - Explode - Spritesheet.png-96472596027af79057dcfaa60e3d433c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Player Death - Spritesheet.png"
-dest_files=["res://.godot/imported/Player Death - Spritesheet.png-26831cc49df40d4f55ebf00e8449586d.ctex"]
+source_file="res://Assets/Characters/Enemies/Circuit Bug/Projectile CB - Explode - Spritesheet.png"
+dest_files=["res://.godot/imported/Projectile CB - Explode - Spritesheet.png-96472596027af79057dcfaa60e3d433c.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cb70c00m1bc4m"]
 
-[ext_resource type="Texture2D" uid="uid://davnc7oxtr5md" path="res://Assets/Characters/Player Dash (Explosion) - Spritesheet.png" id="1_c24mq"]
+[ext_resource type="Texture2D" uid="uid://davnc7oxtr5md" path="res://Assets/Characters/Player/Player Dash (Explosion) - Spritesheet.png" id="1_c24mq"]
 [ext_resource type="Script" uid="uid://bi4sv3jb3vvuu" path="res://Scripts/Player/DashAnimation.cs" id="2_52rhg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h6qut"]

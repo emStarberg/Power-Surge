@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckuettnld20c6"
-path="res://.godot/imported/Circuit Bug Run - Spritesheet.png-cc476dde84da24756b72682c5e4bb845.ctex"
+uid="uid://b61u24calio1c"
+path="res://.godot/imported/Circuit bug Attack - Spritesheet.png-154845594f7089465016f4a029960958.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Circuit Bug Run - Spritesheet.png"
-dest_files=["res://.godot/imported/Circuit Bug Run - Spritesheet.png-cc476dde84da24756b72682c5e4bb845.ctex"]
+source_file="res://Assets/Characters/Enemies/Circuit Bug/Circuit bug Attack - Spritesheet.png"
+dest_files=["res://.godot/imported/Circuit bug Attack - Spritesheet.png-154845594f7089465016f4a029960958.ctex"]
 
 [params]
 

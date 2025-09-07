@@ -1,9 +1,9 @@
 [gd_scene load_steps=38 format=3 uid="uid://dso2d7b5ykmol"]
 
 [ext_resource type="Script" uid="uid://cwcle1kyugf2e" path="res://Scripts/Enemies/CircuitBug.cs" id="1_pjp8a"]
-[ext_resource type="Texture2D" uid="uid://ckuettnld20c6" path="res://Assets/Characters/Circuit Bug Run - Spritesheet.png" id="2_hrnt5"]
-[ext_resource type="Texture2D" uid="uid://b61u24calio1c" path="res://Assets/Characters/Circuit bug Attack - Spritesheet.png" id="3_862px"]
-[ext_resource type="Texture2D" uid="uid://cndd6taxvrma1" path="res://Assets/Characters/Projectile CB - Explode - Spritesheet.png" id="4_8trt3"]
+[ext_resource type="Texture2D" uid="uid://ckuettnld20c6" path="res://Assets/Characters/Enemies/Circuit Bug/Circuit Bug Run - Spritesheet.png" id="2_hrnt5"]
+[ext_resource type="Texture2D" uid="uid://b61u24calio1c" path="res://Assets/Characters/Enemies/Circuit Bug/Circuit bug Attack - Spritesheet.png" id="3_862px"]
+[ext_resource type="Texture2D" uid="uid://cndd6taxvrma1" path="res://Assets/Characters/Enemies/Circuit Bug/Projectile CB - Explode - Spritesheet.png" id="4_8trt3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ritr"]
 size = Vector2(16, 12)
