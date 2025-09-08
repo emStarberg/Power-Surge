@@ -1,6 +1,4 @@
 using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using Godot;
 //------------------------------------------------------------------------------
 // <summary>
@@ -168,10 +166,6 @@ public partial class Player : CharacterBody2D
 				}
 			}
 
-			if (Input.IsActionJustPressed("input_attack"))
-			{
-				Attack();
-			}
 
 			if (Input.IsActionJustPressed("input_cycle_forward"))
 			{
@@ -388,7 +382,10 @@ public partial class Player : CharacterBody2D
 			if (attackInstance is WeakPulse b)
 			{
 				b.Activate(facing);
+				DecreasePower(5);
 			}
+
+			
 		}
 
 		// STRONG BLAST
@@ -400,8 +397,11 @@ public partial class Player : CharacterBody2D
 			if (attackInstance is StrongBlast b)
 			{
 				b.Activate(facing);
+				DecreasePower(15);
 			}
 		}
+
+		
 	}
 
 	/// <summary>
