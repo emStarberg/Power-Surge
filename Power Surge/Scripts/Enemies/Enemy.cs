@@ -10,8 +10,7 @@ public abstract partial class Enemy : CharacterBody2D
 {
 	protected bool isAlive = true;
 	protected float health;
-	protected AnimatedSprite2D currentAnimation;
-	protected AnimatedSprite2D deathAnim;
+	protected AnimatedSprite2D animation;
 	protected bool canBeHurt = true;
 	protected Timer hurtCooldownTimer;
 
@@ -43,8 +42,7 @@ public abstract partial class Enemy : CharacterBody2D
 	public virtual void Die()
 	{
 		isAlive = false;
-		GD.Print("deathAnim: " + deathAnim);
-		SwitchAnim(deathAnim);
+		animation.Animation = "death";
 
 	}
 
@@ -66,28 +64,15 @@ public abstract partial class Enemy : CharacterBody2D
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				currentAnimation.Modulate = new Color(1, 0, 0);
+				animation.Modulate = new Color(1, 0, 0);
 				await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
-				currentAnimation.Modulate = new Color(1, 1, 1);
+				animation.Modulate = new Color(1, 1, 1);
 				await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
 			}
 		}
 
 	}
 
-	/// <summary>
-	/// Switch between AnimatedSprite2D
-	/// </summary>
-	/// <param name="to">Animation to switch to</param>
-	protected void SwitchAnim(AnimatedSprite2D to)
-	{
-		currentAnimation.Visible = false;
-		currentAnimation.Stop();
-		currentAnimation = to;
-
-		currentAnimation.Visible = true;
-		currentAnimation.Play();
-	}
 	
 	/// <summary>
 	/// Called when the hurt cooldown timer finishes.

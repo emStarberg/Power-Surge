@@ -1,0 +1,153 @@
+[gd_scene load_steps=19 format=3 uid="uid://ch58q6jxnp3qs"]
+
+[ext_resource type="Script" uid="uid://ie77lp106ux2" path="res://Scripts/Enemies/VoltageSentinel.cs" id="1_jwrvh"]
+[ext_resource type="Texture2D" uid="uid://jymvujbdliud" path="res://Assets/Characters/Enemies/Voltage Sentinel Idle - Spritesheet.png" id="2_50eub"]
+[ext_resource type="Texture2D" uid="uid://s3i71lqrcy4x" path="res://Assets/Characters/Enemies/Voltage Sentinel Walk - Spritesheet.png" id="3_qxj3x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uv22f"]
+size = Vector2(17, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uv22f"]
+atlas = ExtResource("2_50eub")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl5kd"]
+atlas = ExtResource("2_50eub")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7dkw"]
+atlas = ExtResource("2_50eub")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yo0d"]
+atlas = ExtResource("3_qxj3x")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5kwj"]
+atlas = ExtResource("3_qxj3x")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_baem7"]
+atlas = ExtResource("3_qxj3x")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjn53"]
+atlas = ExtResource("3_qxj3x")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ojmf"]
+atlas = ExtResource("3_qxj3x")
+region = Rect2(224, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3o48"]
+atlas = ExtResource("3_qxj3x")
+region = Rect2(256, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh6nn"]
+atlas = ExtResource("3_qxj3x")
+region = Rect2(288, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a6ei"]
+atlas = ExtResource("3_qxj3x")
+region = Rect2(320, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y63s"]
+atlas = ExtResource("3_qxj3x")
+region = Rect2(352, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u6u1"]
+atlas = ExtResource("3_qxj3x")
+region = Rect2(448, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2yo0d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uv22f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uv22f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uv22f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uv22f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl5kd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7dkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7dkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7dkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl5kd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yo0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5kwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_baem7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjn53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ojmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3o48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh6nn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a6ei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y63s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u6u1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="Voltage Sentinel" type="CharacterBody2D"]
+script = ExtResource("1_jwrvh")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_uv22f")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, -2)
+sprite_frames = SubResource("SpriteFrames_2yo0d")
+animation = &"walk"
+autoplay = "idle"
+frame = 3
+frame_progress = 0.790987
+
+[node name="RayCasts" type="Node2D" parent="."]
+
+[node name="GroundRay" type="RayCast2D" parent="RayCasts"]
+position = Vector2(-12, 0)
+
+[node name="WallRay" type="RayCast2D" parent="RayCasts"]
+target_position = Vector2(-18, 0)
