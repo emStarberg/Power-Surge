@@ -265,7 +265,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"new_animation",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [node name="Node2D" type="Node2D"]
@@ -363,6 +363,5 @@ position = Vector2(0, -0.25)
 position = Vector2(214, 56)
 sprite_frames = SubResource("SpriteFrames_2yo0d")
 animation = &"new_animation"
-autoplay = "default"
-frame = 5
-frame_progress = 0.986692
+autoplay = "new_animation"
+frame_progress = 0.355985
