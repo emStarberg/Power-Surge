@@ -12,23 +12,19 @@ public partial class CircuitBug : Enemy
 	public const float Speed = 50.0f; // Movement speed
 	private Vector2 velocity; // For updating Velocity property
 	private string direction = "left"; // Direction bug is facing
-	private AnimatedSprite2D runAnim, attackAnim;
 	private bool isRunning = true; // Whether bug is running
 	private bool playerDetected = false; // Whether player has been detected
 	private PackedScene projectile = GD.Load<PackedScene>("Scenes/projectile_cb.tscn"); // For spawning projectiles
 	private RayCast2D groundRay, wallRay, playerRay; // Ground detection, wall/object detection, player detection
-	
+	private bool projectileSpawnedThisAttack = false; // Prevents spawning > 1 projectile per animation
+
 
 	public override void _Ready()
 	{
 		playerRay = GetNode<RayCast2D>("PlayerRay");
 		groundRay = GetNode<RayCast2D>("GroundRay");
 		wallRay = GetNode<RayCast2D>("WallRay");
-		runAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Run");
-		attackAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Attack");
-		deathAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Death"); // Death animation still to be made
-		currentAnimation = runAnim;
-		currentAnimation.Play();
+		animation = GetNode<AnimatedSprite2D>("Animations");
 
 		hurtCooldownTimer = new Timer();
 		hurtCooldownTimer.WaitTime = 0.5f;
@@ -36,8 +32,8 @@ public partial class CircuitBug : Enemy
 		AddChild(hurtCooldownTimer);
 		hurtCooldownTimer.Timeout += OnHurtCooldownTimeout;
 
-		attackAnim.FrameChanged += OnAttackAnimFrameChanged;
-		deathAnim.AnimationFinished += OnDeathAnimFinished;
+		animation.FrameChanged += OnAnimationFrameChanged;
+		animation.AnimationFinished += OnAnimationFinished;
 
 		health = 10;
 	}
@@ -46,7 +42,7 @@ public partial class CircuitBug : Enemy
 	{
 		if (isAlive)
 		{
-			
+
 			// Gravity
 			if (!IsOnFloor())
 				velocity += GetGravity() * (float)delta;
@@ -107,39 +103,20 @@ public partial class CircuitBug : Enemy
 	/// </summary>
 	public void Attack()
 	{
-		GD.Print("attack");
-		SwitchAnim(attackAnim);
+		animation.Animation = "attack";
+		animation.Play();
 		isRunning = false;
 		// Stop
 		velocity = new Vector2(0, 0);
 	}
 
-	/// <summary>
-	/// Resume running if player no longer detected after attack animation finished
-	/// </summary>
-	public void OnAttackAnimFinished()
-	{
-		if (!playerDetected)
-		{
-			// Return to running
-			SwitchAnim(runAnim);
-			attackAnim.Visible = false;
-			isRunning = true;
-		}
-		else
-		{
-			// Attack again if player still detected
-			Attack();
-		}
-	}
-
-	private bool projectileSpawnedThisAttack = false; // Prevents spawning > 1 projectile per animation
+	
 	/// <summary>
 	/// Spawn a projectile on 13th frame to line up with animation
 	/// </summary>
-	private void OnAttackAnimFrameChanged()
+	private void OnAnimationFrameChanged()
 	{
-		if (attackAnim.Frame == 13 && !projectileSpawnedThisAttack)
+		if (animation.Frame == 13 && !projectileSpawnedThisAttack && animation.Animation == "attack")
 		{
 			projectileSpawnedThisAttack = true;
 			// Spawn new projectile
@@ -155,18 +132,34 @@ public partial class CircuitBug : Enemy
 		}
 
 		// Reset flag when animation loops or finishes
-		if (attackAnim.Frame == 0)
+		if (animation.Frame == 0)
 		{
 			projectileSpawnedThisAttack = false;
 		}
 	}
 
-	/// <summary>
-	/// Destroy self once death animation has finished
-	/// </summary>
-	public void OnDeathAnimFinished()
+
+	public void OnAnimationFinished()
 	{
-		QueueFree();
+		if (animation.Animation == "death")
+		{
+			QueueFree();
+		}
+		else if (animation.Animation == "attack")
+		{
+			if (!playerDetected)
+			{
+				// Return to running
+				animation.Animation = "run";
+				animation.Play();
+				isRunning = true;
+			}
+			else
+			{
+				// Attack again if player still detected
+				Attack();
+			}
+		}
 	}
 
 

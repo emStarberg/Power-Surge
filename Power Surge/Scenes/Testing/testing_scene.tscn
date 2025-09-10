@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=26 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Background.cs" id="2_p1rgw"]
@@ -9,11 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="11_g2vln"]
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
+[ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="13_6hp8k"]
 [ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="14_6nksn"]
 [ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="15_o8qng"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5o82n"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6hp8k"]
 texture = ExtResource("6_4nrw7")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -21,11 +22,22 @@ texture = ExtResource("6_4nrw7")
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-3:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_0hka7"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_5o82n")
+sources/2 = SubResource("TileSetAtlasSource_6hp8k")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
 atlas = ExtResource("15_o8qng")
@@ -108,7 +120,7 @@ script = ExtResource("2_p1rgw")
 cameraPath = NodePath("../Camera")
 
 [node name="Ground" type="TileMapLayer" parent="." groups=["Ground"]]
-tile_map_data = PackedByteArray("AAD8/wIAAAAAAAAAAAD9/wIAAAABAAAAAAD+/wIAAAABAAAAAAD//wIAAAABAAAAAAAAAAIAAAABAAAAAAABAAIAAAABAAAAAAACAAIAAAABAAAAAAADAAIAAAABAAAAAAAEAAIAAAABAAAAAAAFAAIAAAACAAAAAAD9/wUAAAABAAAAAAD+/wUAAAABAAAAAAD//wUAAAABAAAAAAAAAAUAAAABAAAAAAABAAUAAAABAAAAAAACAAUAAAABAAAAAAADAAUAAAABAAAAAAAEAAUAAAABAAAAAAAFAAUAAAABAAAAAAAGAAUAAAABAAAAAAAHAAUAAAABAAAAAAAIAAUAAAABAAAAAAAJAAUAAAABAAAAAAAKAAUAAAABAAAAAAALAAUAAAABAAAAAAAMAAUAAAABAAAAAAANAAUAAAABAAAAAAAOAAUAAAABAAAAAAAPAAUAAAABAAAAAAAQAAUAAAACAAAAAADy/wQAAAAAAAAAAADz/wQAAAABAAAAAAD0/wQAAAABAAAAAAD1/wQAAAABAAAAAAD2/wQAAAABAAAAAAD3/wQAAAABAAAAAAD4/wQAAAABAAAAAAD5/wQAAAACAAAAAAD6/wUAAAABAAAAAAD7/wUAAAABAAAAAAD8/wUAAAABAAAAAAD5/wUAAAABAAAAAAD4/wUAAAABAAAAAAA=")
+tile_map_data = PackedByteArray("AAD9/wUAAgABAAAAAAD+/wUAAgABAAAAAAD//wUAAgABAAAAAAAAAAUAAgABAAAAAAABAAUAAgABAAAAAAACAAUAAgABAAAAAAADAAUAAgABAAAAAAAEAAUAAgABAAAAAAAFAAUAAgABAAAAAAAGAAUAAgABAAAAAAAHAAUAAgABAAAAAAAIAAUAAgABAAAAAAAJAAUAAgABAAAAAAAKAAUAAgABAAAAAAALAAUAAgABAAAAAAAMAAUAAgABAAAAAAANAAUAAgABAAAAAAAOAAUAAgABAAAAAAAPAAUAAgABAAAAAAAQAAUAAgACAAAAAADy/wQAAgAAAAAAAADz/wQAAgABAAAAAAD0/wQAAgABAAAAAAD1/wQAAgABAAAAAAD2/wQAAgABAAAAAAD3/wQAAgABAAAAAAD4/wQAAgABAAAAAAD5/wQAAgACAAAAAAD6/wUAAgABAAAAAAD7/wUAAgABAAAAAAD8/wUAAgABAAAAAAD5/wUAAgABAAEAAAD4/wUAAgABAAEAAADz/wUAAgABAAEAAAD0/wUAAgABAAEAAAD1/wUAAgABAAEAAAD2/wUAAgABAAEAAAD3/wUAAgABAAEAAADy/wUAAgAAAAEAAADy/wYAAgAAAAEAAADz/wYAAgABAAEAAAD0/wYAAgABAAEAAAD1/wYAAgABAAEAAAD2/wYAAgABAAEAAAD3/wYAAgABAAEAAAD4/wYAAgABAAEAAAD5/wYAAgABAAEAAAD6/wYAAgABAAEAAAD7/wYAAgABAAEAAAD8/wYAAgABAAEAAAD9/wYAAgABAAEAAAD+/wYAAgABAAEAAAD//wYAAgABAAEAAAAAAAYAAgABAAEAAAABAAYAAgABAAEAAAACAAYAAgABAAEAAAADAAYAAgABAAEAAAAEAAYAAgABAAEAAAAFAAYAAgABAAEAAAAGAAYAAgABAAEAAAAHAAYAAgABAAEAAAAIAAYAAgABAAEAAAAJAAYAAgABAAEAAAAKAAYAAgABAAEAAAALAAYAAgABAAEAAAAMAAYAAgABAAEAAAANAAYAAgABAAEAAAAOAAYAAgABAAEAAAAPAAYAAgABAAEAAAAPAAcAAgABAAMAAAAOAAcAAgABAAMAAAANAAcAAgABAAMAAAAMAAcAAgABAAMAAAALAAcAAgABAAMAAAAKAAcAAgABAAMAAAAJAAcAAgABAAMAAAAIAAcAAgABAAMAAAAHAAcAAgABAAMAAAAGAAcAAgABAAMAAAAFAAcAAgABAAMAAAAEAAcAAgABAAMAAAADAAcAAgABAAMAAAACAAcAAgABAAMAAAABAAcAAgABAAMAAAAAAAcAAgABAAMAAAD//wcAAgABAAMAAAD+/wcAAgABAAMAAAD9/wcAAgABAAMAAAD8/wcAAgABAAMAAAD6/wcAAgABAAMAAAD5/wcAAgABAAMAAAD4/wcAAgABAAMAAAD3/wcAAgABAAMAAAD7/wcAAgABAAMAAAD2/wcAAgABAAMAAAD1/wcAAgABAAMAAAD0/wcAAgABAAMAAADz/wcAAgABAAMAAADy/wcAAgAAAAMAAAAQAAYAAgACAAEAAAAQAAcAAgACAAMAAAAJAP3/AgABAAAAAAAKAP3/AgABAAAAAAALAP3/AgABAAAAAAAIAP3/AgAAAAAAAAAIAP7/AgAAAAMAAAALAP7/AgABAAMAAAAKAP7/AgABAAMAAAAJAP7/AgABAAMAAAAAAAEAAgABAAAAAAAAAAIAAgABAAMAAAABAAEAAgABAAAAAAACAAEAAgABAAAAAAADAAEAAgABAAAAAAD//wEAAgABAAAAAAD+/wEAAgABAAAAAAD9/wEAAgABAAAAAAAEAAEAAgACAAAAAAD8/wEAAgAAAAAAAAD8/wIAAgAAAAMAAAAEAAIAAgACAAMAAAABAAIAAgABAAMAAAACAAIAAgABAAMAAAADAAIAAgABAAMAAAD//wIAAgABAAMAAAD+/wIAAgABAAMAAAD9/wIAAgABAAMAAAAMAP3/AgABAAAAAAANAP3/AgABAAAAAAAOAP3/AgABAAAAAAAPAP3/AgABAAAAAAAQAP3/AgABAAAAAAARAP3/AgABAAAAAAASAP3/AgACAAAAAAASAP7/AgACAAMAAAARAP7/AgABAAMAAAAQAP7/AgABAAMAAAAPAP7/AgABAAMAAAAOAP7/AgABAAMAAAANAP7/AgABAAMAAAAMAP7/AgABAAMAAAA=")
 tile_set = SubResource("TileSet_0hka7")
 
 [node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel") instance=ExtResource("4_ymafl")]
@@ -188,3 +200,6 @@ texture = ExtResource("11_g2vln")
 position = Vector2(0, -0.25)
 
 [node name="Battery Pack" parent="." instance=ExtResource("15_yy038")]
+
+[node name="Voltage Sentinel" parent="." instance=ExtResource("13_6hp8k")]
+position = Vector2(180, -70)

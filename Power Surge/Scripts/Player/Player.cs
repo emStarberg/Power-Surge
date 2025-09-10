@@ -1,6 +1,4 @@
 using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using Godot;
 //------------------------------------------------------------------------------
 // <summary>
@@ -19,7 +17,7 @@ public partial class Player : CharacterBody2D
 	[Export] public Label percentageLabel; // Label under power meter
 	private int power = 100; // Percentage of power left
 	private Vector2 velocity; // For changing player's Velocity property
-	private AnimatedSprite2D currentAnim, idleAnim, deathAnim, hurtAnim, dashAnim; // Player's animations
+	private AnimatedSprite2D animation; // Player's animations
 	private StaticBody2D shield; // Player's shield ability when activated
 	private PackedScene jumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn"); // For spawning jump animations
 	private PackedScene dashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn"); // For spawning dash animations
@@ -41,12 +39,8 @@ public partial class Player : CharacterBody2D
 	public override void _Ready()
 	{
 		// Set up animations
-		hurtAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Hurt");
-		deathAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Death");
-		dashAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Dash");
-		idleAnim = GetNode<AnimatedSprite2D>("Animations/Anim_Idle");
-		currentAnim = idleAnim;
-		currentAnim.Play();
+		animation = GetNode<AnimatedSprite2D>("Animations");
+		animation.Play();
 
 		// Set up shield
 		shield = GetNode<StaticBody2D>("Shield");
@@ -168,11 +162,6 @@ public partial class Player : CharacterBody2D
 				}
 			}
 
-			if (Input.IsActionJustPressed("input_attack"))
-			{
-				Attack();
-			}
-
 			if (Input.IsActionJustPressed("input_cycle_forward"))
 			{
 				CycleAttack("forward");
@@ -233,9 +222,7 @@ public partial class Player : CharacterBody2D
 	{
 		alive = false;
 		GD.Print("Dead!");
-		HideAllAnimations();
-		deathAnim.Visible = true;
-		deathAnim.Play();
+		animation.Animation = "death";
 	}
 
 	/// <summary>
@@ -246,7 +233,7 @@ public partial class Player : CharacterBody2D
 	/// <param name="shakeDuration">Camera shake duration</param>
 	public void Hurt(int damage, float shakeAmount, float shakeDuration)
 	{
-		SwitchAnim(hurtAnim);
+		animation.Animation = "hurt";
 
 		// Camera shake
 		var camera = GetParent().GetNode<Camera>("Camera");
@@ -255,85 +242,30 @@ public partial class Player : CharacterBody2D
 	}
 
 	/// <Summary>
-	/// Resets level once death animation finished
-	/// </Summary>
-	public void OnDeathAnimFinished()
-	{
-		deathAnim.Visible = false;
-		// Create timer to wait before reloading
-		Timer timer = new()
-		{
-			WaitTime = 0.6f,
-			OneShot = true
-		};
-		AddChild(timer);
-		timer.Timeout += () =>
-		{
-			// Reload scene
-			var scenePath = GetTree().CurrentScene.SceneFilePath;
-			GetTree().ChangeSceneToFile(scenePath);
-		};
-		timer.Start();
-	}
-	/// <Summary>
 	/// The player "dashes" left or right depending on the direction they're facing
 	/// </Summary>
 	public void Dash()
 	{
 		if (!isDashing && alive)
 		{
-			SwitchAnim(dashAnim);
+			animation.Animation = "dash";
 			isDashing = true;
-			dashAnim.Play();
 			Node dashAnimInstance = dashAnimation.Instantiate();
 			((Node2D)dashAnimInstance).GlobalPosition = GlobalPosition;
 			if (direction == 1)
 			{
-				dashAnim.FlipH = false;
+				animation.FlipH = false;
 				((Node2D)dashAnimInstance).Scale = new Vector2(-1, 1); // Flip horizontally
 			}
 			else
 			{
-				dashAnim.FlipH = true;
+				animation.FlipH = true;
 			}
 			GetTree().Root.AddChild(dashAnimInstance);
 		}
 		DecreasePower(3);
 	}
 
-	/// <Summary>
-	/// When hurt animation has finished, resume idle animation
-	/// </Summary>
-	public void OnHurtAnimFinished()
-	{
-		if (alive)
-		{
-			SwitchAnim(idleAnim);
-		}
-		else
-		{
-			hurtAnim.Visible = false;
-		}
-	}
-
-	/// <Summary>
-	/// When dash animation has finished, stop moving and resume idle animation
-	/// </Summary>
-	public void OnDashAnimFinished()
-	{
-		isDashing = false;
-		velocity.X = 0; // Stop horizontal movement after dash
-
-		if (alive)
-		{
-			SwitchAnim(idleAnim);
-		}
-		else
-		{
-			dashAnim.Visible = false;
-		}
-
-	}
 	/// <summary>
 	/// Decrease player power level
 	/// </summary>
@@ -350,29 +282,7 @@ public partial class Player : CharacterBody2D
 	{
 		power += amount;
 	}
-	/// <summary>
-	/// Set Visible = false on all animatedsprite2d
-	/// </summary>
-	private void HideAllAnimations()
-	{
-		dashAnim.Visible = false;
-		deathAnim.Visible = false;
-		idleAnim.Visible = false;
-		hurtAnim.Visible = false;
-	}
-
-	/// <summary>
-	/// Switch from current AnimatedSprite2D to another
-	/// </summary>
-	/// <param name="to">Animation to switch to</param>
-	private void SwitchAnim(AnimatedSprite2D to)
-	{
-		currentAnim.Visible = false;
-		currentAnim.Stop();
-		currentAnim = to;
-		currentAnim.Visible = true;
-		currentAnim.Play();
-	}
+	
 
 	/// <summary>
 	/// Use selected attack
@@ -388,7 +298,10 @@ public partial class Player : CharacterBody2D
 			if (attackInstance is WeakPulse b)
 			{
 				b.Activate(facing);
+				DecreasePower(5);
 			}
+
+
 		}
 
 		// STRONG BLAST
@@ -400,8 +313,11 @@ public partial class Player : CharacterBody2D
 			if (attackInstance is StrongBlast b)
 			{
 				b.Activate(facing);
+				DecreasePower(15);
 			}
 		}
+
+
 	}
 
 	/// <summary>
@@ -431,5 +347,54 @@ public partial class Player : CharacterBody2D
 
 		attackSelected = attackNames[index];
 		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/" + attackSelected + ".png");
+	}
+
+	public void OnAnimationFinished()
+	{
+		if (animation.Animation == "hurt")
+		{
+			if (alive)
+			{
+				animation.Animation = "idle";
+				animation.Play();
+			}
+			else
+			{
+				animation.Visible = false;
+			}
+		}
+		else if (animation.Animation == "death")
+		{
+			animation.Visible = false;
+			// Create timer to wait before reloading
+			Timer timer = new()
+			{
+				WaitTime = 0.6f,
+				OneShot = true
+			};
+			AddChild(timer);
+			timer.Timeout += () =>
+			{
+				// Reload scene
+				var scenePath = GetTree().CurrentScene.SceneFilePath;
+				GetTree().ChangeSceneToFile(scenePath);
+			};
+			timer.Start();
+		}
+		else if (animation.Animation == "dash")
+		{
+			isDashing = false;
+			velocity.X = 0; // Stop horizontal movement after dash
+
+			if (alive)
+			{
+				animation.Animation = "idle";
+				animation.Play();
+			}
+			else
+			{
+				animation.Visible = false;
+			}
+		}
 	}
 }
