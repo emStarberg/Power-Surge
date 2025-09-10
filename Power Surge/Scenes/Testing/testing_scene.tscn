@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=45 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Background.cs" id="2_p1rgw"]
@@ -175,10 +175,6 @@ region = Rect2(352, 0, 32, 48)
 atlas = ExtResource("14_uv22f")
 region = Rect2(384, 0, 32, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6xbq8"]
-atlas = ExtResource("14_uv22f")
-region = Rect2(416, 0, 32, 48)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_6u6u1"]
 atlas = ExtResource("14_uv22f")
 region = Rect2(448, 0, 32, 48)
@@ -258,7 +254,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_87f7d")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6xbq8")
+"texture": SubResource("AtlasTexture_6u6u1")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6u6u1")
@@ -364,4 +360,5 @@ position = Vector2(214, 56)
 sprite_frames = SubResource("SpriteFrames_2yo0d")
 animation = &"new_animation"
 autoplay = "new_animation"
-frame_progress = 0.355985
+frame = 1
+frame_progress = 0.825478
