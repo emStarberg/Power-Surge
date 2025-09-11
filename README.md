@@ -1,8 +1,9 @@
 # Power-Surge
 A 2D platformer about resource management, created in Godot
-## Contributors:
+## Contributors
 - Emily Braithwaite @emStarberg 🐻🦉
-  
+
+## Repository
 When working on a new feature:
 
 Pull from main --> new branch --> checkout new branch --> work on stuff --> push branch when finished --> create pull request --> fix merge conflicts if necessary -> merge with main
