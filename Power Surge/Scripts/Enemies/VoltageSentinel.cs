@@ -22,6 +22,7 @@ public partial class VoltageSentinel : Enemy
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		groundRay = GetNode<RayCast2D>("RayCasts/GroundRay");
 		wallRay = GetNode<RayCast2D>("RayCasts/WallRay");
+		playerRay = GetNode<RayCast2D>("RayCasts/PlayerRay");
 		startPosition = GlobalPosition;
 
 		animation.Animation = "walk";
@@ -45,10 +46,14 @@ public partial class VoltageSentinel : Enemy
 			wallRay.ForceRaycastUpdate();
 			if (wallRay.IsColliding())
 			{
-				direction = direction == "right" ? "left" : "right";
-				Scale = new Vector2(-Scale.X, Scale.Y);
-				walkedDistance = 0f;
-				startPosition = GlobalPosition;
+				var Collider = wallRay.GetCollider();
+				if (!(Collider is Node2D node && node.Name == "Player"))
+				{
+					direction = direction == "right" ? "left" : "right";
+					Scale = new Vector2(-Scale.X, Scale.Y);
+					walkedDistance = 0f;
+					startPosition = GlobalPosition;
+				}
 			}
 
 			// Check for ground ahead
@@ -72,8 +77,10 @@ public partial class VoltageSentinel : Enemy
 
 			Velocity = velocity;
 			MoveAndSlide();
+
+
 		}
-		else
+		else if (animation.Animation != "attack")
 		{
 			// Stopping phase
 			velocity = new Vector2(0, Velocity.Y);
@@ -92,6 +99,50 @@ public partial class VoltageSentinel : Enemy
 				startPosition = GlobalPosition;
 			}
 		}
+		
+		// Player detection via raycast
+			playerRay.ForceRaycastUpdate();
+			if (playerRay.IsColliding() && playerRay.GetCollider() is Node2D collider && collider.Name == "Player")
+			{
+				if (!playerDetected)
+				{
+					GD.Print("Player detected by raycast");
+					Attack();
+					playerDetected = true;
+				}
+			}
+			else
+			{
+				if (playerDetected)
+				{
+					GD.Print("Player lost by raycast");
+					playerDetected = false;
+				}
+			}
+	}
 
+	public void Attack()
+	{
+		isWalking = false;
+		animation.Animation = "attack";
+		animation.Play();
+	}
+
+	public void OnAnimationFinished()
+	{
+		if (animation.Animation == "attack")
+		{
+			if (!playerDetected)
+			{
+				animation.Animation = "walk";
+				animation.Play();
+				isWalking = true;
+			}
+			else
+			{
+				Attack();
+			}
+			
+		}
 	}
 }

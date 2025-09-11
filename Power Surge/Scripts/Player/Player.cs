@@ -300,8 +300,6 @@ public partial class Player : CharacterBody2D
 				b.Activate(facing);
 				DecreasePower(5);
 			}
-
-
 		}
 
 		// STRONG BLAST
