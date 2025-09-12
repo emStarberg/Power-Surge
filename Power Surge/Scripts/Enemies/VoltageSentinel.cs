@@ -28,7 +28,7 @@ public partial class VoltageSentinel : Enemy
 		wallRay = GetNode<RayCast2D>("RayCasts/WallRay");
 		playerRay = GetNode<RayCast2D>("RayCasts/PlayerRay");
 		startPosition = GlobalPosition;
-		targetPlayer = GetParent().GetNode<Player>("Player");
+		targetPlayer = GetParent().GetParent().GetNode<Player>("Player");
 
 		animation.Animation = "walk";
 
