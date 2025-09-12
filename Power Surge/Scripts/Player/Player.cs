@@ -347,6 +347,9 @@ public partial class Player : CharacterBody2D
 		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/" + attackSelected + ".png");
 	}
 
+	/// <summary>
+	/// Called when any player animation finishes
+	/// </summary>
 	public void OnAnimationFinished()
 	{
 		if (animation.Animation == "hurt")

@@ -159,6 +159,11 @@ public partial class VoltageSentinel : Enemy
 		}
 	}
 
+
+	/// <summary>
+	/// Attack the player
+	/// </summary>
+	
 	public void Attack()
 	{
 		isWalking = false;
@@ -166,6 +171,9 @@ public partial class VoltageSentinel : Enemy
 		animation.Play();
 	}
 
+	/// <summary>
+	/// Called when any sentinel animations finish
+	/// </summary>
 	public void OnAnimationFinished()
 	{
 		if (animation.Animation == "attack")
@@ -187,7 +195,10 @@ public partial class VoltageSentinel : Enemy
 		}
 	}
 
-
+	/// <summary>
+	/// For detecting the player, if detected should follow player
+	/// </summary>
+	/// <param name="body">Body detected</param>
 	public void OnPlayerDetectionBodyEntered(Node2D body)
 	{
 		if (body is Player player)
@@ -209,6 +220,10 @@ public partial class VoltageSentinel : Enemy
 		}
 	}
 
+	/// <summary>
+	/// Called when a body is no longer detected
+	/// </summary>
+	/// <param name="body"></param>
 	public void OnPlayerDetectionBodyExited(Node2D body)
 	{
 		if (body == targetPlayer)
@@ -218,7 +233,10 @@ public partial class VoltageSentinel : Enemy
 			targetPlayer = null;
 		}
 	}
-
+	
+	/// <summary>
+	/// Called on every animation frame change. For determining when to damage the player
+	/// </summary>
 	public void OnAnimationFrameChanged()
 	{
 		if (animation.Animation == "attack")
