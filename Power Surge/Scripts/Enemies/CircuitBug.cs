@@ -30,7 +30,6 @@ public partial class CircuitBug : Enemy
 		hurtCooldownTimer.WaitTime = 0.5f;
 		hurtCooldownTimer.OneShot = true;
 		AddChild(hurtCooldownTimer);
-		hurtCooldownTimer.Timeout += OnHurtCooldownTimeout;
 
 		animation.FrameChanged += OnAnimationFrameChanged;
 		animation.AnimationFinished += OnAnimationFinished;

@@ -307,7 +307,7 @@ public partial class Player : CharacterBody2D
 		{
 			Node attackInstance = strongBlast.Instantiate();
 			((StrongBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0, -2);
-			AddChild(attackInstance);
+			GetTree().Root.AddChild(attackInstance); // <-- Add to root, not player
 			if (attackInstance is StrongBlast b)
 			{
 				b.Activate(facing);

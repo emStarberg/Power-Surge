@@ -47,7 +47,6 @@ public partial class StrongBlast : Area2D, IPlayerAttack
 	/// </summary>
 	public void Activate(string dir)
 	{
-		GlobalPosition = ((Node2D)GetParent()).GlobalPosition + new Vector2(0, -2);
 
 		doMove = true;
 		direction = dir;

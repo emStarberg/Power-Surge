@@ -1,8 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://ch58q6jxnp3qs"]
+[gd_scene load_steps=42 format=3 uid="uid://ch58q6jxnp3qs"]
 
 [ext_resource type="Script" uid="uid://ie77lp106ux2" path="res://Scripts/Enemies/VoltageSentinel.cs" id="1_jwrvh"]
 [ext_resource type="Texture2D" uid="uid://jymvujbdliud" path="res://Assets/Characters/Enemies/Voltage Sentinel Idle - Spritesheet.png" id="2_50eub"]
 [ext_resource type="Texture2D" uid="uid://b7ngo5vyr5gji" path="res://Assets/Characters/Enemies/Voltage Sentinel - Attack - Spritesheet.png" id="2_qxj3x"]
+[ext_resource type="Texture2D" uid="uid://cndd6taxvrma1" path="res://Assets/Characters/Enemies/Circuit Bug/Projectile CB - Explode - Spritesheet.png" id="3_ihxra"]
 [ext_resource type="Texture2D" uid="uid://s3i71lqrcy4x" path="res://Assets/Characters/Enemies/Voltage Sentinel Walk - Spritesheet.png" id="3_qxj3x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uv22f"]
@@ -67,6 +68,26 @@ region = Rect2(192, 96, 64, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_eutup"]
 atlas = ExtResource("2_qxj3x")
 region = Rect2(256, 96, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7yx0"]
+atlas = ExtResource("3_ihxra")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl3up"]
+atlas = ExtResource("3_ihxra")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks312"]
+atlas = ExtResource("3_ihxra")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln3mu"]
+atlas = ExtResource("3_ihxra")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cucx"]
+atlas = ExtResource("3_ihxra")
+region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uv22f"]
 atlas = ExtResource("2_50eub")
@@ -173,9 +194,35 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eutup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eutup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eutup")
 }],
 "loop": false,
 "name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7yx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hl3up")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ks312")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ln3mu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cucx")
+}],
+"loop": false,
+"name": &"death",
 "speed": 12.0
 }, {
 "frames": [{
@@ -260,7 +307,7 @@ shape = SubResource("RectangleShape2D_uv22f")
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -2)
 sprite_frames = SubResource("SpriteFrames_2yo0d")
-animation = &"idle"
+animation = &"death"
 autoplay = "idle"
 
 [node name="RayCasts" type="Node2D" parent="."]
@@ -274,7 +321,7 @@ target_position = Vector2(-22, 0)
 
 [node name="PlayerRay" type="RayCast2D" parent="RayCasts"]
 position = Vector2(0, 13)
-target_position = Vector2(-12, 0)
+target_position = Vector2(-18, 0)
 
 [node name="PlayerDetection" type="Area2D" parent="."]
 
@@ -282,6 +329,8 @@ target_position = Vector2(-12, 0)
 position = Vector2(1, -1.5)
 shape = SubResource("RectangleShape2D_50eub")
 
+[connection signal="animation_changed" from="Animations" to="." method="OnAnimationChanged"]
 [connection signal="animation_finished" from="Animations" to="." method="OnAnimationFinished"]
+[connection signal="frame_changed" from="Animations" to="." method="OnAnimationFrameChanged"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="OnPlayerDetectionBodyEntered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="OnPlayerDetectionBodyExited"]

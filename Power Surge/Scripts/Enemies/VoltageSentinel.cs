@@ -19,6 +19,7 @@ public partial class VoltageSentinel : Enemy
 
 	private Player targetPlayer = null;
 	private bool isFollowingPlayer = false;
+	private bool canDamagePlayer = false;
 
 	public override void _Ready()
 	{
@@ -27,17 +28,27 @@ public partial class VoltageSentinel : Enemy
 		wallRay = GetNode<RayCast2D>("RayCasts/WallRay");
 		playerRay = GetNode<RayCast2D>("RayCasts/PlayerRay");
 		startPosition = GlobalPosition;
+		targetPlayer = GetParent().GetNode<Player>("Player");
 
 		animation.Animation = "walk";
+
+		health = 30;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (playerRay.IsColliding() && playerRay.GetCollider() is Player player && canDamagePlayer)
+		{
+			player.Hurt(25, 2f, 0.2f);
+			canDamagePlayer = false;
+		}
+
+
 		if (!IsOnFloor())
 			velocity += GetGravity() * (float)delta;
 
 
-		if (isFollowingPlayer && targetPlayer != null)
+		if (isFollowingPlayer && targetPlayer != null && animation.Animation != "attack")
 		{
 			groundRay.ForceRaycastUpdate();
 			if (!groundRay.IsColliding())
@@ -48,17 +59,16 @@ public partial class VoltageSentinel : Enemy
 				Speed = 15f;
 				animation.Animation = "idle";
 				animation.Play();
-				GD.Print("Stopped Following (no ground)");
 				return; // Exit early so it doesn't move off the edge
 			}
-			
+
 			Vector2 toPlayer = (targetPlayer.GlobalPosition - GlobalPosition).Normalized();
 			velocity = new Vector2(toPlayer.X * Speed, Velocity.Y);
 			Velocity = velocity;
 			MoveAndSlide();
 		}
 
-		if (isWalking)
+		if (isWalking && animation.Animation != "attack")
 		{
 			if (!isFollowingPlayer)
 			{
@@ -102,9 +112,6 @@ public partial class VoltageSentinel : Enemy
 					stopTimer = stopTime;
 				}
 			}
-			
-
-			
 
 			Velocity = velocity;
 			MoveAndSlide();
@@ -173,7 +180,10 @@ public partial class VoltageSentinel : Enemy
 			{
 				Attack();
 			}
-
+		}
+		else if (animation.Animation == "death")
+		{
+			QueueFree();
 		}
 	}
 
@@ -187,7 +197,6 @@ public partial class VoltageSentinel : Enemy
 			isFollowingPlayer = true;
 			animation.Animation = "walk";
 			animation.Play();
-			GD.Print("Following");
 
 			// Flip direction if player is behind
 			float playerX = player.GlobalPosition.X;
@@ -207,8 +216,27 @@ public partial class VoltageSentinel : Enemy
 			Speed = 15f;
 			isFollowingPlayer = false;
 			targetPlayer = null;
-			// Optionally, return to patrol logic
-			GD.Print("Stopped Following");
 		}
 	}
+
+	public void OnAnimationFrameChanged()
+	{
+		if (animation.Animation == "attack")
+		{
+			// Can only hurt player between frames 7 and 14
+			if (animation.Frame == 7)
+			{
+				canDamagePlayer = true;
+			}
+			else if (animation.Frame == 14)
+			{
+				canDamagePlayer = false;
+			}
+		}
+		else
+		{
+			canDamagePlayer = false;
+		}
+	}
+
 }
