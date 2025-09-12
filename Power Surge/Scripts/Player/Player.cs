@@ -300,8 +300,6 @@ public partial class Player : CharacterBody2D
 				b.Activate(facing);
 				DecreasePower(5);
 			}
-
-
 		}
 
 		// STRONG BLAST
@@ -309,7 +307,7 @@ public partial class Player : CharacterBody2D
 		{
 			Node attackInstance = strongBlast.Instantiate();
 			((StrongBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0, -2);
-			AddChild(attackInstance);
+			GetTree().Root.AddChild(attackInstance); // <-- Add to root, not player
 			if (attackInstance is StrongBlast b)
 			{
 				b.Activate(facing);
@@ -349,6 +347,9 @@ public partial class Player : CharacterBody2D
 		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/" + attackSelected + ".png");
 	}
 
+	/// <summary>
+	/// Called when any player animation finishes
+	/// </summary>
 	public void OnAnimationFinished()
 	{
 		if (animation.Animation == "hurt")

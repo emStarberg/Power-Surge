@@ -32,10 +32,9 @@ public abstract partial class Enemy : CharacterBody2D
 		{
 			FlashHurtEffect();
 			canBeHurt = false;
-			hurtCooldownTimer.Start();
 		}
 	}
-	
+
 	/// <summary>
 	/// Called when health = 0
 	/// </summary>
@@ -69,17 +68,9 @@ public abstract partial class Enemy : CharacterBody2D
 				animation.Modulate = new Color(1, 1, 1);
 				await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
 			}
+			canBeHurt = true;
 		}
 
 	}
 
-	
-	/// <summary>
-	/// Called when the hurt cooldown timer finishes.
-	/// Allows CircuitBug to be hurt again.
-	/// </summary>
-	protected void OnHurtCooldownTimeout()
-	{
-		canBeHurt = true;
-	}
 }

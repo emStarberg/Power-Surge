@@ -243,6 +243,5 @@ target_position = Vector2(-76, -1)
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_brl5d")
-animation = &"run"
+animation = &"death"
 autoplay = "run"
-frame_progress = 0.776906
