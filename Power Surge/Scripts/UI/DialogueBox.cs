@@ -8,35 +8,41 @@ public partial class DialogueBox : Control
 	[Export] private Label dialogueLabel;
 	[Export] private TextureRect portrait;
 
-	private Queue<DialogueLine> dialogueQueue = new Queue<DialogueLine>();
+	private readonly Queue<DialogueLine> dialogueQueue = new Queue<DialogueLine>();
 	private bool isTyping = false;
 	private float typingSpeed = 0.03f; // seconds between letters
-	public override void _Ready(){
-		List<DialogueLine> introDialogue = new List<DialogueLine>
-		{
-			new DialogueLine("LILAH", "Try using that battery pack there to recharge!", GD.Load<Texture2D>("res:///Assets/Default/icon.svg")),
-			new DialogueLine("ARCHIE", "Don't listen to her, Felix!", GD.Load<Texture2D>("res:///Assets/Default/icon.svg")),
-			new DialogueLine("ARCHIE", "The guardians are protecting something important!",  GD.Load<Texture2D>("res:///Assets/Default/icon.svg"))
-		};
-		StartDialogue(introDialogue);
+	private bool isFinished = false;
+	private readonly List<DialogueLine> dialogueList = new List<DialogueLine>();
+	private bool paused;
+	
+
+
+
+	public override void _Ready()
+	{
+		Visible = false;
 	}
 	public override void _Process(double delta)
 	{
-		// If accept is pressed
-		if (Input.IsActionJustPressed("ui_accept"))
+		if (!paused)
 		{
-			if (isTyping)
+			// If accept is pressed
+			if (Input.IsActionJustPressed("ui_accept"))
 			{
-				// Skip typing effect and show full line
-				dialogueLabel.Text = currentLine.Text;
-				isTyping = false;
-			}
-			else
-			{
-				// Show next line
-				ShowNextLine();
+				if (isTyping)
+				{
+					// Skip typing effect and show full line
+					dialogueLabel.Text = currentLine.Text;
+					isTyping = false;
+				}
+				else
+				{
+					// Show next line
+					ShowNextLine();
+				}
 			}
 		}
+
 	}
 
 	// Add this field to store the current line:
@@ -84,18 +90,110 @@ public partial class DialogueBox : Control
 
 		isTyping = false;
 	}
+
+	public void AddLine(string speakerName, string text)
+	{
+		dialogueList.Add(new DialogueLine(speakerName, text));
+	}
+
+	public void Start()
+	{
+		StartDialogue(dialogueList);
+		paused = false;
+		Visible = true;
+	}
+
+	public void Pause()
+	{
+		paused = true;
+	}
+
+	public void Resume()
+	{
+		paused = false;
+	}
+
+	/// <summary>
+	/// Reads dialogue lines from a file and adds them to the dialogue list.
+	/// Expected file format: speakerName|text (one line per dialogue)
+	/// </summary>
+	public void AddLinesFromFile(string filename)
+	{
+		dialogueList.Clear();
+
+		var file = FileAccess.Open(filename, FileAccess.ModeFlags.Read);
+		if (file == null)
+		{
+			GD.PrintErr($"Could not open file: {filename}");
+			return;
+		}
+
+		while (!file.EofReached())
+		{
+			string line = file.GetLine();
+			if (string.IsNullOrWhiteSpace(line)) continue;
+
+			var parts = line.Split('|');
+			if (parts.Length < 2)
+			{
+				GD.PrintErr($"Malformed line: {line}");
+				continue;
+			}
+
+			string speaker = parts[0].Trim();
+			string text = parts[1].Trim();
+
+
+			dialogueList.Add(new DialogueLine(speaker, text));
+		}
+
+		file.Close();
+	}
+
+	public int GetLineNumber()
+	{
+		return dialogueList.Count - dialogueQueue.Count;
+	}
+
+	public bool GetIsTyping()
+	{
+		return isTyping;
+	}
+
 }
+
+
+
+
+
 
 public class DialogueLine
 {
+	private readonly string lilahPortrait = "res://Assets/Default/icon.svg";
+	private readonly string archiePortrait = "res://Assets/Default/icon.svg";
+	private readonly string felixPortrait = "res://Assets/Default/icon.svg";
 	public string SpeakerName { get; set; }
 	public string Text { get; set; }
-	public Texture2D Portrait { get; set; }
-
-	public DialogueLine(string speaker, string text, Texture2D portrait)
+	public Texture2D Portrait;
+	public DialogueLine(string speaker, string text)
 	{
 		SpeakerName = speaker;
 		Text = text;
-		Portrait = portrait;
+		string path;
+		if (SpeakerName == "Lilah")
+		{
+			path = lilahPortrait;
+		}
+		else if (SpeakerName == "Archie")
+		{
+			path = archiePortrait;
+		}
+		else
+		{
+			path = felixPortrait;
+		}
+
+		Portrait = GD.Load<Texture2D>(path);
 	}
 }
+	

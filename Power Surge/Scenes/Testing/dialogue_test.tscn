@@ -1,59 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmi5enjil5q16"]
+[gd_scene load_steps=2 format=3 uid="uid://cmi5enjil5q16"]
 
-[ext_resource type="Script" uid="uid://cyosfbk2au0be" path="res://Scripts/UI/DialogueBox.cs" id="1_xiiiq"]
-[ext_resource type="Texture2D" uid="uid://bf6v7uj1no3ey" path="res://Assets/Default/icon.svg" id="2_w7i8l"]
+[ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="1_xiiiq"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="DialogueBox" type="Control" parent="." node_paths=PackedStringArray("speakerLabel", "dialogueLabel", "portrait")]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 16.0
-offset_top = 28.0
-offset_right = 56.0
-offset_bottom = 68.0
-script = ExtResource("1_xiiiq")
-speakerLabel = NodePath("Panel/MarginContainer/VBoxContainer/SpeakerName")
-dialogueLabel = NodePath("Panel/MarginContainer/VBoxContainer/DialogueText")
-portrait = NodePath("Panel/Portrait")
-
-[node name="Panel" type="Panel" parent="DialogueBox"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="DialogueBox/Panel"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 5.0
-offset_right = 47.0
-offset_bottom = 45.0
-scale = Vector2(8.15288, 1.48215)
-color = Color(0, 0, 0, 0.419608)
-
-[node name="MarginContainer" type="MarginContainer" parent="DialogueBox/Panel"]
-layout_mode = 0
-offset_left = 76.0
-offset_top = 9.0
-offset_right = 191.0
-offset_bottom = 59.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DialogueBox/Panel/MarginContainer"]
-layout_mode = 2
-
-[node name="SpeakerName" type="Label" parent="DialogueBox/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Lilah"
-
-[node name="DialogueText" type="Label" parent="DialogueBox/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Some dialogue here"
-
-[node name="Portrait" type="TextureRect" parent="DialogueBox/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.560001, 0.560001)
-texture = ExtResource("2_w7i8l")
+[node name="DialogueBox" parent="." instance=ExtResource("1_xiiiq")]
