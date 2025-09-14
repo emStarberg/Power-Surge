@@ -14,13 +14,18 @@ public partial class DialogueBox : Control
 	private bool isFinished = false;
 	private readonly List<DialogueLine> dialogueList = new List<DialogueLine>();
 	private bool paused;
+	private AudioStreamPlayer2D startupSound;
 	
+	private AudioStreamPlayer2D continueSound;
+
 
 
 
 	public override void _Ready()
 	{
 		Visible = false;
+		startupSound = GetNode<AudioStreamPlayer2D>("Startup Sound");
+		continueSound = GetNode<AudioStreamPlayer2D>("Continue Sound");
 	}
 	public override void _Process(double delta)
 	{
@@ -56,7 +61,7 @@ public partial class DialogueBox : Control
 			Hide();
 			return;
 		}
-
+		continueSound.Play();
 		currentLine = dialogueQueue.Dequeue();
 		speakerLabel.Text = currentLine.SpeakerName;
 		portrait.Texture = currentLine.Portrait;
@@ -99,6 +104,7 @@ public partial class DialogueBox : Control
 	public void Start()
 	{
 		StartDialogue(dialogueList);
+		startupSound.Play();
 		paused = false;
 		Visible = true;
 	}
@@ -169,9 +175,6 @@ public partial class DialogueBox : Control
 
 public class DialogueLine
 {
-	private readonly string lilahPortrait = "res://Assets/Default/icon.svg";
-	private readonly string archiePortrait = "res://Assets/Default/icon.svg";
-	private readonly string felixPortrait = "res://Assets/Default/icon.svg";
 	public string SpeakerName { get; set; }
 	public string Text { get; set; }
 	public Texture2D Portrait;
@@ -179,19 +182,8 @@ public class DialogueLine
 	{
 		SpeakerName = speaker;
 		Text = text;
-		string path;
-		if (SpeakerName == "Lilah")
-		{
-			path = lilahPortrait;
-		}
-		else if (SpeakerName == "Archie")
-		{
-			path = archiePortrait;
-		}
-		else
-		{
-			path = felixPortrait;
-		}
+		string path = "res://Assets/UI/Icons/"+ speaker + ".png";
+		
 
 		Portrait = GD.Load<Texture2D>(path);
 	}

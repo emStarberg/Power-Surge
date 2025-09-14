@@ -17,6 +17,8 @@ public partial class OpeningSequence : Node2D
 	private int explosionFarIndex = 0;
 	private float[] explosionFarTimes = [4.0f, 12.0f];
 
+	private bool dialogueStarted = false;
+
 
 	public override void _Ready()
 	{
@@ -59,6 +61,11 @@ public partial class OpeningSequence : Node2D
 		}
 		else if (currentVideo == "alarm loop")
 		{
+			if (!dialogueStarted && videoTimer >= 4.0f)
+			{
+				dialogueBox.Start();
+				dialogueStarted = true;
+			}
 			// Play far explosion every 8 seconds
 			if (Math.Round(videoTimer % 8) == 0)
 			{
@@ -69,7 +76,6 @@ public partial class OpeningSequence : Node2D
 			{
 				explosionSoundNear.Play();
 			}
-
 		}
 	
 
@@ -80,21 +86,20 @@ public partial class OpeningSequence : Node2D
 				GD.Print("Stopped loop");
 				videoPlayer.Stop();
 				buzzerSound.Stop();
+				
 				}
-
-				GD.Print(dialogueBox.GetLineNumber());
 			}
 }
 
 	public void OnVideoFinished()
 	{
+		videoTimer = 0;
 		if (currentVideo == "part 1")
 		{
 			videoPlayer.Stream = ResourceLoader.Load<VideoStream>(loop);
 			currentVideo = "alarm loop";
 			videoPlayer.Loop = true;
 			videoPlayer.Play();
-			dialogueBox.Start();
 		}
 	}
 
