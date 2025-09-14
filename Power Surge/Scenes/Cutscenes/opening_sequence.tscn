@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dknc5kxbdjwvk"]
+[gd_scene load_steps=7 format=3 uid="uid://dknc5kxbdjwvk"]
 
-[ext_resource type="VideoStream" uid="uid://cb0twnsddhqsb" path="res://Assets/Videos/Opening Pt. 1.ogv" id="1_cg6bf"]
 [ext_resource type="Script" uid="uid://bnfrsuonqeowr" path="res://Scripts/Cutscenes/OpeningSequence.cs" id="1_uwh2j"]
+[ext_resource type="VideoStream" uid="uid://c1loxqu00e2tb" path="res://Assets/Videos/Opening Pt. 1.ogv" id="2_clode"]
+[ext_resource type="AudioStream" uid="uid://t83c6giu7g0e" path="res://Assets/Audio/Buzzer.wav" id="3_ae85s"]
 [ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="3_clode"]
+[ext_resource type="AudioStream" uid="uid://bpb5sanue6hqk" path="res://Assets/Audio/Explosion-Far.wav" id="4_nd5di"]
+[ext_resource type="AudioStream" uid="uid://db7xs82lxm43t" path="res://Assets/Audio/Explosion-Near.wav" id="5_6u8og"]
 
 [node name="OpeningSequence" type="Node2D"]
 scale = Vector2(1.08, 1)
@@ -18,8 +21,18 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
-stream = ExtResource("1_cg6bf")
+stream = ExtResource("2_clode")
+volume_db = -80.0
 autoplay = true
+
+[node name="Buzzer" type="AudioStreamPlayer2D" parent="Control"]
+stream = ExtResource("3_ae85s")
+
+[node name="Explosion Far" type="AudioStreamPlayer2D" parent="Control"]
+stream = ExtResource("4_nd5di")
+
+[node name="Explosion Near" type="AudioStreamPlayer2D" parent="Control"]
+stream = ExtResource("5_6u8og")
 
 [node name="DialogueBox" parent="." instance=ExtResource("3_clode")]
 offset_left = 50.0
@@ -28,3 +41,4 @@ offset_right = 90.0
 offset_bottom = 86.0
 
 [connection signal="finished" from="Control/Video" to="." method="OnVideoFinished"]
+[connection signal="finished" from="Control/Buzzer" to="." method="OnBuzzerFinished"]
