@@ -1,6 +1,12 @@
 using Godot;
 using System;
 
+//------------------------------------------------------------------------------
+// <summary>
+//   Plays the opening cutscene for the game
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class OpeningSequence : Node2D
 {
 	private VideoStreamPlayer videoPlayer;
@@ -10,14 +16,16 @@ public partial class OpeningSequence : Node2D
 	private string currentVideo = "part 1";
 	private float videoTimer = 0f;
 	private DialogueBox dialogueBox;
-	
 	private int explosionNearIndex = 0;
 	private float[] explosionNearTimes = [7.2f];
-
 	private int explosionFarIndex = 0;
 	private float[] explosionFarTimes = [4.0f, 12.0f];
-
 	private bool dialogueStarted = false;
+
+	private TextureRect fadeImage;
+	private float fadeTime = 1.0f; // seconds
+	private float fadeTimer = 0f;
+	private bool fadingIn = false;
 
 
 	public override void _Ready()
@@ -31,6 +39,9 @@ public partial class OpeningSequence : Node2D
 
 		videoPlayer = GetNode<VideoStreamPlayer>("Control/Video");
 
+		fadeImage = GetNode<TextureRect>("Control/BackgroundImage");
+		fadeImage.Modulate = new Color(1, 1, 1, 0); // Start fully transparent
+
 		// Begin playing part 1
 		videoPlayer.Play();
 		currentVideo = "part 1";
@@ -40,8 +51,8 @@ public partial class OpeningSequence : Node2D
 	}
 
 	public override void _Process(double delta)
-{
-	videoTimer += (float)delta;
+	{
+		videoTimer += (float)delta;
 
 		if (currentVideo == "part 1")
 		{
@@ -77,20 +88,32 @@ public partial class OpeningSequence : Node2D
 				explosionSoundNear.Play();
 			}
 		}
-	
+		else if (fadingIn)
+		{
+			fadeTimer += (float)delta;
+			float alpha = Mathf.Clamp(fadeTimer / fadeTime, 0, 1);
+			fadeImage.Modulate = new Color(1, 1, 1, alpha);
 
-	if (Input.IsActionJustPressed("ui_accept"))
-			{
+			if (alpha >= 1)
+				fadingIn = false; // Fade complete
+		}
+
+		// Move to next scene if needed
+		if (Input.IsActionJustPressed("ui_accept"))
+		{
 			if (dialogueBox.GetLineNumber() == 2 && !dialogueBox.GetIsTyping() && videoPlayer.IsPlaying() && currentVideo == "alarm loop")
 			{
-				GD.Print("Stopped loop");
 				videoPlayer.Stop();
 				buzzerSound.Stop();
-				
-				}
-			}
-}
+				dialogueBox.Pause();
+				FadeImageIn();
 
+			}
+		}
+	}
+	/// <summary>
+	/// Called when the current video is finished playing
+	/// </summary>
 	public void OnVideoFinished()
 	{
 		videoTimer = 0;
@@ -103,10 +126,21 @@ public partial class OpeningSequence : Node2D
 		}
 	}
 
+	/// <summary>
+	/// Loop buzzer sound when audio finishes
+	/// </summary>
 	public void OnBuzzerFinished()
 	{
 		// Loop
 		buzzerSound.Play();
 		buzzerSound.VolumeDb = 0;
+	}
+	
+	public void FadeImageIn(float duration = 1.0f)
+	{
+		fadeTime = duration;
+		fadeTimer = 0f;
+		fadingIn = true;
+		fadeImage.Modulate = new Color(1, 1, 1, 0);
 	}
 }

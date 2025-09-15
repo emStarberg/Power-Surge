@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=29 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Background.cs" id="2_p1rgw"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="14_6nksn"]
 [ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="15_o8qng"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
+[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/ScreenResolution.cs" id="16_k7dkw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6hp8k"]
 texture = ExtResource("6_4nrw7")
@@ -265,3 +266,6 @@ scale = Vector2(1.11998, 1.11998)
 
 [node name="Voltage Sentinel" parent="Enemies" instance=ExtResource("13_6hp8k")]
 position = Vector2(180, -70)
+
+[node name="ScreenResolution" type="Node" parent="."]
+script = ExtResource("16_k7dkw")

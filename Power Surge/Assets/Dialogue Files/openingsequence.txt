@@ -1,2 +1,44 @@
 Lilah|Felix! Hurry, get to the bunker!
 Lilah|We haven't got long before they take over the building!
+Lilah|Felix! Where are you?
+Lilah|You're in the bunker?
+Lilah|I'm in the bunker with Archie, but we don't see you...
+Lilah|I'll put him on the hologram
+Archie|Hey Felix! I'm not sure where you're at buddy but it's not the bunker, what can you see?
+Archie|Huh? That sounds like the... but it can't be. How did you get in?
+Lilah|The security system must have failed in the presence of those... those things...
+Archie|I'm sorry, those things? Those are magnificent feats of engineering, forged in The World Conductor itself, they deserve some respect!
+Lilah|Whatever you want to call them, they just took over our research facility and tried to murder us in the process. Not worthy of respect in my opinion.
+Archie|I was just sayi...
+Lilah|That thing is corrupt... it needs to be destroyed! I don't care that it provides all power to the world, it's got to go.
+Archie|Ok ok...
+Archie|What's that Felix?
+Archie|Well, it sounds like you're in the secret lab, it's supposed to be, well y'know, a secret.
+Lilah|It seems that the electronic lock has failed, so barricade the door to keep yourself safe, but DON'T TOUCH ANYTHING IN THERE FELIX. I REPEAT, DO NOT TOUCH!
+Archie|Unless...
+Archie|Maybe it's time?
+Lilah|I'm sorry?
+Archie|It's in a stable enough condition, it was just waiting on a proper test run.
+Lilah|We can't just go ahead and play with it like it's some toy, not only has it not been fully tested, we need permission form the boss!
+Archie|Surely you're kidding? There's no way he, or anyone else for that matter, survived the attack, there aren't any other secure spaces in the building.
+Archie|Fully tested or not, it's our only hope. No one's coming to help.
+Lilah|...
+Lilah|... I hate to say this, but you're right.
+Lilah|...
+Lilah|Felix, you need to know what's in that room.
+Lilah|About 6 months ago, strange things started happening all over the world, all electricity related.
+Lilah|It's as if the electricity itself were sentient. 
+Lilah|That's when we put together a team of top scientists, to create a device that could allow us into the earths core, and to interact with The World Conductor itself
+Lilah|You'll recall that incident last month with the girl and the refrigerator? Yeah, that's when we really knew something was up, so we added weapons.
+Lilah|And as you know, in the last week, these machines have appeared, destroying buildings, and even leveling entire cities.
+Lilah|That was them that just attacked us...
+Archie|The device, we named S.U.R.G.E, is what's in that room with you, see that funky looking blue orb?
+Archie|We need you to pilot it, the only way to access it's controls is in that room.
+Archie|You need to use it to gain access to The World Conductor. This could be humanity's last hope.
+Archie|You're not sure about taking on the responsibility? Fair enough.
+Lilah|Felix, I know you're scared, but there's no other way. Please do this.
+Archie|We'll be with you every step of the way buddy. Once S.U.R.G.E is up and running, we'll be able to see your display.
+Archie|...
+Lilah|...
+Lilah|... Thank you Felix, you have no idea how imprtant this is.
+Lilah|Walk over to the control panel and I'll walk you through what to do.

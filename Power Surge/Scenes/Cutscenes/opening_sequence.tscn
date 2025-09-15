@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dknc5kxbdjwvk"]
+[gd_scene load_steps=9 format=3 uid="uid://dknc5kxbdjwvk"]
 
 [ext_resource type="Script" uid="uid://bnfrsuonqeowr" path="res://Scripts/Cutscenes/OpeningSequence.cs" id="1_uwh2j"]
 [ext_resource type="VideoStream" uid="uid://c1loxqu00e2tb" path="res://Assets/Videos/Opening Pt. 1.ogv" id="2_clode"]
@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="3_clode"]
 [ext_resource type="AudioStream" uid="uid://bpb5sanue6hqk" path="res://Assets/Audio/Explosion-Far.wav" id="4_nd5di"]
 [ext_resource type="AudioStream" uid="uid://db7xs82lxm43t" path="res://Assets/Audio/Explosion-Near.wav" id="5_6u8og"]
+[ext_resource type="Texture2D" uid="uid://4w6t28hm3g3o" path="res://Assets/UI/Lab Placeholder.jpg" id="6_6u8og"]
+[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/ScreenResolution.cs" id="8_n7b67"]
 
 [node name="OpeningSequence" type="Node2D"]
-scale = Vector2(1.08, 1)
 script = ExtResource("1_uwh2j")
 
 [node name="Control" type="Control" parent="."]
@@ -16,9 +17,13 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Video" type="VideoStreamPlayer" parent="Control"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.030555
+anchor_right = 0.0305542
 offset_left = -97.2222
 offset_top = -21.0
 offset_right = 1182.78
@@ -26,6 +31,7 @@ offset_bottom = 699.0
 stream = ExtResource("2_clode")
 volume_db = -80.0
 autoplay = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Buzzer" type="AudioStreamPlayer2D" parent="Control"]
 stream = ExtResource("3_ae85s")
@@ -36,16 +42,30 @@ stream = ExtResource("4_nd5di")
 [node name="Explosion Near" type="AudioStreamPlayer2D" parent="Control"]
 stream = ExtResource("5_6u8og")
 
+[node name="BackgroundImage" type="TextureRect" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = -102.0
+offset_top = -19.0
+offset_right = 1169.0
+offset_bottom = 678.0
+scale = Vector2(1.0516, 1.0516)
+texture = ExtResource("6_6u8og")
+
 [node name="DialogueBox" parent="." instance=ExtResource("3_clode")]
-offset_left = 50.0
-offset_top = 46.0
-offset_right = 90.0
-offset_bottom = 86.0
+offset_left = 256.0
+offset_top = 83.0
+offset_right = 296.0
+offset_bottom = 123.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(543.518, 339)
+position = Vector2(544, 339)
 scale = Vector2(-4.53983, 3.20103)
-zoom = Vector2(0.838, 0.9)
+zoom = Vector2(0.9, 0.9)
+
+[node name="ScreenResolution" type="Node" parent="."]
+script = ExtResource("8_n7b67")
 
 [connection signal="finished" from="Control/Video" to="." method="OnVideoFinished"]
 [connection signal="finished" from="Control/Buzzer" to="." method="OnBuzzerFinished"]
