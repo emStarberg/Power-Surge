@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=30 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Background.cs" id="2_p1rgw"]
@@ -6,12 +6,13 @@
 [ext_resource type="Script" uid="uid://rfodace5xyiq" path="res://Scripts/Camera.cs" id="5_qte2r"]
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="6_4nrw7"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="9_xf330"]
+[ext_resource type="FontFile" uid="uid://du2man675mp5b" path="res://Assets/Fonts/Roboto_Mono/static/RobotoMono-Bold.ttf" id="10_w5kwj"]
+[ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="11_2yo0d"]
 [ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="11_g2vln"]
-[ext_resource type="Script" uid="uid://cyosfbk2au0be" path="res://Scripts/UI/DialogueBox.cs" id="11_nl5kd"]
-[ext_resource type="Texture2D" uid="uid://bf6v7uj1no3ey" path="res://Assets/Default/icon.svg" id="12_k7dkw"]
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
 [ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="13_6hp8k"]
+[ext_resource type="PackedScene" uid="uid://bignn7lsbeest" path="res://Scenes/fragment.tscn" id="14_2yo0d"]
 [ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="14_6nksn"]
 [ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="15_o8qng"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
@@ -114,7 +115,6 @@ animations = [{
 }]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(416, 228)
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(-1, -5)
@@ -126,9 +126,10 @@ cameraPath = NodePath("../Camera")
 tile_map_data = PackedByteArray("AAD9/wUAAgABAAAAAAD+/wUAAgABAAAAAAD//wUAAgABAAAAAAAAAAUAAgABAAAAAAABAAUAAgABAAAAAAACAAUAAgABAAAAAAADAAUAAgABAAAAAAAEAAUAAgABAAAAAAAFAAUAAgABAAAAAAAGAAUAAgABAAAAAAAHAAUAAgABAAAAAAAIAAUAAgABAAAAAAAJAAUAAgABAAAAAAAKAAUAAgABAAAAAAALAAUAAgABAAAAAAAMAAUAAgABAAAAAAANAAUAAgABAAAAAAAOAAUAAgABAAAAAAAPAAUAAgABAAAAAAAQAAUAAgACAAAAAADy/wQAAgAAAAAAAADz/wQAAgABAAAAAAD0/wQAAgABAAAAAAD1/wQAAgABAAAAAAD2/wQAAgABAAAAAAD3/wQAAgABAAAAAAD4/wQAAgABAAAAAAD5/wQAAgACAAAAAAD6/wUAAgABAAAAAAD7/wUAAgABAAAAAAD8/wUAAgABAAAAAAD5/wUAAgABAAEAAAD4/wUAAgABAAEAAADz/wUAAgABAAEAAAD0/wUAAgABAAEAAAD1/wUAAgABAAEAAAD2/wUAAgABAAEAAAD3/wUAAgABAAEAAADy/wUAAgAAAAEAAADy/wYAAgAAAAEAAADz/wYAAgABAAEAAAD0/wYAAgABAAEAAAD1/wYAAgABAAEAAAD2/wYAAgABAAEAAAD3/wYAAgABAAEAAAD4/wYAAgABAAEAAAD5/wYAAgABAAEAAAD6/wYAAgABAAEAAAD7/wYAAgABAAEAAAD8/wYAAgABAAEAAAD9/wYAAgABAAEAAAD+/wYAAgABAAEAAAD//wYAAgABAAEAAAAAAAYAAgABAAEAAAABAAYAAgABAAEAAAACAAYAAgABAAEAAAADAAYAAgABAAEAAAAEAAYAAgABAAEAAAAFAAYAAgABAAEAAAAGAAYAAgABAAEAAAAHAAYAAgABAAEAAAAIAAYAAgABAAEAAAAJAAYAAgABAAEAAAAKAAYAAgABAAEAAAALAAYAAgABAAEAAAAMAAYAAgABAAEAAAANAAYAAgABAAEAAAAOAAYAAgABAAEAAAAPAAYAAgABAAEAAAAPAAcAAgABAAMAAAAOAAcAAgABAAMAAAANAAcAAgABAAMAAAAMAAcAAgABAAMAAAALAAcAAgABAAMAAAAKAAcAAgABAAMAAAAJAAcAAgABAAMAAAAIAAcAAgABAAMAAAAHAAcAAgABAAMAAAAGAAcAAgABAAMAAAAFAAcAAgABAAMAAAAEAAcAAgABAAMAAAADAAcAAgABAAMAAAACAAcAAgABAAMAAAABAAcAAgABAAMAAAAAAAcAAgABAAMAAAD//wcAAgABAAMAAAD+/wcAAgABAAMAAAD9/wcAAgABAAMAAAD8/wcAAgABAAMAAAD6/wcAAgABAAMAAAD5/wcAAgABAAMAAAD4/wcAAgABAAMAAAD3/wcAAgABAAMAAAD7/wcAAgABAAMAAAD2/wcAAgABAAMAAAD1/wcAAgABAAMAAAD0/wcAAgABAAMAAADz/wcAAgABAAMAAADy/wcAAgAAAAMAAAAQAAYAAgACAAEAAAAQAAcAAgACAAMAAAAJAP3/AgABAAAAAAAKAP3/AgABAAAAAAALAP3/AgABAAAAAAAIAP3/AgAAAAAAAAAIAP7/AgAAAAMAAAALAP7/AgABAAMAAAAKAP7/AgABAAMAAAAJAP7/AgABAAMAAAAAAAEAAgABAAAAAAAAAAIAAgABAAMAAAABAAEAAgABAAAAAAACAAEAAgABAAAAAAADAAEAAgABAAAAAAD//wEAAgABAAAAAAD+/wEAAgABAAAAAAD9/wEAAgABAAAAAAAEAAEAAgACAAAAAAD8/wEAAgAAAAAAAAD8/wIAAgAAAAMAAAAEAAIAAgACAAMAAAABAAIAAgABAAMAAAACAAIAAgABAAMAAAADAAIAAgABAAMAAAD//wIAAgABAAMAAAD+/wIAAgABAAMAAAD9/wIAAgABAAMAAAAMAP3/AgABAAAAAAANAP3/AgABAAAAAAAOAP3/AgABAAAAAAAPAP3/AgABAAAAAAAQAP3/AgABAAAAAAARAP3/AgABAAAAAAASAP3/AgACAAAAAAASAP7/AgACAAMAAAARAP7/AgABAAMAAAAQAP7/AgABAAMAAAAPAP7/AgABAAMAAAAOAP7/AgABAAMAAAANAP7/AgABAAMAAAAMAP7/AgABAAMAAAA=")
 tile_set = SubResource("TileSet_0hka7")
 
-[node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel") instance=ExtResource("4_ymafl")]
+[node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("4_ymafl")]
 PowerMeter = NodePath("../UI/Control/Power Meter")
 percentageLabel = NodePath("../UI/Control/Percentage Label")
+FragmentSlots = NodePath("../UI/Control/Fragment Slots")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(2, -2)
@@ -141,8 +142,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_left = -5.0
 offset_top = -24.0
-offset_right = 35.0
-offset_bottom = 16.0
+offset_right = -5.0
+offset_bottom = -24.0
 
 [node name="Power Meter" type="TextureProgressBar" parent="UI/Control" node_paths=PackedStringArray("Camera")]
 layout_mode = 0
@@ -184,11 +185,12 @@ anchor_left = 14.75
 anchor_top = 14.275
 anchor_right = 14.75
 anchor_bottom = 14.275
-offset_left = -23.0001
-offset_top = -7.0
-offset_right = 18.9999
-offset_bottom = 16.0
+offset_left = 567.0
+offset_top = 564.0
+offset_right = 609.0
+offset_bottom = 587.0
 scale = Vector2(1.08018, 1.15144)
+theme_override_fonts/font = ExtResource("10_w5kwj")
 theme_override_font_sizes/font_size = 16
 text = "100%"
 horizontal_alignment = 1
@@ -201,63 +203,57 @@ texture = ExtResource("11_g2vln")
 [node name="Attack Sprite" type="Sprite2D" parent="UI/Control/Attacks-ui"]
 position = Vector2(0, -0.25)
 
-[node name="DialogueBox" type="Control" parent="UI" node_paths=PackedStringArray("speakerLabel", "dialogueLabel", "portrait")]
-layout_mode = 3
+[node name="Fragment Slots" type="Control" parent="UI/Control"]
 anchors_preset = 0
-offset_left = 24.0
-offset_top = 28.0
-offset_right = 64.0
-offset_bottom = 68.0
-scale = Vector2(1.2, 1.2)
-script = ExtResource("11_nl5kd")
-speakerLabel = NodePath("Panel/MarginContainer/VBoxContainer/SpeakerName")
-dialogueLabel = NodePath("Panel/MarginContainer/VBoxContainer/DialogueText")
-portrait = NodePath("Panel/Portrait")
-
-[node name="Panel" type="Panel" parent="UI/DialogueBox"]
-layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="UI/DialogueBox/Panel"]
+[node name="Slot 1" type="TextureRect" parent="UI/Control/Fragment Slots"]
 layout_mode = 0
-offset_left = 6.66667
-offset_top = 9.16667
-offset_right = 46.6667
-offset_bottom = 49.1667
-scale = Vector2(9.48621, 1.31548)
-color = Color(0, 0, 0, 0.756863)
+offset_left = 31.0
+offset_top = 50.0
+offset_right = 71.0
+offset_bottom = 90.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("11_2yo0d")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueBox/Panel"]
+[node name="Slot 2" type="TextureRect" parent="UI/Control/Fragment Slots"]
 layout_mode = 0
-offset_left = 76.0
-offset_top = 14.8333
+offset_left = 91.0
+offset_top = 50.0
+offset_right = 131.0
+offset_bottom = 90.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("11_2yo0d")
+
+[node name="Slot 3" type="TextureRect" parent="UI/Control/Fragment Slots"]
+layout_mode = 0
+offset_left = 151.0
+offset_top = 50.0
 offset_right = 191.0
-offset_bottom = 64.8333
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/DialogueBox/Panel/MarginContainer"]
-layout_mode = 2
-
-[node name="SpeakerName" type="Label" parent="UI/DialogueBox/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Lilah"
-
-[node name="DialogueText" type="Label" parent="UI/DialogueBox/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Some dialogue here"
-
-[node name="Portrait" type="TextureRect" parent="UI/DialogueBox/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.560001, 0.560001)
-texture = ExtResource("12_k7dkw")
+offset_bottom = 90.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("11_2yo0d")
 
 [node name="Objects" type="Node2D" parent="."]
 
+[node name="Battery Pack3" parent="Objects" instance=ExtResource("15_yy038")]
+position = Vector2(-211, 51)
+
+[node name="Battery Pack2" parent="Objects" instance=ExtResource("15_yy038")]
+position = Vector2(-183, 51)
+
 [node name="Battery Pack" parent="Objects" instance=ExtResource("15_yy038")]
+position = Vector2(-147, 50)
+
+[node name="Fragment3" parent="Objects" instance=ExtResource("14_2yo0d")]
+position = Vector2(-7, 70)
+
+[node name="Fragment2" parent="Objects" instance=ExtResource("14_2yo0d")]
+position = Vector2(-123, 57)
+
+[node name="Fragment" parent="Objects" instance=ExtResource("14_2yo0d")]
+position = Vector2(-47, 5)
 
 [node name="Enemies" type="Node2D" parent="."]
 

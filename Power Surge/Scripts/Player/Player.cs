@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 //------------------------------------------------------------------------------
 // <summary>
@@ -15,6 +16,7 @@ public partial class Player : CharacterBody2D
 	[Export] public int MaxPower = 200; // Maximum power level 200%
 	[Export] public TextureProgressBar PowerMeter; // Power meter
 	[Export] public Label percentageLabel; // Label under power meter
+	[Export] public Control FragmentSlots;
 	private int power = 100; // Percentage of power left
 	private Vector2 velocity; // For changing player's Velocity property
 	private AnimatedSprite2D animation; // Player's animations
@@ -34,7 +36,11 @@ public partial class Player : CharacterBody2D
 	private int attackIndex = 0;
 	private string facing = "left";
 	private Sprite2D attackIcon;
-
+	private int fragmentCount = 0;
+	private List<TextureRect> fragmentSlots = new List<TextureRect>();
+	private Label powerSurgeTimer;
+	private float powerSurgeTime = 10f;
+	private bool powerSurgeActive = false;
 
 	public override void _Ready()
 	{
@@ -49,17 +55,31 @@ public partial class Player : CharacterBody2D
 		attackIcon = GetParent().GetNode<Sprite2D>("UI/Control/Attacks-ui/Attack Sprite");
 		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/weak pulse.png");
 
+		// Load all empty fragment slots
+		foreach (Node child in FragmentSlots.GetChildren())
+		{
+			if (child is TextureRect t)
+			{
+				fragmentSlots.Add(t);
+			}
+		}
+
+		powerSurgeTimer = GetNode<Label>("Timer");
+		powerSurgeTimer.Visible = false;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+
+
+
+		if (power < 0)
+		{
+			power = 0;
+		}
 		if (alive)
 		{
 			// Don't allow negative numbers
-			if (power < 0)
-			{
-				power = 0;
-			}
 			if (power <= 100)
 			{
 				PowerMeter.Value = power;
@@ -69,6 +89,11 @@ public partial class Player : CharacterBody2D
 					{
 						powerMeter.SetPowerSurgeMode(false);
 					}
+				}
+
+				if (powerSurgeActive)
+				{
+					StopPowerSurgeTimer();
 				}
 
 			}
@@ -82,10 +107,27 @@ public partial class Player : CharacterBody2D
 					{
 						powerMeter.SetPowerSurgeMode(true);
 					}
+					if (!powerSurgeActive)
+					{
+						StartPowerSurgeTimer();
+					}
 				}
 
 			}
 
+			if (powerSurgeActive)
+			{
+				powerSurgeTime -= (float)delta;
+				if (powerSurgeTime < 0)
+					powerSurgeTime = 0;
+
+				powerSurgeTimer.Text = ((int)Math.Ceiling(powerSurgeTime)).ToString();
+
+				if (powerSurgeTime <= 0)
+				{
+					Die();
+				}
+			}
 
 			// Check whether to dash
 			if (Input.IsActionJustPressed("input_dash"))
@@ -282,7 +324,7 @@ public partial class Player : CharacterBody2D
 	{
 		power += amount;
 	}
-	
+
 
 	/// <summary>
 	/// Use selected attack
@@ -314,8 +356,6 @@ public partial class Player : CharacterBody2D
 				DecreasePower(15);
 			}
 		}
-
-
 	}
 
 	/// <summary>
@@ -341,7 +381,6 @@ public partial class Player : CharacterBody2D
 				index = attackNames.Length - 1;
 			}
 		}
-
 
 		attackSelected = attackNames[index];
 		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/" + attackSelected + ".png");
@@ -398,4 +437,32 @@ public partial class Player : CharacterBody2D
 			}
 		}
 	}
+
+	/// <summary>
+	/// Called when the player collects a fragment
+	/// </summary>
+	public void AddFragment()
+	{
+		fragmentSlots[fragmentCount].Texture = (Texture2D)GD.Load("res://Assets/Objects/Fragment - Filled Slot.png");
+		fragmentCount++;
+		if (fragmentCount == 3 && power < 100)
+		{
+			power = 100;
+			var camera = GetParent().GetNode<Camera>("Camera");
+			camera.Shake(6, 0.2f);
+		}
+	}
+
+	public void StartPowerSurgeTimer()
+	{
+		powerSurgeTime = 10f;
+		powerSurgeActive = true;
+		powerSurgeTimer.Visible = true;
+	}
+	
+	public void StopPowerSurgeTimer()
+{
+	powerSurgeActive = false;
+	powerSurgeTimer.Visible = false;
+}
 }
