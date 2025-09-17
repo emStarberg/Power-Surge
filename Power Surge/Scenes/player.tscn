@@ -277,7 +277,7 @@ frame_progress = 0.348018
 position = Vector2(2, -2)
 scale = Vector2(1.05, 1.05)
 sprite_frames = SubResource("SpriteFrames_2exqc")
-animation = &"dash"
+animation = &"death"
 autoplay = "idle"
 
 [connection signal="animation_finished" from="Animations" to="." method="OnAnimationFinished"]
