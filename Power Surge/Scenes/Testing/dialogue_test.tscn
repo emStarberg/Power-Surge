@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmi5enjil5q16"]
+
+[ext_resource type="Script" uid="uid://cdjwx8mec1oco" path="res://Scenes/Testing/DialogueTest.cs" id="1_w7i8l"]
+[ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="1_xiiiq"]
+[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/ScreenResolution.cs" id="3_u6or3"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_w7i8l")
+
+[node name="DialogueBox" parent="." instance=ExtResource("1_xiiiq")]
+offset_left = 350.0
+offset_top = 91.0
+offset_right = 390.0
+offset_bottom = 131.0
+
+[node name="ScreenResolution" type="Node" parent="."]
+script = ExtResource("3_u6or3")

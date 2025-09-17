@@ -1,0 +1,159 @@
+[gd_scene load_steps=21 format=3 uid="uid://ddm7mroixav47"]
+
+[ext_resource type="Script" uid="uid://cyosfbk2au0be" path="res://Scripts/UI/DialogueBox.cs" id="1_l8qb8"]
+[ext_resource type="Texture2D" uid="uid://b6bpwxeudsr6k" path="res://Assets/UI/Icons/Dialogue Box - Spritesheet.png" id="2_63nfq"]
+[ext_resource type="Texture2D" uid="uid://ddagygbosjaeo" path="res://Assets/UI/Icons/Lilah.png" id="2_l8qb8"]
+[ext_resource type="AudioStream" uid="uid://cnns3i27v537e" path="res://Assets/Audio/DialogueStart.wav" id="3_kyvu4"]
+[ext_resource type="FontFile" uid="uid://cgcq2jkm3sh2j" path="res://Assets/Fonts/Roboto_Mono/static/RobotoMono-Medium.ttf" id="3_v08tw"]
+[ext_resource type="FontFile" uid="uid://du2man675mp5b" path="res://Assets/Fonts/Roboto_Mono/static/RobotoMono-Bold.ttf" id="4_f3slv"]
+[ext_resource type="AudioStream" uid="uid://4x4v1k6mmvr2" path="res://Assets/Audio/DialogueContinue.wav" id="4_tlprh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjnou"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 528, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a7kq"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 480, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm7ja"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 432, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy1m0"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 384, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiqhv"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 336, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs5kc"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 288, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfqpb"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 240, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76eea"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 192, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dep18"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 144, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c5wi"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 96, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tec03"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 48, 285, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yx06p"]
+atlas = ExtResource("2_63nfq")
+region = Rect2(0, 0, 285, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_266nb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjnou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a7kq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm7ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy1m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qiqhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs5kc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfqpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76eea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dep18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1c5wi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tec03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yx06p")
+}],
+"loop": false,
+"name": &"default",
+"speed": 40.0
+}]
+
+[node name="DialogueBox" type="Control" node_paths=PackedStringArray("speakerLabel", "dialogueLabel", "portrait")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 28.0
+offset_right = 56.0
+offset_bottom = 68.0
+scale = Vector2(2.2, 2.2)
+script = ExtResource("1_l8qb8")
+speakerLabel = NodePath("Box/SpeakerName")
+dialogueLabel = NodePath("Box/Text")
+portrait = NodePath("Box/Portrait")
+
+[node name="Box" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.05455, 1.05455)
+sprite_frames = SubResource("SpriteFrames_266nb")
+frame = 11
+frame_progress = 1.0
+
+[node name="Portrait" type="TextureRect" parent="Box"]
+offset_left = -139.0
+offset_top = -20.0
+offset_right = -99.0
+offset_bottom = 20.0
+texture = ExtResource("2_l8qb8")
+
+[node name="Text" type="Label" parent="Box"]
+texture_filter = 1
+offset_left = -90.5172
+offset_top = -4.74138
+offset_right = 765.483
+offset_bottom = 216.259
+scale = Vector2(0.167007, 0.167007)
+theme_override_fonts/font = ExtResource("3_v08tw")
+theme_override_font_sizes/font_size = 40
+text = "Some dialogue here
+another line
+
+"
+
+[node name="SpeakerName" type="Label" parent="Box"]
+offset_left = -90.5173
+offset_top = -16.8103
+offset_right = -4.51726
+offset_bottom = 16.1897
+scale = Vector2(0.329638, 0.324954)
+theme_override_fonts/font = ExtResource("4_f3slv")
+theme_override_font_sizes/font_size = 24
+text = "Lilah:"
+
+[node name="Startup Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kyvu4")
+volume_db = -15.0
+
+[node name="Continue Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_tlprh")
+volume_db = -15.0

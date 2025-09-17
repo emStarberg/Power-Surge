@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=29 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Background.cs" id="2_p1rgw"]
@@ -7,12 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="6_4nrw7"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="9_xf330"]
 [ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="11_g2vln"]
+[ext_resource type="Script" uid="uid://cyosfbk2au0be" path="res://Scripts/UI/DialogueBox.cs" id="11_nl5kd"]
+[ext_resource type="Texture2D" uid="uid://bf6v7uj1no3ey" path="res://Assets/Default/icon.svg" id="12_k7dkw"]
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
 [ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="13_6hp8k"]
 [ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="14_6nksn"]
 [ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="15_o8qng"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
+[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/ScreenResolution.cs" id="16_k7dkw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6hp8k"]
 texture = ExtResource("6_4nrw7")
@@ -131,9 +134,6 @@ percentageLabel = NodePath("../UI/Control/Percentage Label")
 position = Vector2(2, -2)
 script = ExtResource("5_qte2r")
 
-[node name="Circuit Bug" parent="." groups=["Enemy"] instance=ExtResource("9_xf330")]
-scale = Vector2(1.11998, 1.11998)
-
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="UI"]
@@ -146,11 +146,11 @@ offset_bottom = 16.0
 
 [node name="Power Meter" type="TextureProgressBar" parent="UI/Control" node_paths=PackedStringArray("Camera")]
 layout_mode = 0
-offset_left = 518.0
-offset_top = 580.0
-offset_right = 566.0
-offset_bottom = 620.0
-scale = Vector2(3.24117, 3.24117)
+offset_left = 505.0
+offset_top = 571.0
+offset_right = 553.0
+offset_bottom = 611.0
+scale = Vector2(3.73117, 3.76576)
 texture_under = ExtResource("12_rpok1")
 texture_progress = ExtResource("13_5nmc8")
 script = ExtResource("14_6nksn")
@@ -163,10 +163,11 @@ anchor_left = 14.536
 anchor_top = 7.268
 anchor_right = 14.536
 anchor_bottom = 7.268
-offset_left = -682.665
+offset_left = -682.933
 offset_top = -292.952
-offset_right = -667.665
+offset_right = -667.933
 offset_bottom = -285.952
+scale = Vector2(1.00417, 1.00375)
 color = Color(0.223103, 0.223103, 0.223103, 1)
 
 [node name="Power Surge" type="AnimatedSprite2D" parent="UI/Control/Power Meter"]
@@ -183,23 +184,88 @@ anchor_left = 14.75
 anchor_top = 14.275
 anchor_right = 14.75
 anchor_bottom = 14.275
-offset_left = -20.0
-offset_top = 1.0
-offset_right = 22.0
-offset_bottom = 24.0
+offset_left = -23.0001
+offset_top = -7.0
+offset_right = 18.9999
+offset_bottom = 16.0
+scale = Vector2(1.08018, 1.15144)
 theme_override_font_sizes/font_size = 16
 text = "100%"
 horizontal_alignment = 1
 
 [node name="Attacks-ui" type="Sprite2D" parent="UI/Control"]
-position = Vector2(92, 604)
+position = Vector2(102, 593)
 scale = Vector2(4, 4)
 texture = ExtResource("11_g2vln")
 
 [node name="Attack Sprite" type="Sprite2D" parent="UI/Control/Attacks-ui"]
 position = Vector2(0, -0.25)
 
-[node name="Battery Pack" parent="." instance=ExtResource("15_yy038")]
+[node name="DialogueBox" type="Control" parent="UI" node_paths=PackedStringArray("speakerLabel", "dialogueLabel", "portrait")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 28.0
+offset_right = 64.0
+offset_bottom = 68.0
+scale = Vector2(1.2, 1.2)
+script = ExtResource("11_nl5kd")
+speakerLabel = NodePath("Panel/MarginContainer/VBoxContainer/SpeakerName")
+dialogueLabel = NodePath("Panel/MarginContainer/VBoxContainer/DialogueText")
+portrait = NodePath("Panel/Portrait")
 
-[node name="Voltage Sentinel" parent="." instance=ExtResource("13_6hp8k")]
+[node name="Panel" type="Panel" parent="UI/DialogueBox"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/DialogueBox/Panel"]
+layout_mode = 0
+offset_left = 6.66667
+offset_top = 9.16667
+offset_right = 46.6667
+offset_bottom = 49.1667
+scale = Vector2(9.48621, 1.31548)
+color = Color(0, 0, 0, 0.756863)
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueBox/Panel"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 14.8333
+offset_right = 191.0
+offset_bottom = 64.8333
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/DialogueBox/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="SpeakerName" type="Label" parent="UI/DialogueBox/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Lilah"
+
+[node name="DialogueText" type="Label" parent="UI/DialogueBox/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Some dialogue here"
+
+[node name="Portrait" type="TextureRect" parent="UI/DialogueBox/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.560001, 0.560001)
+texture = ExtResource("12_k7dkw")
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Battery Pack" parent="Objects" instance=ExtResource("15_yy038")]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Circuit Bug" parent="Enemies" groups=["Enemy"] instance=ExtResource("9_xf330")]
+scale = Vector2(1.11998, 1.11998)
+
+[node name="Voltage Sentinel" parent="Enemies" instance=ExtResource("13_6hp8k")]
 position = Vector2(180, -70)
+
+[node name="ScreenResolution" type="Node" parent="."]
+script = ExtResource("16_k7dkw")
