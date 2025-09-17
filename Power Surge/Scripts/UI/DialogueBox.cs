@@ -14,7 +14,7 @@ public partial class DialogueBox : Control
 	[Export] private TextureRect portrait;
 
 	private readonly Queue<DialogueLine> dialogueQueue = new Queue<DialogueLine>();
-	private bool isTyping = false;
+	private bool typing = false;
 	private float typingSpeed = 0.03f; // seconds between letters
 	private bool isFinished = false;
 	private readonly List<DialogueLine> dialogueList = new List<DialogueLine>();
@@ -36,20 +36,20 @@ public partial class DialogueBox : Control
 			// If accept is pressed
 			if (Input.IsActionJustPressed("ui_accept"))
 			{
-				if (isTyping)
+				if (typing)
 				{
 					// Skip typing effect and show full line
 					dialogueLabel.Text = FormatTextWithLineBreaks(currentLine.Text);
-					isTyping = false;
+					typing = false;
 				}
 				else
 				{
-					
+
 					Texture2D prev = portrait.Texture; // Get current texture for later comparison
-					// Show next line
+													   // Show next line
 					ShowNextLine();
 					Texture2D current = portrait.Texture; // Get new texture
-					// Play startup sound if speaker has changed
+														  // Play startup sound if speaker has changed
 					if (current != prev)
 					{
 						startupSound.Play();
@@ -77,9 +77,9 @@ public partial class DialogueBox : Control
 			return;
 		}
 		// Remove current line from queue
-		currentLine = dialogueQueue.Dequeue(); 
+		currentLine = dialogueQueue.Dequeue();
 		// Set up new line
-		speakerLabel.Text = currentLine.SpeakerName; 
+		speakerLabel.Text = currentLine.SpeakerName;
 		portrait.Texture = currentLine.Portrait;
 		dialogueLabel.Text = "";
 
@@ -96,7 +96,7 @@ public partial class DialogueBox : Control
 	/// <returns></returns>
 	private async System.Threading.Tasks.Task TypeText(string text)
 	{
-		isTyping = true;
+		typing = true;
 		dialogueLabel.Text = "";
 
 		int charCount = 0;
@@ -113,10 +113,10 @@ public partial class DialogueBox : Control
 			}
 
 			await ToSignal(GetTree().CreateTimer(typingSpeed), "timeout");
-			if (!isTyping) break;
+			if (!typing) break;
 		}
 
-		isTyping = false;
+		typing = false;
 	}
 
 	/// <summary>
@@ -182,6 +182,8 @@ public partial class DialogueBox : Control
 	public void Resume()
 	{
 		paused = false;
+		ShowNextLine();
+		startupSound.Play();
 	}
 
 	/// <summary>
@@ -233,9 +235,14 @@ public partial class DialogueBox : Control
 	/// Whether dialogue is being typed
 	/// </summary>
 	/// <returns>isTyping</returns>
-	public bool GetIsTyping()
+	public bool IsTyping()
 	{
-		return isTyping;
+		return typing;
+	}
+
+	public bool IsPaused()
+	{
+		return paused;
 	}
 
 }

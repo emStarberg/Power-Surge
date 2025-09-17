@@ -10,8 +10,9 @@ using System;
 public partial class OpeningSequence : Node2D
 {
 	private VideoStreamPlayer videoPlayer;
-	private AudioStreamPlayer2D buzzerSound, explosionSoundFar, explosionSoundNear;
+	private AudioStreamPlayer2D buzzerSound, explosionSoundFar, explosionSoundNear, runningSound, doorOpenSound, doorCloseSound;
 	private string part1 = "res://Assets/Videos/Opening Pt. 1.ogv";
+	private string part2 = "res://Assets/Videos/Opening Pt. 2.ogv";
 	private string loop = "res://Assets/Videos/Opening Alarm Loop.ogv";
 	private string currentVideo = "part 1";
 	private float videoTimer = 0f;
@@ -20,12 +21,19 @@ public partial class OpeningSequence : Node2D
 	private float[] explosionNearTimes = [7.2f];
 	private int explosionFarIndex = 0;
 	private float[] explosionFarTimes = [4.0f, 12.0f];
-	private bool dialogueStarted = false;
+	private bool runSoundPlayed = false;
+	private bool openSoundPlayed = false;
+	private bool closeSoundPlayed = false;
+
+	private bool dialogueStarted = false; // To be used when starting/resuming dialogue
 
 	private TextureRect fadeImage;
-	private float fadeTime = 1.0f; // seconds
+	private float fadeTime = 6.0f; // seconds
 	private float fadeTimer = 0f;
 	private bool fadingIn = false;
+
+	private bool buzzerFadingOut = false;
+	private float buzzerFadeSpeed = 10f; // Decibels per second
 
 
 	public override void _Ready()
@@ -36,7 +44,10 @@ public partial class OpeningSequence : Node2D
 		buzzerSound = GetNode<AudioStreamPlayer2D>("Control/Buzzer");
 		explosionSoundNear = GetNode<AudioStreamPlayer2D>("Control/Explosion Near");
 		explosionSoundFar = GetNode<AudioStreamPlayer2D>("Control/Explosion Far");
-
+		runningSound = GetNode<AudioStreamPlayer2D>("Control/Running");
+		doorOpenSound = GetNode<AudioStreamPlayer2D>("Control/Door Open");
+		doorCloseSound = GetNode<AudioStreamPlayer2D>("Control/Door Close");
+		;
 		videoPlayer = GetNode<VideoStreamPlayer>("Control/Video");
 
 		fadeImage = GetNode<TextureRect>("Control/BackgroundImage");
@@ -45,7 +56,7 @@ public partial class OpeningSequence : Node2D
 		// Begin playing part 1
 		videoPlayer.Play();
 		currentVideo = "part 1";
-		buzzerSound.VolumeDb = -10;
+		buzzerSound.VolumeDb = -30;
 		buzzerSound.Play();
 
 	}
@@ -77,37 +88,75 @@ public partial class OpeningSequence : Node2D
 				dialogueBox.Start();
 				dialogueStarted = true;
 			}
-			// Play far explosion every 8 seconds
-			if (Math.Round(videoTimer % 8) == 0)
+			if (!buzzerFadingOut)
 			{
-				explosionSoundFar.Play();
+				// Play far explosion every 8 seconds
+				if (Math.Round(videoTimer % 8) == 0)
+				{
+					explosionSoundFar.Play();
+				}
+				// Play far explosion every 20 seconds
+				if (Math.Round(videoTimer % 20) == 0)
+				{
+					explosionSoundNear.Play();
+				}
 			}
-			// Play far explosion every 20 seconds
-			if (Math.Round(videoTimer % 20) == 0)
+				
+			if (dialogueBox.IsPaused())
 			{
-				explosionSoundNear.Play();
+				// Play run sound once at 1 second after dialogue box pauses (video timer has just reset)
+				if (videoTimer >= 1 && !runSoundPlayed)
+				{
+					runningSound.Play();
+					runSoundPlayed = true;
+				}
+				if (videoTimer >= 5 && !openSoundPlayed)
+				{
+					runningSound.Stop();
+					doorOpenSound.Play();
+					openSoundPlayed = true;
+				}
+			}
+
+			// Fade out alarm buzzer sound
+			if (buzzerFadingOut)
+			{
+				buzzerSound.VolumeDb -= buzzerFadeSpeed * (float)delta;
+				if (buzzerSound.VolumeDb <= -80)
+				{
+					// Switch to pt.2 when faded out
+					videoPlayer.Loop = false;
+					buzzerSound.Stop();
+					videoPlayer.Stream = ResourceLoader.Load<VideoStream>(part2);
+					videoPlayer.Play();
+					currentVideo = "part 2";
+					buzzerFadingOut = false;
+				}
 			}
 		}
-		else if (fadingIn)
+		if (fadingIn)
 		{
+			GD.Print(fadeImage.Modulate);
 			fadeTimer += (float)delta;
 			float alpha = Mathf.Clamp(fadeTimer / fadeTime, 0, 1);
 			fadeImage.Modulate = new Color(1, 1, 1, alpha);
 
 			if (alpha >= 1)
+			{
 				fadingIn = false; // Fade complete
+				dialogueBox.Resume();
+			}
+				
 		}
 
 		// Move to next scene if needed
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
-			if (dialogueBox.GetLineNumber() == 2 && !dialogueBox.GetIsTyping() && videoPlayer.IsPlaying() && currentVideo == "alarm loop")
+			if (dialogueBox.GetLineNumber() == 2 && !dialogueBox.IsTyping() && videoPlayer.IsPlaying() && currentVideo == "alarm loop")
 			{
-				videoPlayer.Stop();
-				buzzerSound.Stop();
+				// Pause dialogue and reset video timer
 				dialogueBox.Pause();
-				FadeImageIn();
-
+				videoTimer = 0;
 			}
 		}
 	}
@@ -124,23 +173,43 @@ public partial class OpeningSequence : Node2D
 			videoPlayer.Loop = true;
 			videoPlayer.Play();
 		}
+		else if (currentVideo == "part 2")
+		{
+			currentVideo = "none";
+			videoPlayer.Stop();
+			fadeImage.Visible = true;
+			FadeImageIn();
+		}
 	}
 
 	/// <summary>
 	/// Loop buzzer sound when audio finishes
 	/// </summary>
+	/// 
 	public void OnBuzzerFinished()
 	{
 		// Loop
 		buzzerSound.Play();
-		buzzerSound.VolumeDb = 0;
+		buzzerSound.VolumeDb = -20;
 	}
-	
-	public void FadeImageIn(float duration = 1.0f)
+
+	public void FadeImageIn(float duration = 6.0f)
 	{
+		fadeImage.Visible = true;
+		GD.Print("Fading image in");
 		fadeTime = duration;
 		fadeTimer = 0f;
 		fadingIn = true;
 		fadeImage.Modulate = new Color(1, 1, 1, 0);
+	}
+
+	public void OnOpenSoundFinished()
+	{
+		doorCloseSound.Play();
+	}
+
+	public void OnClosedSoundFinished()
+	{
+		buzzerFadingOut = true;
 	}
 }

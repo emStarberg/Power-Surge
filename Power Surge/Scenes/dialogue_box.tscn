@@ -114,30 +114,10 @@ dialogueLabel = NodePath("Box/Text")
 portrait = NodePath("Box/Portrait")
 
 [node name="Box" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.05455, 1.05455)
 sprite_frames = SubResource("SpriteFrames_266nb")
 frame = 11
 frame_progress = 1.0
-
-[node name="Text" type="Label" parent="Box"]
-texture_filter = 1
-offset_left = -90.0
-offset_top = -7.54546
-offset_right = 766.0
-offset_bottom = 56.4545
-scale = Vector2(0.158514, 0.158514)
-theme_override_fonts/font = ExtResource("3_v08tw")
-theme_override_font_sizes/font_size = 40
-text = "Some dialogue here"
-
-[node name="SpeakerName" type="Label" parent="Box"]
-offset_left = -89.5455
-offset_top = -18.3181
-offset_right = -3.54547
-offset_bottom = 14.6819
-scale = Vector2(0.312396, 0.307957)
-theme_override_fonts/font = ExtResource("4_f3slv")
-theme_override_font_sizes/font_size = 24
-text = "Lilah:"
 
 [node name="Portrait" type="TextureRect" parent="Box"]
 offset_left = -139.0
@@ -146,8 +126,34 @@ offset_right = -99.0
 offset_bottom = 20.0
 texture = ExtResource("2_l8qb8")
 
+[node name="Text" type="Label" parent="Box"]
+texture_filter = 1
+offset_left = -90.5172
+offset_top = -4.74138
+offset_right = 765.483
+offset_bottom = 216.259
+scale = Vector2(0.167007, 0.167007)
+theme_override_fonts/font = ExtResource("3_v08tw")
+theme_override_font_sizes/font_size = 40
+text = "Some dialogue here
+another line
+
+"
+
+[node name="SpeakerName" type="Label" parent="Box"]
+offset_left = -90.5173
+offset_top = -16.8103
+offset_right = -4.51726
+offset_bottom = 16.1897
+scale = Vector2(0.329638, 0.324954)
+theme_override_fonts/font = ExtResource("4_f3slv")
+theme_override_font_sizes/font_size = 24
+text = "Lilah:"
+
 [node name="Startup Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_kyvu4")
+volume_db = -15.0
 
 [node name="Continue Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_tlprh")
+volume_db = -15.0
