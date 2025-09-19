@@ -6,11 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="3_clode"]
 [ext_resource type="AudioStream" uid="uid://bpb5sanue6hqk" path="res://Assets/Audio/Explosion-Far.wav" id="4_nd5di"]
 [ext_resource type="AudioStream" uid="uid://db7xs82lxm43t" path="res://Assets/Audio/Explosion-Near.wav" id="5_6u8og"]
-[ext_resource type="Texture2D" uid="uid://4w6t28hm3g3o" path="res://Assets/UI/Lab Placeholder.jpg" id="6_6u8og"]
 [ext_resource type="AudioStream" uid="uid://dg8njo1op226y" path="res://Assets/Audio/Running.mp3" id="6_o1he4"]
 [ext_resource type="AudioStream" uid="uid://eqwppe1jk00t" path="res://Assets/Audio/DoorOpen.mp3" id="7_rx33v"]
 [ext_resource type="AudioStream" uid="uid://bdge72s6vvmeh" path="res://Assets/Audio/DoorClose.mp3" id="8_6qxwc"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/ScreenResolution.cs" id="8_n7b67"]
+[ext_resource type="Texture2D" uid="uid://c324rs8m228jw" path="res://Assets/UI/Lab.png" id="9_rx33v"]
 
 [node name="OpeningSequence" type="Node2D"]
 script = ExtResource("1_uwh2j")
@@ -65,7 +65,7 @@ offset_top = -19.0
 offset_right = 1169.0
 offset_bottom = 678.0
 scale = Vector2(1.0516, 1.0516)
-texture = ExtResource("6_6u8og")
+texture = ExtResource("9_rx33v")
 
 [node name="DialogueBox" parent="." instance=ExtResource("3_clode")]
 offset_left = 278.0
