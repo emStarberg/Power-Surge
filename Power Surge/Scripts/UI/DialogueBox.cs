@@ -21,6 +21,7 @@ public partial class DialogueBox : Control
 	private bool paused;
 	private AudioStreamPlayer2D startupSound, continueSound;
 	private DialogueLine currentLine;
+	private String playerName = "George";
 
 	public override void _Ready()
 	{
@@ -220,6 +221,7 @@ public partial class DialogueBox : Control
 		}
 
 		file.Close();
+		ReplaceNameInDialogue(playerName);
 	}
 
 	/// <summary>
@@ -240,9 +242,26 @@ public partial class DialogueBox : Control
 		return typing;
 	}
 
+	/// <summary>
+	/// Whether the dialogue is paused
+	/// </summary>
+	/// <returns></returns>
 	public bool IsPaused()
 	{
 		return paused;
+	}
+
+	/// <summary>
+	/// Replaces any appearences of "[name]" in the dialogue with the player's chosen name
+	/// </summary>
+	/// <param name="playerName">Player's chosen name</param>
+	public void ReplaceNameInDialogue(string playerName)
+	{
+		foreach (var line in dialogueList)
+		{
+			if (line.Text.Contains("[name]"))
+				line.Text = line.Text.Replace("[name]", playerName);
+		}
 	}
 
 }

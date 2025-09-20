@@ -102,7 +102,7 @@ public partial class OpeningSequence : Node2D
 					explosionSoundNear.Play();
 				}
 			}
-				
+
 			if (dialogueBox.IsPaused())
 			{
 				if (currentVideo == "alarm loop")
@@ -120,8 +120,9 @@ public partial class OpeningSequence : Node2D
 						openSoundPlayed = true;
 					}
 				}
-					
+
 			}
+			
 
 			// Fade out alarm buzzer sound
 			if (buzzerFadingOut)
@@ -138,7 +139,16 @@ public partial class OpeningSequence : Node2D
 					buzzerFadingOut = false;
 				}
 			}
+			
+		}else if (currentVideo == "computer" && !dialogueStarted) 
+		{ // Start dialogue again
+				if (videoTimer >= 2)
+				{
+					dialogueBox.Resume();
+					dialogueStarted = true;
+				}
 		}
+		
 		if (fadingIn)
 		{
 			GD.Print(fadeImage.Modulate);
@@ -151,7 +161,7 @@ public partial class OpeningSequence : Node2D
 				fadingIn = false; // Fade complete
 				dialogueBox.Resume();
 			}
-				
+
 		}
 
 		// Move to next scene if needed
@@ -166,6 +176,9 @@ public partial class OpeningSequence : Node2D
 			else if (dialogueBox.GetLineNumber() == 54 && !dialogueBox.IsTyping())
 			{
 				dialogueBox.Pause();
+				dialogueStarted = false;
+				currentVideo = "computer";
+				videoTimer = 0;
 				fadeImage.Texture = GD.Load<Texture2D>("res://Assets/UI/Lab Computer.png");
 			}
 		}
@@ -185,7 +198,7 @@ public partial class OpeningSequence : Node2D
 		}
 		else if (currentVideo == "part 2")
 		{
-			currentVideo = "none";
+			currentVideo = "lab";
 			videoPlayer.Stop();
 			fadeImage.Visible = true;
 			FadeImageIn();
