@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
 //------------------------------------------------------------------------------
 // <summary>
@@ -101,22 +102,27 @@ public partial class OpeningSequence : Node2D
 					explosionSoundNear.Play();
 				}
 			}
-				
+
 			if (dialogueBox.IsPaused())
 			{
-				// Play run sound once at 1 second after dialogue box pauses (video timer has just reset)
-				if (videoTimer >= 1 && !runSoundPlayed)
+				if (currentVideo == "alarm loop")
 				{
-					runningSound.Play();
-					runSoundPlayed = true;
+					// Play run sound once at 1 second after dialogue box pauses (video timer has just reset)
+					if (videoTimer >= 1 && !runSoundPlayed)
+					{
+						runningSound.Play();
+						runSoundPlayed = true;
+					}
+					if (videoTimer >= 5 && !openSoundPlayed)
+					{
+						runningSound.Stop();
+						doorOpenSound.Play();
+						openSoundPlayed = true;
+					}
 				}
-				if (videoTimer >= 5 && !openSoundPlayed)
-				{
-					runningSound.Stop();
-					doorOpenSound.Play();
-					openSoundPlayed = true;
-				}
+
 			}
+			
 
 			// Fade out alarm buzzer sound
 			if (buzzerFadingOut)
@@ -133,7 +139,16 @@ public partial class OpeningSequence : Node2D
 					buzzerFadingOut = false;
 				}
 			}
+			
+		}else if (currentVideo == "computer" && !dialogueStarted) 
+		{ // Start dialogue again
+				if (videoTimer >= 2)
+				{
+					dialogueBox.Resume();
+					dialogueStarted = true;
+				}
 		}
+		
 		if (fadingIn)
 		{
 			GD.Print(fadeImage.Modulate);
@@ -146,7 +161,7 @@ public partial class OpeningSequence : Node2D
 				fadingIn = false; // Fade complete
 				dialogueBox.Resume();
 			}
-				
+
 		}
 
 		// Move to next scene if needed
@@ -157,6 +172,14 @@ public partial class OpeningSequence : Node2D
 				// Pause dialogue and reset video timer
 				dialogueBox.Pause();
 				videoTimer = 0;
+			}
+			else if (dialogueBox.GetLineNumber() == 54 && !dialogueBox.IsTyping())
+			{
+				dialogueBox.Pause();
+				dialogueStarted = false;
+				currentVideo = "computer";
+				videoTimer = 0;
+				fadeImage.Texture = GD.Load<Texture2D>("res://Assets/UI/Lab Computer.png");
 			}
 		}
 	}
@@ -175,7 +198,7 @@ public partial class OpeningSequence : Node2D
 		}
 		else if (currentVideo == "part 2")
 		{
-			currentVideo = "none";
+			currentVideo = "lab";
 			videoPlayer.Stop();
 			fadeImage.Visible = true;
 			FadeImageIn();

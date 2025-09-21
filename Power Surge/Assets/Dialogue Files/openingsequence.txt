@@ -1,10 +1,10 @@
-Lilah|Felix! Hurry, get to the bunker!
+Lilah|[name]! Hurry, get to the bunker!
 Lilah|We haven't got long before they take over the building!
-Lilah|Felix! Where are you?
+Lilah|[name]! Where are you?
 Lilah|You're in the bunker?
 Lilah|I'm in the bunker with Archie, but we don't see you...
 Lilah|I'll put him on the hologram
-Archie|Hey Felix! I'm not sure where you're at buddy but it's not the bunker, what can you see?
+Archie|Hey [name]! I'm not sure where you're at, but it's not the bunker, what can you see?
 Archie|Huh? That sounds like the... but it can't be. How did you get in?
 Lilah|The security system must have failed in the presence of those... those things...
 Archie|I'm sorry, those things? Those are magnificent feats of engineering, forged in The World Conductor itself, 
@@ -16,10 +16,10 @@ Archie|I was just sayi...
 Lilah|That thing is corrupt... it needs to be destroyed! I don't care that it provides all power to the world. 
 Lilah|It's got to go.
 Archie|Ok ok...
-Archie|What's that Felix?
+Archie|What's that [name]?
 Archie|Well, it sounds like you're in the secret lab, it's supposed to be, well y'know, a secret.
 Lilah|It seems that the electronic lock has failed, so barricade the door to keep yourself safe, but
-Lilah|DO NOT TOUCH ANYTHING IN THERE FELIX. I REPEAT, DO NOT TOUCH!
+Lilah|DO NOT TOUCH ANYTHING IN THERE [name]. I REPEAT, DO NOT TOUCH!
 Archie|Unless...
 Archie|Maybe it's time?
 Lilah|I'm sorry?
@@ -32,7 +32,7 @@ Archie|Fully tested or not, it's our only hope. No one's coming to help.
 Lilah|...
 Lilah|... I hate to say this, but you're right.
 Lilah|...
-Lilah|Felix, you need to know what's in that room.
+Lilah|[name], you need to know what's in that room.
 Lilah|About 6 months ago, strange things started happening all over the world, all electricity related.
 Lilah|It's as if the electricity itself were sentient. 
 Lilah|That's when we put together a team of top scientists, to create a device that could allow us to reach 
@@ -45,10 +45,14 @@ Archie|The device, we named S.U.R.G.E, is what's in that room with you, see that
 Archie|We need you to pilot it, the only way to access its controls is in that room.
 Archie|You need to use it to gain access to The World Conductor. This could be humanity's last hope.
 Archie|You're not sure about taking on the responsibility? Fair enough.
-Lilah|Felix, I know you're scared, but there's no other way. Please do this.
+Lilah|[name], I know you're scared, but there's no other way. Please do this.
 Archie|We'll be with you every step of the way. 
 Archie|Once S.U.R.G.E is up and running, we'll be able to see your display.
 Archie|...
 Lilah|...
-Lilah|... Thank you Felix, you have no idea how important this is.
+Lilah|... Thank you [name], you have no idea how important this is.
 Lilah|Walk over to the control panel and I'll walk you through what to do.
+Lilah|Are you at the control panel?
+Lilah|Great, see that button on the screen that says "RUN SIMULATION"?
+Lilah|Clicking that will transport S.U.R.G.E into a digital environment where you can practice controlling it.
+Archie|There's a lot to learn, but it's not too hard once you get used to it, even I can do it!
