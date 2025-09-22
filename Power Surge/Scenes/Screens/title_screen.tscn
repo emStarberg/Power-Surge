@@ -1,0 +1,151 @@
+[gd_scene load_steps=7 format=3 uid="uid://csh2l54drx116"]
+
+[ext_resource type="Texture2D" uid="uid://6t78hc5yqo6t" path="res://Assets/UI/Button.png" id="1_utbhb"]
+[ext_resource type="Script" uid="uid://br1ugryadi5uk" path="res://Scripts/UI/TitleScreen.cs" id="1_wk421"]
+[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="3_ed76m"]
+[ext_resource type="PackedScene" uid="uid://cr8f3adpxwjal" path="res://Scenes/ui_spark.tscn" id="4_2egpy"]
+[ext_resource type="Script" uid="uid://houf28qf5ruu" path="res://Scripts/UICamera.cs" id="4_ed76m"]
+[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/ScreenResolution.cs" id="5_ogsbk"]
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource("1_wk421")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Buttons" type="Control" parent="Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="START" type="Control" parent="Control/Buttons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 573.0
+offset_top = 247.0
+offset_right = 573.0
+offset_bottom = 247.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite" type="Sprite2D" parent="Control/Buttons/START"]
+position = Vector2(-0.879959, -0.739986)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("1_utbhb")
+
+[node name="Label" type="Label" parent="Control/Buttons/START"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.88
+offset_top = -44.74
+offset_right = 138.12
+offset_bottom = 63.26
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.460858, 0.460858)
+theme_override_fonts/font = ExtResource("3_ed76m")
+theme_override_font_sizes/font_size = 80
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OPTIONS" type="Control" parent="Control/Buttons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 573.0
+offset_top = 337.0
+offset_right = 573.0
+offset_bottom = 337.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite" type="Sprite2D" parent="Control/Buttons/OPTIONS"]
+position = Vector2(-0.879959, -0.739986)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("1_utbhb")
+
+[node name="Label" type="Label" parent="Control/Buttons/OPTIONS"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.3799
+offset_top = -44.74
+offset_right = 147.62
+offset_bottom = 63.26
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.460858, 0.460858)
+theme_override_fonts/font = ExtResource("3_ed76m")
+theme_override_font_sizes/font_size = 80
+text = "OPTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Effects" type="Control" parent="Control/Buttons"]
+anchors_preset = 0
+offset_left = 571.0
+offset_top = 244.0
+offset_right = 611.0
+offset_bottom = 284.0
+
+[node name="UI Spark" parent="Control/Buttons/Effects" instance=ExtResource("4_2egpy")]
+position = Vector2(-19, -21)
+rotation = -1.16726
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark2" parent="Control/Buttons/Effects" instance=ExtResource("4_2egpy")]
+position = Vector2(45, -19)
+rotation = 0.939397
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark3" parent="Control/Buttons/Effects" instance=ExtResource("4_2egpy")]
+position = Vector2(-62, -13)
+rotation = -0.882684
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark4" parent="Control/Buttons/Effects" instance=ExtResource("4_2egpy")]
+position = Vector2(69, -2)
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark5" parent="Control/Buttons/Effects" instance=ExtResource("4_2egpy")]
+position = Vector2(-68, 18)
+rotation = -2.54797
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark6" parent="Control/Buttons/Effects" instance=ExtResource("4_2egpy")]
+position = Vector2(-12, 22)
+rotation = -4.45951
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark7" parent="Control/Buttons/Effects" instance=ExtResource("4_2egpy")]
+position = Vector2(50, 19)
+rotation = -2.54797
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Camera" type="Camera2D" parent="."]
+position = Vector2(577, 322)
+script = ExtResource("4_ed76m")
+
+[node name="ScreenResolution" type="Node" parent="."]
+script = ExtResource("5_ogsbk")

@@ -20,10 +20,7 @@ public partial class OpeningSequence : Node2D
 	private int explosionNearIndex = 0, explosionFarIndex = 0;
 	private float[] explosionNearTimes = [7.2f], explosionFarTimes = [4.0f, 12.0f];
 	private bool runSoundPlayed = false, openSoundPlayed = false, closeSoundPlayed = false;
-	
-
 	private bool dialogueStarted = false; // To be used when starting/resuming dialogue
-
 	private TextureRect fadeImage;
 	private float fadeTime = 6.0f, fadeTimer = 0; // seconds
 	private bool fadingIn = false, fadingOut = false;

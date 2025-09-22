@@ -53,7 +53,6 @@ animations = [{
 }]
 
 [node name="UI Spark" type="AnimatedSprite2D"]
-position = Vector2(44, 349)
 scale = Vector2(5.08528, 5.01912)
 sprite_frames = SubResource("SpriteFrames_82itx")
 frame = 6

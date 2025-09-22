@@ -297,7 +297,7 @@ size = Vector2(20, 27)
 script = ExtResource("1_i0v1t")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(-1, -5)
+position = Vector2(-14, -2)
 texture = ExtResource("1_sghjv")
 script = ExtResource("1_mnia5")
 cameraPath = NodePath("../Camera")
