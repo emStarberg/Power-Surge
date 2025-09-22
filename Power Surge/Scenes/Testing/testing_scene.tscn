@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/ScreenResolution.cs" id="16_k7dkw"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6hp8k"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2yo0d"]
 texture = ExtResource("6_4nrw7")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -41,7 +41,7 @@ texture = ExtResource("6_4nrw7")
 
 [sub_resource type="TileSet" id="TileSet_0hka7"]
 physics_layer_0/collision_layer = 1
-sources/2 = SubResource("TileSetAtlasSource_6hp8k")
+sources/2 = SubResource("TileSetAtlasSource_2yo0d")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
 atlas = ExtResource("15_o8qng")
@@ -117,7 +117,7 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(-1, -5)
+position = Vector2(-18, -1)
 texture = ExtResource("1_bops4")
 script = ExtResource("2_p1rgw")
 cameraPath = NodePath("../Camera")

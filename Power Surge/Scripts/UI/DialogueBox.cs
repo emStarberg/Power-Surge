@@ -106,8 +106,8 @@ public partial class DialogueBox : Control
 			dialogueLabel.Text += letter;
 			charCount++;
 
-			// Insert a new line if current line exceeds 50 characters
-			if (charCount >= 52 && letter == ' ')
+			// Insert a new line if current line exceeds 48 characters
+			if (charCount >= 48 && letter == ' ')
 			{
 				dialogueLabel.Text += "\n";
 				charCount = 0;

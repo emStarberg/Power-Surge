@@ -12,30 +12,34 @@ public partial class OpeningSequence : Node2D
 {
 	private VideoStreamPlayer videoPlayer;
 	private AudioStreamPlayer2D buzzerSound, explosionSoundFar, explosionSoundNear, runningSound, doorOpenSound, doorCloseSound;
-	private string part1 = "res://Assets/Videos/Opening Pt. 1.ogv";
-	private string part2 = "res://Assets/Videos/Opening Pt. 2.ogv";
-	private string loop = "res://Assets/Videos/Opening Alarm Loop.ogv";
+	private string part1 = "res://Assets/Videos/Opening Pt. 1.ogv", part2 = "res://Assets/Videos/Opening Pt. 2.ogv", loop = "res://Assets/Videos/Opening Alarm Loop.ogv";
 	private string currentVideo = "part 1";
 	private float videoTimer = 0f;
 	private DialogueBox dialogueBox;
-	private int explosionNearIndex = 0;
-	private float[] explosionNearTimes = [7.2f];
-	private int explosionFarIndex = 0;
-	private float[] explosionFarTimes = [4.0f, 12.0f];
-	private bool runSoundPlayed = false;
-	private bool openSoundPlayed = false;
-	private bool closeSoundPlayed = false;
+	private Camera2D camera;
+	private int explosionNearIndex = 0, explosionFarIndex = 0;
+	private float[] explosionNearTimes = [7.2f], explosionFarTimes = [4.0f, 12.0f];
+	private bool runSoundPlayed = false, openSoundPlayed = false, closeSoundPlayed = false;
+	
 
 	private bool dialogueStarted = false; // To be used when starting/resuming dialogue
 
 	private TextureRect fadeImage;
-	private float fadeTime = 6.0f; // seconds
-	private float fadeTimer = 0f;
-	private bool fadingIn = false;
+	private float fadeTime = 6.0f, fadeTimer = 0; // seconds
+	private bool fadingIn = false, fadingOut = false;
+
+	private float zoomTime = 2f, zoomTimer = 0f;
+	private bool zoomingIn = false;
+
+	private Vector2 startZoom = new Vector2(0.9f, 0.9f), endZoom = new Vector2(2, 2);
 
 	private bool buzzerFadingOut = false;
 	private float buzzerFadeSpeed = 10f; // Decibels per second
 
+
+	private Vector2 panStart, panEnd;
+	private bool panningUp = false;
+	private float panTime = 2f, panTimer = 0f;
 
 	public override void _Ready()
 	{
@@ -53,6 +57,8 @@ public partial class OpeningSequence : Node2D
 
 		fadeImage = GetNode<TextureRect>("Control/BackgroundImage");
 		fadeImage.Modulate = new Color(1, 1, 1, 0); // Start fully transparent
+
+		camera = GetNode<Camera2D>("Camera");
 
 		// Begin playing part 1
 		videoPlayer.Play();
@@ -102,7 +108,7 @@ public partial class OpeningSequence : Node2D
 					explosionSoundNear.Play();
 				}
 			}
-
+			// When dialogue is paused
 			if (dialogueBox.IsPaused())
 			{
 				if (currentVideo == "alarm loop")
@@ -123,7 +129,6 @@ public partial class OpeningSequence : Node2D
 
 			}
 			
-
 			// Fade out alarm buzzer sound
 			if (buzzerFadingOut)
 			{
@@ -148,7 +153,7 @@ public partial class OpeningSequence : Node2D
 					dialogueStarted = true;
 				}
 		}
-		
+		// Fade image in
 		if (fadingIn)
 		{
 			GD.Print(fadeImage.Modulate);
@@ -161,7 +166,34 @@ public partial class OpeningSequence : Node2D
 				fadingIn = false; // Fade complete
 				dialogueBox.Resume();
 			}
+		}
+		// Fade image out
+		if (fadingOut && fadeImage.Visible)
+		{
+			fadeTimer += (float)delta;
+			float alpha = Mathf.Clamp(1 - (fadeTimer / fadeTime), 0, 1);
+			fadeImage.Modulate = new Color(1, 1, 1, alpha);
 
+			if (alpha <= 0)
+			{
+				fadeImage.Visible = false; // Hide when fully faded out
+				GetTree().ChangeSceneToFile("res://Scenes/Levels/tutorial.tscn");
+			}
+		}
+		// Zoom camera in when dialogue has finished
+		if (zoomingIn)
+		{
+			zoomTimer += (float)delta;
+			float t = Mathf.Clamp(zoomTimer / zoomTime, 0, 1);
+
+			camera.Zoom = startZoom.Lerp(endZoom, t);
+			camera.Position = panStart.Lerp(panEnd, t);
+
+			if (t >= 1)
+			{
+				zoomingIn = false; // Zoom and pan complete
+				FadeImageOut();
+			}
 		}
 
 		// Move to next scene if needed
@@ -175,14 +207,21 @@ public partial class OpeningSequence : Node2D
 			}
 			else if (dialogueBox.GetLineNumber() == 54 && !dialogueBox.IsTyping())
 			{
+				// Show close up of computer
 				dialogueBox.Pause();
 				dialogueStarted = false;
 				currentVideo = "computer";
 				videoTimer = 0;
 				fadeImage.Texture = GD.Load<Texture2D>("res://Assets/UI/Lab Computer.png");
 			}
+			else if (dialogueBox.GetLineNumber() == 58 && !dialogueBox.IsTyping())
+			{
+				// Zoom in on computer before fading out
+				ZoomIn();
+			}
 		}
 	}
+
 	/// <summary>
 	/// Called when the current video is finished playing
 	/// </summary>
@@ -216,7 +255,11 @@ public partial class OpeningSequence : Node2D
 		buzzerSound.VolumeDb = -20;
 	}
 
-	public void FadeImageIn(float duration = 6.0f)
+	/// <summary>
+	/// Fade in an image
+	/// </summary>
+	/// <param name="duration">Time to fade in for</param>
+	public void FadeImageIn(float duration = 4.5f)
 	{
 		fadeImage.Visible = true;
 		GD.Print("Fading image in");
@@ -225,12 +268,43 @@ public partial class OpeningSequence : Node2D
 		fadingIn = true;
 		fadeImage.Modulate = new Color(1, 1, 1, 0);
 	}
-
+	/// <summary>
+	/// Fade out an image
+	/// </summary>
+	/// <param name="duration">Time to fade out for</param>
+	public void FadeImageOut(float duration = 3.5f)
+	{
+		fadeImage.Visible = true;
+		GD.Print("Fading image out");
+		fadeTime = duration;
+		fadeTimer = 0f;
+		fadingOut = true;
+		fadeImage.Modulate = new Color(1, 1, 1, 1); // Start fully opaque
+	}
+	/// <summary>
+	/// Zoom and pan camera
+	/// </summary>
+	/// <param name="duration">Time to zoom in/pan for</param>
+	public void ZoomIn(float duration = 2f, Vector2? targetZoom = null)
+	{
+		zoomTime = duration;
+		zoomTimer = 0f;
+		zoomingIn = true;
+		startZoom = camera.Zoom;
+		endZoom = targetZoom ?? new Vector2(2.2f, 2.2f);
+		panStart = camera.Position;
+		panEnd = panStart + new Vector2(0, -120);
+	}
+	/// <summary>
+	/// Called when door opening sound finishes
+	/// </summary>
 	public void OnOpenSoundFinished()
 	{
 		doorCloseSound.Play();
 	}
-
+	/// <summary>
+	/// Called when door closing sound finishes
+	/// </summary>
 	public void OnClosedSoundFinished()
 	{
 		buzzerFadingOut = true;

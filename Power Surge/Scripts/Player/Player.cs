@@ -17,6 +17,7 @@ public partial class Player : CharacterBody2D
 	[Export] public TextureProgressBar PowerMeter; // Power meter
 	[Export] public Label percentageLabel; // Label under power meter
 	[Export] public Control FragmentSlots;
+	[Export] public bool TutorialMode = false;
 	private int power = 100; // Percentage of power left
 	private Vector2 velocity; // For changing player's Velocity property
 	private AnimatedSprite2D animation; // Player's animations
@@ -41,6 +42,15 @@ public partial class Player : CharacterBody2D
 	private Label powerSurgeTimer;
 	private float powerSurgeTime = 10f;
 	private bool powerSurgeActive = false;
+
+
+
+	// FOR TUTORIAL
+	public List<String> disabledInputs = new List<string>();
+	private float mileage = 0; // How far the player has moved left/right
+	public bool HasDashed = false, HasJumped = false, HasCycled = false, HasAttacked = false;
+
+
 
 	public override void _Ready()
 	{
@@ -70,9 +80,6 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-
-
-
 		if (power < 0)
 		{
 			power = 0;
@@ -130,7 +137,7 @@ public partial class Player : CharacterBody2D
 			}
 
 			// Check whether to dash
-			if (Input.IsActionJustPressed("input_dash"))
+			if (Input.IsActionJustPressed("input_dash") && !disabledInputs.Contains("input_dash"))
 			{
 				// No stationary dashes
 				if (velocity.X != 0)
@@ -154,15 +161,17 @@ public partial class Player : CharacterBody2D
 				velocity.Y = Mathf.Min(velocity.Y, MaxFallSpeed);
 				direction = 0;
 				// Get input direction
-				if (Input.IsActionPressed("input_left"))
+				if (Input.IsActionPressed("input_left") && !disabledInputs.Contains("input_left"))
 				{
 					direction -= 1.0f;
+					mileage++; // For tutorial
 					facing = "left";
 				}
 
-				if (Input.IsActionPressed("input_right"))
+				if (Input.IsActionPressed("input_right") && !disabledInputs.Contains("input_left"))
 				{
 					direction += 1.0f;
+					mileage++; // For tutorial
 					facing = "right";
 				}
 
@@ -171,7 +180,7 @@ public partial class Player : CharacterBody2D
 				velocity.X = direction * Speed;
 
 				// Handle jump
-				if (Input.IsActionJustPressed("input_jump"))
+				if (Input.IsActionJustPressed("input_jump") && !disabledInputs.Contains("input_jump"))
 				{
 					Jump();
 				}
@@ -190,7 +199,7 @@ public partial class Player : CharacterBody2D
 					Die();
 				}
 
-				if (Input.IsActionJustPressed("input_shield"))
+				if (Input.IsActionJustPressed("input_shield") && !disabledInputs.Contains("input_shield"))
 				{
 					// Activate shield
 					GetNode<StaticBody2D>("Shield").Visible = true;
@@ -204,12 +213,12 @@ public partial class Player : CharacterBody2D
 				}
 			}
 
-			if (Input.IsActionJustPressed("input_cycle_forward"))
+			if (Input.IsActionJustPressed("input_cycle_forward") && !disabledInputs.Contains("input_cycle_forward"))
 			{
 				CycleAttack("forward");
 			}
 
-			if (Input.IsActionJustPressed("input_cycle_backward"))
+			if (Input.IsActionJustPressed("input_cycle_backward") && !disabledInputs.Contains("input_cycle_backward"))
 			{
 				CycleAttack("backward");
 			}
@@ -226,7 +235,7 @@ public partial class Player : CharacterBody2D
 			// Move
 			MoveAndSlide();
 
-			if (Input.IsActionJustPressed("input_attack"))
+			if (Input.IsActionJustPressed("input_attack") && !disabledInputs.Contains("input_attack"))
 			{
 				Attack();
 			}
@@ -238,8 +247,14 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void Jump()
 	{
+		// For tutorial
+			if (!HasJumped)
+			{
+				HasJumped = true;
+			}
 		if (IsOnFloor() || numJumps < 2)
 		{
+
 			// Reset number of jumps if on floor
 			if (IsOnFloor())
 			{
@@ -249,7 +264,7 @@ public partial class Player : CharacterBody2D
 			velocity.Y = JumpStrength;
 			// Create jump animation
 			Node jumpAnimInstance = jumpAnimation.Instantiate();
-			((Node2D)jumpAnimInstance).GlobalPosition = GlobalPosition + new Vector2(2, 0);
+			((Node2D)jumpAnimInstance).GlobalPosition = GlobalPosition;
 			GetTree().Root.AddChild(jumpAnimInstance);
 			// Increase no. of jumps, for counting double jumps
 			numJumps++;
@@ -263,7 +278,7 @@ public partial class Player : CharacterBody2D
 	public void Die()
 	{
 		alive = false;
-		GD.Print("Dead!");
+		isDashing = false;
 		animation.Animation = "death";
 	}
 
@@ -288,6 +303,11 @@ public partial class Player : CharacterBody2D
 	/// </Summary>
 	public void Dash()
 	{
+		// For tutorial
+		if (!HasDashed)
+		{
+			HasDashed = true;
+		}
 		if (!isDashing && alive)
 		{
 			animation.Animation = "dash";
@@ -331,6 +351,11 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	private void Attack()
 	{
+		// For tutorial
+		if (!HasAttacked)
+		{
+			HasAttacked = true;
+		}
 		// WEAK PULSE
 		if (attackSelected == "weak pulse")
 		{
@@ -349,7 +374,7 @@ public partial class Player : CharacterBody2D
 		{
 			Node attackInstance = strongBlast.Instantiate();
 			((StrongBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0, -2);
-			GetTree().Root.AddChild(attackInstance); // <-- Add to root, not player
+			GetTree().Root.AddChild(attackInstance);
 			if (attackInstance is StrongBlast b)
 			{
 				b.Activate(facing);
@@ -364,6 +389,11 @@ public partial class Player : CharacterBody2D
 	/// <param name="direction"></param>
 	private void CycleAttack(string direction)
 	{
+		// For tutorial
+		if (!HasCycled)
+		{
+			HasCycled = true;
+		}
 		int index = Array.IndexOf(attackNames, attackSelected);
 		if (direction == "forward")
 		{
@@ -406,6 +436,7 @@ public partial class Player : CharacterBody2D
 		else if (animation.Animation == "death")
 		{
 			animation.Visible = false;
+
 			// Create timer to wait before reloading
 			Timer timer = new()
 			{
@@ -415,10 +446,22 @@ public partial class Player : CharacterBody2D
 			AddChild(timer);
 			timer.Timeout += () =>
 			{
-				// Reload scene
-				var scenePath = GetTree().CurrentScene.SceneFilePath;
-				GetTree().ChangeSceneToFile(scenePath);
+				if (!TutorialMode)
+				{
+					// Reload scene
+					var scenePath = GetTree().CurrentScene.SceneFilePath;
+					GetTree().ChangeSceneToFile(scenePath);
+				}
+				else
+				{
+					animation.Animation = "idle";
+					alive = true;
+					power = 100;
+					animation.Visible = true;
+					animation.Play();
+				}
 			};
+
 			timer.Start();
 		}
 		else if (animation.Animation == "dash")
@@ -452,17 +495,63 @@ public partial class Player : CharacterBody2D
 			camera.Shake(6, 0.2f);
 		}
 	}
-
+	/// <summary>
+	/// Start the power surge timer
+	/// </summary>
 	public void StartPowerSurgeTimer()
 	{
 		powerSurgeTime = 10f;
 		powerSurgeActive = true;
 		powerSurgeTimer.Visible = true;
 	}
-	
+	/// <summary>
+	/// Stop the power surge timer
+	/// </summary>
 	public void StopPowerSurgeTimer()
-{
-	powerSurgeActive = false;
-	powerSurgeTimer.Visible = false;
-}
+	{
+		powerSurgeActive = false;
+		powerSurgeTimer.Visible = false;
+	}
+
+	/// <summary>
+	/// Disable any number of input mappings
+	/// </summary>
+	/// <param name="inputs">Names of mappings to be disabled</param>
+	public void DisableInputs(params string[] inputs)
+	{
+		foreach (var input in inputs)
+		{
+			if (!disabledInputs.Contains(input))
+			{
+				disabledInputs.Add(input);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Enable any number of input mappings
+	/// </summary>
+	/// <param name="input">Names of mappings to be enabled</param>
+	public void EnableInputs(params string[] inputs)
+	{
+		foreach (var input in inputs)
+		{
+			disabledInputs.Remove(input);
+		}
+
+	}
+
+	/// <summary>
+	/// Get total distance moved left/right
+	/// </summary>
+	/// <returns>mileage</returns>
+	public float GetMileage()
+	{
+		return mileage;
+	}
+
+	public bool IsAlive()
+	{
+		return alive;
+	}
 }

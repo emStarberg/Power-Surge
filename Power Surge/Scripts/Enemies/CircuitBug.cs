@@ -111,7 +111,7 @@ public partial class CircuitBug : Enemy
 
 	
 	/// <summary>
-	/// Spawn a projectile on 13th frame to line up with animation
+	/// Spawn projectile on 13th frame to line up with animation
 	/// </summary>
 	private void OnAnimationFrameChanged()
 	{
@@ -137,7 +137,10 @@ public partial class CircuitBug : Enemy
 		}
 	}
 
-
+	/// <summary>
+	/// Called when an animation finishes.
+	/// Behaves differently depending on animation
+	/// </summary>
 	public void OnAnimationFinished()
 	{
 		if (animation.Animation == "death")
