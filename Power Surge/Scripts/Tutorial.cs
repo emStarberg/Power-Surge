@@ -6,9 +6,10 @@ public partial class Tutorial : Node2D
 {
 	private DialogueBox dialogueBox, deathDialogue;
 	private bool hasJumped = false, hasDashed = false, hasMoved = false, hasAttacked = false, hasCycled = false;
-	private bool dialogueWasPlaying = false, deathDialogueStarted = false;
+	private bool dialogueWasPlaying = false, deathDialogueStarted = false, dialogueStarted = false;
 	private Control tutorials;
 	private Player player;
+	private float timer = 0;
 	public override void _Ready()
 	{
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
@@ -21,17 +22,23 @@ public partial class Tutorial : Node2D
 
 		// Set up dialogue
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/tutorial.txt");
-		dialogueBox.Start();
 		deathDialogue.AddLinesFromFile("res://Assets/Dialogue Files/tutorialdeath.txt");
 	}
 
 	public override void _Process(double delta)
 	{
+		timer += (float)delta;
+		if (timer >= 2f && !dialogueStarted)
+		{
+			dialogueStarted = true;
+			dialogueBox.Start();
+		}
+		
 		// Continue dialogue
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
 			// Movement
-			if (dialogueBox.GetLineNumber() == 2 && !dialogueBox.IsTyping() && !hasMoved)
+			if (dialogueBox.GetLineNumber() == 3 && !dialogueBox.IsTyping() && !hasMoved)
 			{
 				dialogueBox.Pause();
 				ShowTutorial("Move");
@@ -40,7 +47,7 @@ public partial class Tutorial : Node2D
 
 			}
 			// Jump
-			if (dialogueBox.GetLineNumber() == 3 && !dialogueBox.IsTyping() && !hasJumped)
+			if (dialogueBox.GetLineNumber() == 4 && !dialogueBox.IsTyping() && !hasJumped)
 			{
 				dialogueBox.Pause();
 				ShowTutorial("Jump");
@@ -48,7 +55,7 @@ public partial class Tutorial : Node2D
 				player.EnableInputs("input_jump");
 			}
 			// Dash
-			if (dialogueBox.GetLineNumber() == 11 && !dialogueBox.IsTyping() && !hasDashed)
+			if (dialogueBox.GetLineNumber() == 13 && !dialogueBox.IsTyping() && !hasDashed)
 			{
 				dialogueBox.Pause();
 				ShowTutorial("Dash");
@@ -56,7 +63,7 @@ public partial class Tutorial : Node2D
 				player.EnableInputs("input_dash");
 			}
 			// Attack
-			if (dialogueBox.GetLineNumber() == 21 && !dialogueBox.IsTyping() && !hasAttacked)
+			if (dialogueBox.GetLineNumber() == 25 && !dialogueBox.IsTyping() && !hasAttacked)
 			{
 				dialogueBox.Pause();
 				ShowTutorial("Attack");
@@ -79,7 +86,7 @@ public partial class Tutorial : Node2D
 				dialogueWasPlaying = false;
 			}
 			// End of dialogue
-			if (dialogueBox.GetLineNumber() == 26 && !dialogueBox.IsTyping())
+			if (dialogueBox.GetLineNumber() == 31 && !dialogueBox.IsTyping())
 			{
 				dialogueBox.Pause();
 			}
@@ -174,11 +181,18 @@ public partial class Tutorial : Node2D
 		}
 	}
 
+	/// <summary>
+	/// Make the specified tutorial text visible
+	/// </summary>
+	/// <param name="name">Name of tutorial</param>
 	private void ShowTutorial(String name)
 	{
 		tutorials.GetNode<Control>(name).Visible = true;
 	}
 
+	/// <summary>
+	/// Make all tutorial texts invisible
+	/// </summary>
 	private void HideTutorials()
 	{
 		foreach (Node n in tutorials.GetChildren())

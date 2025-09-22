@@ -2,12 +2,12 @@ using Godot;
 using System;
 //------------------------------------------------------------------------------
 // <summary>
-//   Controls the Circuit Bug enemy.
+//   Controls the enemy appearing in the tutorial level
 // 	 Inherits Enemy
 // </summary>
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
-public partial class CircuitBug : Enemy
+public partial class TutorialEnemy : Enemy
 {
 	public const float Speed = 50.0f; // Movement speed
 	private Vector2 velocity; // For updating Velocity property
@@ -15,13 +15,12 @@ public partial class CircuitBug : Enemy
 	private bool isRunning = true; // Whether bug is running
 	private bool playerDetected = false; // Whether player has been detected
 	private PackedScene projectile = GD.Load<PackedScene>("Scenes/projectile_cb.tscn"); // For spawning projectiles
-	private RayCast2D groundRay, wallRay, playerRay; // Ground detection, wall/object detection, player detection
+	private RayCast2D groundRay, wallRay; // Ground detection, wall/object detection, player detection
 	private bool projectileSpawnedThisAttack = false; // Prevents spawning > 1 projectile per animation
 
 
 	public override void _Ready()
 	{
-		playerRay = GetNode<RayCast2D>("PlayerRay");
 		groundRay = GetNode<RayCast2D>("GroundRay");
 		wallRay = GetNode<RayCast2D>("WallRay");
 		animation = GetNode<AnimatedSprite2D>("Animations");
@@ -34,14 +33,13 @@ public partial class CircuitBug : Enemy
 		animation.FrameChanged += OnAnimationFrameChanged;
 		animation.AnimationFinished += OnAnimationFinished;
 
-		health = 10;
+		health = 25;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		if (isAlive)
 		{
-
 			// Gravity
 			if (!IsOnFloor())
 				velocity += GetGravity() * (float)delta;
@@ -70,31 +68,9 @@ public partial class CircuitBug : Enemy
 					Scale = new Vector2(-Scale.X, Scale.Y);
 				}
 			}
-
-			// Player detection via raycast
-			playerRay.ForceRaycastUpdate();
-			if (playerRay.IsColliding() && playerRay.GetCollider() is Node2D collider && collider.Name == "Player")
-			{
-				if (!playerDetected)
-				{
-					GD.Print("Player detected by raycast");
-					Attack();
-					playerDetected = true;
-				}
-			}
-			else
-			{
-				if (playerDetected)
-				{
-					GD.Print("Player lost by raycast");
-					playerDetected = false;
-				}
-			}
-
 			Velocity = velocity;
 			MoveAndSlide();
 		}
-
 	}
 
 	/// <summary>
@@ -111,7 +87,7 @@ public partial class CircuitBug : Enemy
 
 	
 	/// <summary>
-	/// Spawn projectile on 13th frame to line up with animation
+	/// Spawn a projectile on 13th frame to line up with animation
 	/// </summary>
 	private void OnAnimationFrameChanged()
 	{
@@ -137,32 +113,14 @@ public partial class CircuitBug : Enemy
 		}
 	}
 
-	/// <summary>
-	/// Called when an animation finishes.
-	/// Behaves differently depending on animation
-	/// </summary>
+    /// <summary>
+    /// Called when any animation finishes
+    /// </summary>
 	public void OnAnimationFinished()
 	{
 		if (animation.Animation == "death")
 		{
 			QueueFree();
 		}
-		else if (animation.Animation == "attack")
-		{
-			if (!playerDetected)
-			{
-				// Return to running
-				animation.Animation = "run";
-				animation.Play();
-				isRunning = true;
-			}
-			else
-			{
-				// Attack again if player still detected
-				Attack();
-			}
-		}
 	}
-
-
-}
+} 

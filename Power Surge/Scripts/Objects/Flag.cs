@@ -1,0 +1,19 @@
+using Godot;
+using System;
+//------------------------------------------------------------------------------
+// <summary>
+//   Moves to next level when contacted by player.
+//   For tutorial
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
+public partial class Flag : Area2D
+{
+	public void OnBodyEntered(Node2D body)
+	{
+		if (body is Player player)
+		{
+			GetTree().ChangeSceneToFile("res://Scenes/Levels/tutorial.tscn"); // SET TO CORRECT SCENE LATER
+		}
+	}
+}

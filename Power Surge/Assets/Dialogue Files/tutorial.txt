@@ -1,26 +1,31 @@
-Lilah|Welcome to the simulation room, this isn't real, just a way to get you familiar with the controls for S.U.R.G.E.
-Lilah|You can move left and right by either pressing A and D or the arrow keys, give it a try.
+Lilah|Welcome to the simulation room.
+Lilah|This isn't real, just a way to get you familiar with the controls for S.U.R.G.E.
+Lilah|You can move left and right using A and D or the arrow keys, give it a try.
 Lilah|Great, now try pressing W or the up arrow to jump.
 Archie|You can also double jump by pressing the same key while in midair!
 Lilah|Be careful. See that meter at the bottom of your screen?
 Lilah|That's your power meter, actions like jumping decrease your power. 
 Lilah|If you run out, it's all over, so keep an eye on it.
 Archie|Fortunately, those robots that keep showing up require power too, 
-Archie|so it looks like The World Conductor has been giving them some supplies. You should use that to your advantage.
+Archie|so it looks like The World Conductor has been giving them some supplies.
+Archie|You should use this to your advantage.
 Lilah|That's right, and if you need to get away in a hurry, there's also the dash feature.
 Lilah|You can access it by pressing LSHIFT while moving left or right. Give it a try.
-Lilah|Good job. Now you should know that we didn't leave S.U.R.G.E defenseless, you've got 3 attacks to choose from:
+Lilah|Good job. 
+Lilah|Of course, we didn't leave S.U.R.G.E defenseless, you've got 3 attacks to choose from:
 Lilah|Firstly there's the weak pulse, its power cost is low, 
 Lilah|but as the name implies, it is weak and only has a short range.
 Lilah|Secondly, there's the strong blast. 
 Lilah|This one is a long ranged projectile that packs a bit of a punch, but at a high cost.
-Lilah|Lastly, there's the surround blast. This one is reasonably powerful, but with a lower cost than the strong blast,
+Lilah|Lastly, there's the surround blast. This one is reasonably powerful, 
+Lilah|but with a lower cost than the strong blast,
 Lilah|It fires a round of short range projectiles in a ring around you.
 Lilah|To cycle between these attacks, use [ and ]. 
 Lilah|You can see your selected attack in the bottom left corner of your screen.
-Lilah|Press SPACE to use your selected attack. There are a few enemies scattered around for you to practice on.
+Lilah|Press SPACE to use your selected attack. There are a few enemies around for you to practice on.
 Archie|Awesome work there [name], looks like you're almost ready to go. 
-Archie|You can play around with the controls for as long as you like, 
-Archie|just press the "Exit Simulation" button when you're ready to continue!
-Archie|Wait! Before I forget, you can access the settings menu by pressing ESC.
-Archie|There're a few things you can change there, including key remapping if you don't like the way the controls feel!
+Archie|See if you can reach the end of the simulation using the controls we just taught you!
+Archie|Once you're there we'll be ready to start the mission.
+Archie|And before I forget, you can access the settings menu by pressing ESC.
+Archie|There's a few things you can change there, 
+Archie|including key remapping if you don't like how the controls feel!
