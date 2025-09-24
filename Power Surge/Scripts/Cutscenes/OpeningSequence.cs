@@ -38,6 +38,7 @@ public partial class OpeningSequence : Node2D
 	private bool panningUp = false;
 	private float panTime = 2f, panTimer = 0f;
 
+
 	public override void _Ready()
 	{
 		dialogueBox = GetNode<DialogueBox>("DialogueBox");

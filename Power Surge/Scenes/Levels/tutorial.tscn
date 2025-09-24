@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=4 uid="uid://cbiqqcphxpcho"]
+[gd_scene load_steps=66 format=4 uid="uid://cbiqqcphxpcho"]
 
 [ext_resource type="Script" uid="uid://dfdyvnoyifhh0" path="res://Scripts/Tutorial.cs" id="1_i0v1t"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Background.cs" id="1_mnia5"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://lsrntgdj76fp" path="res://Scripts/Objects/Flag.cs" id="24_a8vmy"]
 [ext_resource type="PackedScene" uid="uid://d2jbpab1pvd5l" path="res://Scenes/tutorial_enemy.tscn" id="25_ckfad"]
 [ext_resource type="Texture2D" uid="uid://ddbpv5oeurh0e" path="res://Assets/Objects/Flag.png" id="26_oowow"]
+[ext_resource type="AudioStream" uid="uid://b63crk43h6eee" path="res://Assets/Audio/Tutorial.mp3" id="28_xj3ld"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfmmv"]
 texture = ExtResource("2_sghjv")
@@ -315,6 +316,11 @@ TutorialMode = true
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(2, -2)
 script = ExtResource("4_i0v1t")
+
+[node name="Background Music" type="AudioStreamPlayer2D" parent="Camera"]
+position = Vector2(-2, 2)
+stream = ExtResource("28_xj3ld")
+autoplay = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 

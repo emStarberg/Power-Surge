@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://52mkyg1d130l"
+path="res://.godot/imported/DavidKBD - Cosmic Pack 03 - Nebula Run-full.ogg-c9d763ba78cf9b40fd2ecd3fe8528f37.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/DavidKBD - Cosmic Pack 03 - Nebula Run-full.ogg"
+dest_files=["res://.godot/imported/DavidKBD - Cosmic Pack 03 - Nebula Run-full.ogg-c9d763ba78cf9b40fd2ecd3fe8528f37.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
