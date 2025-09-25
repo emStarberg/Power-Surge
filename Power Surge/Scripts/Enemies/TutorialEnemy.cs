@@ -113,9 +113,9 @@ public partial class TutorialEnemy : Enemy
 		}
 	}
 
-    /// <summary>
-    /// Called when any animation finishes
-    /// </summary>
+	/// <summary>
+	/// Called when any animation finishes
+	/// </summary>
 	public void OnAnimationFinished()
 	{
 		if (animation.Animation == "death")
