@@ -126,7 +126,7 @@ public partial class TitleScreen : Node2D
 
 	private void OnVolumeChanged()
 	{
-		backgroundMusic.VolumeDb = GameSettings.Instance.GetFinalMusic() - 10;
+		backgroundMusic.VolumeDb = GameSettings.Instance.GetFinalMusic();
 		zapSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
 	}
 

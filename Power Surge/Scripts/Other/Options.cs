@@ -61,6 +61,11 @@ public partial class Options : Node2D
 		{
 			AudioProcess();
 		}
+		else if (currentMenu.Name == "Controls")
+		{
+			ControlsProcess();
+		}
+
 
 	}
 
@@ -90,6 +95,9 @@ public partial class Options : Node2D
 			GetNode<Label>("Control/Options/Input Mapping/Jump/Key").Text = keyEvent.AsText();
 		}
 	}
+	
+
+
 
 	private void SelectButton(int index)
 	{
@@ -118,21 +126,34 @@ public partial class Options : Node2D
 
 		HSlider slider = currentItem.GetNode<HSlider>("HSlider");
 		slider.GrabFocus();
-
-		effects.Position = currentItem.Position;
-		foreach (Node node in effects.GetChildren())
-		{
-			if (node is AnimatedSprite2D spark)
-			{
-				spark.Play();
-			}
-		}
 	}
 
 	private void DeselectSlider(int index)
 	{
 		currentItem = menuItems[index];
 		currentItem.GetNode<Label>("Label").AddThemeColorOverride("font_color", new Color(255, 255, 255)); // White
+	}
+
+	private void SelectBox(int index)
+	{
+		menuSound.Play();
+		currentItem = menuItems[index];
+		Label key = currentItem.GetNode<Label>("Key");
+		Label label = currentItem.GetNode<Label>("Label");
+		label.AddThemeColorOverride("font_color", new Color("79e4ff")); // Blue
+		key.AddThemeColorOverride("font_color", new Color("79e4ff")); // Blue
+		label.AddThemeColorOverride("font_shadow_color", new Color(0, 0, 0, 0.8f)); // Semi-transparent black
+		label.AddThemeConstantOverride("shadow_offset_x", 4); // Horizontal offset
+		label.AddThemeConstantOverride("shadow_offset_y", 4); // Vertical offset
+	}
+
+	private void DeselectBox(int index)
+	{
+		Control currentItem = menuItems[index];
+		Label key = currentItem.GetNode<Label>("Key");
+		Label label = currentItem.GetNode<Label>("Label");
+		label.AddThemeColorOverride("font_color", new Color(255, 255, 255)); // White
+		key.AddThemeColorOverride("font_color", new Color(255,255,255)); // White
 	}
 
 	private void MainProcess()
@@ -171,11 +192,13 @@ public partial class Options : Node2D
 			String name = currentItem.Name;
 			if (name == "AUDIO")
 			{
+				DeselectButton(selected);
 				SwitchMenu(GetNode<Control>("Menus/Audio"));
 			}
 			else if (name == "CONTROLS")
 			{
-
+				DeselectButton(selected);
+				SwitchMenu(GetNode<Control>("Menus/Controls"));
 			}
 			else if (name == "BACK")
 			{
@@ -222,7 +245,47 @@ public partial class Options : Node2D
 				SwitchMenu(GetNode<Control>("Menus/Main"));
 			}
 		}
+	}
+	
 
+	private void ControlsProcess()
+	{
+		// Switch between buttons
+		if (Input.IsActionJustPressed("input_up"))
+		{
+			DeselectBox(selected);
+			if (selected > 0)
+			{
+				selected--;
+			}
+			else
+			{
+				selected = menuItems.Count - 1;
+			}
+			SelectBox(selected);
+		}
+		if (Input.IsActionJustPressed("input_down"))
+		{
+			DeselectBox(selected);
+			if (selected < menuItems.Count - 1)
+			{
+				selected++;
+			}
+			else
+			{
+				selected = 0;
+			}
+			SelectBox(selected);
+		}
+
+		if (Input.IsActionJustPressed("input_accept"))
+		{
+			if (currentItem.Name == "BACK")
+			{
+				DeselectBox(selected);
+				SwitchMenu(GetNode<Control>("Menus/Main"));
+			}
+		}
 	}
 
 	public void VolumeChanged(double value)
@@ -296,6 +359,18 @@ public partial class Options : Node2D
 				}
 			}
 			SelectButton(selected);
+		}
+		else if (name == "Controls")
+		{
+			// Add boxes to list
+			foreach (Node node in GetNode<Control>("Menus/Controls/Boxes").GetChildren())
+			{
+				if (node is Control button)
+				{
+					menuItems.Add(button);
+				}
+			}
+			SelectBox(selected);
 		}
 	}
 	
