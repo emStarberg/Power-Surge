@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://csh2l54drx116"]
+[gd_scene load_steps=20 format=3 uid="uid://csh2l54drx116"]
 
 [ext_resource type="Texture2D" uid="uid://6t78hc5yqo6t" path="res://Assets/UI/Button.png" id="1_utbhb"]
 [ext_resource type="Script" uid="uid://br1ugryadi5uk" path="res://Scripts/UI/TitleScreen.cs" id="1_wk421"]
+[ext_resource type="Texture2D" uid="uid://dn3sxyhw3ei3o" path="res://Assets/UI/Title Background.png" id="2_737wf"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="3_ed76m"]
 [ext_resource type="PackedScene" uid="uid://cr8f3adpxwjal" path="res://Scenes/ui_spark.tscn" id="4_2egpy"]
 [ext_resource type="Script" uid="uid://houf28qf5ruu" path="res://Scripts/UICamera.cs" id="4_ed76m"]
@@ -70,6 +71,13 @@ animations = [{
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource("1_wk421")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = 2.0
+offset_top = 10.0
+offset_right = 1274.0
+offset_bottom = 646.0
+texture = ExtResource("2_737wf")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -272,4 +280,5 @@ stream = ExtResource("9_0575v")
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_sb3vm")
+volume_db = -10.0
 autoplay = true
