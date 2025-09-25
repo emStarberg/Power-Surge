@@ -10,12 +10,17 @@ public partial class Tutorial : Node2D
 	private Control tutorials;
 	private Player player;
 	private float timer = 0;
+	private AudioStreamPlayer2D backgroundMusic;
 	public override void _Ready()
 	{
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
 		deathDialogue = GetNode<DialogueBox>("UI/DeathDialogue");
 		player = GetNode<Player>("Player");
 		tutorials = GetNode<Control>("UI/Tutorials");
+		backgroundMusic = GetNode<AudioStreamPlayer2D>("Camera/Background Music");
+
+		GameSettings.Instance.VolumeChanged += OnVolumeChanged;
+		OnVolumeChanged(); // Set initial volume
 
 		// Disable all inputs to begin with, these are unlocked as the tutorial progresses
 		DisableAllInputs();
@@ -33,7 +38,7 @@ public partial class Tutorial : Node2D
 			dialogueStarted = true;
 			dialogueBox.Start();
 		}
-		
+
 		// Continue dialogue
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
@@ -202,6 +207,11 @@ public partial class Tutorial : Node2D
 				control.Visible = false;
 			}
 		}
+	}
+	
+	private void OnVolumeChanged()
+	{
+		backgroundMusic.VolumeDb = GameSettings.Instance.GetFinalMusic();
 	}
 
 }

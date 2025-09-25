@@ -5,7 +5,7 @@ public partial class UICamera : Camera2D
 {
 	private float shakeAmount, shakeTime = 0f; // Parameters for camera shake effect
 	private Random random = new(); // Random number for generating shake effect
-	private Vector2 baseOffset = new Vector2(0, -15); // Camera offset
+	private Vector2 baseOffset = new Vector2(0, 0); // Camera offset
 	public override void _PhysicsProcess(double delta)
 	{
 

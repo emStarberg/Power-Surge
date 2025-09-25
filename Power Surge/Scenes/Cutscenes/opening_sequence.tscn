@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dg8njo1op226y" path="res://Assets/Audio/Running.mp3" id="6_o1he4"]
 [ext_resource type="AudioStream" uid="uid://eqwppe1jk00t" path="res://Assets/Audio/DoorOpen.mp3" id="7_rx33v"]
 [ext_resource type="AudioStream" uid="uid://bdge72s6vvmeh" path="res://Assets/Audio/DoorClose.mp3" id="8_6qxwc"]
-[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/ScreenResolution.cs" id="8_n7b67"]
+[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="8_n7b67"]
 [ext_resource type="Texture2D" uid="uid://c324rs8m228jw" path="res://Assets/UI/Lab.png" id="9_rx33v"]
 
 [node name="OpeningSequence" type="Node2D"]
@@ -45,11 +45,10 @@ volume_db = -20.0
 
 [node name="Explosion Near" type="AudioStreamPlayer2D" parent="Control"]
 stream = ExtResource("5_6u8og")
-volume_db = -20.0
+volume_db = -10.0
 
 [node name="Running" type="AudioStreamPlayer2D" parent="Control"]
 stream = ExtResource("6_o1he4")
-volume_db = 10.0
 
 [node name="Door Open" type="AudioStreamPlayer2D" parent="Control"]
 stream = ExtResource("7_rx33v")

@@ -28,6 +28,9 @@ public partial class DialogueBox : Control
 		Visible = false;
 		startupSound = GetNode<AudioStreamPlayer2D>("Startup Sound");
 		continueSound = GetNode<AudioStreamPlayer2D>("Continue Sound");
+
+		GameSettings.Instance.VolumeChanged += OnVolumeChanged;
+		OnVolumeChanged(); // Set initial volume
 	}
 
 	public override void _Process(double delta)
@@ -45,7 +48,6 @@ public partial class DialogueBox : Control
 				}
 				else
 				{
-
 					Texture2D prev = portrait.Texture; // Get current texture for later comparison
 													   // Show next line
 					ShowNextLine();
@@ -64,7 +66,6 @@ public partial class DialogueBox : Control
 		}
 
 	}
-
 
 	/// <summary>
 	/// Display the next line of dialogue
@@ -262,6 +263,12 @@ public partial class DialogueBox : Control
 			if (line.Text.Contains("[name]"))
 				line.Text = line.Text.Replace("[name]", playerName);
 		}
+	}
+
+	private void OnVolumeChanged()
+	{
+		startupSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
+		continueSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
 	}
 
 }

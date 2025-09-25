@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/Testing/testing_scene.tscn"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://Assets/Default/icon.svg"
 
+[autoload]
+
+GameSettings="*res://Scripts/Other/GameSettings.cs"
+
 [display]
 
 window/size/mode=2
@@ -27,6 +31,10 @@ project/assembly_name="Power-Surge"
 [global_group]
 
 Enemy=""
+
+[gui]
+
+theme/default_font_antialiasing=0
 
 [input]
 
