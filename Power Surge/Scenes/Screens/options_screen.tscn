@@ -432,6 +432,10 @@ theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
 text = "A"
 
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/MOVE LEFT"]
+
+[node name="left" type="Node" parent="Menus/Controls/Boxes/MOVE LEFT/Name"]
+
 [node name="MOVE RIGHT" type="Control" parent="Menus/Controls/Boxes"]
 layout_mode = 3
 anchors_preset = 0
@@ -475,6 +479,10 @@ scale = Vector2(0.280737, 0.280737)
 theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
 text = "D"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/MOVE RIGHT"]
+
+[node name="right" type="Node" parent="Menus/Controls/Boxes/MOVE RIGHT/Name"]
 
 [node name="JUMP" type="Control" parent="Menus/Controls/Boxes"]
 layout_mode = 3
@@ -520,6 +528,10 @@ theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
 text = "W"
 
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/JUMP"]
+
+[node name="jump" type="Node" parent="Menus/Controls/Boxes/JUMP/Name"]
+
 [node name="DASH" type="Control" parent="Menus/Controls/Boxes"]
 layout_mode = 3
 anchors_preset = 0
@@ -564,7 +576,11 @@ theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
 text = "LSHIFT"
 
-[node name="SWITCH ATTK A" type="Control" parent="Menus/Controls/Boxes"]
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/DASH"]
+
+[node name="dash" type="Node" parent="Menus/Controls/Boxes/DASH/Name"]
+
+[node name="CYCLE ATTK F" type="Control" parent="Menus/Controls/Boxes"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 320.0
@@ -572,23 +588,23 @@ offset_top = 390.0
 offset_right = 360.0
 offset_bottom = 430.0
 
-[node name="Label" type="Label" parent="Menus/Controls/Boxes/SWITCH ATTK A"]
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/CYCLE ATTK F"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -1.4
 anchor_top = -1.6
 anchor_right = -1.4
 anchor_bottom = -1.6
-offset_left = 90.0
+offset_left = 106.574
 offset_top = 69.0
-offset_right = 572.0
+offset_right = 588.574
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
 theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
-text = "SWITCH ATTK A"
+text = "CYCLE ATTK F"
 
-[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/SWITCH ATTK A"]
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/CYCLE ATTK F"]
 layout_mode = 0
 offset_left = 305.0
 offset_top = 4.0
@@ -597,7 +613,7 @@ offset_bottom = 49.0
 scale = Vector2(0.895335, 0.895335)
 color = Color(0, 0, 0, 1)
 
-[node name="Key" type="Label" parent="Menus/Controls/Boxes/SWITCH ATTK A"]
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/CYCLE ATTK F"]
 layout_mode = 0
 offset_left = 322.0
 offset_top = 8.0
@@ -608,7 +624,11 @@ theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
 text = "LEFTBRACKET"
 
-[node name="SWITCH ATTK B" type="Control" parent="Menus/Controls/Boxes"]
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/CYCLE ATTK F"]
+
+[node name="cycle_forward" type="Node" parent="Menus/Controls/Boxes/CYCLE ATTK F/Name"]
+
+[node name="CYCLE ATTK B" type="Control" parent="Menus/Controls/Boxes"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 320.0
@@ -616,23 +636,23 @@ offset_top = 440.0
 offset_right = 360.0
 offset_bottom = 480.0
 
-[node name="Label" type="Label" parent="Menus/Controls/Boxes/SWITCH ATTK B"]
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/CYCLE ATTK B"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -1.4
 anchor_top = -1.6
 anchor_right = -1.4
 anchor_bottom = -1.6
-offset_left = 90.0
+offset_left = 104.364
 offset_top = 69.0
-offset_right = 572.0
+offset_right = 586.364
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
 theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
-text = "SWITCH ATTK B"
+text = "CYCLE ATTK B"
 
-[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/SWITCH ATTK B"]
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/CYCLE ATTK B"]
 layout_mode = 0
 offset_left = 305.0
 offset_top = 4.0
@@ -641,7 +661,7 @@ offset_bottom = 49.0
 scale = Vector2(0.895335, 0.895335)
 color = Color(0, 0, 0, 1)
 
-[node name="Key" type="Label" parent="Menus/Controls/Boxes/SWITCH ATTK B"]
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/CYCLE ATTK B"]
 layout_mode = 0
 offset_left = 322.0
 offset_top = 8.0
@@ -651,6 +671,10 @@ scale = Vector2(0.280737, 0.280737)
 theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
 text = "RIGHTBRACKET"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/CYCLE ATTK B"]
+
+[node name="cycle_backward" type="Node" parent="Menus/Controls/Boxes/CYCLE ATTK B/Name"]
 
 [node name="ATTACK" type="Control" parent="Menus/Controls/Boxes"]
 layout_mode = 3
@@ -696,6 +720,10 @@ theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
 text = "SPACE"
 
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/ATTACK"]
+
+[node name="attack" type="Node" parent="Menus/Controls/Boxes/ATTACK/Name"]
+
 [node name="SHIELD" type="Control" parent="Menus/Controls/Boxes"]
 layout_mode = 3
 anchors_preset = 0
@@ -740,6 +768,10 @@ theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
 text = "RSHIFT"
 
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/SHIELD"]
+
+[node name="shield" type="Node" parent="Menus/Controls/Boxes/SHIELD/Name"]
+
 [node name="ACCEPT" type="Control" parent="Menus/Controls/Boxes"]
 layout_mode = 3
 anchors_preset = 0
@@ -783,6 +815,10 @@ scale = Vector2(0.280737, 0.280737)
 theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 100
 text = "ENTER"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/ACCEPT"]
+
+[node name="accept" type="Node" parent="Menus/Controls/Boxes/ACCEPT/Name"]
 
 [node name="BACK" type="Control" parent="Menus/Controls/Boxes"]
 layout_mode = 3

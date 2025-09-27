@@ -9,8 +9,9 @@ using System.Collections.Generic;
 //------------------------------------------------------------------------------
 public partial class Options : Node2D
 {
-	private bool listeningForKey = false;
-	private string actionToRebind = "input_jump";
+	// For key mapping
+	private bool waitingForKey = false;
+	private string actionToRebind = " ";
 
 	private List<Control> menuItems = new List<Control>();
 	private int selected = 0;
@@ -18,7 +19,6 @@ public partial class Options : Node2D
 	private UICamera camera;
 	private Control effects, currentItem, currentMenu;
 	private AudioStreamPlayer2D menuSound;
-
 
 	public override void _Ready()
 	{
@@ -46,8 +46,32 @@ public partial class Options : Node2D
 				}
 			}
 		}
-
 		SelectButton(selected);
+
+		foreach (Node node in GetNode<Control>("Menus/Controls/Boxes").GetChildren())
+		{
+			if (node is Control box && node.Name != "BACK")
+			{
+				String inputName = "input_" + node.GetNode<Node>("Name").GetChildren()[0].Name;
+				foreach (InputEvent inputEvent in InputMap.ActionGetEvents(inputName))
+				{
+					if (inputEvent is InputEventKey keyEvent)
+					{
+						String keyName = OS.GetKeycodeString(keyEvent.PhysicalKeycode);
+						if (keyName == "Shift" || keyName == "Ctrl")
+						{
+							keyName += keyEvent.Location.ToString();
+						}
+						Label key = node.GetNode<Label>("Key");
+						key.Text = keyName;
+
+						// Adjust background size
+						ColorRect bg = node.GetNode<ColorRect>("ColorRect");
+						bg.Size = new Vector2(key.Text.Length*12 + 30, bg.Size.Y);
+					}
+				}
+			}
+		}
 	}
 
 	public override void _Process(double delta)
@@ -68,36 +92,6 @@ public partial class Options : Node2D
 
 
 	}
-
-
-
-
-	public void OnRebindButtonPressed(string action)
-	{
-		listeningForKey = true;
-		actionToRebind = action;
-		// Update UI to show "Press any key..."
-	}
-
-	public override void _Input(InputEvent @event)
-	{
-		if (listeningForKey && @event is InputEventKey keyEvent && keyEvent.Pressed)
-		{
-			// Remove old bindings
-			InputMap.ActionEraseEvents(actionToRebind);
-
-			// Add new binding
-			InputMap.ActionAddEvent(actionToRebind, keyEvent);
-
-			//listeningForKey = false;
-			//actionToRebind = "";
-			// Update UI to show new key
-			GetNode<Label>("Control/Options/Input Mapping/Jump/Key").Text = keyEvent.AsText();
-		}
-	}
-	
-
-
 
 	private void SelectButton(int index)
 	{
@@ -153,7 +147,7 @@ public partial class Options : Node2D
 		Label key = currentItem.GetNode<Label>("Key");
 		Label label = currentItem.GetNode<Label>("Label");
 		label.AddThemeColorOverride("font_color", new Color(255, 255, 255)); // White
-		key.AddThemeColorOverride("font_color", new Color(255,255,255)); // White
+		key.AddThemeColorOverride("font_color", new Color(255, 255, 255)); // White
 	}
 
 	private void MainProcess()
@@ -246,11 +240,11 @@ public partial class Options : Node2D
 			}
 		}
 	}
-	
+
 
 	private void ControlsProcess()
 	{
-		// Switch between buttons
+		// Switch between keys
 		if (Input.IsActionJustPressed("input_up"))
 		{
 			DeselectBox(selected);
@@ -284,6 +278,12 @@ public partial class Options : Node2D
 			{
 				DeselectBox(selected);
 				SwitchMenu(GetNode<Control>("Menus/Main"));
+			}
+			else
+			{
+				// Get name of input to change
+				string inputName = "input_" + currentItem.GetNode<Node>("Name").GetChildren()[0].Name;
+				StartRebinding(inputName);
 			}
 		}
 	}
@@ -341,8 +341,6 @@ public partial class Options : Node2D
 				}
 			}
 			SelectSlider(selected);
-
-
 		}
 		else if (name == "Main")
 		{
@@ -373,9 +371,50 @@ public partial class Options : Node2D
 			SelectBox(selected);
 		}
 	}
-	
+
 	private void OnVolumeChanged()
 	{
 		menuSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
+	}
+
+	/// <summary>
+	/// Start listening for key input to rebind
+	/// </summary>
+	/// <param name="inputName"></param>
+	public void StartRebinding(string inputName)
+	{
+		waitingForKey = true;
+		actionToRebind = inputName;
+		Label key = currentItem.GetNode<Label>("Key");
+		key.Text = "Press any key...";
+		// Adjust background size
+		ColorRect bg = currentItem.GetNode<ColorRect>("ColorRect");
+		bg.Size = new Vector2(key.Text.Length*12 + 35, bg.Size.Y);
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (waitingForKey && @event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.Echo)
+		{
+			// Remove all previous events for this action
+			InputMap.ActionEraseEvents(actionToRebind);
+
+			// Add the new key
+			InputMap.ActionAddEvent(actionToRebind, keyEvent);
+
+			waitingForKey = false;
+			actionToRebind = "";
+			// Optionally update UI to show the new key
+			String keyName = OS.GetKeycodeString(keyEvent.PhysicalKeycode);
+			if (keyName == "Shift" || keyName == "Ctrl")
+			{
+				keyName += keyEvent.Location.ToString();
+			}
+			Label key = currentItem.GetNode<Label>("Key");
+			key.Text = keyName;
+			// Adjust background size
+			ColorRect bg = currentItem.GetNode<ColorRect>("ColorRect");
+			bg.Size = new Vector2(key.Text.Length*12 + 30, bg.Size.Y);
+		}
 	}
 }
