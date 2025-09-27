@@ -1,0 +1,921 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4yoyys55f7bk"]
+
+[ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_bpa1g"]
+[ext_resource type="Script" uid="uid://sknoq2ltap0a" path="res://Scripts/Other/Options.cs" id="1_g3f7p"]
+[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="1_uadqa"]
+[ext_resource type="Texture2D" uid="uid://6t78hc5yqo6t" path="res://Assets/UI/Button.png" id="3_g3f7p"]
+[ext_resource type="PackedScene" uid="uid://cr8f3adpxwjal" path="res://Scenes/ui_spark.tscn" id="5_2fkhl"]
+[ext_resource type="AudioStream" uid="uid://w3o11ne75jbx" path="res://Assets/Audio/Menu Select.mp3" id="7_2fkhl"]
+[ext_resource type="Script" uid="uid://houf28qf5ruu" path="res://Scripts/Other/UICamera.cs" id="7_hwt8o"]
+
+[node name="OptionsScreen" type="Node2D"]
+process_mode = 3
+z_index = 1
+script = ExtResource("1_g3f7p")
+
+[node name="Overlay" type="ColorRect" parent="."]
+offset_left = 195.0
+offset_top = 24.0
+offset_right = 963.0
+offset_bottom = 635.0
+color = Color(0.14, 0.14, 0.14, 0.827451)
+
+[node name="Menus" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Main" type="Control" parent="Menus"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="Menus/Main"]
+layout_mode = 0
+offset_left = 339.0
+offset_top = 74.0
+offset_right = 1039.0
+offset_bottom = 182.0
+scale = Vector2(0.687646, 0.687646)
+theme_override_fonts/font = ExtResource("1_bpa1g")
+theme_override_font_sizes/font_size = 50
+text = "OPTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="Control" parent="Menus/Main"]
+anchors_preset = 0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 48.0
+
+[node name="AUDIO" type="Control" parent="Menus/Main/Buttons"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 582.0
+offset_top = 223.0
+offset_right = 582.0
+offset_bottom = 223.0
+
+[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/AUDIO"]
+position = Vector2(-0.879959, -0.739986)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("3_g3f7p")
+
+[node name="Label" type="Label" parent="Menus/Main/Buttons/AUDIO"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -25.0
+offset_right = 157.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.460858, 0.460858)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 80
+text = "AUDIO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CONTROLS" type="Control" parent="Menus/Main/Buttons"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 582.0
+offset_top = 314.0
+offset_right = 582.0
+offset_bottom = 314.0
+
+[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/CONTROLS"]
+position = Vector2(-0.879959, -0.739986)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("3_g3f7p")
+
+[node name="Label" type="Label" parent="Menus/Main/Buttons/CONTROLS"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -25.0
+offset_right = 306.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.460858, 0.460858)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 80
+text = "CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BACK" type="Control" parent="Menus/Main/Buttons"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 582.0
+offset_top = 407.0
+offset_right = 582.0
+offset_bottom = 407.0
+
+[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/BACK"]
+position = Vector2(-0.879959, -0.739986)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("3_g3f7p")
+
+[node name="Label" type="Label" parent="Menus/Main/Buttons/BACK"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -25.0
+offset_right = 157.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.460858, 0.460858)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 80
+text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QUIT" type="Control" parent="Menus/Main/Buttons"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 582.0
+offset_top = 500.0
+offset_right = 582.0
+offset_bottom = 500.0
+
+[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/QUIT"]
+position = Vector2(-0.879959, -0.739986)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("3_g3f7p")
+
+[node name="Label" type="Label" parent="Menus/Main/Buttons/QUIT"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -24.0
+offset_right = 210.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.440215, 0.440215)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 80
+text = "QUIT GAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Effects" type="Control" parent="Menus/Main/Buttons"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 571.0
+offset_top = 247.0
+offset_right = 611.0
+offset_bottom = 287.0
+
+[node name="UI Spark" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+position = Vector2(-19, -21)
+rotation = -1.16726
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark2" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+position = Vector2(45, -19)
+rotation = 0.939397
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark3" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+position = Vector2(-62, -13)
+rotation = -0.882684
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark4" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+position = Vector2(69, -2)
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark5" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+position = Vector2(-68, 18)
+rotation = -2.54797
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark6" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+position = Vector2(-12, 22)
+rotation = -4.45951
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark7" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+position = Vector2(50, 19)
+rotation = -2.54797
+scale = Vector2(3, 3)
+script = null
+
+[node name="Audio" type="Control" parent="Menus"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="Menus/Audio"]
+layout_mode = 0
+offset_left = 314.0
+offset_top = 66.0
+offset_right = 1014.0
+offset_bottom = 174.0
+scale = Vector2(0.759001, 0.759001)
+theme_override_fonts/font = ExtResource("1_bpa1g")
+theme_override_font_sizes/font_size = 50
+text = "AUDIO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sliders" type="Control" parent="Menus/Audio"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MASTER" type="Control" parent="Menus/Audio/Sliders"]
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 192.0
+offset_right = 360.0
+offset_bottom = 232.0
+
+[node name="Label" type="Label" parent="Menus/Audio/Sliders/MASTER"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 143.0
+offset_top = 64.0
+offset_right = 407.0
+offset_bottom = 172.0
+scale = Vector2(0.476614, 0.476614)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "MASTER"
+
+[node name="HSlider" type="HSlider" parent="Menus/Audio/Sliders/MASTER"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 18.0
+offset_right = 576.0
+offset_bottom = 34.0
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="MUSIC" type="Control" parent="Menus/Audio/Sliders"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 267.0
+offset_right = 360.0
+offset_bottom = 307.0
+
+[node name="Label" type="Label" parent="Menus/Audio/Sliders/MUSIC"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 173.0
+offset_top = 64.0
+offset_right = 437.0
+offset_bottom = 172.0
+scale = Vector2(0.476614, 0.476614)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "MUSIC"
+
+[node name="HSlider" type="HSlider" parent="Menus/Audio/Sliders/MUSIC"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 18.0
+offset_right = 576.0
+offset_bottom = 34.0
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.51
+
+[node name="SFX" type="Control" parent="Menus/Audio/Sliders"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 342.0
+offset_right = 360.0
+offset_bottom = 382.0
+
+[node name="Label" type="Label" parent="Menus/Audio/Sliders/SFX"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 210.0
+offset_top = 64.0
+offset_right = 474.0
+offset_bottom = 172.0
+scale = Vector2(0.476614, 0.476614)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "SFX"
+
+[node name="HSlider" type="HSlider" parent="Menus/Audio/Sliders/SFX"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 18.0
+offset_right = 576.0
+offset_bottom = 34.0
+min_value = 0.01
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="BACK" type="Control" parent="Menus/Audio/Sliders"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Menus/Audio/Sliders/BACK"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 508.0
+offset_top = 475.0
+offset_right = 772.0
+offset_bottom = 583.0
+scale = Vector2(0.476614, 0.476614)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "BACK"
+
+[node name="HSlider" type="HSlider" parent="Menus/Audio/Sliders/BACK"]
+visible = false
+layout_mode = 0
+offset_left = 696.0
+offset_top = 432.0
+offset_right = 704.0
+offset_bottom = 448.0
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Audio"]
+layout_mode = 0
+offset_left = 582.0
+offset_top = 173.0
+offset_right = 622.0
+offset_bottom = 213.0
+scale = Vector2(0.0173839, 7.69068)
+
+[node name="Controls" type="Control" parent="Menus"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="Menus/Controls"]
+layout_mode = 0
+offset_left = 314.0
+offset_top = 40.0
+offset_right = 1014.0
+offset_bottom = 148.0
+scale = Vector2(0.759001, 0.759001)
+theme_override_fonts/font = ExtResource("1_bpa1g")
+theme_override_font_sizes/font_size = 50
+text = "CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Boxes" type="Control" parent="Menus/Controls"]
+anchors_preset = 0
+offset_left = 54.0
+offset_top = -39.0
+offset_right = 94.0
+offset_bottom = 0.999996
+scale = Vector2(0.905013, 0.905013)
+
+[node name="MOVE LEFT" type="Control" parent="Menus/Controls/Boxes"]
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 190.0
+offset_right = 360.0
+offset_bottom = 230.0
+
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/MOVE LEFT"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 144.0
+offset_top = 69.0
+offset_right = 487.0
+offset_bottom = 177.0
+scale = Vector2(0.388348, 0.388348)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "MOVE LEFT"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/MOVE LEFT"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 4.0
+offset_right = 353.0
+offset_bottom = 49.0
+scale = Vector2(0.895335, 0.895335)
+color = Color(0, 0, 0, 1)
+
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/MOVE LEFT"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 8.0
+offset_right = 381.0
+offset_bottom = 116.0
+scale = Vector2(0.280737, 0.280737)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "A"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/MOVE LEFT"]
+
+[node name="left" type="Node" parent="Menus/Controls/Boxes/MOVE LEFT/Name"]
+
+[node name="MOVE RIGHT" type="Control" parent="Menus/Controls/Boxes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 240.0
+offset_right = 360.0
+offset_bottom = 280.0
+
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/MOVE RIGHT"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 130.0
+offset_top = 69.0
+offset_right = 511.0
+offset_bottom = 177.0
+scale = Vector2(0.388348, 0.388348)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "MOVE RIGHT"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/MOVE RIGHT"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 4.0
+offset_right = 353.0
+offset_bottom = 49.0
+scale = Vector2(0.895335, 0.895335)
+color = Color(0, 0, 0, 1)
+
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/MOVE RIGHT"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 8.0
+offset_right = 381.0
+offset_bottom = 116.0
+scale = Vector2(0.280737, 0.280737)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "D"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/MOVE RIGHT"]
+
+[node name="right" type="Node" parent="Menus/Controls/Boxes/MOVE RIGHT/Name"]
+
+[node name="JUMP" type="Control" parent="Menus/Controls/Boxes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 290.0
+offset_right = 360.0
+offset_bottom = 330.0
+
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/JUMP"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 209.0
+offset_top = 69.0
+offset_right = 590.0
+offset_bottom = 177.0
+scale = Vector2(0.388348, 0.388348)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "JUMP"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/JUMP"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 4.0
+offset_right = 353.0
+offset_bottom = 49.0
+scale = Vector2(0.895335, 0.895335)
+color = Color(0, 0, 0, 1)
+
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/JUMP"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 8.0
+offset_right = 381.0
+offset_bottom = 116.0
+scale = Vector2(0.280737, 0.280737)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "W"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/JUMP"]
+
+[node name="jump" type="Node" parent="Menus/Controls/Boxes/JUMP/Name"]
+
+[node name="DASH" type="Control" parent="Menus/Controls/Boxes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 340.0
+offset_right = 360.0
+offset_bottom = 380.0
+
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/DASH"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 211.0
+offset_top = 69.0
+offset_right = 592.0
+offset_bottom = 177.0
+scale = Vector2(0.388348, 0.388348)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "DASH"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/DASH"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 4.0
+offset_right = 353.0
+offset_bottom = 49.0
+scale = Vector2(0.895335, 0.895335)
+color = Color(0, 0, 0, 1)
+
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/DASH"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 8.0
+offset_right = 381.0
+offset_bottom = 116.0
+scale = Vector2(0.280737, 0.280737)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "LSHIFT"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/DASH"]
+
+[node name="dash" type="Node" parent="Menus/Controls/Boxes/DASH/Name"]
+
+[node name="CYCLE ATTK F" type="Control" parent="Menus/Controls/Boxes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 390.0
+offset_right = 360.0
+offset_bottom = 430.0
+
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/CYCLE ATTK F"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 106.574
+offset_top = 69.0
+offset_right = 588.574
+offset_bottom = 177.0
+scale = Vector2(0.388348, 0.388348)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "CYCLE ATTK F"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/CYCLE ATTK F"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 4.0
+offset_right = 353.0
+offset_bottom = 49.0
+scale = Vector2(0.895335, 0.895335)
+color = Color(0, 0, 0, 1)
+
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/CYCLE ATTK F"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 8.0
+offset_right = 381.0
+offset_bottom = 116.0
+scale = Vector2(0.280737, 0.280737)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "LEFTBRACKET"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/CYCLE ATTK F"]
+
+[node name="cycle_forward" type="Node" parent="Menus/Controls/Boxes/CYCLE ATTK F/Name"]
+
+[node name="CYCLE ATTK B" type="Control" parent="Menus/Controls/Boxes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 440.0
+offset_right = 360.0
+offset_bottom = 480.0
+
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/CYCLE ATTK B"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 104.364
+offset_top = 69.0
+offset_right = 586.364
+offset_bottom = 177.0
+scale = Vector2(0.388348, 0.388348)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "CYCLE ATTK B"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/CYCLE ATTK B"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 4.0
+offset_right = 353.0
+offset_bottom = 49.0
+scale = Vector2(0.895335, 0.895335)
+color = Color(0, 0, 0, 1)
+
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/CYCLE ATTK B"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 8.0
+offset_right = 381.0
+offset_bottom = 116.0
+scale = Vector2(0.280737, 0.280737)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "RIGHTBRACKET"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/CYCLE ATTK B"]
+
+[node name="cycle_backward" type="Node" parent="Menus/Controls/Boxes/CYCLE ATTK B/Name"]
+
+[node name="ATTACK" type="Control" parent="Menus/Controls/Boxes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 490.0
+offset_right = 360.0
+offset_bottom = 530.0
+
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/ATTACK"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 183.0
+offset_top = 69.0
+offset_right = 665.0
+offset_bottom = 177.0
+scale = Vector2(0.388348, 0.388348)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "ATTACK"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/ATTACK"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 4.0
+offset_right = 353.0
+offset_bottom = 49.0
+scale = Vector2(0.895335, 0.895335)
+color = Color(0, 0, 0, 1)
+
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/ATTACK"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 8.0
+offset_right = 381.0
+offset_bottom = 116.0
+scale = Vector2(0.280737, 0.280737)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "SPACE"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/ATTACK"]
+
+[node name="attack" type="Node" parent="Menus/Controls/Boxes/ATTACK/Name"]
+
+[node name="SHIELD" type="Control" parent="Menus/Controls/Boxes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 540.0
+offset_right = 360.0
+offset_bottom = 580.0
+
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/SHIELD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 193.0
+offset_top = 69.0
+offset_right = 675.0
+offset_bottom = 177.0
+scale = Vector2(0.388348, 0.388348)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "SHIELD"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/SHIELD"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 4.0
+offset_right = 353.0
+offset_bottom = 49.0
+scale = Vector2(0.895335, 0.895335)
+color = Color(0, 0, 0, 1)
+
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/SHIELD"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 8.0
+offset_right = 381.0
+offset_bottom = 116.0
+scale = Vector2(0.280737, 0.280737)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "RSHIFT"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/SHIELD"]
+
+[node name="shield" type="Node" parent="Menus/Controls/Boxes/SHIELD/Name"]
+
+[node name="ACCEPT" type="Control" parent="Menus/Controls/Boxes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 590.0
+offset_right = 360.0
+offset_bottom = 630.0
+
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/ACCEPT"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 183.0
+offset_top = 69.0
+offset_right = 665.0
+offset_bottom = 177.0
+scale = Vector2(0.388348, 0.388348)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "ACCEPT"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/ACCEPT"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 4.0
+offset_right = 353.0
+offset_bottom = 49.0
+scale = Vector2(0.895335, 0.895335)
+color = Color(0, 0, 0, 1)
+
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/ACCEPT"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 8.0
+offset_right = 381.0
+offset_bottom = 116.0
+scale = Vector2(0.280737, 0.280737)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "ENTER"
+
+[node name="Name" type="Node" parent="Menus/Controls/Boxes/ACCEPT"]
+
+[node name="accept" type="Node" parent="Menus/Controls/Boxes/ACCEPT/Name"]
+
+[node name="BACK" type="Control" parent="Menus/Controls/Boxes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 640.0
+offset_right = 360.0
+offset_bottom = 680.0
+
+[node name="Label" type="Label" parent="Menus/Controls/Boxes/BACK"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.4
+anchor_top = -1.6
+anchor_right = -1.4
+anchor_bottom = -1.6
+offset_left = 213.939
+offset_top = 69.0
+offset_right = 695.939
+offset_bottom = 177.0
+scale = Vector2(0.388348, 0.388348)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "BACK"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls/Boxes/BACK"]
+visible = false
+layout_mode = 0
+offset_left = 305.0
+offset_top = 4.0
+offset_right = 353.0
+offset_bottom = 49.0
+scale = Vector2(0.895335, 0.895335)
+color = Color(0, 0, 0, 1)
+
+[node name="Key" type="Label" parent="Menus/Controls/Boxes/BACK"]
+visible = false
+layout_mode = 0
+offset_left = 322.0
+offset_top = 8.0
+offset_right = 381.0
+offset_bottom = 116.0
+scale = Vector2(0.280737, 0.280737)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 100
+text = "ENTER"
+
+[node name="ColorRect" type="ColorRect" parent="Menus/Controls"]
+layout_mode = 0
+offset_left = 582.0
+offset_top = 136.0
+offset_right = 622.0
+offset_bottom = 176.0
+scale = Vector2(0.0173839, 11.6011)
+
+[node name="UI Camera" type="Camera2D" parent="."]
+position = Vector2(577, 325)
+script = ExtResource("7_hwt8o")
+
+[node name="Menu Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_2fkhl")
+
+[connection signal="value_changed" from="Menus/Audio/Sliders/MASTER/HSlider" to="." method="VolumeChanged"]
+[connection signal="value_changed" from="Menus/Audio/Sliders/MUSIC/HSlider" to="." method="MusicVolumeChanged"]
+[connection signal="value_changed" from="Menus/Audio/Sliders/SFX/HSlider" to="." method="SfxVolumeChanged"]

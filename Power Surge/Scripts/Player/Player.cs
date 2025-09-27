@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Godot;
 //------------------------------------------------------------------------------
 // <summary>
-//   methods for all player controls and animations
+//   Methods for all player controls and animations
 // </summary>
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ public partial class Player : CharacterBody2D
 
 
 
-	// FOR TUTORIAL
+	// FOR TUTORIAL & OPTIONS MENU
 	public List<String> disabledInputs = new List<string>();
 	private float mileage = 0; // How far the player has moved left/right
 	public bool HasDashed = false, HasJumped = false, HasCycled = false, HasAttacked = false;

@@ -1,0 +1,121 @@
+[gd_scene load_steps=5 format=3 uid="uid://q38fjenqn5n6"]
+
+[ext_resource type="Script" uid="uid://chcv2yprbo8it" path="res://Scripts/UI/NameSelector.cs" id="1_fcnor"]
+[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="2_0e4rs"]
+[ext_resource type="Texture2D" uid="uid://6t78hc5yqo6t" path="res://Assets/UI/Button.png" id="3_ih64o"]
+[ext_resource type="AudioStream" uid="uid://w3o11ne75jbx" path="res://Assets/Audio/Menu Select.mp3" id="4_cwa41"]
+
+[node name="Name Selector" type="ColorRect"]
+offset_left = 277.0
+offset_top = 211.0
+offset_right = 890.0
+offset_bottom = 461.0
+color = Color(0.154876, 0.154876, 0.154876, 0.85098)
+script = ExtResource("1_fcnor")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 33.0
+offset_right = 467.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("2_0e4rs")
+theme_override_font_sizes/font_size = 46
+text = "What Is Your Name?"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 202.0
+offset_top = 106.0
+offset_right = 402.0
+offset_bottom = 148.0
+theme_override_fonts/font = ExtResource("2_0e4rs")
+theme_override_font_sizes/font_size = 30
+placeholder_text = "Felix"
+alignment = 1
+
+[node name="Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="OK" type="Control" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 186.0
+offset_top = 205.0
+offset_right = 186.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+
+[node name="Sprite" type="Sprite2D" parent="Buttons/OK"]
+position = Vector2(-0.879959, -0.739986)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("3_ih64o")
+
+[node name="Label" type="Label" parent="Buttons/OK"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -46.25
+offset_right = 134.0
+offset_bottom = 61.75
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.460858, 0.460858)
+theme_override_fonts/font = ExtResource("2_0e4rs")
+theme_override_font_sizes/font_size = 80
+text = "OK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CANCEL" type="Control" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 427.0
+offset_top = 205.0
+offset_right = 427.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+
+[node name="Sprite" type="Sprite2D" parent="Buttons/CANCEL"]
+position = Vector2(-0.879959, -0.739986)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("3_ih64o")
+
+[node name="Label" type="Label" parent="Buttons/CANCEL"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.75
+offset_top = -46.25
+offset_right = 140.25
+offset_bottom = 61.75
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.460858, 0.460858)
+theme_override_fonts/font = ExtResource("2_0e4rs")
+theme_override_font_sizes/font_size = 80
+text = "CANCEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_cwa41")

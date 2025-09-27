@@ -41,6 +41,7 @@ public partial class OpeningSequence : Node2D
 
 	public override void _Ready()
 	{
+		GD.Print(GameSettings.Instance.PlayerName);
 		dialogueBox = GetNode<DialogueBox>("DialogueBox");
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/openingsequence.txt");
 
@@ -50,7 +51,7 @@ public partial class OpeningSequence : Node2D
 		runningSound = GetNode<AudioStreamPlayer2D>("Control/Running");
 		doorOpenSound = GetNode<AudioStreamPlayer2D>("Control/Door Open");
 		doorCloseSound = GetNode<AudioStreamPlayer2D>("Control/Door Close");
-		;
+		
 		videoPlayer = GetNode<VideoStreamPlayer>("Control/Video");
 
 		fadeImage = GetNode<TextureRect>("Control/BackgroundImage");
@@ -58,12 +59,14 @@ public partial class OpeningSequence : Node2D
 
 		camera = GetNode<Camera2D>("Camera");
 
+		GameSettings.Instance.VolumeChanged += OnVolumeChanged;
+		OnVolumeChanged(); // Set initial volume
+
 		// Begin playing part 1
 		videoPlayer.Play();
 		currentVideo = "part 1";
-		buzzerSound.VolumeDb = -30;
+		buzzerSound.VolumeDb -= 10;
 		buzzerSound.Play();
-
 	}
 
 	public override void _Process(double delta)
@@ -126,7 +129,7 @@ public partial class OpeningSequence : Node2D
 				}
 
 			}
-			
+
 			// Fade out alarm buzzer sound
 			if (buzzerFadingOut)
 			{
@@ -142,14 +145,15 @@ public partial class OpeningSequence : Node2D
 					buzzerFadingOut = false;
 				}
 			}
-			
-		}else if (currentVideo == "computer" && !dialogueStarted) 
+
+		}
+		else if (currentVideo == "computer" && !dialogueStarted)
 		{ // Start dialogue again
-				if (videoTimer >= 2)
-				{
-					dialogueBox.Resume();
-					dialogueStarted = true;
-				}
+			if (videoTimer >= 2)
+			{
+				dialogueBox.Resume();
+				dialogueStarted = true;
+			}
 		}
 		// Fade image in
 		if (fadingIn)
@@ -250,7 +254,7 @@ public partial class OpeningSequence : Node2D
 	{
 		// Loop
 		buzzerSound.Play();
-		buzzerSound.VolumeDb = -20;
+		OnVolumeChanged();
 	}
 
 	/// <summary>
@@ -306,5 +310,16 @@ public partial class OpeningSequence : Node2D
 	public void OnClosedSoundFinished()
 	{
 		buzzerFadingOut = true;
+	}
+
+	private void OnVolumeChanged()
+	{
+		explosionSoundFar.VolumeDb = GameSettings.Instance.GetFinalSfx() - 30;
+		explosionSoundNear.VolumeDb = GameSettings.Instance.GetFinalSfx();
+		doorOpenSound.VolumeDb = GameSettings.Instance.GetFinalSfx() + 5;
+		doorCloseSound.VolumeDb = GameSettings.Instance.GetFinalSfx() + 5;
+		runningSound.VolumeDb = GameSettings.Instance.GetFinalSfx() + 5;
+
+		buzzerSound.VolumeDb = GameSettings.Instance.GetFinalMusic()-10;
 	}
 }

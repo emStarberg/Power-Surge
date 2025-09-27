@@ -1,9 +1,9 @@
 [gd_scene load_steps=30 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
-[ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Background.cs" id="2_p1rgw"]
+[ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Other/Background.cs" id="2_p1rgw"]
 [ext_resource type="PackedScene" uid="uid://bwvj50vhjjac7" path="res://Scenes/player.tscn" id="4_ymafl"]
-[ext_resource type="Script" uid="uid://rfodace5xyiq" path="res://Scripts/Camera.cs" id="5_qte2r"]
+[ext_resource type="Script" uid="uid://rfodace5xyiq" path="res://Scripts/Other/Camera.cs" id="5_qte2r"]
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="6_4nrw7"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="9_xf330"]
 [ext_resource type="FontFile" uid="uid://du2man675mp5b" path="res://Assets/Fonts/Roboto_Mono/static/RobotoMono-Bold.ttf" id="10_w5kwj"]
@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="14_6nksn"]
 [ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="15_o8qng"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
-[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/ScreenResolution.cs" id="16_k7dkw"]
+[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="16_k7dkw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2yo0d"]
 texture = ExtResource("6_4nrw7")
