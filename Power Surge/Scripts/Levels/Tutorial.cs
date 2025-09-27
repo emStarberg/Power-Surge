@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class Tutorial : Node2D
+public partial class Tutorial : GameLevel
 {
 	private DialogueBox dialogueBox, deathDialogue;
 	private bool hasJumped = false, hasDashed = false, hasMoved = false, hasAttacked = false, hasCycled = false;
@@ -12,6 +12,7 @@ public partial class Tutorial : Node2D
 	private float timer = 0;
 	private AudioStreamPlayer2D backgroundMusic;
 	public override void _Ready()
+	
 	{
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
 		deathDialogue = GetNode<DialogueBox>("UI/DeathDialogue");
@@ -32,6 +33,9 @@ public partial class Tutorial : Node2D
 
 	public override void _Process(double delta)
 	{
+	
+		checkOptionsMenu();
+
 		timer += (float)delta;
 		if (timer >= 2f && !dialogueStarted)
 		{

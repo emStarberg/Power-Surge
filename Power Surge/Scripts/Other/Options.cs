@@ -16,16 +16,14 @@ public partial class Options : Node2D
 	private List<Control> menuItems = new List<Control>();
 	private int selected = 0;
 	private Texture2D buttonOn, buttonOff;
-	private UICamera camera;
 	private Control effects, currentItem, currentMenu;
 	private AudioStreamPlayer2D menuSound;
 
 	public override void _Ready()
 	{
+		GetTree().Paused = true;
 		buttonOn = GD.Load<Texture2D>("res://Assets/UI/Button - Highlighted.png");
 		buttonOff = GD.Load<Texture2D>("res://Assets/UI/Button.png");
-
-		camera = GetParent().GetNode<UICamera>("UI Camera");
 		effects = GetNode<Control>("Menus/Main/Buttons/Effects");
 		menuSound = GetNode<AudioStreamPlayer2D>("Menu Sound");
 
@@ -89,8 +87,6 @@ public partial class Options : Node2D
 		{
 			ControlsProcess();
 		}
-
-
 	}
 
 	private void SelectButton(int index)
@@ -196,7 +192,12 @@ public partial class Options : Node2D
 			}
 			else if (name == "BACK")
 			{
+				GetTree().Paused = false;
 				QueueFree();
+			}
+			else if (name == "QUIT")
+			{
+				GetTree().Quit();
 			}
 		}
 	}

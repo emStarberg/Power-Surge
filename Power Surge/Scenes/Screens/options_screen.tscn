@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://houf28qf5ruu" path="res://Scripts/Other/UICamera.cs" id="7_hwt8o"]
 
 [node name="OptionsScreen" type="Node2D"]
+process_mode = 3
+z_index = 1
 script = ExtResource("1_g3f7p")
 
 [node name="Overlay" type="ColorRect" parent="."]
@@ -44,9 +46,9 @@ vertical_alignment = 1
 
 [node name="Buttons" type="Control" parent="Menus/Main"]
 anchors_preset = 0
-offset_top = 17.0
+offset_top = 8.0
 offset_right = 40.0
-offset_bottom = 57.0
+offset_bottom = 48.0
 
 [node name="AUDIO" type="Control" parent="Menus/Main/Buttons"]
 layout_mode = 3
@@ -144,6 +146,39 @@ scale = Vector2(0.460858, 0.460858)
 theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 80
 text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QUIT" type="Control" parent="Menus/Main/Buttons"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 582.0
+offset_top = 500.0
+offset_right = 582.0
+offset_bottom = 500.0
+
+[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/QUIT"]
+position = Vector2(-0.879959, -0.739986)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("3_g3f7p")
+
+[node name="Label" type="Label" parent="Menus/Main/Buttons/QUIT"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -24.0
+offset_right = 210.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.440215, 0.440215)
+theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_font_sizes/font_size = 80
+text = "QUIT GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -1,7 +1,12 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-
+//------------------------------------------------------------------------------
+// <summary>
+//   Handles the title screen
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class TitleScreen : Node2D
 {
 	private List<Control> buttons = new List<Control>();
@@ -10,11 +15,9 @@ public partial class TitleScreen : Node2D
 	private UICamera camera;
 	private Control effects, currentButton;
 	private AudioStreamPlayer2D zapSound, backgroundMusic;
-	private bool optionsOpen = false;
+	private bool optionsOpen = false, selectorOpen = false;
 	public override void _Ready()
 	{
-		
-
 		buttonOn = GD.Load<Texture2D>("res://Assets/UI/Button - Highlighted.png");
 		buttonOff = GD.Load<Texture2D>("res://Assets/UI/Button.png");
 
@@ -38,14 +41,13 @@ public partial class TitleScreen : Node2D
 				}
 			}
 		}
-
 		SelectButton(selected);
 	}
 
 	public override void _Process(double delta)
 	{
 		// Switch between buttons
-		if (Input.IsActionJustPressed("input_up") && !optionsOpen)
+		if (Input.IsActionJustPressed("input_up") && !optionsOpen && !selectorOpen)
 		{
 			DeselectButton(selected);
 			if (selected > 0)
@@ -58,7 +60,7 @@ public partial class TitleScreen : Node2D
 			}
 			SelectButton(selected);
 		}
-		if (Input.IsActionJustPressed("input_down") && !optionsOpen)
+		if (Input.IsActionJustPressed("input_down") && !optionsOpen && !selectorOpen)
 		{
 			DeselectButton(selected);
 			if (selected < buttons.Count - 1)
@@ -73,12 +75,17 @@ public partial class TitleScreen : Node2D
 		}
 
 		// Enter pressed
-		if (Input.IsActionJustPressed("input_accept") && !optionsOpen)
+		if (Input.IsActionJustPressed("input_accept") && !optionsOpen && !selectorOpen)
 		{
 			String name = currentButton.Name;
 			if (name == "START")
 			{
-				GetTree().ChangeSceneToFile("res://Scenes/Cutscenes/opening_sequence.tscn");
+				GetNode<Control>("Control/Buttons").Visible = false;
+				selectorOpen = true;
+				var selectorScene = GD.Load<PackedScene>("res://Scenes/Screens/name_selector.tscn");
+				var selectorInstance = selectorScene.Instantiate();
+				GetTree().CurrentScene.AddChild(selectorInstance);
+				selectorInstance.TreeExited += OnNameSelectorClosed;
 			}
 			else if (name == "OPTIONS")
 			{
@@ -102,6 +109,16 @@ public partial class TitleScreen : Node2D
 		GetNode<Control>("Control/Buttons").Visible = true;
 	}
 
+	private void OnNameSelectorClosed()
+	{
+		selectorOpen = false;
+		GetNode<Control>("Control/Buttons").Visible = true;
+	}
+
+	/// <summary>
+	/// Select a button by higlighting it
+	/// </summary>
+	/// <param name="index">Index of control node to select</param>
 	private void SelectButton(int index)
 	{
 		zapSound.Play();
@@ -117,7 +134,10 @@ public partial class TitleScreen : Node2D
 			}
 		}
 	}
-
+	/// <summary>
+	/// Deselect a button by unhiglighting it
+	/// </summary>
+	/// <param name="index">Index of control node to deselect</param>
 	private void DeselectButton(int index)
 	{
 		Control button = buttons[index];

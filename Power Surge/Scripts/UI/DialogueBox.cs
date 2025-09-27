@@ -21,7 +21,7 @@ public partial class DialogueBox : Control
 	private bool paused;
 	private AudioStreamPlayer2D startupSound, continueSound;
 	private DialogueLine currentLine;
-	private String playerName = "George";
+	private String playerName = GameSettings.Instance.PlayerName;
 
 	public override void _Ready()
 	{
@@ -270,7 +270,6 @@ public partial class DialogueBox : Control
 		startupSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
 		continueSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
 	}
-
 }
 
 

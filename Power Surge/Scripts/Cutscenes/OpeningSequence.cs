@@ -41,6 +41,7 @@ public partial class OpeningSequence : Node2D
 
 	public override void _Ready()
 	{
+		GD.Print(GameSettings.Instance.PlayerName);
 		dialogueBox = GetNode<DialogueBox>("DialogueBox");
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/openingsequence.txt");
 

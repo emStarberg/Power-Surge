@@ -2,7 +2,7 @@ using Godot;
 using System;
 //------------------------------------------------------------------------------
 // <summary>
-//   Interface to be inherited by all enemies
+//   Abstract class to be inherited by all enemies
 // </summary>
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
