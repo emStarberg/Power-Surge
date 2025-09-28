@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b0j6bpgh0pm7d"
+path="res://.godot/imported/laser-14792 (mp3cut.net).mp3-4261cf4e1a55905269437b6c3667ac57.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/laser-14792 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/laser-14792 (mp3cut.net).mp3-4261cf4e1a55905269437b6c3667ac57.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

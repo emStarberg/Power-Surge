@@ -1,10 +1,12 @@
-[gd_scene load_steps=42 format=3 uid="uid://ch58q6jxnp3qs"]
+[gd_scene load_steps=44 format=3 uid="uid://ch58q6jxnp3qs"]
 
 [ext_resource type="Script" uid="uid://ie77lp106ux2" path="res://Scripts/Enemies/VoltageSentinel.cs" id="1_jwrvh"]
 [ext_resource type="Texture2D" uid="uid://jymvujbdliud" path="res://Assets/Characters/Enemies/Voltage Sentinel Idle - Spritesheet.png" id="2_50eub"]
 [ext_resource type="Texture2D" uid="uid://b7ngo5vyr5gji" path="res://Assets/Characters/Enemies/Voltage Sentinel - Attack - Spritesheet.png" id="2_qxj3x"]
 [ext_resource type="Texture2D" uid="uid://cndd6taxvrma1" path="res://Assets/Characters/Enemies/Circuit Bug/Projectile CB - Explode - Spritesheet.png" id="3_ihxra"]
 [ext_resource type="Texture2D" uid="uid://s3i71lqrcy4x" path="res://Assets/Characters/Enemies/Voltage Sentinel Walk - Spritesheet.png" id="3_qxj3x"]
+[ext_resource type="AudioStream" uid="uid://7mb6qf0cwo8d" path="res://Assets/Audio/Sentinel Attack.mp3" id="6_n50ty"]
+[ext_resource type="AudioStream" uid="uid://10utki4mrysf" path="res://Assets/Audio/metal-impact-247482.mp3" id="7_n50ty"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uv22f"]
 size = Vector2(15, 42)
@@ -328,6 +330,15 @@ target_position = Vector2(-18, 0)
 [node name="Collider" type="CollisionShape2D" parent="PlayerDetection"]
 position = Vector2(1, -1.5)
 shape = SubResource("RectangleShape2D_50eub")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_n50ty")
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_n50ty")
+volume_db = 10.0
 
 [connection signal="animation_changed" from="Animations" to="." method="OnAnimationChanged"]
 [connection signal="animation_finished" from="Animations" to="." method="OnAnimationFinished"]

@@ -13,6 +13,7 @@ public abstract partial class Enemy : CharacterBody2D
 	protected AnimatedSprite2D animation;
 	protected bool canBeHurt = true;
 	protected Timer hurtCooldownTimer;
+	protected AudioStreamPlayer2D hurtSound;
 
 	/// <summary>
 	/// Called when enemy is hit by an attack
@@ -23,6 +24,7 @@ public abstract partial class Enemy : CharacterBody2D
 		if (!canBeHurt)
 			return;
 
+		hurtSound.Play();
 		health -= amount;
 		if (health <= 0)
 		{
@@ -71,6 +73,13 @@ public abstract partial class Enemy : CharacterBody2D
 			canBeHurt = true;
 		}
 
+	}
+	/// <summary>
+	/// Called when options menu closes, updates audio players in accordance with volume settings
+	/// </summary>
+	public virtual void UpdateVolume()
+	{
+		
 	}
 
 }

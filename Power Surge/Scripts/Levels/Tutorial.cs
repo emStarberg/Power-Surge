@@ -8,11 +8,10 @@ public partial class Tutorial : GameLevel
 	private bool hasJumped = false, hasDashed = false, hasMoved = false, hasAttacked = false, hasCycled = false;
 	private bool dialogueWasPlaying = false, deathDialogueStarted = false, dialogueStarted = false;
 	private Control tutorials;
-	private Player player;
 	private float timer = 0;
 	private AudioStreamPlayer2D backgroundMusic;
 	public override void _Ready()
-	
+
 	{
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
 		deathDialogue = GetNode<DialogueBox>("UI/DeathDialogue");
@@ -20,20 +19,18 @@ public partial class Tutorial : GameLevel
 		tutorials = GetNode<Control>("UI/Tutorials");
 		backgroundMusic = GetNode<AudioStreamPlayer2D>("Camera/Background Music");
 
-		GameSettings.Instance.VolumeChanged += OnVolumeChanged;
-		OnVolumeChanged(); // Set initial volume
-
 		// Disable all inputs to begin with, these are unlocked as the tutorial progresses
 		DisableAllInputs();
 
 		// Set up dialogue
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/tutorial.txt");
 		deathDialogue.AddLinesFromFile("res://Assets/Dialogue Files/tutorialdeath.txt");
+		
+		
 	}
 
 	public override void _Process(double delta)
 	{
-	
 		checkOptionsMenu();
 
 		timer += (float)delta;
@@ -213,7 +210,7 @@ public partial class Tutorial : GameLevel
 		}
 	}
 	
-	private void OnVolumeChanged()
+	protected override void UpdateVolume()
 	{
 		backgroundMusic.VolumeDb = GameSettings.Instance.GetFinalMusic();
 	}

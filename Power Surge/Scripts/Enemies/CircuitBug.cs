@@ -17,6 +17,7 @@ public partial class CircuitBug : Enemy
 	private PackedScene projectile = GD.Load<PackedScene>("Scenes/projectile_cb.tscn"); // For spawning projectiles
 	private RayCast2D groundRay, wallRay, playerRay; // Ground detection, wall/object detection, player detection
 	private bool projectileSpawnedThisAttack = false; // Prevents spawning > 1 projectile per animation
+	private AudioStreamPlayer2D attackSound;
 
 
 	public override void _Ready()
@@ -25,6 +26,8 @@ public partial class CircuitBug : Enemy
 		groundRay = GetNode<RayCast2D>("GroundRay");
 		wallRay = GetNode<RayCast2D>("WallRay");
 		animation = GetNode<AnimatedSprite2D>("Animations");
+		attackSound = GetNode<AudioStreamPlayer2D>("Sounds/Attack");
+		hurtSound = GetNode<AudioStreamPlayer2D>("Sounds/Hurt");
 
 		hurtCooldownTimer = new Timer();
 		hurtCooldownTimer.WaitTime = 0.5f;
@@ -35,6 +38,8 @@ public partial class CircuitBug : Enemy
 		animation.AnimationFinished += OnAnimationFinished;
 
 		health = 10;
+
+		UpdateVolume();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -117,6 +122,7 @@ public partial class CircuitBug : Enemy
 	{
 		if (animation.Frame == 13 && !projectileSpawnedThisAttack && animation.Animation == "attack")
 		{
+			attackSound.Play();
 			projectileSpawnedThisAttack = true;
 			// Spawn new projectile
 			Node projectileInstance = projectile.Instantiate();
@@ -164,5 +170,9 @@ public partial class CircuitBug : Enemy
 		}
 	}
 
-
+	public override void UpdateVolume()
+	{
+		attackSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
+		hurtSound.VolumeDb = GameSettings.Instance.GetFinalSfx() - 10;
+	}
 }

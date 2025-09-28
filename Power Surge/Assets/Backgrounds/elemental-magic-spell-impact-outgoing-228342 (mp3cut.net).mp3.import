@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://yuk6y78tw6nb"
+path="res://.godot/imported/elemental-magic-spell-impact-outgoing-228342 (mp3cut.net).mp3-bcabc7743ceea02dba6c608086f0a3fc.mp3str"
+
+[deps]
+
+source_file="res://Assets/Backgrounds/elemental-magic-spell-impact-outgoing-228342 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/elemental-magic-spell-impact-outgoing-228342 (mp3cut.net).mp3-bcabc7743ceea02dba6c608086f0a3fc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
