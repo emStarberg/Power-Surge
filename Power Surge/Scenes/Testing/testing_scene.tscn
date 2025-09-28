@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=50 format=4 uid="uid://c07snwm6iwu0b"]
 
 [ext_resource type="Script" uid="uid://bs0wptc4sskex" path="res://Scripts/Levels/LevelTemplate.cs" id="1_baem7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
@@ -19,6 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="15_o8qng"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="15_yy038"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="16_k7dkw"]
+[ext_resource type="Script" uid="uid://cypy8h14tqy4j" path="res://Scripts/Objects/StoneBridge.cs" id="20_acifj"]
+[ext_resource type="Texture2D" uid="uid://k8on6iy7yqcn" path="res://Assets/Objects/Stone Bridge - Animation - Spritesheet.png" id="20_bjn53"]
+[ext_resource type="AudioStream" uid="uid://ctoo0el5qp2tp" path="res://Assets/Audio/dropping-rocks-5996.mp3" id="22_dqaec"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2yo0d"]
 texture = ExtResource("6_4nrw7")
@@ -115,6 +118,104 @@ animations = [{
 "name": &"default",
 "speed": 16.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acifj"]
+size = Vector2(16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acifj"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(0, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqaec"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(16, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bp46n"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(32, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ojmf"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(48, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3o48"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(64, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh6nn"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(80, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a6ei"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(96, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y63s"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(112, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87f7d"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(128, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xbq8"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(144, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u6u1"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(160, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fb68"]
+atlas = ExtResource("20_bjn53")
+region = Rect2(176, 0, 16, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i73aq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acifj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqaec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bp46n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ojmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3o48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh6nn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a6ei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y63s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87f7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xbq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u6u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fb68")
+}],
+"loop": false,
+"name": &"default",
+"speed": 16.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81rc4"]
+size = Vector2(16, 16)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_baem7")
@@ -239,6 +340,7 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("11_2yo0d")
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("13_w5kwj")]
+visible = false
 offset_left = 315.0
 offset_top = 66.0
 offset_right = 355.0
@@ -275,3 +377,160 @@ position = Vector2(180, -70)
 
 [node name="ScreenResolution" type="Node" parent="."]
 script = ExtResource("16_k7dkw")
+
+[node name="Stone Bridge" type="Node2D" parent="."]
+position = Vector2(279, 88)
+script = ExtResource("20_acifj")
+
+[node name="Tile" type="StaticBody2D" parent="Stone Bridge"]
+
+[node name="Player Detection" type="Area2D" parent="Stone Bridge/Tile"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_acifj")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Stone Bridge/Tile"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_i73aq")
+frame = 4
+frame_progress = 0.436441
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile"]
+shape = SubResource("RectangleShape2D_81rc4")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Stone Bridge/Tile"]
+stream = ExtResource("22_dqaec")
+
+[node name="Tile2" type="StaticBody2D" parent="Stone Bridge"]
+position = Vector2(16, 0)
+
+[node name="Player Detection" type="Area2D" parent="Stone Bridge/Tile2"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile2/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_acifj")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Stone Bridge/Tile2"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_i73aq")
+frame = 4
+frame_progress = 0.436441
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile2"]
+shape = SubResource("RectangleShape2D_81rc4")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Stone Bridge/Tile2"]
+stream = ExtResource("22_dqaec")
+
+[node name="Tile3" type="StaticBody2D" parent="Stone Bridge"]
+position = Vector2(32, 0)
+
+[node name="Player Detection" type="Area2D" parent="Stone Bridge/Tile3"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile3/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_acifj")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Stone Bridge/Tile3"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_i73aq")
+frame = 4
+frame_progress = 0.436441
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile3"]
+shape = SubResource("RectangleShape2D_81rc4")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Stone Bridge/Tile3"]
+stream = ExtResource("22_dqaec")
+
+[node name="Tile4" type="StaticBody2D" parent="Stone Bridge"]
+position = Vector2(48, 0)
+
+[node name="Player Detection" type="Area2D" parent="Stone Bridge/Tile4"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile4/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_acifj")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Stone Bridge/Tile4"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_i73aq")
+frame = 4
+frame_progress = 0.436441
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile4"]
+shape = SubResource("RectangleShape2D_81rc4")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Stone Bridge/Tile4"]
+stream = ExtResource("22_dqaec")
+
+[node name="Tile5" type="StaticBody2D" parent="Stone Bridge"]
+position = Vector2(64, 0)
+
+[node name="Player Detection" type="Area2D" parent="Stone Bridge/Tile5"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile5/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_acifj")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Stone Bridge/Tile5"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_i73aq")
+frame = 4
+frame_progress = 0.436441
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile5"]
+shape = SubResource("RectangleShape2D_81rc4")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Stone Bridge/Tile5"]
+stream = ExtResource("22_dqaec")
+
+[node name="Tile6" type="StaticBody2D" parent="Stone Bridge"]
+position = Vector2(80, 0)
+
+[node name="Player Detection" type="Area2D" parent="Stone Bridge/Tile6"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile6/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_acifj")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Stone Bridge/Tile6"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_i73aq")
+frame = 4
+frame_progress = 0.436441
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile6"]
+shape = SubResource("RectangleShape2D_81rc4")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Stone Bridge/Tile6"]
+stream = ExtResource("22_dqaec")
+
+[node name="Tile7" type="StaticBody2D" parent="Stone Bridge"]
+position = Vector2(96, 0)
+
+[node name="Player Detection" type="Area2D" parent="Stone Bridge/Tile7"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile7/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_acifj")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Stone Bridge/Tile7"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_i73aq")
+frame = 4
+frame_progress = 0.436441
+
+[node name="Collider" type="CollisionShape2D" parent="Stone Bridge/Tile7"]
+shape = SubResource("RectangleShape2D_81rc4")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Stone Bridge/Tile7"]
+stream = ExtResource("22_dqaec")

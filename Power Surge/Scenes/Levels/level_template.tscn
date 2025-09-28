@@ -112,7 +112,7 @@ animations = [{
 "speed": 16.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_2ejuk")
 
 [node name="Label" type="Label" parent="."]

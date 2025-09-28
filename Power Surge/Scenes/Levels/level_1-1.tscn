@@ -111,7 +111,7 @@ animations = [{
 "speed": 16.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(-18, -1)
@@ -123,10 +123,7 @@ cameraPath = NodePath("../Camera")
 position = Vector2(142, -17)
 tile_set = SubResource("TileSet_gv0h3")
 
-[node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("4_3rrt1")]
-PowerMeter = NodePath("")
-percentageLabel = NodePath("")
-FragmentSlots = NodePath("")
+[node name="Player" parent="." instance=ExtResource("4_3rrt1")]
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(2, -2)
