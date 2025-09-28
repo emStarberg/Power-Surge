@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bwvj50vhjjac7"]
+[gd_scene load_steps=46 format=3 uid="uid://bwvj50vhjjac7"]
 
 [ext_resource type="Script" uid="uid://dr47mlmgvnewi" path="res://Scripts/Player/Player.cs" id="1_3smsa"]
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player/Player-Spritesheet.png" id="2_8erm5"]
@@ -7,6 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://3wb48qr8yjh1" path="res://Assets/Characters/Player/Player Dash - Spritesheet.png" id="5_gymyn"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="7_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bitip81tn2v63" path="res://Assets/Characters/Player/Shield - Spritesheet.png" id="7_ukyrk"]
+[ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Audio/Zap.mp3" id="8_8erm5"]
+[ext_resource type="AudioStream" uid="uid://cro575ta0sjg2" path="res://Assets/Audio/Weak Pulse.mp3" id="8_tx1dd"]
+[ext_resource type="AudioStream" uid="uid://b0j6bpgh0pm7d" path="res://Assets/Audio/laser-14792 (mp3cut.net).mp3" id="9_pu2lt"]
+[ext_resource type="AudioStream" uid="uid://dghc3witth3y7" path="res://Assets/Audio/Hurt.mp3" id="10_gymyn"]
+[ext_resource type="AudioStream" uid="uid://bnycau3ogy1fg" path="res://Assets/Audio/Dash.mp3" id="10_tx1dd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1bk2"]
 radius = 8.06226
@@ -289,5 +294,22 @@ theme_override_fonts/font = ExtResource("7_3smsa")
 theme_override_font_sizes/font_size = 24
 text = "10"
 horizontal_alignment = 1
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Weak Pulse" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("8_tx1dd")
+
+[node name="Strong Blast" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("9_pu2lt")
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("10_tx1dd")
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("10_gymyn")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("8_8erm5")
 
 [connection signal="animation_finished" from="Animations" to="." method="OnAnimationFinished"]

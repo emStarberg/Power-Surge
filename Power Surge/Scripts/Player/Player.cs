@@ -18,6 +18,7 @@ public partial class Player : CharacterBody2D
 	[Export] public Label percentageLabel; // Label under power meter
 	[Export] public Control FragmentSlots;
 	[Export] public bool TutorialMode = false;
+	
 	private int power = 100; // Percentage of power left
 	private Vector2 velocity; // For changing player's Velocity property
 	private AnimatedSprite2D animation; // Player's animations
@@ -42,18 +43,22 @@ public partial class Player : CharacterBody2D
 	private Label powerSurgeTimer;
 	private float powerSurgeTime = 10f;
 	private bool powerSurgeActive = false;
+	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound;
 
-
-
-	// FOR TUTORIAL & OPTIONS MENU
+	// FOR TUTORIAL
 	public List<String> disabledInputs = new List<string>();
 	private float mileage = 0; // How far the player has moved left/right
 	public bool HasDashed = false, HasJumped = false, HasCycled = false, HasAttacked = false;
 
 
-
 	public override void _Ready()
 	{
+		// Set up sounds
+		jumpSound = GetNode<AudioStreamPlayer2D>("Sounds/Jump");
+		weakPulseSound = GetNode<AudioStreamPlayer2D>("Sounds/Weak Pulse");
+		strongBlastSound = GetNode<AudioStreamPlayer2D>("Sounds/Strong Blast");
+		dashSound = GetNode<AudioStreamPlayer2D>("Sounds/Dash");
+		hurtSound = GetNode<AudioStreamPlayer2D>("Sounds/Hurt");
 		// Set up animations
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		animation.Play();
@@ -64,6 +69,8 @@ public partial class Player : CharacterBody2D
 
 		attackIcon = GetParent().GetNode<Sprite2D>("UI/Control/Attacks-ui/Attack Sprite");
 		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/weak pulse.png");
+
+		UpdateVolume();
 
 		// Load all empty fragment slots
 		foreach (Node child in FragmentSlots.GetChildren())
@@ -248,13 +255,13 @@ public partial class Player : CharacterBody2D
 	public void Jump()
 	{
 		// For tutorial
-			if (!HasJumped)
-			{
-				HasJumped = true;
-			}
+		if (!HasJumped)
+		{
+			HasJumped = true;
+		}
 		if (IsOnFloor() || numJumps < 2)
 		{
-
+			jumpSound.Play();
 			// Reset number of jumps if on floor
 			if (IsOnFloor())
 			{
@@ -291,7 +298,7 @@ public partial class Player : CharacterBody2D
 	public void Hurt(int damage, float shakeAmount, float shakeDuration)
 	{
 		animation.Animation = "hurt";
-
+		hurtSound.Play();
 		// Camera shake
 		var camera = GetParent().GetNode<Camera>("Camera");
 		camera.Shake(shakeAmount, shakeDuration);
@@ -310,6 +317,7 @@ public partial class Player : CharacterBody2D
 		}
 		if (!isDashing && alive)
 		{
+			dashSound.Play();
 			animation.Animation = "dash";
 			isDashing = true;
 			Node dashAnimInstance = dashAnimation.Instantiate();
@@ -359,6 +367,7 @@ public partial class Player : CharacterBody2D
 		// WEAK PULSE
 		if (attackSelected == "weak pulse")
 		{
+			weakPulseSound.Play();
 			Node attackInstance = weakPulse.Instantiate();
 			((WeakPulse)attackInstance).GlobalPosition = GlobalPosition;
 			AddChild(attackInstance);
@@ -372,6 +381,8 @@ public partial class Player : CharacterBody2D
 		// STRONG BLAST
 		if (attackSelected == "strong blast")
 		{
+			jumpSound.Play();
+			strongBlastSound.Play();
 			Node attackInstance = strongBlast.Instantiate();
 			((StrongBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0, -2);
 			GetTree().Root.AddChild(attackInstance);
@@ -553,5 +564,17 @@ public partial class Player : CharacterBody2D
 	public bool IsAlive()
 	{
 		return alive;
+	}
+	
+	public void UpdateVolume()
+	{
+		foreach (Node node in GetNode<Node2D>("Sounds").GetChildren())
+		{
+			if (node is AudioStreamPlayer2D sound)
+			{
+				sound.VolumeDb = GameSettings.Instance.GetFinalSfx();
+			}
+		}
+		
 	}
 }

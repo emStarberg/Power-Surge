@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://7mb6qf0cwo8d"
+path="res://.godot/imported/Sentinel Attack.mp3-9da5e0140a3fdb13de79354e40462ac9.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Sentinel Attack.mp3"
+dest_files=["res://.godot/imported/Sentinel Attack.mp3-9da5e0140a3fdb13de79354e40462ac9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

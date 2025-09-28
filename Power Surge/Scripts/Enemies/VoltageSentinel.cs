@@ -20,16 +20,21 @@ public partial class VoltageSentinel : Enemy
 	private Player targetPlayer = null;
 	private bool isFollowingPlayer = false;
 	private bool canDamagePlayer = false;
+	private AudioStreamPlayer2D attackSound;
+
+	private Camera camera;
 
 	public override void _Ready()
 	{
+		hurtSound = GetNode<AudioStreamPlayer2D>("Sounds/Hurt");
+		attackSound = GetNode<AudioStreamPlayer2D>("Sounds/Attack");
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		groundRay = GetNode<RayCast2D>("RayCasts/GroundRay");
 		wallRay = GetNode<RayCast2D>("RayCasts/WallRay");
 		playerRay = GetNode<RayCast2D>("RayCasts/PlayerRay");
 		startPosition = GlobalPosition;
 		targetPlayer = GetParent().GetParent().GetNode<Player>("Player");
-
+		camera = GetParent().GetParent().GetNode<Camera>("Camera");
 		animation.Animation = "walk";
 
 		health = 30;
@@ -163,7 +168,7 @@ public partial class VoltageSentinel : Enemy
 	/// <summary>
 	/// Attack the player
 	/// </summary>
-	
+
 	public void Attack()
 	{
 		isWalking = false;
@@ -233,7 +238,7 @@ public partial class VoltageSentinel : Enemy
 			targetPlayer = null;
 		}
 	}
-	
+
 	/// <summary>
 	/// Called on every animation frame change. For determining when to damage the player
 	/// </summary>
@@ -244,6 +249,8 @@ public partial class VoltageSentinel : Enemy
 			// Can only hurt player between frames 7 and 14
 			if (animation.Frame == 7)
 			{
+				attackSound.Play();
+				camera.Shake(5, 0.4f);
 				canDamagePlayer = true;
 			}
 			else if (animation.Frame == 14)
@@ -257,4 +264,10 @@ public partial class VoltageSentinel : Enemy
 		}
 	}
 
+	
+	public override void UpdateVolume()
+	{
+		attackSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
+		hurtSound.VolumeDb = GameSettings.Instance.GetFinalSfx() + 10;
+	}
 }
