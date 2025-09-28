@@ -1,5 +1,6 @@
-[gd_scene load_steps=30 format=4 uid="uid://c07snwm6iwu0b"]
+[gd_scene load_steps=32 format=4 uid="uid://c07snwm6iwu0b"]
 
+[ext_resource type="Script" uid="uid://bs0wptc4sskex" path="res://Scripts/Levels/LevelTemplate.cs" id="1_baem7"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_bops4"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Other/Background.cs" id="2_p1rgw"]
 [ext_resource type="PackedScene" uid="uid://bwvj50vhjjac7" path="res://Scenes/player.tscn" id="4_ymafl"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="12_rpok1"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="13_5nmc8"]
 [ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="13_6hp8k"]
+[ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="13_w5kwj"]
 [ext_resource type="PackedScene" uid="uid://bignn7lsbeest" path="res://Scenes/fragment.tscn" id="14_2yo0d"]
 [ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="14_6nksn"]
 [ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="15_o8qng"]
@@ -115,6 +117,7 @@ animations = [{
 }]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_baem7")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(-18, -1)
@@ -234,6 +237,13 @@ offset_right = 191.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("11_2yo0d")
+
+[node name="DialogueBox" parent="UI" instance=ExtResource("13_w5kwj")]
+offset_left = 315.0
+offset_top = 66.0
+offset_right = 355.0
+offset_bottom = 106.0
+scale = Vector2(2, 2)
 
 [node name="Objects" type="Node2D" parent="."]
 
