@@ -21,7 +21,10 @@ public partial class Options : Node2D
 
 	public override void _Ready()
 	{
-		GetTree().Paused = true;
+		// Don't pause title screen
+		if (GetTree().CurrentScene.Name != "TitleScreen")
+			GetTree().Paused = true;
+
 		buttonOn = GD.Load<Texture2D>("res://Assets/UI/Button - Highlighted.png");
 		buttonOff = GD.Load<Texture2D>("res://Assets/UI/Button.png");
 		effects = GetNode<Control>("Menus/Main/Buttons/Effects");

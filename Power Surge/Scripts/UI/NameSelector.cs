@@ -91,7 +91,10 @@ public partial class NameSelector : ColorRect
 		{
 			if (currentButton.Name == "OK")
 			{
-				GameSettings.Instance.PlayerName = lineEdit.Text;
+				if (lineEdit.Text != "")
+				{
+					GameSettings.Instance.PlayerName = lineEdit.Text;
+				}
 				GetTree().ChangeSceneToFile("res://Scenes/Cutscenes/opening_sequence.tscn");
 			}
 			else if (currentButton.Name == "CANCEL")
@@ -102,7 +105,7 @@ public partial class NameSelector : ColorRect
 	}
 
 	/// <summary>
-	/// Select a button by higlighting it
+	/// Select a button by highlighting it
 	/// </summary>
 	/// <param name="index">Index of control node to select</param>
 	private void SelectButton(int index)

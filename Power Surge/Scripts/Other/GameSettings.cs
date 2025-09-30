@@ -17,12 +17,12 @@ public partial class GameSettings : Node
         }
     }
 
-    private float volume = 0.5f;
-    private float musicVolume = 0.5f;
-    private float sfxVolume = 0.5f;
+    private float volume = 1f;
+    private float musicVolume = 1f;
+    private float sfxVolume = 1f;
 
-    private float finalMusicVolume = 0.5f;
-    private float finalSfxVolume = 0.5f;
+    private float finalMusicVolume = 1f;
+    private float finalSfxVolume = 1f;
 
     public float Volume
     {
@@ -65,7 +65,7 @@ public partial class GameSettings : Node
         return finalMusicVolume;
     }
 
-    public string PlayerName { get; set; } = "George";
+    public string PlayerName { get; set; } = "Felix";
 
     private void UpdateAllAudioVolumes()
     {
