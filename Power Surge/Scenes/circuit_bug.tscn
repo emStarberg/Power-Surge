@@ -235,6 +235,7 @@ shape = SubResource("RectangleShape2D_8ritr")
 
 [node name="GroundRay" type="RayCast2D" parent="." groups=["Enemy"]]
 position = Vector2(-13, 7)
+target_position = Vector2(0, 11)
 
 [node name="WallRay" type="RayCast2D" parent="."]
 target_position = Vector2(-14, 1)

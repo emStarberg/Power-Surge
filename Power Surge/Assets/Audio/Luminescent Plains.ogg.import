@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dqm7pgn4ixtxs"
+path="res://.godot/imported/Luminescent Plains.ogg-257b05385b00b2b70f8b100d4a8149cc.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/Luminescent Plains.ogg"
+dest_files=["res://.godot/imported/Luminescent Plains.ogg-257b05385b00b2b70f8b100d4a8149cc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

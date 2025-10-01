@@ -13,7 +13,7 @@ public partial class Flag : Area2D
 	{
 		if (body is Player player)
 		{
-			GetTree().ChangeSceneToFile("res://Scenes/Levels/tutorial.tscn"); // SET TO CORRECT SCENE LATER
+			GetTree().ChangeSceneToFile("res://Scenes/Cutscenes/post_tutorial.tscn");
 		}
 	}
 }

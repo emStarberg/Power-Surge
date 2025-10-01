@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://okx2qh8g2en6"]
+
+[ext_resource type="Script" uid="uid://ckvae6qcdio6y" path="res://Scripts/Cutscenes/PostTutorial.cs" id="1_dahsd"]
+[ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="2_dahsd"]
+[ext_resource type="Texture2D" uid="uid://dwnldk5gnc5va" path="res://Assets/UI/Lab Computer.png" id="2_qprit"]
+[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="3_qprit"]
+
+[node name="PostTutorial" type="Node2D"]
+script = ExtResource("1_dahsd")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_right = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = -99.0
+offset_top = -20.0
+offset_right = 1246.0
+offset_bottom = 725.0
+color = Color(0, 0, 0, 1)
+
+[node name="BackgroundImage" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -121.0
+offset_top = -38.0
+offset_right = 1194.0
+offset_bottom = 683.0
+scale = Vector2(1.0516, 1.0516)
+texture = ExtResource("2_qprit")
+
+[node name="DialogueBox" parent="." instance=ExtResource("2_dahsd")]
+offset_left = 278.0
+offset_top = 105.0
+offset_right = 318.0
+offset_bottom = 145.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(544, 339)
+scale = Vector2(-4.53983, 3.20103)
+zoom = Vector2(0.9, 0.9)
+
+[node name="ScreenResolution" type="Node" parent="."]
+script = ExtResource("3_qprit")

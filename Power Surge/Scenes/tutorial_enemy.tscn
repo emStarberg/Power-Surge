@@ -1,8 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://d2jbpab1pvd5l"]
+[gd_scene load_steps=18 format=3 uid="uid://d2jbpab1pvd5l"]
 
 [ext_resource type="Script" uid="uid://cq4ngrnt3s8qu" path="res://Scripts/Enemies/TutorialEnemy.cs" id="1_6ukwf"]
 [ext_resource type="Texture2D" uid="uid://bmunycu1jeije" path="res://Assets/Characters/Enemies/Circuit Bug/Circuit Bug (Tutorial) - Spritesheet.png" id="1_6xtvk"]
 [ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player/Player Death - Spritesheet.png" id="2_ofe0q"]
+[ext_resource type="AudioStream" uid="uid://b3wcyxxxrcief" path="res://Assets/Audio/laser-45816.mp3" id="4_le8o7"]
+[ext_resource type="AudioStream" uid="uid://cjimrlhj0qdfl" path="res://Assets/Audio/Metal Hit.wav" id="5_86n1f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ritr"]
 size = Vector2(16, 12)
@@ -109,3 +111,11 @@ target_position = Vector2(-14, 1)
 sprite_frames = SubResource("SpriteFrames_86n1f")
 animation = &"run"
 autoplay = "run"
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("4_le8o7")
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("5_86n1f")

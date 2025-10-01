@@ -22,15 +22,20 @@ public partial class DialogueBox : Control
 	private AudioStreamPlayer2D startupSound, continueSound;
 	private DialogueLine currentLine;
 	private String playerName = GameSettings.Instance.PlayerName;
+	private ColorRect prompt;
+	private Label promptLabel;
 
 	public override void _Ready()
 	{
 		Visible = false;
 		startupSound = GetNode<AudioStreamPlayer2D>("Startup Sound");
 		continueSound = GetNode<AudioStreamPlayer2D>("Continue Sound");
+		prompt = GetNode<ColorRect>("Box/Prompt");
+		promptLabel = GetNode<Label>("Box/Prompt Label");
+		prompt.Visible = false;
+		promptLabel.Visible = false;
 
-		GameSettings.Instance.VolumeChanged += OnVolumeChanged;
-		OnVolumeChanged(); // Set initial volume
+		UpdateVolume(); // Set initial volume
 	}
 
 	public override void _Process(double delta)
@@ -38,7 +43,7 @@ public partial class DialogueBox : Control
 		if (!paused)
 		{
 			// If accept is pressed
-			if (Input.IsActionJustPressed("ui_accept"))
+			if (Input.IsActionJustPressed("input_accept"))
 			{
 				if (typing)
 				{
@@ -63,8 +68,10 @@ public partial class DialogueBox : Control
 					}
 				}
 			}
+			// Dialogue is idle waiting
+			prompt.Visible = !typing;
+			promptLabel.Visible = !typing;
 		}
-
 	}
 
 	/// <summary>
@@ -72,12 +79,26 @@ public partial class DialogueBox : Control
 	/// </summary>
 	public void ShowNextLine()
 	{
-		// Stop if there are no more lines left
-		if (dialogueQueue.Count == 0)
+		foreach (InputEvent inputEvent in InputMap.ActionGetEvents("input_accept"))
 		{
-			Hide();
-			return;
+			if (inputEvent is InputEventKey keyEvent)
+			{
+				String keyName = OS.GetKeycodeString(keyEvent.PhysicalKeycode);
+				if (keyName == "Shift" || keyName == "Ctrl")
+				{
+					keyName += keyEvent.Location.ToString();
+				}
+				
+				promptLabel.Text = "Press " + keyName;
+				prompt.Size = new Vector2(promptLabel.Text.Length*5 + 5, prompt.Size.Y);
+			}
 		}
+		// Stop if there are no more lines left
+			if (dialogueQueue.Count == 0)
+			{
+				Hide();
+				return;
+			}
 		// Remove current line from queue
 		currentLine = dialogueQueue.Dequeue();
 		// Set up new line
@@ -265,7 +286,7 @@ public partial class DialogueBox : Control
 		}
 	}
 
-	private void OnVolumeChanged()
+	private void UpdateVolume()
 	{
 		startupSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
 		continueSound.VolumeDb = GameSettings.Instance.GetFinalSfx();

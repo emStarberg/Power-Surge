@@ -21,19 +21,23 @@ public partial class TutorialEnemy : Enemy
 
 	public override void _Ready()
 	{
+		player = GetParent().GetParent().GetNode<Player>("Player");
 		groundRay = GetNode<RayCast2D>("GroundRay");
 		wallRay = GetNode<RayCast2D>("WallRay");
 		animation = GetNode<AnimatedSprite2D>("Animations");
+		hurtSound = GetNode<AudioStreamPlayer2D>("Sounds/Hurt");
 
 		hurtCooldownTimer = new Timer();
 		hurtCooldownTimer.WaitTime = 0.5f;
 		hurtCooldownTimer.OneShot = true;
 		AddChild(hurtCooldownTimer);
+		
 
 		animation.FrameChanged += OnAnimationFrameChanged;
 		animation.AnimationFinished += OnAnimationFinished;
 
-		health = 25;
+		maxHealth = 25;
+		health = maxHealth;
 	}
 
 	public override void _PhysicsProcess(double delta)

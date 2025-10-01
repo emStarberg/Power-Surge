@@ -33,11 +33,13 @@ public partial class VoltageSentinel : Enemy
 		wallRay = GetNode<RayCast2D>("RayCasts/WallRay");
 		playerRay = GetNode<RayCast2D>("RayCasts/PlayerRay");
 		startPosition = GlobalPosition;
+		player = GetParent().GetParent().GetNode<Player>("Player");
 		targetPlayer = GetParent().GetParent().GetNode<Player>("Player");
 		camera = GetParent().GetParent().GetNode<Camera>("Camera");
 		animation.Animation = "walk";
 
-		health = 30;
+		maxHealth = 30;
+		health = maxHealth;
 	}
 
 	public override void _PhysicsProcess(double delta)

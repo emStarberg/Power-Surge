@@ -22,6 +22,7 @@ public partial class CircuitBug : Enemy
 
 	public override void _Ready()
 	{
+		player = GetParent().GetParent().GetNode<Player>("Player");
 		playerRay = GetNode<RayCast2D>("PlayerRay");
 		groundRay = GetNode<RayCast2D>("GroundRay");
 		wallRay = GetNode<RayCast2D>("WallRay");
@@ -37,7 +38,8 @@ public partial class CircuitBug : Enemy
 		animation.FrameChanged += OnAnimationFrameChanged;
 		animation.AnimationFinished += OnAnimationFinished;
 
-		health = 10;
+		maxHealth = 10;
+		health = maxHealth;
 
 		UpdateVolume();
 	}
@@ -126,7 +128,7 @@ public partial class CircuitBug : Enemy
 			projectileSpawnedThisAttack = true;
 			// Spawn new projectile
 			Node projectileInstance = projectile.Instantiate();
-			((Node2D)projectileInstance).GlobalPosition = GlobalPosition;
+			((Node2D)projectileInstance).GlobalPosition = GlobalPosition += new Vector2(-5,0);
 			GetTree().Root.CallDeferred("add_child", projectileInstance);
 
 			if (projectileInstance is ProjectileCB projectileScript)

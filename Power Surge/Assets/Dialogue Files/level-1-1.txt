@@ -1,0 +1,17 @@
+Lilah|This is as close as I could get you.
+Lilah|Remember, we can see your screen so we can give advice as you go.
+Archie|From what I can remember, continuing straight along here should lead you to the lab entrance.
+Archie|Woah...
+Archie|W..What???
+Lilah|It looks like The World Conductor's done a bit of landscaping...
+Lilah|I suspect those platforms will be safe to land on, just be careful.
+Archie|What's that there? It looks important.
+Lilah|I have no idea, but it could be useful. Try touching it, [name].
+Lilah|Great. Now that S.U.R.G.E has added it to its inventory, Archie and I can inspect it further.
+Lilah|If you see any more, make sure to grab them.
+Lilah|Here we go, just as I expected. It's left some nasty bugs around to try and kill us.
+Lilah|Kill it. NOW.
+Archie|...
+Archie|It looks like destroying that creature restored some of your power, cool!
+Archie|Maybe don't go round killing all of them though, it would fascinating to study them later on.
+Lilah|As I predicted, there's a power source you can use, touching that should restore a good amount of your power.

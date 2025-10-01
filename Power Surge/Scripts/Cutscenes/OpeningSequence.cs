@@ -59,8 +59,7 @@ public partial class OpeningSequence : Node2D
 
 		camera = GetNode<Camera2D>("Camera");
 
-		GameSettings.Instance.VolumeChanged += OnVolumeChanged;
-		OnVolumeChanged(); // Set initial volume
+		UpdateVolume(); // Set initial volume
 
 		// Begin playing part 1
 		videoPlayer.Play();
@@ -158,7 +157,6 @@ public partial class OpeningSequence : Node2D
 		// Fade image in
 		if (fadingIn)
 		{
-			GD.Print(fadeImage.Modulate);
 			fadeTimer += (float)delta;
 			float alpha = Mathf.Clamp(fadeTimer / fadeTime, 0, 1);
 			fadeImage.Modulate = new Color(1, 1, 1, alpha);
@@ -254,7 +252,6 @@ public partial class OpeningSequence : Node2D
 	{
 		// Loop
 		buzzerSound.Play();
-		OnVolumeChanged();
 	}
 
 	/// <summary>
@@ -312,7 +309,7 @@ public partial class OpeningSequence : Node2D
 		buzzerFadingOut = true;
 	}
 
-	private void OnVolumeChanged()
+	private void UpdateVolume()
 	{
 		explosionSoundFar.VolumeDb = GameSettings.Instance.GetFinalSfx() - 30;
 		explosionSoundNear.VolumeDb = GameSettings.Instance.GetFinalSfx();

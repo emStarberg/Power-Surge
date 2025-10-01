@@ -148,6 +148,7 @@ public partial class TitleScreen : Node2D
 	{
 		backgroundMusic.VolumeDb = GameSettings.Instance.GetFinalMusic();
 		zapSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
+		
 	}
 
 }
