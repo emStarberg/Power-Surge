@@ -1,0 +1,199 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+
+public partial class EndScreen : Node2D
+{
+	private List<Control> buttons = new List<Control>();
+	private List<Label> labels = new List<Label>();
+	private int selected = 0;
+	private Texture2D buttonOn, buttonOff;
+	private UICamera camera;
+	private Control effects, currentButton, textEffects;
+	private AudioStreamPlayer2D zapSound, backgroundMusic, lightningSound;
+	private List<string> levels = new List<string> { "1-1", "1-2", "1-3" };
+	private float timer = 0;
+	private bool shownFragments = false, shownPower = false, shownTime = false, shownRank = false;
+	private Label rank;
+
+	public override void _Ready()
+	{
+		buttonOn = GD.Load<Texture2D>("res://Assets/UI/Button - Highlighted.png");
+		buttonOff = GD.Load<Texture2D>("res://Assets/UI/Button.png");
+
+		camera = GetNode<UICamera>("UI Camera");
+		effects = GetNode<Control>("Control/Buttons/Effects");
+		textEffects = GetNode<Control>("Control/Stats/Effects");
+		zapSound = GetNode<AudioStreamPlayer2D>("Zap Sound");
+		lightningSound = GetNode<AudioStreamPlayer2D>("Lightning Sound");
+		rank = GetNode<Label>("Control/Rank");
+
+		// Add buttons to list
+		foreach (Node node in GetNode<Control>("Control/Buttons").GetChildren())
+		{
+			if (node is Control button)
+			{
+				// Don't add effects to list
+				if (button.Name != "Effects")
+				{
+					buttons.Add(button);
+				}
+			}
+		}
+		SelectButton(selected);
+
+		// Add labels to list
+		foreach (Node node in GetNode<Control>("Control/Stats").GetChildren())
+		{
+			if (node is Label stat)
+			{
+				labels.Add(stat.GetNode<Label>("Label"));
+			}
+		}
+	}
+
+	public override void _Process(double delta)
+	{
+		timer += (float)delta;
+		if (timer >= 2f && !shownFragments)
+		{
+			shownFragments = true;
+			ShowStat(labels[0]);
+		}
+		if (timer >= 3f && !shownPower)
+		{
+			shownPower = true;
+			ShowStat(labels[1]);
+		}
+		if (timer >= 4f && !shownTime)
+		{
+			shownTime = true;
+			ShowStat(labels[2]);
+		}
+		if (timer >= 6f && !shownRank)
+		{
+			shownRank = true;
+			ShowRank();
+		}
+		// Switch between buttons
+		if (Input.IsActionJustPressed("input_left"))
+		{
+			DeselectButton(selected);
+			if (selected > 0)
+			{
+				selected--;
+			}
+			else
+			{
+				selected = buttons.Count - 1;
+			}
+			SelectButton(selected);
+		}
+		if (Input.IsActionJustPressed("input_right"))
+		{
+			DeselectButton(selected);
+			if (selected < buttons.Count - 1)
+			{
+				selected++;
+			}
+			else
+			{
+				selected = 0;
+			}
+			SelectButton(selected);
+		}
+		// Button pressed
+		if (Input.IsActionJustPressed("input_accept"))
+		{
+			switch (currentButton.Name)
+			{
+				case "RETRY":
+					// Restart current level
+					GetTree().ChangeSceneToFile("res://Scenes/Levels/level_" + GameData.Instance.CurrentLevel + ".tscn");
+					break;
+				case "EXIT":
+					// Exit to title screen
+					GetTree().ChangeSceneToFile("res://Scenes/Screens/title_screen.tscn");
+					break;
+				case "NEXT":
+					// Go to next level
+					int index = levels.IndexOf(GameData.Instance.CurrentLevel);
+					string next = levels[index + 1];
+					GetTree().ChangeSceneToFile("res://Scenes/Levels/level_" + next + ".tscn");
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	/// <summary>
+	/// Select a button by highlighting it
+	/// </summary>
+	/// <param name="index">Index of control node to select</param>
+	private void SelectButton(int index)
+	{
+		currentButton = buttons[index];
+		currentButton.GetNode<Sprite2D>("Sprite").Texture = buttonOn;
+		if (shownFragments)
+		{
+			zapSound.Play();
+			camera.Shake(7, 0.1f);
+			effects.Position = currentButton.Position;
+			foreach (Node node in effects.GetChildren())
+			{
+				if (node is AnimatedSprite2D spark)
+				{
+					spark.Play();
+				}
+			}
+		}				
+	}
+
+	/// <summary>
+	/// Deselect a button by unhighlighting it
+	/// </summary>
+	/// <param name="index">Index of control node to deselect</param>
+	private void DeselectButton(int index)
+	{
+		Control button = buttons[index];
+		button.GetNode<Sprite2D>("Sprite").Texture = buttonOff;
+	}
+
+	/// <summary>
+	/// Show a stat label with dramatic effect
+	/// </summary>
+	/// <param name="label">Label to be shown</param>
+	private void ShowStat(Label label)
+	{
+		lightningSound.Play();
+		camera.Shake(8, 0.3f);
+		label.Visible = true;
+		textEffects.Position = ((Label)label.GetParent()).Position + new Vector2(200, 0);
+		foreach (Node node in textEffects.GetChildren())
+		{
+			if (node is AnimatedSprite2D spark)
+			{
+				spark.Play();
+			}
+		}
+	}
+	
+	/// <summary>
+	/// Show the player's rank with dramatic effect
+	/// </summary>
+	public void ShowRank()
+	{
+		Control rankEffects = rank.GetNode<Control>("Effects");
+		lightningSound.Play();
+		camera.Shake(10, 0.6f);
+		rank.Visible = true;
+		foreach (Node node in rankEffects.GetChildren())
+		{
+			if (node is AnimatedSprite2D spark)
+			{
+				spark.Play();
+			}
+		}
+	}
+}

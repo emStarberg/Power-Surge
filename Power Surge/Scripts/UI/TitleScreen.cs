@@ -116,7 +116,7 @@ public partial class TitleScreen : Node2D
 	}
 
 	/// <summary>
-	/// Select a button by higlighting it
+	/// Select a button by highlighting it
 	/// </summary>
 	/// <param name="index">Index of control node to select</param>
 	private void SelectButton(int index)
@@ -135,7 +135,7 @@ public partial class TitleScreen : Node2D
 		}
 	}
 	/// <summary>
-	/// Deselect a button by unhiglighting it
+	/// Deselect a button by unhighlighting it
 	/// </summary>
 	/// <param name="index">Index of control node to deselect</param>
 	private void DeselectButton(int index)
