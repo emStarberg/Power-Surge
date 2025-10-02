@@ -26,8 +26,7 @@ public partial class End : Area2D
 			GameData.Instance.LevelFragments = player.GetFragmentCount();
 			GameData.Instance.LevelPower = player.GetPower();
 			GameData.Instance.LevelTime = 0; // Update this later
-			GD.Print("End");
-			// Get scene
+			GetTree().ChangeSceneToFile("res://Scenes/Screens/end_screen.tscn");
 		}
 	}
 }

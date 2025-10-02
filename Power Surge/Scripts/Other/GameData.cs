@@ -3,7 +3,7 @@ using Godot;
 
 public partial class GameData : Node
 {
-
+    // Instance
     private static GameData _instance;
     public static GameData Instance
     {
@@ -14,6 +14,7 @@ public partial class GameData : Node
             return _instance;
         }
     }
+
     // Game data
     public int TotalFragments;
     public string CurrentLevel;
