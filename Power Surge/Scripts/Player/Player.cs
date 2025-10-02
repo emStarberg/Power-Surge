@@ -43,7 +43,7 @@ public partial class Player : CharacterBody2D
 	private Label powerSurgeTimer;
 	private float powerSurgeTime = 10f;
 	private bool powerSurgeActive = false;
-	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic;
+	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound;
 
 	// FOR TUTORIAL
 	public List<String> disabledInputs = new List<string>();
@@ -60,6 +60,7 @@ public partial class Player : CharacterBody2D
 		dashSound = GetNode<AudioStreamPlayer2D>("Sounds/Dash");
 		hurtSound = GetNode<AudioStreamPlayer2D>("Sounds/Hurt");
 		powerSurgeMusic = GetNode<AudioStreamPlayer2D>("Sounds/Power Surge");
+		fragmentSound = GetNode<AudioStreamPlayer2D>("Sounds/Collect Fragment");
 		// Set up animations
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		animation.Play();
@@ -363,6 +364,8 @@ public partial class Player : CharacterBody2D
 	public void IncreasePower(int amount)
 	{
 		power += amount;
+		var camera = GetParent().GetNode<Camera>("Camera");
+		camera.Shake(2, 0.2f);
 	}
 
 
@@ -509,12 +512,14 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void AddFragment()
 	{
+		var camera = GetParent().GetNode<Camera>("Camera");
+		fragmentSound.Play();
 		fragmentSlots[fragmentCount].Texture = (Texture2D)GD.Load("res://Assets/Objects/Fragment - Filled Slot.png");
 		fragmentCount++;
+		camera.Shake(2, 0.2f);
 		if (fragmentCount == 3 && power < 100)
 		{
 			power = 100;
-			var camera = GetParent().GetNode<Camera>("Camera");
 			camera.Shake(6, 0.2f);
 		}
 	}
@@ -583,6 +588,11 @@ public partial class Player : CharacterBody2D
 	public int GetFragmentCount()
 	{
 		return fragmentCount;
+	}
+
+	public float GetPower()
+	{
+		return power;
 	}
 	
 	public void UpdateVolume()

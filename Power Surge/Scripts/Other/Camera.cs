@@ -13,22 +13,38 @@ public partial class Camera : Camera2D
 	private Node2D _player; // Reference to player node
 	private float shakeAmount, shakeTime = 0f; // Parameters for camera shake effect
 	private Random random = new(); // Random number for generating shake effect
-	private Vector2 baseOffset = new Vector2(0, -15); // Camera offset from player pos
+	private Vector2 baseOffset = new Vector2(0, 0); // Camera offset from player pos
 
 	public override void _Ready()
 	{
 		Zoom = new Vector2(2.4f, 2.4f);
 		_player = GetParent().GetNode<Node2D>("Player");
 		Offset = baseOffset;
+		MakeCurrent();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		if (_player != null)
 		{
-			// Move the camera to follow the player's position
-			Position = _player.Position;
+			float halfVisibleWidth = GetViewportRect().Size.X * 0.5f / Zoom.X;
+			float halfVisibleHeight = GetViewportRect().Size.Y * 0.5f / Zoom.Y;
+
+			// X axis: clamp as before
+			float newX = Position.X;
+			if (_player.Position.X > LimitLeft + halfVisibleWidth && _player.Position.X < LimitRight - halfVisibleWidth)
+				newX = _player.Position.X;
+
+			/*// Y axis: only move if player is near the edge of the visible area
+			float newY = Position.Y;
+			if (_player.Position.Y < Position.Y - halfVisibleHeight * 0.4f)
+				newY = _player.Position.Y + halfVisibleHeight * 0.4f;
+			else if (_player.Position.Y > Position.Y + halfVisibleHeight * 0.4f)
+				newY = _player.Position.Y - halfVisibleHeight * 0.4f; */
+
+			Position = new Vector2(newX, _player.Position.Y);
 		}
+
 		// Shake the camera when required
 		if (shakeTime > 0)
 		{
