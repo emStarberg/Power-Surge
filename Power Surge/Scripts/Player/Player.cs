@@ -12,7 +12,7 @@ public partial class Player : CharacterBody2D
 	[Export] public float Speed = 200f; // Movement speed          
 	[Export] public float JumpStrength = -300f; // Jump velocity
 	[Export] public float Gravity = 1000f; // Gravity force      
-	[Export] public float MaxFallSpeed = 1000f; // Terminal velocity
+	[Export] public float MaxFallSpeed = 500f; // Terminal velocity
 	[Export] public int MaxPower = 200; // Maximum power level 200%
 	[Export] public TextureProgressBar PowerMeter; // Power meter
 	[Export] public Label percentageLabel; // Label under power meter
@@ -43,13 +43,13 @@ public partial class Player : CharacterBody2D
 	private Label powerSurgeTimer;
 	private float powerSurgeTime = 10f;
 	private bool powerSurgeActive = false;
-	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound;
+	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound;
 
 	// FOR TUTORIAL
 	public List<String> disabledInputs = new List<string>();
 	private float mileage = 0; // How far the player has moved left/right
 	public bool HasDashed = false, HasJumped = false, HasCycled = false, HasAttacked = false;
-
+	public bool Paused = false;
 
 	public override void _Ready()
 	{
@@ -59,6 +59,8 @@ public partial class Player : CharacterBody2D
 		strongBlastSound = GetNode<AudioStreamPlayer2D>("Sounds/Strong Blast");
 		dashSound = GetNode<AudioStreamPlayer2D>("Sounds/Dash");
 		hurtSound = GetNode<AudioStreamPlayer2D>("Sounds/Hurt");
+		powerSurgeMusic = GetNode<AudioStreamPlayer2D>("Sounds/Power Surge");
+		fragmentSound = GetNode<AudioStreamPlayer2D>("Sounds/Collect Fragment");
 		// Set up animations
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		animation.Play();
@@ -87,6 +89,23 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (alive)
+		{
+			// Apply gravity to Y velocity.
+			velocity.Y += Gravity * (float)delta;
+			// Clamp vertical velocity to terminal velocity.
+			velocity.Y = Mathf.Min(velocity.Y, MaxFallSpeed);
+
+			// Update velocity
+			Velocity = velocity;
+			// Move
+			MoveAndSlide();
+		}
+
+		if (Paused){
+			velocity.X = 0;
+			return;
+		}
 		if (power < 0)
 		{
 			power = 0;
@@ -162,10 +181,7 @@ public partial class Player : CharacterBody2D
 			}
 			else
 			{
-				// Apply gravity to Y velocity.
-				velocity.Y += Gravity * (float)delta;
-				// Clamp vertical velocity to terminal velocity.
-				velocity.Y = Mathf.Min(velocity.Y, MaxFallSpeed);
+				
 				direction = 0;
 				// Get input direction
 				if (Input.IsActionPressed("input_left") && !disabledInputs.Contains("input_left"))
@@ -237,10 +253,7 @@ public partial class Player : CharacterBody2D
 				Die();
 			}
 
-			// Update velocity
-			Velocity = velocity;
-			// Move
-			MoveAndSlide();
+			
 
 			if (Input.IsActionJustPressed("input_attack") && !disabledInputs.Contains("input_attack"))
 			{
@@ -351,6 +364,8 @@ public partial class Player : CharacterBody2D
 	public void IncreasePower(int amount)
 	{
 		power += amount;
+		var camera = GetParent().GetNode<Camera>("Camera");
+		camera.Shake(2, 0.2f);
 	}
 
 
@@ -497,12 +512,14 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void AddFragment()
 	{
+		var camera = GetParent().GetNode<Camera>("Camera");
+		fragmentSound.Play();
 		fragmentSlots[fragmentCount].Texture = (Texture2D)GD.Load("res://Assets/Objects/Fragment - Filled Slot.png");
 		fragmentCount++;
+		camera.Shake(2, 0.2f);
 		if (fragmentCount == 3 && power < 100)
 		{
 			power = 100;
-			var camera = GetParent().GetNode<Camera>("Camera");
 			camera.Shake(6, 0.2f);
 		}
 	}
@@ -511,6 +528,7 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void StartPowerSurgeTimer()
 	{
+		powerSurgeMusic.Play();
 		powerSurgeTime = 10f;
 		powerSurgeActive = true;
 		powerSurgeTimer.Visible = true;
@@ -520,6 +538,7 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void StopPowerSurgeTimer()
 	{
+		powerSurgeMusic.Stop();
 		powerSurgeActive = false;
 		powerSurgeTimer.Visible = false;
 	}
@@ -565,6 +584,16 @@ public partial class Player : CharacterBody2D
 	{
 		return alive;
 	}
+
+	public int GetFragmentCount()
+	{
+		return fragmentCount;
+	}
+
+	public float GetPower()
+	{
+		return power;
+	}
 	
 	public void UpdateVolume()
 	{
@@ -572,9 +601,15 @@ public partial class Player : CharacterBody2D
 		{
 			if (node is AudioStreamPlayer2D sound)
 			{
-				sound.VolumeDb = GameSettings.Instance.GetFinalSfx();
+				if (node.Name != "Power Surge")
+				{
+					sound.VolumeDb = GameSettings.Instance.GetFinalSfx();
+				}
+				else
+				{
+					sound.VolumeDb = GameSettings.Instance.GetFinalMusic();
+				}
 			}
 		}
-		
 	}
 }

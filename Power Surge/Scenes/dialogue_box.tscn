@@ -150,10 +150,31 @@ theme_override_fonts/font = ExtResource("4_f3slv")
 theme_override_font_sizes/font_size = 24
 text = "Lilah:"
 
+[node name="Prompt" type="ColorRect" parent="Box"]
+offset_left = 97.0
+offset_top = 22.0
+offset_right = 144.0
+offset_bottom = 32.0
+scale = Vector2(0.798936, 0.798936)
+color = Color(0.13, 0.13, 0.13, 0.729412)
+
+[node name="Prompt Label" type="Label" parent="Box"]
+offset_left = 99.5685
+offset_top = 22.4137
+offset_right = 363.568
+offset_bottom = 75.4137
+scale = Vector2(0.155983, 0.155983)
+theme_override_fonts/font = ExtResource("4_f3slv")
+theme_override_font_sizes/font_size = 40
+text = "Press Enter"
+
 [node name="Startup Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_kyvu4")
 volume_db = -15.0
+max_distance = 4096.0
+attenuation = 4.46806e-05
 
 [node name="Continue Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_tlprh")
 volume_db = -15.0
+attenuation = 5.5008e-05

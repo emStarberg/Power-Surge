@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bwvj50vhjjac7"]
+[gd_scene load_steps=48 format=3 uid="uid://bwvj50vhjjac7"]
 
 [ext_resource type="Script" uid="uid://dr47mlmgvnewi" path="res://Scripts/Player/Player.cs" id="1_3smsa"]
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player/Player-Spritesheet.png" id="2_8erm5"]
@@ -12,6 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://b0j6bpgh0pm7d" path="res://Assets/Audio/laser-14792 (mp3cut.net).mp3" id="9_pu2lt"]
 [ext_resource type="AudioStream" uid="uid://dghc3witth3y7" path="res://Assets/Audio/Hurt.mp3" id="10_gymyn"]
 [ext_resource type="AudioStream" uid="uid://bnycau3ogy1fg" path="res://Assets/Audio/Dash.mp3" id="10_tx1dd"]
+[ext_resource type="AudioStream" uid="uid://dkppxtnqyjuwd" path="res://Assets/Audio/fast-paced-doom-metal-instrumental-262778 (mp3cut.net).mp3" id="13_ukyrk"]
+[ext_resource type="AudioStream" uid="uid://b006kt33m325e" path="res://Assets/Audio/arcade-ui-1-229498.mp3" id="14_7dp3o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1bk2"]
 radius = 8.06226
@@ -251,7 +253,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 12.0
+"speed": 13.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -283,6 +285,8 @@ scale = Vector2(1.05, 1.05)
 sprite_frames = SubResource("SpriteFrames_2exqc")
 animation = &"idle"
 autoplay = "idle"
+frame = 3
+frame_progress = 0.47151
 
 [node name="Timer" type="Label" parent="."]
 offset_left = -3.0
@@ -311,5 +315,11 @@ stream = ExtResource("10_gymyn")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("8_8erm5")
+
+[node name="Power Surge" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("13_ukyrk")
+
+[node name="Collect Fragment" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("14_7dp3o")
 
 [connection signal="animation_finished" from="Animations" to="." method="OnAnimationFinished"]

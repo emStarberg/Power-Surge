@@ -9,11 +9,12 @@ using System;
 public abstract partial class Enemy : CharacterBody2D
 {
 	protected bool isAlive = true;
-	protected float health;
+	protected float health, maxHealth;
 	protected AnimatedSprite2D animation;
 	protected bool canBeHurt = true;
 	protected Timer hurtCooldownTimer;
 	protected AudioStreamPlayer2D hurtSound;
+	protected Player player;
 
 	/// <summary>
 	/// Called when enemy is hit by an attack
@@ -44,7 +45,7 @@ public abstract partial class Enemy : CharacterBody2D
 	{
 		isAlive = false;
 		animation.Animation = "death";
-
+		player.IncreasePower((int)maxHealth);
 	}
 
 	/// <summary>
@@ -74,12 +75,14 @@ public abstract partial class Enemy : CharacterBody2D
 		}
 
 	}
+	
+
 	/// <summary>
 	/// Called when options menu closes, updates audio players in accordance with volume settings
 	/// </summary>
 	public virtual void UpdateVolume()
 	{
-		
+
 	}
 
 }

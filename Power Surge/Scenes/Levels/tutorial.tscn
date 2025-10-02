@@ -299,6 +299,7 @@ script = ExtResource("1_xj3ld")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(-14, -2)
+scale = Vector2(1.12024, 1.12024)
 texture = ExtResource("1_sghjv")
 script = ExtResource("1_mnia5")
 cameraPath = NodePath("../Camera")
@@ -426,6 +427,7 @@ offset_top = 66.0
 offset_right = 355.0
 offset_bottom = 106.0
 scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
 
 [node name="DeathDialogue" parent="UI" instance=ExtResource("13_qvtqq")]
 offset_left = 315.0

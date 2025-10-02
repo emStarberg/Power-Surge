@@ -24,6 +24,9 @@ public partial class GameSettings : Node
     private float finalMusicVolume = 1f;
     private float finalSfxVolume = 1f;
 
+    public string currentLevel;
+    public string nextLevel;
+
     public float Volume
     {
         get => volume;

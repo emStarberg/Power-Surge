@@ -1,0 +1,19 @@
+Archie|Awesome work there [name]! 
+Lilah|I have to agree. You're a much better pilot than I expected. This could work.
+Lilah|While you were getting acquainted with the controls, Archie and I were busy devising a plan.
+Lilah|As you know, The World Conductor lies deep within the earth's core.
+Lilah|Humanity is yet to reach it, that's what S.U.R.G.E was being developed for.
+Lilah|We're hoping that S.U.R.G.E is developed enough and that you're able to get it there.
+Archie|I'm so excited, there's so much we don't know about what's down there!
+Archie|Our findings will be ground breaking! We'll be famous!
+Lilah|Let's just hope there's still other people left by the time we're done.
+Lilah|The route we've devised will send you through an old research facility.
+Lilah|From there you should be able to navigate through a tunnel system,
+Lilah|the remains of previous attempts to reach the core.
+Lilah|I don't know what we'll find down there, but I'm sure any way down will be heavily guarded by now.
+Archie|I'm sure there's a reasonable explanation for all this.
+Archie|Once we get down there we may be able to fix it so it stops trying to destroy us.
+Lilah|We'll see.
+Lilah|[name]. I'm going to send you some coordinates to a spawn point set up near the old lab.
+Lilah|S.U.R.G.E is able to create its own spawn points, but we don't have any down there.
+Lilah|Good luck [name]. We'll be with you the whole way.
