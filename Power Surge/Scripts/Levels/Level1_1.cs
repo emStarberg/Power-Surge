@@ -28,7 +28,7 @@ public partial class Level1_1 : GameLevel
 		camera.LimitLeft = -400;
 		camera.LimitRight = 4500;
 
-		expectedTime = 60;
+		expectedTime = 80;
 
 		// Set up checkpoints
 		foreach (Node node in GetNode<Node2D>("Checkpoints").GetChildren())
