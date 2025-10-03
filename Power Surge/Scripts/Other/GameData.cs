@@ -23,5 +23,6 @@ public partial class GameData : Node
     public int LevelFragments = 0;
     public float LevelTime = 0;
     public float LevelPower = 0;
+    public float LevelExpectedTime = 0;
 
 }

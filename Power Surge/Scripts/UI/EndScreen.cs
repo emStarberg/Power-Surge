@@ -50,6 +50,16 @@ public partial class EndScreen : Node2D
 				labels.Add(stat.GetNode<Label>("Label"));
 			}
 		}
+
+		labels[0].Text = GameData.Instance.LevelFragments.ToString() + "/3";
+		labels[1].Text = GameData.Instance.LevelPower.ToString() + "%";
+		float totalSeconds = GameData.Instance.LevelTime;
+		int minutes = (int)(totalSeconds / 60);
+		int seconds = (int)(totalSeconds % 60);
+		// Format as "MM:SS"
+		labels[2].Text = $"{minutes:D2}:{seconds:D2}";
+		rank.Text = CalculateRank();
+
 	}
 
 	public override void _Process(double delta)
@@ -147,7 +157,7 @@ public partial class EndScreen : Node2D
 					spark.Play();
 				}
 			}
-		}				
+		}
 	}
 
 	/// <summary>
@@ -178,11 +188,11 @@ public partial class EndScreen : Node2D
 			}
 		}
 	}
-	
+
 	/// <summary>
 	/// Show the player's rank with dramatic effect
 	/// </summary>
-	public void ShowRank()
+	private void ShowRank()
 	{
 		Control rankEffects = rank.GetNode<Control>("Effects");
 		lightningSound.Play();
@@ -195,5 +205,44 @@ public partial class EndScreen : Node2D
 				spark.Play();
 			}
 		}
+	}
+
+	private string CalculateRank()
+	{
+		string finalRank = "F";
+		int points = 0;
+
+		points += GameData.Instance.LevelFragments;
+		points += (int)Math.Round(GameData.Instance.LevelPower / 40);
+		float levelTime = GameData.Instance.LevelTime;
+		float expectedTime = GameData.Instance.LevelExpectedTime;
+		if (levelTime >= expectedTime)
+		{
+			if ((levelTime - expectedTime) < 25)
+			{
+				points++;
+			}
+			if ((levelTime - expectedTime) < 10)
+			{
+				points++;
+			}
+		}
+		else
+		{
+			points+=2;
+			if ((expectedTime - levelTime) > 10)
+			{
+				points++;
+			}
+			if ((expectedTime - levelTime) > 25)
+			{
+				points++;
+			}
+		}
+
+		List<string> ranks = new List<string> { "F", "E", "D", "C", "C+", "B", "B+", "A", "A+", "S" };
+
+		finalRank = ranks[points];
+		return finalRank;
 	}
 }

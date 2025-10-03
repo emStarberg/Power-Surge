@@ -11,6 +11,8 @@ public abstract partial class GameLevel : Node2D
 {
 	protected bool optionsOpen = false;
 	protected Player player;
+	protected float levelTimer = 0;
+	protected float expectedTime;
 
 	protected void checkOptionsMenu()
 	{
@@ -46,6 +48,22 @@ public abstract partial class GameLevel : Node2D
 	/// </summary>
 	protected virtual void UpdateVolume()
 	{
-		
+
+	}
+	/// <summary>
+	/// Get the time taken to complete the level
+	/// </summary>
+	/// <returns>levelTimer</returns>
+	public float GetLevelTimer()
+	{
+		return levelTimer;
+	}
+	/// <summary>
+	/// Get the level's expected completion time in seconds, for calculating rank
+	/// </summary>
+	/// <returns></returns>
+	public float GetExpectedTime()
+	{
+		return expectedTime;
 	}
 }
