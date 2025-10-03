@@ -28,6 +28,8 @@ public partial class Level1_1 : GameLevel
 		camera.LimitLeft = -400;
 		camera.LimitRight = 4500;
 
+		expectedTime = 60;
+
 		// Set up checkpoints
 		foreach (Node node in GetNode<Node2D>("Checkpoints").GetChildren())
 		{
@@ -41,6 +43,7 @@ public partial class Level1_1 : GameLevel
 
 	public override void _Process(double delta)
 	{
+		levelTimer += (float)delta;
 		checkOptionsMenu();
 		player.Paused = !dialogueBox.IsPaused();
 

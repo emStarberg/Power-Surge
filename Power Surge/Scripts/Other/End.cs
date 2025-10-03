@@ -25,8 +25,13 @@ public partial class End : Area2D
 			GameData.Instance.CurrentLevel = GetParent().Name; ;
 			GameData.Instance.LevelFragments = player.GetFragmentCount();
 			GameData.Instance.LevelPower = player.GetPower();
-			GameData.Instance.LevelTime = 0; // Update this later
+			if (GetParent() is GameLevel gameLevel)
+			{
+				GameData.Instance.LevelTime = gameLevel.GetLevelTimer();
+				GameData.Instance.LevelExpectedTime = gameLevel.GetExpectedTime();
+			}
 			GetTree().ChangeSceneToFile("res://Scenes/Screens/end_screen.tscn");
+			
 		}
 	}
 }
