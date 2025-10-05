@@ -45,7 +45,11 @@ public abstract partial class Enemy : CharacterBody2D
 	{
 		isAlive = false;
 		animation.Animation = "death";
-		player.IncreasePower((int)maxHealth);
+		if (player.GetPower() <= 100)
+		{
+			player.IncreasePower((int)maxHealth);
+		}
+		
 	}
 
 	/// <summary>

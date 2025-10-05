@@ -1,6 +1,5 @@
 using Godot;
-using System;
-using System.Data.Common;
+
 //------------------------------------------------------------------------------
 // <summary>
 //   Abstract class to be inherited by all game levels
@@ -13,6 +12,7 @@ public abstract partial class GameLevel : Node2D
 	protected Player player;
 	protected float levelTimer = 0;
 	protected float expectedTime;
+	protected Camera camera;
 
 	protected void checkOptionsMenu()
 	{

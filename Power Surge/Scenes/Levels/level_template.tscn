@@ -143,11 +143,8 @@ cameraPath = NodePath("../Camera")
 position = Vector2(142, -17)
 tile_set = SubResource("TileSet_5ckws")
 
-[node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("5_n4o5f")]
+[node name="Player" parent="." instance=ExtResource("5_n4o5f")]
 position = Vector2(-131, 16)
-PowerMeter = NodePath("")
-percentageLabel = NodePath("")
-FragmentSlots = NodePath("")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(-5, 6)

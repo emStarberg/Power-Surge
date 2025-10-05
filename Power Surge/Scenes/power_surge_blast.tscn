@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://5prgkbfkhkv0"]
+
+[ext_resource type="Texture2D" uid="uid://co7ukwvmgkafk" path="res://Assets/Characters/Player/Power Surge Blast - Spritesheet.png" id="1_c5s2d"]
+[ext_resource type="Script" uid="uid://ogoatv3kjlbn" path="res://Scripts/Player/Player Attacks/PowerSurgeBlast.cs" id="1_s28rj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s28rj"]
+size = Vector2(131, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4rai"]
+atlas = ExtResource("1_c5s2d")
+region = Rect2(0, 160, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jo8r"]
+atlas = ExtResource("1_c5s2d")
+region = Rect2(0, 0, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkys4"]
+atlas = ExtResource("1_c5s2d")
+region = Rect2(0, 32, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7hnr"]
+atlas = ExtResource("1_c5s2d")
+region = Rect2(0, 64, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxhk5"]
+atlas = ExtResource("1_c5s2d")
+region = Rect2(0, 96, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qa5gi"]
+atlas = ExtResource("1_c5s2d")
+region = Rect2(0, 128, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd8k5"]
+atlas = ExtResource("1_c5s2d")
+region = Rect2(0, 192, 128, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8a48"]
+atlas = ExtResource("1_c5s2d")
+region = Rect2(0, 224, 128, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_chf64"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4rai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jo8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkys4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7hnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxhk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7hnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qa5gi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4rai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hd8k5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8a48")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Power Surge Blast" type="Area2D"]
+script = ExtResource("1_s28rj")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(65.5, 0)
+shape = SubResource("RectangleShape2D_s28rj")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(64, 0)
+sprite_frames = SubResource("SpriteFrames_chf64")
+frame = 4
+frame_progress = 0.436422
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="animation_finished" from="Animation" to="." method="OnAnimationFinished"]

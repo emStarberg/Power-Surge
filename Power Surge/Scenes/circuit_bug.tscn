@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cjimrlhj0qdfl" path="res://Assets/Audio/Metal Hit.wav" id="6_hl3up"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ritr"]
-size = Vector2(16, 12)
+size = Vector2(16, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ol1ik"]
 atlas = ExtResource("3_862px")
@@ -224,13 +224,12 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Circuit Bug" type="CharacterBody2D"]
-position = Vector2(130, 72)
+[node name="Circuit Bug" type="CharacterBody2D" groups=["Enemy"]]
 collision_mask = 3
 script = ExtResource("1_pjp8a")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(2, 1)
+position = Vector2(2, -0.5)
 shape = SubResource("RectangleShape2D_8ritr")
 
 [node name="GroundRay" type="RayCast2D" parent="." groups=["Enemy"]]
@@ -242,7 +241,7 @@ target_position = Vector2(-14, 1)
 
 [node name="PlayerRay" type="RayCast2D" parent="."]
 position = Vector2(-6, 2)
-target_position = Vector2(-76, -1)
+target_position = Vector2(-76, 0)
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_brl5d")
