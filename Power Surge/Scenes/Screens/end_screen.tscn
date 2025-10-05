@@ -385,6 +385,28 @@ rotation = -2.54797
 scale = Vector2(3, 3)
 script = null
 
+[node name="X" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 763.0
+offset_top = 474.0
+offset_right = 803.0
+offset_bottom = 497.0
+scale = Vector2(5.15552, 5.15552)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "X"
+
+[node name="X2" type="Label" parent="Control"]
+visible = false
+offset_left = 720.0
+offset_top = 421.0
+offset_right = 818.0
+offset_bottom = 444.0
+rotation = 0.159752
+scale = Vector2(2.57858, 2.57858)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "END OF MVP"
+
 [node name="ScreenResolution" type="Node" parent="."]
 script = ExtResource("3_qkjpm")
 

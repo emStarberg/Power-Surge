@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bd74wxs2mglig"]
+[gd_scene load_steps=35 format=3 uid="uid://bd74wxs2mglig"]
 
 [ext_resource type="Script" uid="uid://bs0wptc4sskex" path="res://Scripts/Levels/LevelTemplate.cs" id="1_2ejuk"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="2_0jff0"]
@@ -14,9 +14,16 @@
 [ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="12_5d0pu"]
 [ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="13_14037"]
 [ext_resource type="PackedScene" uid="uid://bignn7lsbeest" path="res://Scenes/fragment.tscn" id="14_a6xh0"]
+[ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="14_ub7cd"]
+[ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="15_bll46"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="15_nawxm"]
+[ext_resource type="Texture2D" uid="uid://b8ulvofnby7aw" path="res://Assets/Objects/Fragment - Filled Slot.png" id="16_xdd2k"]
+[ext_resource type="Texture2D" uid="uid://dxjb13hojjw0x" path="res://Assets/UI/Button - Highlighted.png" id="17_7wvp5"]
+[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="18_5d0pu"]
+[ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="20_14037"]
+[ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="22_a6xh0"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ejuk"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nawxm"]
 texture = ExtResource("4_yiwsm")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -37,9 +44,9 @@ texture = ExtResource("4_yiwsm")
 2:3/0 = 0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSet" id="TileSet_sn6f3"]
+[sub_resource type="TileSet" id="TileSet_5ckws"]
 physics_layer_0/collision_layer = 1
-sources/2 = SubResource("TileSetAtlasSource_2ejuk")
+sources/2 = SubResource("TileSetAtlasSource_nawxm")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
 atlas = ExtResource("10_xdd2k")
@@ -77,7 +84,7 @@ region = Rect2(128, 16, 64, 16)
 atlas = ExtResource("10_xdd2k")
 region = Rect2(192, 16, 64, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rn3a1"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_sn6f3"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -112,7 +119,7 @@ animations = [{
 "speed": 16.0
 }]
 
-[node name="Node2D2" type="Node2D"]
+[node name="LevelTemplate" type="Node2D"]
 script = ExtResource("1_2ejuk")
 
 [node name="Label" type="Label" parent="."]
@@ -123,24 +130,27 @@ offset_bottom = -145.0
 text = "To Do:
 - Add new script to root
 - Fill player export variables"
+metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(-18, -1)
+position = Vector2(3, -18)
+scale = Vector2(1.08203, 1.13281)
 texture = ExtResource("2_0jff0")
 script = ExtResource("3_iihae")
 cameraPath = NodePath("../Camera")
 
 [node name="Ground" type="TileMapLayer" parent="." groups=["Ground"]]
 position = Vector2(142, -17)
-tile_set = SubResource("TileSet_sn6f3")
+tile_set = SubResource("TileSet_5ckws")
 
 [node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("5_n4o5f")]
-PowerMeter = NodePath("../UI/Control/Power Meter")
-percentageLabel = NodePath("../UI/Control/Percentage Label")
-FragmentSlots = NodePath("../UI/Control/Fragment Slots")
+position = Vector2(-131, 16)
+PowerMeter = NodePath("")
+percentageLabel = NodePath("")
+FragmentSlots = NodePath("")
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(2, -2)
+position = Vector2(-5, 6)
 script = ExtResource("6_o2vlx")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -160,10 +170,11 @@ offset_left = 505.0
 offset_top = 571.0
 offset_right = 553.0
 offset_bottom = 611.0
-scale = Vector2(3.73117, 3.76576)
+scale = Vector2(3.5, 3.533)
 texture_under = ExtResource("7_h5ye2")
 texture_progress = ExtResource("8_ub7cd")
 script = ExtResource("9_bll46")
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
 layout_mode = 1
@@ -178,11 +189,12 @@ offset_right = -667.933
 offset_bottom = -285.952
 scale = Vector2(1.00417, 1.00375)
 color = Color(0.223103, 0.223103, 0.223103, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Power Surge" type="AnimatedSprite2D" parent="UI/Control/Power Meter"]
 visible = false
 position = Vector2(22.2142, 8.0218)
-sprite_frames = SubResource("SpriteFrames_rn3a1")
+sprite_frames = SubResource("SpriteFrames_sn6f3")
 
 [node name="Percentage Label" type="Label" parent="UI/Control"]
 layout_mode = 1
@@ -200,6 +212,7 @@ theme_override_fonts/font = ExtResource("11_7wvp5")
 theme_override_font_sizes/font_size = 16
 text = "100%"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Attacks-ui" type="Sprite2D" parent="UI/Control"]
 position = Vector2(102, 593)
@@ -213,6 +226,7 @@ position = Vector2(0, -0.25)
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Slot 1" type="TextureRect" parent="UI/Control/Fragment Slots"]
 layout_mode = 0
@@ -222,6 +236,7 @@ offset_right = 71.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("13_14037")
+metadata/_edit_use_anchors_ = true
 
 [node name="Slot 2" type="TextureRect" parent="UI/Control/Fragment Slots"]
 layout_mode = 0
@@ -231,6 +246,7 @@ offset_right = 131.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("13_14037")
+metadata/_edit_use_anchors_ = true
 
 [node name="Slot 3" type="TextureRect" parent="UI/Control/Fragment Slots"]
 layout_mode = 0
@@ -240,19 +256,122 @@ offset_right = 191.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("13_14037")
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogueBox" parent="UI" instance=ExtResource("14_ub7cd")]
+visible = false
+offset_left = 315.0
+offset_top = 66.0
+offset_right = 355.0
+offset_bottom = 106.0
+scale = Vector2(2, 2)
+
+[node name="Pop-up" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -125.0
+offset_top = -88.0
+offset_right = -85.0
+offset_bottom = -48.0
+scale = Vector2(1.20593, 1.20593)
+
+[node name="ColorRect" type="ColorRect" parent="UI/Pop-up"]
+layout_mode = 0
+offset_left = 357.0
+offset_top = 212.0
+offset_right = 809.0
+offset_bottom = 453.0
+color = Color(0.136826, 0.136826, 0.136826, 0.839216)
+
+[node name="Title" type="Label" parent="UI/Pop-up"]
+layout_mode = 0
+offset_left = 395.0
+offset_top = 238.0
+offset_right = 859.0
+offset_bottom = 261.0
+scale = Vector2(0.820161, 0.820161)
+theme_override_fonts/font = ExtResource("15_bll46")
+text = "You've discovered a fragment!"
+
+[node name="Fragment-FilledSlot" type="Sprite2D" parent="UI/Pop-up"]
+position = Vector2(583, 297)
+scale = Vector2(2.23797, 2.23797)
+texture = ExtResource("16_xdd2k")
+
+[node name="Label" type="Label" parent="UI/Pop-up"]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 344.0
+offset_right = 1159.0
+offset_bottom = 398.0
+scale = Vector2(0.532068, 0.532068)
+theme_override_fonts/font = ExtResource("15_bll46")
+text = "There are three fragments to find in every level, 
+collecting them all will refill your power meter."
+horizontal_alignment = 1
+
+[node name="Button" type="Control" parent="UI/Pop-up"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 586.0
+offset_top = 412.0
+offset_right = 586.0
+offset_bottom = 412.0
+scale = Vector2(0.72383, 0.72383)
+
+[node name="Sprite" type="Sprite2D" parent="UI/Pop-up/Button"]
+position = Vector2(-0.879944, -0.73999)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("17_7wvp5")
+
+[node name="Label" type="Label" parent="UI/Pop-up/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -25.0
+offset_right = 157.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.460858, 0.460858)
+theme_override_fonts/font = ExtResource("18_5d0pu")
+theme_override_font_sizes/font_size = 80
+text = "OK"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Fragment3" parent="Objects" instance=ExtResource("14_a6xh0")]
-position = Vector2(-52, 5)
+position = Vector2(-415, -139)
+scale = Vector2(1.1, 1.1)
 
 [node name="Fragment2" parent="Objects" instance=ExtResource("14_a6xh0")]
-position = Vector2(-51, 5)
+position = Vector2(-420, -195)
+scale = Vector2(1.1, 1.1)
 
 [node name="Fragment" parent="Objects" instance=ExtResource("14_a6xh0")]
-position = Vector2(-47, 5)
+position = Vector2(-422, -232)
+scale = Vector2(1.1, 1.1)
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Enemies" type="Node2D" parent="." groups=["Enemy"]]
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_14037")
+autoplay = true
+max_distance = 100000.0
+attenuation = 1e-05
+parameters/looping = true
 
 [node name="ScreenResolution" type="Node" parent="."]
 script = ExtResource("15_nawxm")
+
+[node name="End" parent="." instance=ExtResource("22_a6xh0")]
+position = Vector2(-470, -183)
