@@ -1,30 +1,29 @@
-[gd_scene load_steps=35 format=3 uid="uid://bd74wxs2mglig"]
+[gd_scene load_steps=34 format=3 uid="uid://de5lu023djnhs"]
 
-[ext_resource type="Script" uid="uid://bs0wptc4sskex" path="res://Scripts/Levels/LevelTemplate.cs" id="1_2ejuk"]
-[ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="2_0jff0"]
-[ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Other/Background.cs" id="3_iihae"]
-[ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="4_yiwsm"]
-[ext_resource type="PackedScene" uid="uid://bwvj50vhjjac7" path="res://Scenes/player.tscn" id="5_n4o5f"]
-[ext_resource type="Script" uid="uid://rfodace5xyiq" path="res://Scripts/Other/Camera.cs" id="6_o2vlx"]
-[ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="7_h5ye2"]
-[ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="8_ub7cd"]
-[ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="9_bll46"]
-[ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="10_xdd2k"]
-[ext_resource type="FontFile" uid="uid://du2man675mp5b" path="res://Assets/Fonts/Roboto_Mono/static/RobotoMono-Bold.ttf" id="11_7wvp5"]
-[ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="12_5d0pu"]
-[ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="13_14037"]
-[ext_resource type="PackedScene" uid="uid://bignn7lsbeest" path="res://Scenes/fragment.tscn" id="14_a6xh0"]
-[ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="14_ub7cd"]
-[ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="15_bll46"]
-[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="15_nawxm"]
-[ext_resource type="Texture2D" uid="uid://b8ulvofnby7aw" path="res://Assets/Objects/Fragment - Filled Slot.png" id="16_xdd2k"]
-[ext_resource type="Texture2D" uid="uid://dxjb13hojjw0x" path="res://Assets/UI/Button - Highlighted.png" id="17_7wvp5"]
-[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="18_5d0pu"]
-[ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="20_14037"]
-[ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="22_a6xh0"]
+[ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_g2k4b"]
+[ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Other/Background.cs" id="2_tkstn"]
+[ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="3_lfndu"]
+[ext_resource type="PackedScene" uid="uid://bwvj50vhjjac7" path="res://Scenes/player.tscn" id="4_clw6j"]
+[ext_resource type="Script" uid="uid://rfodace5xyiq" path="res://Scripts/Other/Camera.cs" id="5_dvn6w"]
+[ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="6_c6tpp"]
+[ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="7_aj7hx"]
+[ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="8_8d318"]
+[ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="9_me5s4"]
+[ext_resource type="FontFile" uid="uid://du2man675mp5b" path="res://Assets/Fonts/Roboto_Mono/static/RobotoMono-Bold.ttf" id="10_yv68g"]
+[ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="11_2hkck"]
+[ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="12_0jmgq"]
+[ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="13_3nofn"]
+[ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="14_ykout"]
+[ext_resource type="Texture2D" uid="uid://b8ulvofnby7aw" path="res://Assets/Objects/Fragment - Filled Slot.png" id="15_cnm2w"]
+[ext_resource type="Texture2D" uid="uid://dxjb13hojjw0x" path="res://Assets/UI/Button - Highlighted.png" id="16_hll3v"]
+[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="17_7a7x1"]
+[ext_resource type="PackedScene" uid="uid://bignn7lsbeest" path="res://Scenes/fragment.tscn" id="18_xa7xj"]
+[ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="19_3vtx2"]
+[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="20_d4mm0"]
+[ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="21_u83h1"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nawxm"]
-texture = ExtResource("4_yiwsm")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lg2bv"]
+texture = ExtResource("3_lfndu")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -44,47 +43,47 @@ texture = ExtResource("4_yiwsm")
 2:3/0 = 0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSet" id="TileSet_5ckws"]
+[sub_resource type="TileSet" id="TileSet_d4pdi"]
 physics_layer_0/collision_layer = 1
-sources/2 = SubResource("TileSetAtlasSource_nawxm")
+sources/2 = SubResource("TileSetAtlasSource_lg2bv")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
-atlas = ExtResource("10_xdd2k")
+atlas = ExtResource("9_me5s4")
 region = Rect2(0, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_po4dr"]
-atlas = ExtResource("10_xdd2k")
+atlas = ExtResource("9_me5s4")
 region = Rect2(64, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_khk2e"]
-atlas = ExtResource("10_xdd2k")
+atlas = ExtResource("9_me5s4")
 region = Rect2(128, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ur40f"]
-atlas = ExtResource("10_xdd2k")
+atlas = ExtResource("9_me5s4")
 region = Rect2(192, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lw600"]
-atlas = ExtResource("10_xdd2k")
+atlas = ExtResource("9_me5s4")
 region = Rect2(256, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g3ymf"]
-atlas = ExtResource("10_xdd2k")
+atlas = ExtResource("9_me5s4")
 region = Rect2(0, 16, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y1xml"]
-atlas = ExtResource("10_xdd2k")
+atlas = ExtResource("9_me5s4")
 region = Rect2(64, 16, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmvv5"]
-atlas = ExtResource("10_xdd2k")
+atlas = ExtResource("9_me5s4")
 region = Rect2(128, 16, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4akcd"]
-atlas = ExtResource("10_xdd2k")
+atlas = ExtResource("9_me5s4")
 region = Rect2(192, 16, 64, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_sn6f3"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_mf1d6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -119,31 +118,20 @@ animations = [{
 "speed": 16.0
 }]
 
-[node name="LevelTemplate" type="Node2D"]
-script = ExtResource("1_2ejuk")
-
-[node name="Label" type="Label" parent="."]
-offset_left = 290.0
-offset_top = -220.0
-offset_right = 504.0
-offset_bottom = -145.0
-text = "To Do:
-- Add new script to root
-- Fill player export variables"
-metadata/_edit_use_anchors_ = true
+[node name="1-2" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(3, -18)
 scale = Vector2(1.08203, 1.13281)
-texture = ExtResource("2_0jff0")
-script = ExtResource("3_iihae")
+texture = ExtResource("1_g2k4b")
+script = ExtResource("2_tkstn")
 cameraPath = NodePath("../Camera")
 
 [node name="Ground" type="TileMapLayer" parent="." groups=["Ground"]]
 position = Vector2(142, -17)
-tile_set = SubResource("TileSet_5ckws")
+tile_set = SubResource("TileSet_d4pdi")
 
-[node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("5_n4o5f")]
+[node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("4_clw6j")]
 position = Vector2(-131, 16)
 PowerMeter = NodePath("")
 percentageLabel = NodePath("")
@@ -151,7 +139,7 @@ FragmentSlots = NodePath("")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(-5, 6)
-script = ExtResource("6_o2vlx")
+script = ExtResource("5_dvn6w")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -171,9 +159,9 @@ offset_top = 571.0
 offset_right = 553.0
 offset_bottom = 611.0
 scale = Vector2(3.5, 3.533)
-texture_under = ExtResource("7_h5ye2")
-texture_progress = ExtResource("8_ub7cd")
-script = ExtResource("9_bll46")
+texture_under = ExtResource("6_c6tpp")
+texture_progress = ExtResource("7_aj7hx")
+script = ExtResource("8_8d318")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
@@ -194,7 +182,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Power Surge" type="AnimatedSprite2D" parent="UI/Control/Power Meter"]
 visible = false
 position = Vector2(22.2142, 8.0218)
-sprite_frames = SubResource("SpriteFrames_sn6f3")
+sprite_frames = SubResource("SpriteFrames_mf1d6")
 
 [node name="Percentage Label" type="Label" parent="UI/Control"]
 layout_mode = 1
@@ -208,7 +196,7 @@ offset_top = 564.0
 offset_right = 609.0
 offset_bottom = 587.0
 scale = Vector2(1.08018, 1.15144)
-theme_override_fonts/font = ExtResource("11_7wvp5")
+theme_override_fonts/font = ExtResource("10_yv68g")
 theme_override_font_sizes/font_size = 16
 text = "100%"
 horizontal_alignment = 1
@@ -217,7 +205,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Attacks-ui" type="Sprite2D" parent="UI/Control"]
 position = Vector2(102, 593)
 scale = Vector2(4, 4)
-texture = ExtResource("12_5d0pu")
+texture = ExtResource("11_2hkck")
 
 [node name="Attack Sprite" type="Sprite2D" parent="UI/Control/Attacks-ui"]
 position = Vector2(0, -0.25)
@@ -235,7 +223,7 @@ offset_top = 50.0
 offset_right = 71.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("13_14037")
+texture = ExtResource("12_0jmgq")
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot 2" type="TextureRect" parent="UI/Control/Fragment Slots"]
@@ -245,7 +233,7 @@ offset_top = 50.0
 offset_right = 131.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("13_14037")
+texture = ExtResource("12_0jmgq")
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot 3" type="TextureRect" parent="UI/Control/Fragment Slots"]
@@ -255,10 +243,10 @@ offset_top = 50.0
 offset_right = 191.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("13_14037")
+texture = ExtResource("12_0jmgq")
 metadata/_edit_use_anchors_ = true
 
-[node name="DialogueBox" parent="UI" instance=ExtResource("14_ub7cd")]
+[node name="DialogueBox" parent="UI" instance=ExtResource("13_3nofn")]
 visible = false
 offset_left = 315.0
 offset_top = 66.0
@@ -291,13 +279,13 @@ offset_top = 238.0
 offset_right = 859.0
 offset_bottom = 261.0
 scale = Vector2(0.820161, 0.820161)
-theme_override_fonts/font = ExtResource("15_bll46")
+theme_override_fonts/font = ExtResource("14_ykout")
 text = "You've discovered a fragment!"
 
 [node name="Fragment-FilledSlot" type="Sprite2D" parent="UI/Pop-up"]
 position = Vector2(583, 297)
 scale = Vector2(2.23797, 2.23797)
-texture = ExtResource("16_xdd2k")
+texture = ExtResource("15_cnm2w")
 
 [node name="Label" type="Label" parent="UI/Pop-up"]
 layout_mode = 0
@@ -306,7 +294,7 @@ offset_top = 344.0
 offset_right = 1159.0
 offset_bottom = 398.0
 scale = Vector2(0.532068, 0.532068)
-theme_override_fonts/font = ExtResource("15_bll46")
+theme_override_fonts/font = ExtResource("14_ykout")
 text = "There are three fragments to find in every level, 
 collecting them all will refill your power meter."
 horizontal_alignment = 1
@@ -323,7 +311,7 @@ scale = Vector2(0.72383, 0.72383)
 [node name="Sprite" type="Sprite2D" parent="UI/Pop-up/Button"]
 position = Vector2(-0.879944, -0.73999)
 scale = Vector2(5.32, 5.32)
-texture = ExtResource("17_7wvp5")
+texture = ExtResource("16_hll3v")
 
 [node name="Label" type="Label" parent="UI/Pop-up/Button"]
 layout_mode = 1
@@ -339,7 +327,7 @@ offset_bottom = 83.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.460858, 0.460858)
-theme_override_fonts/font = ExtResource("18_5d0pu")
+theme_override_fonts/font = ExtResource("17_7a7x1")
 theme_override_font_sizes/font_size = 80
 text = "OK"
 horizontal_alignment = 1
@@ -347,15 +335,15 @@ vertical_alignment = 1
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Fragment3" parent="Objects" instance=ExtResource("14_a6xh0")]
+[node name="Fragment3" parent="Objects" instance=ExtResource("18_xa7xj")]
 position = Vector2(-415, -139)
 scale = Vector2(1.1, 1.1)
 
-[node name="Fragment2" parent="Objects" instance=ExtResource("14_a6xh0")]
+[node name="Fragment2" parent="Objects" instance=ExtResource("18_xa7xj")]
 position = Vector2(-420, -195)
 scale = Vector2(1.1, 1.1)
 
-[node name="Fragment" parent="Objects" instance=ExtResource("14_a6xh0")]
+[node name="Fragment" parent="Objects" instance=ExtResource("18_xa7xj")]
 position = Vector2(-422, -232)
 scale = Vector2(1.1, 1.1)
 
@@ -364,14 +352,14 @@ scale = Vector2(1.1, 1.1)
 [node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("20_14037")
+stream = ExtResource("19_3vtx2")
 autoplay = true
 max_distance = 100000.0
 attenuation = 1e-05
 parameters/looping = true
 
 [node name="ScreenResolution" type="Node" parent="."]
-script = ExtResource("15_nawxm")
+script = ExtResource("20_d4mm0")
 
-[node name="End" parent="." instance=ExtResource("22_a6xh0")]
+[node name="End" parent="." instance=ExtResource("21_u83h1")]
 position = Vector2(-470, -183)

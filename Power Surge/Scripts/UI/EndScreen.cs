@@ -130,6 +130,7 @@ public partial class EndScreen : Node2D
 					int index = levels.IndexOf(GameData.Instance.CurrentLevel);
 					string next = levels[index + 1];
 					GetTree().ChangeSceneToFile("res://Scenes/Levels/level_" + next + ".tscn");
+					GD.Print("Can't go to next level yet!");
 					break;
 				default:
 					break;
@@ -207,6 +208,10 @@ public partial class EndScreen : Node2D
 		}
 	}
 
+	/// <summary>
+	/// Calculate final rank using fragments collected, power remaining, and time
+	/// </summary>
+	/// <returns>Final letter grade</returns>
 	private string CalculateRank()
 	{
 		string finalRank = "F";
@@ -229,7 +234,7 @@ public partial class EndScreen : Node2D
 		}
 		else
 		{
-			points+=2;
+			points += 2;
 			if ((expectedTime - levelTime) > 10)
 			{
 				points++;

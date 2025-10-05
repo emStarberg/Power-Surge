@@ -1,10 +1,13 @@
-[gd_scene load_steps=48 format=3 uid="uid://bwvj50vhjjac7"]
+[gd_scene load_steps=70 format=3 uid="uid://bwvj50vhjjac7"]
 
 [ext_resource type="Script" uid="uid://dr47mlmgvnewi" path="res://Scripts/Player/Player.cs" id="1_3smsa"]
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player/Player-Spritesheet.png" id="2_8erm5"]
+[ext_resource type="Texture2D" uid="uid://bmj5ko27wem2n" path="res://Assets/Characters/Player/Player Dash - Power Surge - Spritesheet.png" id="3_7dp3o"]
 [ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player/Player Death - Spritesheet.png" id="3_f1ek2"]
+[ext_resource type="Texture2D" uid="uid://cndd6taxvrma1" path="res://Assets/Characters/Enemies/Circuit Bug/Projectile CB - Explode - Spritesheet.png" id="4_h4iuc"]
 [ext_resource type="Texture2D" uid="uid://bptbc7jd1antf" path="res://Assets/Characters/Player/Player Hurt - Spritesheet.png" id="4_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://3wb48qr8yjh1" path="res://Assets/Characters/Player/Player Dash - Spritesheet.png" id="5_gymyn"]
+[ext_resource type="Texture2D" uid="uid://diwq6eaq2306b" path="res://Assets/Characters/Player/Player Idle - Power Surge - Spritesheet.png" id="6_7dp3o"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="7_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bitip81tn2v63" path="res://Assets/Characters/Player/Shield - Spritesheet.png" id="7_ukyrk"]
 [ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Audio/Zap.mp3" id="8_8erm5"]
@@ -256,6 +259,170 @@ animations = [{
 "speed": 13.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqcod"]
+atlas = ExtResource("3_7dp3o")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igrcy"]
+atlas = ExtResource("3_7dp3o")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs7ks"]
+atlas = ExtResource("3_7dp3o")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6n3p"]
+atlas = ExtResource("3_7dp3o")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olqyp"]
+atlas = ExtResource("3_7dp3o")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpjfl"]
+atlas = ExtResource("3_7dp3o")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi64h"]
+atlas = ExtResource("4_h4iuc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ijsl"]
+atlas = ExtResource("4_h4iuc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1odr"]
+atlas = ExtResource("4_h4iuc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gysh"]
+atlas = ExtResource("4_h4iuc")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfarp"]
+atlas = ExtResource("4_h4iuc")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6uwr"]
+atlas = ExtResource("6_7dp3o")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83xs0"]
+atlas = ExtResource("6_7dp3o")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypfnu"]
+atlas = ExtResource("6_7dp3o")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuaoq"]
+atlas = ExtResource("6_7dp3o")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wohnl"]
+atlas = ExtResource("6_7dp3o")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36dho"]
+atlas = ExtResource("6_7dp3o")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh6i2"]
+atlas = ExtResource("6_7dp3o")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nv4vc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqcod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igrcy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs7ks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6n3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olqyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpjfl")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bi64h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ijsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1odr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gysh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vfarp")
+}],
+"loop": false,
+"name": &"death",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko2hj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1twj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4kih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4f21w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qm3s6")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6uwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83xs0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypfnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuaoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wohnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36dho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh6i2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 15.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3smsa")
 
@@ -285,8 +452,14 @@ scale = Vector2(1.05, 1.05)
 sprite_frames = SubResource("SpriteFrames_2exqc")
 animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.47151
+
+[node name="Animations - Power Surge" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-2.38419e-07, 2.38419e-07)
+scale = Vector2(1.05, 1.05)
+sprite_frames = SubResource("SpriteFrames_nv4vc")
+animation = &"hurt"
+autoplay = "idle"
 
 [node name="Timer" type="Label" parent="."]
 offset_left = -3.0
@@ -323,3 +496,4 @@ stream = ExtResource("13_ukyrk")
 stream = ExtResource("14_7dp3o")
 
 [connection signal="animation_finished" from="Animations" to="." method="OnAnimationFinished"]
+[connection signal="animation_finished" from="Animations - Power Surge" to="." method="OnAnimationFinished"]

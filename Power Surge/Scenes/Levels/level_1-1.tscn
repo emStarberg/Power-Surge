@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://cy3q6p77ai3a5"]
+[gd_scene load_steps=38 format=4 uid="uid://cy3q6p77ai3a5"]
 
 [ext_resource type="Script" uid="uid://cdtv6vx2g7h88" path="res://Scripts/Levels/Level1_1.cs" id="1_bcykt"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_booo5"]
@@ -23,9 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://dxjb13hojjw0x" path="res://Assets/UI/Button - Highlighted.png" id="17_4yllm"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="18_2egns"]
 [ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="19_3lm4w"]
-[ext_resource type="Script" uid="uid://bhdr8cm3de4gp" path="res://Scripts/Other/End.cs" id="23_axncg"]
+[ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="23_axncg"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fbvfs"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4yllm"]
 texture = ExtResource("3_ox03y")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -48,7 +48,7 @@ texture = ExtResource("3_ox03y")
 
 [sub_resource type="TileSet" id="TileSet_gv0h3"]
 physics_layer_0/collision_layer = 1
-sources/2 = SubResource("TileSetAtlasSource_fbvfs")
+sources/2 = SubResource("TileSetAtlasSource_4yllm")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
 atlas = ExtResource("9_2kucg")
@@ -124,9 +124,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcykt"]
 size = Vector2(2.27703, 14.7307)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vo021"]
-size = Vector2(1, 20)
-
 [node name="1-1" type="Node2D"]
 script = ExtResource("1_bcykt")
 
@@ -173,6 +170,7 @@ scale = Vector2(3.5, 3.533)
 texture_under = ExtResource("6_3lm4w")
 texture_progress = ExtResource("7_t3yd5")
 script = ExtResource("8_ebuj1")
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
 layout_mode = 1
@@ -187,6 +185,7 @@ offset_right = -667.933
 offset_bottom = -285.952
 scale = Vector2(1.00417, 1.00375)
 color = Color(0.223103, 0.223103, 0.223103, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Power Surge" type="AnimatedSprite2D" parent="UI/Control/Power Meter"]
 visible = false
@@ -209,6 +208,7 @@ theme_override_fonts/font = ExtResource("10_vo021")
 theme_override_font_sizes/font_size = 16
 text = "100%"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Attacks-ui" type="Sprite2D" parent="UI/Control"]
 position = Vector2(102, 593)
@@ -222,6 +222,7 @@ position = Vector2(0, -0.25)
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Slot 1" type="TextureRect" parent="UI/Control/Fragment Slots"]
 layout_mode = 0
@@ -231,6 +232,7 @@ offset_right = 71.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_4yllm")
+metadata/_edit_use_anchors_ = true
 
 [node name="Slot 2" type="TextureRect" parent="UI/Control/Fragment Slots"]
 layout_mode = 0
@@ -240,6 +242,7 @@ offset_right = 131.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_4yllm")
+metadata/_edit_use_anchors_ = true
 
 [node name="Slot 3" type="TextureRect" parent="UI/Control/Fragment Slots"]
 layout_mode = 0
@@ -249,6 +252,7 @@ offset_right = 191.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_4yllm")
+metadata/_edit_use_anchors_ = true
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("14_bcykt")]
 visible = false
@@ -424,15 +428,8 @@ max_distance = 100000.0
 attenuation = 1e-05
 parameters/looping = true
 
-[node name="End" type="Area2D" parent="."]
+[node name="End" parent="." instance=ExtResource("23_axncg")]
 position = Vector2(4471, 292)
-scale = Vector2(1.66278, 5.55891)
-script = ExtResource("23_axncg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="End"]
-shape = SubResource("RectangleShape2D_vo021")
 
 [node name="ScreenResolution" type="Node" parent="."]
 script = ExtResource("14_lg4kb")
-
-[connection signal="body_entered" from="End" to="End" method="OnBodyEntered"]

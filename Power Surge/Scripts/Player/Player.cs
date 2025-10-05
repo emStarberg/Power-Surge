@@ -43,6 +43,7 @@ public partial class Player : CharacterBody2D
 	private Label powerSurgeTimer;
 	private float powerSurgeTime = 10f;
 	private bool powerSurgeActive = false;
+	private bool invincible = true;
 	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound;
 
 	// FOR TUTORIAL
@@ -310,12 +311,15 @@ public partial class Player : CharacterBody2D
 	/// <param name="shakeDuration">Camera shake duration</param>
 	public void Hurt(int damage, float shakeAmount, float shakeDuration)
 	{
-		animation.Animation = "hurt";
-		hurtSound.Play();
-		// Camera shake
-		var camera = GetParent().GetNode<Camera>("Camera");
-		camera.Shake(shakeAmount, shakeDuration);
-		DecreasePower(damage);
+		if (!invincible)
+		{
+			animation.Animation = "hurt";
+			hurtSound.Play();
+			// Camera shake
+			var camera = GetParent().GetNode<Camera>("Camera");
+			camera.Shake(shakeAmount, shakeDuration);
+			DecreasePower(damage);
+		}
 	}
 
 	/// <Summary>
@@ -323,6 +327,7 @@ public partial class Player : CharacterBody2D
 	/// </Summary>
 	public void Dash()
 	{
+		invincible = true;
 		// For tutorial
 		if (!HasDashed)
 		{
@@ -492,6 +497,7 @@ public partial class Player : CharacterBody2D
 		}
 		else if (animation.Animation == "dash")
 		{
+			invincible = false;
 			isDashing = false;
 			velocity.X = 0; // Stop horizontal movement after dash
 
@@ -528,6 +534,11 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void StartPowerSurgeTimer()
 	{
+		animation.Visible = false;
+		animation = GetNode<AnimatedSprite2D>("Animations - Power Surge");
+		animation.Visible = true;
+		Scale = new Vector2(1.3f, 1.3f);
+		Speed = 300f;
 		powerSurgeMusic.Play();
 		powerSurgeTime = 10f;
 		powerSurgeActive = true;
@@ -538,6 +549,15 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void StopPowerSurgeTimer()
 	{
+		if (isDashing)
+		{
+			isDashing = false;
+		}
+		animation.Visible = false;
+		animation = GetNode<AnimatedSprite2D>("Animations");
+		animation.Visible = true;
+		Scale = new Vector2(1f, 1f);
+		Speed = 200f;
 		powerSurgeMusic.Stop();
 		powerSurgeActive = false;
 		powerSurgeTimer.Visible = false;
