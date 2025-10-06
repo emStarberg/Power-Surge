@@ -545,6 +545,7 @@ public partial class Player : CharacterBody2D
 		animation.Visible = true;
 		Scale = new Vector2(1.3f, 1.3f);
 		Speed = 300f;
+		JumpStrength -= 50;
 		powerSurgeMusic.Play();
 		powerSurgeTime = 15f;
 		powerSurgeActive = true;
@@ -564,6 +565,7 @@ public partial class Player : CharacterBody2D
 		animation.Visible = true;
 		Scale = new Vector2(1f, 1f);
 		Speed = 200f;
+		JumpStrength += 50;
 		powerSurgeMusic.Stop();
 		powerSurgeActive = false;
 		powerSurgeTimer.Visible = false;
