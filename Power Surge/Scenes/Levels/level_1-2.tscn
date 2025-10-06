@@ -1,6 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://de5lu023djnhs"]
+[gd_scene load_steps=57 format=4 uid="uid://de5lu023djnhs"]
 
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_g2k4b"]
+[ext_resource type="Script" uid="uid://2tcdm705tb5c" path="res://Scripts/Levels/Level1_2.cs" id="1_tkstn"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Other/Background.cs" id="2_tkstn"]
 [ext_resource type="Texture2D" uid="uid://v5ybrh18m8v4" path="res://Assets/Tilemaps/Luminescent Plains - Tile Set.png" id="3_lfndu"]
 [ext_resource type="PackedScene" uid="uid://bwvj50vhjjac7" path="res://Scenes/player.tscn" id="4_clw6j"]
@@ -14,13 +15,19 @@
 [ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="12_0jmgq"]
 [ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="13_3nofn"]
 [ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="14_ykout"]
-[ext_resource type="Texture2D" uid="uid://b8ulvofnby7aw" path="res://Assets/Objects/Fragment - Filled Slot.png" id="15_cnm2w"]
+[ext_resource type="Texture2D" uid="uid://h3mom5dcl36h" path="res://Assets/Characters/Player/Player - Power Surge.png" id="16_clw6j"]
 [ext_resource type="Texture2D" uid="uid://dxjb13hojjw0x" path="res://Assets/UI/Button - Highlighted.png" id="16_hll3v"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="17_7a7x1"]
 [ext_resource type="PackedScene" uid="uid://bignn7lsbeest" path="res://Scenes/fragment.tscn" id="18_xa7xj"]
 [ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="19_3vtx2"]
+[ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="20_clw6j"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="20_d4mm0"]
+[ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="20_lfndu"]
+[ext_resource type="Script" uid="uid://cypy8h14tqy4j" path="res://Scripts/Objects/StoneBridge.cs" id="21_8d318"]
 [ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="21_u83h1"]
+[ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="22_dvn6w"]
+[ext_resource type="Texture2D" uid="uid://k8on6iy7yqcn" path="res://Assets/Objects/Stone Bridge - Animation - Spritesheet.png" id="22_me5s4"]
+[ext_resource type="AudioStream" uid="uid://ctoo0el5qp2tp" path="res://Assets/Audio/dropping-rocks-5996.mp3" id="23_yv68g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lg2bv"]
 texture = ExtResource("3_lfndu")
@@ -118,7 +125,109 @@ animations = [{
 "speed": 16.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hkck"]
+size = Vector2(16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acifj"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(0, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqaec"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(16, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bp46n"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(32, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ojmf"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(48, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3o48"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(64, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh6nn"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(80, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a6ei"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(96, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y63s"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(112, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87f7d"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(128, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xbq8"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(144, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u6u1"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(160, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fb68"]
+atlas = ExtResource("22_me5s4")
+region = Rect2(176, 0, 16, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0jmgq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acifj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqaec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bp46n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ojmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3o48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh6nn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a6ei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y63s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87f7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xbq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u6u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fb68")
+}],
+"loop": false,
+"name": &"default",
+"speed": 16.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nofn"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_clw6j"]
+size = Vector2(2.27703, 14.7307)
+
 [node name="1-2" type="Node2D"]
+script = ExtResource("1_tkstn")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(3, -18)
@@ -129,13 +238,14 @@ cameraPath = NodePath("../Camera")
 
 [node name="Ground" type="TileMapLayer" parent="." groups=["Ground"]]
 position = Vector2(142, -17)
+tile_map_data = PackedByteArray("AADi/wMAAgABAAAAAADj/wMAAgABAAAAAADk/wMAAgABAAAAAADl/wMAAgABAAAAAADm/wMAAgABAAAAAADn/wMAAgABAAAAAADo/wMAAgABAAAAAADp/wMAAgABAAAAAADq/wMAAgABAAAAAADr/wMAAgABAAAAAADs/wMAAgABAAAAAADt/wMAAgABAAAAAADu/wMAAgABAAAAAADv/wMAAgABAAAAAADw/wMAAgACAAAAAADw/wQAAgACAAEAAADw/wUAAgACAAEAAADw/wYAAgACAAMAAADu/wYAAgABAAMAAADt/wYAAgAAAAMAAADt/wUAAgACAAEAAADs/wUAAgABAAMAAADr/wUAAgAAAAMAAADv/wYAAgABAAMAAADv/wUAAgAAAAEAAADv/wQAAgABAAEAAADu/wQAAgABAAMAAADt/wQAAgABAAEAAADs/wQAAgABAAEAAADr/wQAAgABAAEAAADq/wQAAgABAAEAAADp/wQAAgABAAEAAADo/wQAAgABAAEAAADx/wgAAgAAAAAAAADy/wgAAgABAAAAAADz/wgAAgABAAAAAAD0/wgAAgABAAAAAAD1/wgAAgACAAAAAAD0/wkAAgABAAMAAADz/wkAAgABAAEAAADz/woAAgACAAMAAADy/woAAgABAAMAAADx/woAAgAAAAMAAADx/wkAAgAAAAEAAADy/wkAAgABAAEAAAD1/wkAAgACAAMAAAABAAsAAgAAAAAAAAACAAsAAgABAAAAAAADAAsAAgABAAAAAAAEAAsAAgACAAAAAAACAAwAAgABAAEAAAACAA0AAgABAAEAAAADAA0AAgABAAMAAAAEAA0AAgABAAMAAAAFAA0AAgACAAMAAAAFAAwAAgACAAAAAAAEAAwAAgABAAEAAAADAAwAAgABAAEAAAABAAwAAgAAAAEAAAABAA0AAgABAAEAAAAAAA0AAgABAAAAAAD//w0AAgAAAAAAAAABAA4AAgABAAMAAAAAAA4AAgAAAAMAAAACAA4AAgACAAMAAAD3/w0AAgABAAAAAAD4/w0AAgABAAAAAAD6/wYAAgAAAAAAAAD8/wYAAgACAAAAAAD7/wYAAgABAAAAAAD7/wcAAgABAAMAAAD6/wcAAgAAAAMAAAD8/wcAAgACAAMAAADr/woAAgAAAAAAAADs/woAAgACAAAAAADs/wsAAgACAAMAAADr/wsAAgAAAAMAAAD2/w0AAgABAAAAAAD1/w0AAgABAAAAAAD0/w0AAgABAAAAAADz/w0AAgABAAAAAADy/w0AAgABAAAAAADx/w0AAgABAAAAAAD5/w0AAgACAAAAAADe/w0AAgABAAAAAADf/w0AAgABAAAAAADg/w0AAgACAAAAAADh/wMAAgABAAAAAADg/wMAAgABAAAAAADf/wMAAgABAAAAAADe/wMAAgABAAAAAADd/wMAAgABAAAAAADc/wMAAgABAAAAAADb/wMAAgABAAAAAADa/wMAAgABAAAAAADZ/wMAAgABAAAAAADY/wMAAgAAAAAAAADh/wQAAgABAAEAAADi/wQAAgABAAEAAADi/wUAAgABAAEAAADj/wUAAgABAAEAAADk/wUAAgABAAMAAADl/wUAAgABAAMAAADn/wUAAgACAAMAAADn/wQAAgABAAEAAADm/wUAAgABAAMAAADm/wQAAgABAAEAAADl/wQAAgABAAEAAADk/wQAAgABAAEAAADj/wQAAgABAAEAAADj/wYAAgACAAMAAADi/wYAAgAAAAMAAADh/wUAAgAAAAMAAADg/wQAAgABAAMAAADf/wQAAgAAAAMAAADl/wcAAgAAAAAAAADm/wcAAgACAAAAAAAEAAIAAgABAAAAAAAFAAIAAgABAAAAAAAGAAIAAgABAAAAAAADAAIAAgABAAAAAAACAAIAAgABAAAAAAABAAIAAgABAAAAAAAAAAIAAgAAAAAAAAABAAMAAgABAAMAAAACAAMAAgABAAEAAAACAAQAAgABAAEAAAADAAQAAgABAAEAAAADAAUAAgAAAAMAAAAEAAUAAgABAAMAAAAFAAUAAgABAAMAAAAGAAUAAgACAAMAAAAGAAQAAgABAAEAAAAHAAMAAgABAAMAAAAIAAMAAgABAAMAAAAJAAQAAgAAAAMAAAAKAAQAAgACAAMAAAAKAAMAAgABAAEAAAAJAAMAAgABAAEAAAALAAMAAgACAAMAAAALAAIAAgACAAAAAAAKAAIAAgABAAAAAAAJAAIAAgABAAAAAAAIAAIAAgABAAAAAAAHAAIAAgABAAAAAAADAAMAAgABAAEAAAAEAAMAAgABAAEAAAAFAAMAAgABAAEAAAAGAAMAAgABAAEAAAAFAAQAAgABAAEAAAAEAAQAAgABAAEAAAAAAAMAAgAAAAMAAADq//3/AgABAAAAAADr//3/AgACAAAAAADp//3/AgAAAAAAAADr//7/AgACAAMAAADq//7/AgABAAMAAADp//7/AgAAAAMAAAAOAAEAAgAAAAAAAAAOAAIAAgAAAAMAAAAPAAEAAgABAAAAAAAPAAIAAgABAAMAAAAQAAEAAgABAAAAAAAQAAIAAgABAAMAAAARAAEAAgABAAAAAAARAAIAAgABAAEAAAARAAMAAgAAAAMAAAASAAEAAgABAAAAAAASAAIAAgABAAEAAAASAAMAAgACAAMAAAATAAEAAgABAAAAAAATAAIAAgABAAMAAAAUAAEAAgABAAAAAAAUAAIAAgABAAMAAAAVAAEAAgABAAAAAAAVAAIAAgABAAMAAAAWAAEAAgABAAAAAAAWAAIAAgABAAMAAAAXAAEAAgABAAAAAAAXAAIAAgABAAMAAAAYAAEAAgABAAAAAAAYAAIAAgABAAMAAAAZAAEAAgACAAAAAAAZAAIAAgACAAMAAAANAAYAAgACAAAAAAAMAAYAAgAAAAAAAAANAAcAAgACAAMAAAAMAAcAAgAAAAMAAAAgAAUAAgABAAAAAAAfAAUAAgABAAAAAAAeAAQAAgACAAAAAAAeAAUAAgABAAEAAAAhAAUAAgACAAAAAAAdAAQAAgAAAAAAAAAdAAUAAgAAAAEAAAAdAAYAAgAAAAMAAAAhAAYAAgACAAMAAAAgAAYAAgABAAMAAAAfAAYAAgABAAMAAAAeAAYAAgABAAMAAAApAAUAAgABAAAAAAAqAAUAAgABAAAAAAArAAUAAgABAAAAAAAsAAUAAgABAAAAAAAtAAUAAgABAAAAAAAuAAUAAgABAAAAAAAoAAUAAgAAAAAAAAAuAAYAAgABAAMAAAAoAAYAAgAAAAMAAAAtAAYAAgABAAMAAAAsAAYAAgABAAMAAAArAAYAAgABAAMAAAAqAAYAAgABAAMAAAApAAYAAgABAAMAAAAvAAUAAgABAAAAAAAwAAUAAgACAAAAAAAwAAYAAgACAAMAAAAvAAYAAgABAAMAAAA0AAgAAgABAAAAAAA0AAkAAgABAAEAAAA0AAoAAgABAAMAAAA1AAoAAgABAAMAAAA1AAkAAgABAAAAAAA2AAkAAgABAAAAAAA3AAkAAgABAAAAAAA4AAkAAgACAAAAAAA4AAoAAgABAAEAAAA5AAoAAgACAAAAAAA5AAsAAgACAAMAAAA4AAsAAgABAAMAAAA3AAsAAgABAAMAAAA3AAoAAgABAAEAAAA2AAsAAgAAAAMAAAA2AAoAAgABAAEAAAAzAAoAAgABAAMAAAAyAAoAAgABAAEAAAAxAAoAAgAAAAEAAAAxAAsAAgAAAAMAAAAxAAkAAgAAAAAAAAAyAAkAAgABAAAAAAAzAAkAAgABAAEAAAAzAAgAAgAAAAAAAAA1AAgAAgACAAAAAAAyAAsAAgACAAMAAAA+AAsAAgABAAAAAAA/AAsAAgACAAAAAAA9AAsAAgAAAAAAAAA+AAwAAgABAAMAAAA/AAwAAgACAAMAAAA9AAwAAgAAAAMAAABAAPr/AgABAAEAAABAAPv/AgABAAMAAABBAPr/AgABAAEAAABBAPv/AgABAAEAAABBAPz/AgAAAAMAAABCAPr/AgABAAEAAABCAPv/AgABAAEAAABCAPz/AgABAAMAAABDAPv/AgABAAEAAABDAPz/AgABAAEAAABEAPv/AgABAAEAAABEAPz/AgABAAMAAAAwAPT/AgAAAAAAAAAwAPX/AgAAAAMAAAAxAPT/AgABAAAAAAAxAPX/AgABAAEAAAAxAPb/AgAAAAMAAAAyAPT/AgACAAAAAAAyAPX/AgABAAEAAAAyAPb/AgABAAEAAAAzAPX/AgABAAAAAAAzAPb/AgABAAEAAAA0APX/AgACAAAAAAA0APb/AgACAAMAAAA2APf/AgAAAAAAAAA3APf/AgACAAAAAAA4AP7/AgAAAAAAAAA5AP7/AgABAAAAAAA6APr/AgAAAAAAAAA6AP7/AgABAAAAAAA7APr/AgACAAAAAAA7APv/AgAAAAMAAAA8APv/AgABAAAAAAA9APv/AgABAAAAAAA+APv/AgABAAAAAAA/APn/AgAAAAAAAAA/APr/AgAAAAEAAAA/APv/AgABAAMAAABAAPn/AgABAAAAAABBAPn/AgABAAAAAABCAPn/AgABAAAAAABDAPn/AgACAAAAAABDAPr/AgABAAEAAABDAP3/AgACAAMAAABEAPr/AgACAAAAAABFAPv/AgABAAAAAABFAPz/AgABAAMAAABGAPv/AgACAAAAAABGAPz/AgACAAMAAABIAPX/AgAAAAAAAABIAPb/AgAAAAEAAABIAPf/AgAAAAMAAABJAPX/AgABAAAAAABJAPb/AgABAAEAAABJAPf/AgABAAEAAABJAP//AgABAAAAAABKAPX/AgABAAAAAABKAPb/AgABAAEAAABKAPf/AgABAAEAAABKAPj/AgAAAAMAAABKAP7/AgAAAAAAAABKAP//AgABAAMAAABLAPX/AgABAAAAAABLAPb/AgABAAEAAABLAPf/AgABAAEAAABLAPj/AgABAAMAAABLAP7/AgABAAAAAABLAP//AgABAAMAAABMAPX/AgABAAAAAABMAPb/AgABAAEAAABMAPf/AgACAAEAAABMAPj/AgACAAMAAABMAP7/AgACAAAAAABMAP//AgACAAMAAABNAPX/AgACAAAAAABNAPb/AgACAAMAAABUAPf/AgABAAAAAABVAPf/AgABAAAAAABVAPj/AgAAAAMAAABWAPf/AgACAAAAAABWAPj/AgACAAMAAAA0AAMAAgAAAAAAAAA1AAMAAgABAAAAAAA/AAIAAgAAAAAAAAA0AAQAAgAAAAEAAAA0AAUAAgAAAAMAAAA1AAQAAgABAAEAAAA2AAMAAgABAAAAAAA2AAQAAgACAAMAAAA3AAMAAgABAAAAAAA4AAMAAgABAAAAAAA5AAMAAgABAAAAAAA6AAMAAgABAAAAAAA7AAMAAgABAAAAAAA8AAMAAgABAAAAAAA9AAMAAgABAAAAAAA9AAQAAgAAAAMAAAA+AAMAAgABAAAAAAA+AAQAAgACAAMAAAA/AAMAAgABAAEAAABAAAIAAgACAAAAAABAAAMAAgABAAEAAABBAAMAAgABAAAAAABCAAMAAgABAAAAAABDAAMAAgABAAAAAABEAAMAAgABAAAAAABFAAMAAgABAAAAAABGAAMAAgABAAAAAABHAAMAAgACAAAAAAA1AAUAAgACAAMAAABCAAoAAgAAAAAAAABDAAoAAgABAAAAAABEAAoAAgABAAAAAABFAAoAAgABAAAAAABGAAoAAgABAAAAAABHAAoAAgABAAAAAABIAAoAAgABAAAAAABJAAoAAgABAAAAAABUAAoAAgACAAAAAABTAAoAAgABAAAAAABSAAoAAgABAAAAAABRAAoAAgABAAAAAABQAAoAAgABAAAAAABPAAoAAgABAAAAAABOAAoAAgABAAAAAABNAAoAAgABAAAAAABMAAoAAgABAAAAAABLAAoAAgABAAAAAABKAAoAAgABAAAAAABTAPf/AgABAAAAAABSAPf/AgABAAAAAABRAPf/AgABAAAAAABQAPf/AgAAAAAAAABIAP//AgAAAAAAAAA7AP7/AgACAAAAAABbAPf/AgAAAAAAAABcAPf/AgABAAAAAABdAPf/AgABAAAAAABeAPf/AgABAAAAAABfAPf/AgABAAAAAABgAPf/AgABAAAAAABhAPf/AgABAAAAAABiAPf/AgABAAAAAABjAPf/AgABAAAAAABkAPf/AgABAAAAAABlAPf/AgABAAAAAABmAPf/AgABAAAAAABnAPf/AgABAAAAAABoAPf/AgABAAAAAABpAPf/AgABAAAAAABqAPf/AgABAAEAAABrAPf/AgABAAEAAABsAPf/AgABAAEAAABtAPf/AgABAAEAAABuAPf/AgABAAEAAABvAPf/AgABAAEAAABwAPf/AgABAAEAAABxAPf/AgABAAEAAAByAPf/AgABAAEAAABzAPf/AgABAAAAAAB0APf/AgABAAAAAAB1APf/AgABAAAAAAB2APf/AgABAAAAAAB3APf/AgABAAAAAABqAPb/AgAAAAAAAABrAPb/AgABAAAAAABsAPb/AgABAAAAAABtAPb/AgABAAAAAABuAPb/AgABAAAAAABvAPb/AgABAAAAAABwAPb/AgABAAAAAABxAPb/AgABAAAAAAByAPb/AgACAAAAAAB8APf/AgACAAAAAAB7APf/AgABAAAAAAB6APf/AgABAAAAAAB5APf/AgABAAAAAAB4APf/AgABAAAAAABcAPj/AgABAAEAAABdAPj/AgABAAEAAABeAPj/AgABAAEAAABfAPj/AgABAAEAAABgAPj/AgABAAEAAABhAPj/AgABAAEAAABiAPj/AgABAAEAAABjAPj/AgABAAEAAABkAPj/AgABAAEAAABlAPj/AgABAAEAAABmAPj/AgABAAEAAABnAPj/AgABAAEAAABoAPj/AgABAAEAAABpAPj/AgABAAEAAABqAPj/AgABAAEAAABrAPj/AgABAAEAAABsAPj/AgABAAEAAABtAPj/AgABAAEAAABuAPj/AgABAAEAAABvAPj/AgABAAEAAABwAPj/AgABAAEAAABxAPj/AgABAAEAAAByAPj/AgABAAEAAABzAPj/AgABAAEAAAB0APj/AgABAAEAAAB1APj/AgABAAEAAAB2APj/AgABAAEAAAB3APj/AgABAAEAAAB4APj/AgABAAEAAAB5APj/AgABAAEAAAB6APj/AgABAAEAAAB7APj/AgABAAEAAAB8APj/AgACAAEAAABbAPj/AgAAAAEAAABbAPn/AgAAAAMAAAB8APn/AgACAAMAAAB7APn/AgABAAMAAAB6APn/AgABAAMAAAB5APn/AgABAAMAAAB4APn/AgABAAMAAAB3APn/AgABAAMAAAB2APn/AgABAAMAAAB1APn/AgABAAMAAAB0APn/AgABAAMAAABzAPn/AgABAAMAAAByAPn/AgABAAMAAABxAPn/AgABAAMAAABwAPn/AgABAAMAAABvAPn/AgABAAMAAABuAPn/AgABAAMAAABtAPn/AgABAAMAAABsAPn/AgABAAMAAABrAPn/AgABAAMAAABqAPn/AgABAAMAAABpAPn/AgABAAMAAABoAPn/AgABAAMAAABnAPn/AgABAAMAAABmAPn/AgABAAMAAABlAPn/AgABAAMAAABkAPn/AgABAAMAAABjAPn/AgABAAMAAABiAPn/AgABAAMAAABhAPn/AgABAAMAAABgAPn/AgABAAMAAABfAPn/AgABAAMAAABeAPn/AgABAAMAAABdAPn/AgABAAMAAABcAPn/AgABAAMAAAArAPL/AgABAAAAAAAsAPL/AgACAAAAAAAqAPL/AgAAAAAAAADv/w0AAgAAAAAAAADw/w0AAgABAAAAAAB+APf/AgAAAAAAAAB+APj/AgAAAAEAAAB+APn/AgAAAAMAAAB/APf/AgABAAAAAAB/APj/AgABAAEAAAB/APn/AgABAAMAAACAAPf/AgABAAAAAACAAPj/AgABAAEAAACAAPn/AgABAAMAAACBAPf/AgABAAAAAACBAPj/AgABAAEAAACBAPn/AgABAAMAAACCAPf/AgABAAAAAACCAPj/AgABAAEAAACCAPn/AgABAAMAAACDAPf/AgABAAAAAACDAPj/AgABAAEAAACDAPn/AgABAAMAAACEAPf/AgABAAAAAACEAPj/AgABAAEAAACEAPn/AgABAAMAAACFAPf/AgABAAAAAACFAPj/AgABAAEAAACFAPn/AgABAAMAAACGAPf/AgABAAAAAACGAPj/AgABAAEAAACGAPn/AgABAAMAAACHAPf/AgABAAAAAACHAPj/AgABAAEAAACHAPn/AgABAAMAAACIAPf/AgABAAAAAACIAPj/AgABAAEAAACIAPn/AgABAAMAAACJAPf/AgABAAAAAACJAPj/AgABAAEAAACJAPn/AgABAAMAAACKAPf/AgABAAAAAACKAPj/AgABAAEAAACKAPn/AgABAAMAAACLAPf/AgABAAAAAACLAPj/AgABAAEAAACLAPn/AgABAAMAAACMAPf/AgABAAAAAACMAPj/AgABAAEAAACMAPn/AgABAAMAAACNAPb/AgAAAAAAAACNAPf/AgABAAEAAACNAPj/AgABAAEAAACNAPn/AgABAAMAAACOAPb/AgABAAAAAACOAPf/AgABAAEAAACOAPj/AgABAAEAAACOAPn/AgABAAMAAACPAPb/AgABAAAAAACPAPf/AgABAAEAAACPAPj/AgABAAEAAACPAPn/AgABAAMAAACQAPb/AgABAAAAAACQAPf/AgABAAEAAACQAPj/AgABAAEAAACQAPn/AgABAAMAAACRAPb/AgABAAAAAACRAPf/AgABAAEAAACRAPj/AgABAAEAAACRAPn/AgABAAMAAACSAPb/AgABAAAAAACSAPf/AgABAAEAAACSAPj/AgABAAEAAACSAPn/AgABAAMAAACTAPb/AgABAAAAAACTAPf/AgABAAEAAACTAPj/AgABAAEAAACTAPn/AgABAAMAAACUAPb/AgABAAAAAACUAPf/AgABAAEAAACUAPj/AgABAAEAAACUAPn/AgABAAMAAACVAPb/AgACAAAAAACVAPf/AgABAAEAAACVAPj/AgABAAEAAACVAPn/AgABAAMAAACWAPf/AgABAAAAAACWAPj/AgABAAEAAACWAPn/AgABAAMAAACXAPf/AgABAAAAAACXAPj/AgABAAEAAACXAPn/AgABAAMAAACYAPf/AgABAAAAAACYAPj/AgABAAEAAACYAPn/AgABAAMAAACZAPf/AgABAAAAAACZAPj/AgABAAEAAACZAPn/AgABAAMAAACaAPf/AgABAAAAAACaAPj/AgABAAEAAACaAPn/AgABAAMAAACbAPf/AgABAAAAAACbAPj/AgABAAEAAACbAPn/AgABAAMAAACcAPf/AgABAAAAAACcAPj/AgABAAEAAACcAPn/AgABAAMAAACdAPf/AgABAAAAAACdAPj/AgABAAEAAACdAPn/AgABAAMAAACeAPf/AgABAAAAAACeAPj/AgABAAEAAACeAPn/AgABAAMAAACfAPf/AgACAAAAAACfAPj/AgACAAEAAACfAPn/AgACAAMAAACjAPn/AgAAAAAAAACjAPr/AgAAAAEAAACjAPv/AgAAAAMAAACkAPn/AgABAAAAAACkAPr/AgABAAEAAACkAPv/AgABAAMAAAClAPn/AgABAAAAAAClAPr/AgABAAEAAAClAPv/AgABAAMAAACmAPn/AgABAAAAAACmAPr/AgABAAEAAACmAPv/AgABAAMAAACnAPn/AgABAAAAAACnAPr/AgABAAEAAACnAPv/AgABAAMAAACoAPn/AgABAAAAAACoAPr/AgABAAEAAACoAPv/AgABAAMAAACpAPn/AgABAAAAAACpAPr/AgABAAEAAACpAPv/AgABAAMAAACqAPn/AgABAAAAAACqAPr/AgABAAEAAACqAPv/AgABAAMAAACrAPn/AgABAAAAAACrAPr/AgABAAEAAACrAPv/AgABAAMAAACsAPn/AgABAAAAAACsAPr/AgABAAEAAACsAPv/AgABAAMAAACtAPn/AgABAAAAAACtAPr/AgABAAEAAACtAPv/AgABAAMAAACuAPn/AgABAAAAAACuAPr/AgABAAEAAACuAPv/AgABAAMAAACvAPn/AgABAAAAAACvAPr/AgABAAEAAACvAPv/AgABAAMAAACwAPn/AgABAAAAAACwAPr/AgABAAEAAACwAPv/AgABAAMAAACxAPn/AgABAAAAAACxAPr/AgABAAEAAACxAPv/AgABAAMAAACyAPj/AgAAAAAAAACyAPn/AgABAAEAAACyAPr/AgABAAEAAACyAPv/AgABAAMAAACzAPj/AgABAAAAAACzAPn/AgABAAEAAACzAPr/AgABAAEAAACzAPv/AgABAAMAAAC0APj/AgABAAAAAAC0APn/AgABAAEAAAC0APr/AgABAAEAAAC0APv/AgABAAMAAAC1APj/AgABAAAAAAC1APn/AgABAAEAAAC1APr/AgABAAEAAAC1APv/AgABAAMAAAC2APj/AgABAAAAAAC2APn/AgABAAEAAAC2APr/AgABAAEAAAC2APv/AgABAAMAAAC3APj/AgABAAAAAAC3APn/AgABAAEAAAC3APr/AgABAAEAAAC3APv/AgABAAMAAAC4APj/AgABAAAAAAC4APn/AgABAAEAAAC4APr/AgABAAEAAAC4APv/AgABAAMAAAC5APj/AgABAAAAAAC5APn/AgABAAEAAAC5APr/AgABAAEAAAC5APv/AgABAAMAAAC6APj/AgACAAAAAAC6APn/AgABAAEAAAC6APr/AgABAAEAAAC6APv/AgABAAMAAAC7APn/AgABAAAAAAC7APr/AgABAAEAAAC7APv/AgABAAMAAAC8APn/AgABAAAAAAC8APr/AgABAAEAAAC8APv/AgABAAMAAAC9APn/AgABAAAAAAC9APr/AgABAAEAAAC9APv/AgABAAMAAAC+APn/AgABAAAAAAC+APr/AgABAAEAAAC+APv/AgABAAMAAAC/APn/AgABAAAAAAC/APr/AgABAAEAAAC/APv/AgABAAMAAADAAPn/AgABAAAAAADAAPr/AgABAAEAAADAAPv/AgABAAMAAADBAPn/AgABAAAAAADBAPr/AgABAAEAAADBAPv/AgABAAMAAADCAPn/AgABAAAAAADCAPr/AgABAAEAAADCAPv/AgABAAMAAADDAPn/AgABAAAAAADDAPr/AgABAAEAAADDAPv/AgABAAMAAADEAPn/AgACAAAAAADEAPr/AgACAAEAAADEAPv/AgACAAMAAADEAAAAAgABAAAAAADIAAAAAgABAAAAAADHAAAAAgABAAAAAADGAAAAAgABAAAAAADFAAAAAgABAAAAAADJAAAAAgACAAAAAADDAAAAAgAAAAAAAADGAAEAAgABAAMAAADFAAEAAgABAAEAAADFAAIAAgACAAMAAADEAAIAAgABAAEAAADEAAMAAgACAAMAAADDAAMAAgAAAAMAAADDAAIAAgAAAAEAAADDAAEAAgAAAAEAAADEAAEAAgABAAEAAADHAAEAAgABAAMAAADIAAEAAgACAAMAAADOAPz/AgABAAAAAADNAPz/AgABAAAAAADMAPz/AgABAAAAAADLAPz/AgAAAAAAAADPAPz/AgACAAAAAADOAP3/AgACAAMAAADLAP3/AgAAAAMAAADNAP3/AgABAAMAAADMAP3/AgABAAMAAADWAPr/AgAAAAAAAADXAPr/AgABAAAAAADYAPr/AgABAAAAAADZAPr/AgABAAAAAADaAPr/AgABAAAAAADbAPr/AgABAAAAAADcAPr/AgABAAAAAADdAPr/AgABAAAAAADeAPr/AgABAAAAAADfAPr/AgABAAAAAADgAPr/AgABAAAAAADhAPr/AgABAAAAAADiAPr/AgABAAAAAADjAPr/AgACAAAAAADjAPv/AgACAAMAAADiAPv/AgABAAMAAADhAPv/AgABAAEAAADhAPz/AgACAAMAAADgAPz/AgABAAMAAADfAPz/AgABAAMAAADeAP3/AgACAAMAAADdAP3/AgABAAEAAADdAP7/AgACAAMAAADcAP7/AgAAAAMAAADcAP3/AgAAAAEAAADcAPz/AgABAAEAAADbAPz/AgABAAMAAADbAPv/AgABAAEAAADaAPv/AgABAAEAAADaAPz/AgABAAMAAADZAPz/AgABAAMAAADYAPz/AgAAAAMAAADYAPv/AgABAAEAAADXAPv/AgABAAMAAADWAPv/AgAAAAMAAADZAPv/AgABAAEAAADcAPv/AgABAAEAAADdAPz/AgABAAEAAADeAPz/AgABAAEAAADeAPv/AgABAAEAAADdAPv/AgABAAEAAADfAPv/AgABAAEAAADgAPv/AgABAAEAAADSAPr/AgAAAAAAAADTAPr/AgACAAAAAADnAPf/AgABAAAAAADoAPf/AgACAAAAAADmAPf/AgAAAAAAAADpAPT/AgAAAAAAAADqAPT/AgABAAAAAADrAPT/AgACAAAAAADkAPL/AgAAAAAAAADlAPL/AgABAAAAAADmAPL/AgACAAAAAADqAPD/AgAAAAAAAADrAPD/AgABAAAAAADsAPD/AgACAAAAAADnAO3/AgAAAAAAAADoAO3/AgABAAAAAADpAO3/AgACAAAAAADhAOv/AgAAAAAAAADiAOv/AgABAAAAAADjAOv/AgACAAAAAADoAOj/AgAAAAAAAADpAOj/AgABAAAAAADqAOj/AgACAAAAAADtAOj/AgAAAAAAAADuAOj/AgABAAAAAADvAOj/AgACAAAAAADwAPr/AgAAAAAAAADxAPr/AgABAAAAAADyAPr/AgACAAAAAADyAPX/AgAAAAAAAADzAPX/AgABAAAAAAD0APX/AgACAAAAAAD8AOr/AgABAAEAAAD7AOr/AgABAAEAAAD6AOr/AgABAAEAAAD5AOr/AgABAAEAAAD4AOr/AgABAAEAAAD3AOr/AgABAAEAAAD2AOr/AgABAAEAAAD1AOr/AgABAAAAAAD4AOv/AgABAAMAAAD5AOv/AgABAAMAAAD6AOv/AgABAAMAAAD7AOv/AgABAAMAAAD8AOv/AgACAAMAAAD9AOr/AgABAAMAAAD+AOr/AgACAAMAAAD+AOn/AgABAAEAAAD/AOn/AgABAAMAAAAAAen/AgABAAMAAAABAen/AgACAAMAAAABAej/AgABAAEAAAACAej/AgACAAAAAAABAef/AgACAAAAAAAAAef/AgAAAAAAAAAAAej/AgABAAEAAAD/AOj/AgABAAAAAAD+AOj/AgAAAAAAAAD9AOn/AgABAAAAAAD8AOn/AgABAAAAAAD7AOn/AgABAAAAAAD6AOn/AgABAAAAAAD5AOn/AgABAAAAAAD3AOn/AgABAAAAAAD2AOn/AgAAAAAAAAD4AOn/AgABAAAAAAD0AOr/AgAAAAAAAAD3AOv/AgAAAAMAAAAFAev/AgAAAAEAAAAFAer/AgAAAAAAAAAGAer/AgABAAEAAAAHAer/AgABAAEAAAAIAer/AgABAAEAAAAJAer/AgABAAEAAAAJAev/AgABAAMAAAAKAev/AgABAAMAAAALAev/AgABAAEAAAALAer/AgACAAAAAAAKAer/AgABAAEAAAAIAev/AgABAAMAAAAHAev/AgABAAEAAAAHAez/AgACAAMAAAAGAez/AgABAAMAAAAFAez/AgAAAAMAAAAHAen/AgABAAAAAAAIAen/AgABAAAAAAAJAen/AgABAAAAAAAKAen/AgACAAAAAAAGAen/AgAAAAAAAAAGAev/AgABAAEAAADzAPT/AgABAAMAAAB3AO7/AgAAAAAAAACEAO7/AgACAAAAAABuAPX/AgABAAAAAABvAPX/AgACAAAAAABtAPX/AgAAAAAAAAAMAev/AgABAAAAAAANAev/AgABAAAAAAALAez/AgAAAAMAAAAMAez/AgABAAMAAAANAez/AgABAAMAAAARAev/AgABAAAAAAAQAev/AgABAAAAAAAPAev/AgABAAAAAAAOAev/AgABAAAAAAASAev/AgABAAAAAAATAev/AgABAAAAAAAUAev/AgABAAAAAAAVAev/AgABAAAAAAAWAev/AgABAAAAAAAXAev/AgABAAAAAAAZAev/AgABAAAAAAAYAev/AgABAAAAAAAaAev/AgACAAAAAAAaAez/AgACAAMAAAAZAez/AgABAAMAAAAYAez/AgABAAMAAAAXAez/AgABAAMAAAAWAez/AgABAAMAAAAVAez/AgABAAMAAAAUAez/AgABAAMAAAATAez/AgABAAMAAAASAez/AgABAAMAAAARAez/AgABAAMAAAAQAez/AgABAAMAAAAPAez/AgABAAMAAAAOAez/AgABAAMAAADd/w0AAgAAAAMAAADd/wwAAgACAAEAAADd/wsAAgACAAEAAAA=")
 tile_set = SubResource("TileSet_d4pdi")
 
 [node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("4_clw6j")]
 position = Vector2(-131, 16)
-PowerMeter = NodePath("")
-percentageLabel = NodePath("")
-FragmentSlots = NodePath("")
+PowerMeter = NodePath("../UI/Control/Power Meter")
+percentageLabel = NodePath("../UI/Control/Percentage Label")
+FragmentSlots = NodePath("../UI/Control/Fragment Slots")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(-5, 6)
@@ -152,7 +262,7 @@ offset_right = -5.0
 offset_bottom = -24.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Power Meter" type="TextureProgressBar" parent="UI/Control"]
+[node name="Power Meter" type="TextureProgressBar" parent="UI/Control" node_paths=PackedStringArray("Camera")]
 layout_mode = 0
 offset_left = 505.0
 offset_top = 571.0
@@ -162,6 +272,7 @@ scale = Vector2(3.5, 3.533)
 texture_under = ExtResource("6_c6tpp")
 texture_progress = ExtResource("7_aj7hx")
 script = ExtResource("8_8d318")
+Camera = NodePath("../../../Camera")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
@@ -274,29 +385,30 @@ color = Color(0.136826, 0.136826, 0.136826, 0.839216)
 
 [node name="Title" type="Label" parent="UI/Pop-up"]
 layout_mode = 0
-offset_left = 395.0
-offset_top = 238.0
-offset_right = 859.0
-offset_bottom = 261.0
-scale = Vector2(0.820161, 0.820161)
+offset_left = 377.302
+offset_top = 239.649
+offset_right = 905.302
+offset_bottom = 262.649
+scale = Vector2(0.781398, 1.1383)
 theme_override_fonts/font = ExtResource("14_ykout")
-text = "You've discovered a fragment!"
+text = "You've unlocked Power Surge mode!"
 
-[node name="Fragment-FilledSlot" type="Sprite2D" parent="UI/Pop-up"]
+[node name="Power Surge" type="Sprite2D" parent="UI/Pop-up"]
 position = Vector2(583, 297)
-scale = Vector2(2.23797, 2.23797)
-texture = ExtResource("15_cnm2w")
+scale = Vector2(2.30431, 2.23797)
+texture = ExtResource("16_clw6j")
 
 [node name="Label" type="Label" parent="UI/Pop-up"]
 layout_mode = 0
-offset_left = 375.0
-offset_top = 344.0
-offset_right = 1159.0
-offset_bottom = 398.0
-scale = Vector2(0.532068, 0.532068)
+offset_left = 369.01
+offset_top = 342.474
+offset_right = 1265.01
+offset_bottom = 396.474
+scale = Vector2(0.478699, 0.587386)
 theme_override_fonts/font = ExtResource("14_ykout")
-text = "There are three fragments to find in every level, 
-collecting them all will refill your power meter."
+text = "Activate it by getting your power meter over 100%.
+It comes with a special attack that does massive damage,
+but beware of the 10 second time limit!"
 horizontal_alignment = 1
 
 [node name="Button" type="Control" parent="UI/Pop-up"]
@@ -309,7 +421,7 @@ offset_bottom = 412.0
 scale = Vector2(0.72383, 0.72383)
 
 [node name="Sprite" type="Sprite2D" parent="UI/Pop-up/Button"]
-position = Vector2(-0.879944, -0.73999)
+position = Vector2(-2.02557, -0.73999)
 scale = Vector2(5.32, 5.32)
 texture = ExtResource("16_hll3v")
 
@@ -320,9 +432,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.0
+offset_left = -48.1456
 offset_top = -25.0
-offset_right = 157.0
+offset_right = 155.854
 offset_bottom = 83.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -336,20 +448,339 @@ vertical_alignment = 1
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Fragment3" parent="Objects" instance=ExtResource("18_xa7xj")]
-position = Vector2(-415, -139)
+position = Vector2(2159, -316)
 scale = Vector2(1.1, 1.1)
 
 [node name="Fragment2" parent="Objects" instance=ExtResource("18_xa7xj")]
-position = Vector2(-420, -195)
+position = Vector2(837, -251)
 scale = Vector2(1.1, 1.1)
 
 [node name="Fragment" parent="Objects" instance=ExtResource("18_xa7xj")]
-position = Vector2(-422, -232)
+position = Vector2(-382, 183)
 scale = Vector2(1.1, 1.1)
+
+[node name="Battery Pack2" parent="Objects" instance=ExtResource("20_clw6j")]
+position = Vector2(986, 18)
+
+[node name="Battery Pack3" parent="Objects" instance=ExtResource("20_clw6j")]
+position = Vector2(965, 97)
+
+[node name="Battery Pack4" parent="Objects" instance=ExtResource("20_clw6j")]
+position = Vector2(934, 115)
+
+[node name="Battery Pack5" parent="Objects" instance=ExtResource("20_clw6j")]
+position = Vector2(1149, 146)
+
+[node name="Battery Pack6" parent="Objects" instance=ExtResource("20_clw6j")]
+position = Vector2(1019, -174)
+
+[node name="Battery Pack7" parent="Objects" instance=ExtResource("20_clw6j")]
+position = Vector2(984, 97)
+
+[node name="Battery Pack8" parent="Objects" instance=ExtResource("20_clw6j")]
+position = Vector2(1666, -176)
+
+[node name="Battery Pack9" parent="Objects" instance=ExtResource("20_clw6j")]
+position = Vector2(2473, -190)
+
+[node name="Battery Pack10" parent="Objects" instance=ExtResource("20_clw6j")]
+position = Vector2(1132, 146)
+
+[node name="Battery Pack11" parent="Objects" instance=ExtResource("20_clw6j")]
+position = Vector2(1300, 130)
+
+[node name="Stone Bridge" type="Node2D" parent="Objects"]
+position = Vector2(2071, -296)
+scale = Vector2(1.1, 1.1)
+script = ExtResource("21_8d318")
+
+[node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge"]
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile"]
+stream = ExtResource("23_yv68g")
+
+[node name="Tile2" type="StaticBody2D" parent="Objects/Stone Bridge"]
+position = Vector2(16, 0)
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile2"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile2/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile2"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile2"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile2"]
+stream = ExtResource("23_yv68g")
+
+[node name="Tile3" type="StaticBody2D" parent="Objects/Stone Bridge"]
+position = Vector2(32, 0)
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile3"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile3/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile3"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile3"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile3"]
+stream = ExtResource("23_yv68g")
+
+[node name="Tile4" type="StaticBody2D" parent="Objects/Stone Bridge"]
+position = Vector2(48, 0)
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile4"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile4/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile4"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile4"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile4"]
+stream = ExtResource("23_yv68g")
+
+[node name="Tile5" type="StaticBody2D" parent="Objects/Stone Bridge"]
+position = Vector2(64, 0)
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile5"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile5/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile5"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile5"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile5"]
+stream = ExtResource("23_yv68g")
+
+[node name="Tile6" type="StaticBody2D" parent="Objects/Stone Bridge"]
+position = Vector2(80, 0)
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile6"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile6/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile6"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile6"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile6"]
+stream = ExtResource("23_yv68g")
+
+[node name="Tile7" type="StaticBody2D" parent="Objects/Stone Bridge"]
+position = Vector2(96, 0)
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile7"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile7/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile7"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile7"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile7"]
+stream = ExtResource("23_yv68g")
+
+[node name="Tile8" type="StaticBody2D" parent="Objects/Stone Bridge"]
+position = Vector2(111.818, 0)
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile8"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile8/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile8"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile8"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile8"]
+stream = ExtResource("23_yv68g")
+
+[node name="Tile9" type="StaticBody2D" parent="Objects/Stone Bridge"]
+position = Vector2(127.818, 0)
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile9"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile9/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile9"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile9"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile9"]
+stream = ExtResource("23_yv68g")
+
+[node name="Tile10" type="StaticBody2D" parent="Objects/Stone Bridge"]
+position = Vector2(143.636, 0)
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile10"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile10/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile10"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile10"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile10"]
+stream = ExtResource("23_yv68g")
+
+[node name="Tile11" type="StaticBody2D" parent="Objects/Stone Bridge"]
+position = Vector2(159.636, 0)
+
+[node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile11"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile11/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_2hkck")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Objects/Stone Bridge/Tile11"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_0jmgq")
+
+[node name="Collider" type="CollisionShape2D" parent="Objects/Stone Bridge/Tile11"]
+shape = SubResource("RectangleShape2D_3nofn")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Objects/Stone Bridge/Tile11"]
+stream = ExtResource("23_yv68g")
 
 [node name="Enemies" type="Node2D" parent="." groups=["Enemy"]]
 
+[node name="Circuit Bug" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(172, 7)
+
+[node name="Circuit Bug2" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(276, 7)
+
+[node name="Circuit Bug3" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(497, -9)
+
+[node name="Circuit Bug4" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(425, -9)
+
+[node name="Circuit Bug6" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(1022, 23)
+
+[node name="Circuit Bug7" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(1080, 22)
+
+[node name="Circuit Bug8" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(1052, -55)
+
+[node name="Circuit Bug9" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(1219, 22)
+
+[node name="Circuit Bug10" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(1345, -55)
+
+[node name="Circuit Bug11" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(1322, -202)
+
+[node name="Circuit Bug13" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(932, -217)
+
+[node name="Circuit Bug14" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(1189, -135)
+
+[node name="Circuit Bug15" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(1161, 7)
+
+[node name="Circuit Bug16" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(1365, -201)
+
+[node name="Circuit Bug12" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(1116, 22)
+
+[node name="Voltage Sentinel" parent="Enemies" instance=ExtResource("22_dvn6w")]
+position = Vector2(2907, -144)
+
+[node name="Voltage Sentinel2" parent="Enemies" instance=ExtResource("22_dvn6w")]
+position = Vector2(3215, -143)
+
+[node name="Circuit Bug5" parent="Enemies" instance=ExtResource("20_lfndu")]
+position = Vector2(3603, -121)
+
+[node name="Voltage Sentinel3" parent="Enemies" instance=ExtResource("22_dvn6w")]
+position = Vector2(3703, -129)
+
 [node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Platforms" type="Area2D" parent="Checkpoints"]
+position = Vector2(794, -53)
+scale = Vector2(1.43601, -11.6263)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/Platforms"]
+position = Vector2(75.0224, -2.49435)
+shape = SubResource("RectangleShape2D_clw6j")
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_3vtx2")
@@ -362,4 +793,4 @@ parameters/looping = true
 script = ExtResource("20_d4mm0")
 
 [node name="End" parent="." instance=ExtResource("21_u83h1")]
-position = Vector2(-470, -183)
+position = Vector2(4611, -409)

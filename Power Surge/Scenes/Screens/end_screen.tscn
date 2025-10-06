@@ -398,6 +398,7 @@ text = "X"
 
 [node name="X2" type="Label" parent="Control"]
 visible = false
+layout_mode = 0
 offset_left = 720.0
 offset_top = 421.0
 offset_right = 818.0

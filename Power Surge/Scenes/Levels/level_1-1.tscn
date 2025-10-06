@@ -375,16 +375,16 @@ position = Vector2(3328, 782)
 
 [node name="Enemies" type="Node2D" parent="." groups=["Enemy"]]
 
-[node name="First Enemy" parent="Enemies" groups=["Enemy"] instance=ExtResource("16_ox03y")]
+[node name="First Enemy" parent="Enemies" instance=ExtResource("16_ox03y")]
 position = Vector2(2251, -89)
 
-[node name="Circuit Bug2" parent="Enemies" groups=["Enemy"] instance=ExtResource("16_ox03y")]
+[node name="Circuit Bug2" parent="Enemies" instance=ExtResource("16_ox03y")]
 position = Vector2(2788, 87)
 
-[node name="Circuit Bug3" parent="Enemies" groups=["Enemy"] instance=ExtResource("16_ox03y")]
+[node name="Circuit Bug3" parent="Enemies" instance=ExtResource("16_ox03y")]
 position = Vector2(3838, 359)
 
-[node name="Circuit Bug4" parent="Enemies" groups=["Enemy"] instance=ExtResource("16_ox03y")]
+[node name="Circuit Bug4" parent="Enemies" instance=ExtResource("16_ox03y")]
 position = Vector2(4087, 344)
 
 [node name="Checkpoints" type="Node2D" parent="."]

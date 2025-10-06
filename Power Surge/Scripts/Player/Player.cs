@@ -27,6 +27,7 @@ public partial class Player : CharacterBody2D
 	private PackedScene dashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn"); // For spawning dash animations
 	private PackedScene strongBlast = GD.Load<PackedScene>("Scenes/strong_blast.tscn");
 	private PackedScene weakPulse = GD.Load<PackedScene>("Scenes/weak_pulse.tscn");
+	private PackedScene powerSurgeBlast = GD.Load<PackedScene>("Scenes/power_surge_blast.tscn");
 	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground hit
 	private float fallTime = 0f; // For checking if the player has fallen off the map
 	private bool alive = true; // True if player has died
@@ -41,9 +42,9 @@ public partial class Player : CharacterBody2D
 	private int fragmentCount = 0;
 	private List<TextureRect> fragmentSlots = new List<TextureRect>();
 	private Label powerSurgeTimer;
-	private float powerSurgeTime = 10f;
+	private float powerSurgeTime = 15f;
 	private bool powerSurgeActive = false;
-	private bool invincible = true;
+	private bool invincible = false;
 	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound;
 
 	// FOR TUTORIAL
@@ -254,11 +255,16 @@ public partial class Player : CharacterBody2D
 				Die();
 			}
 
-			
-
 			if (Input.IsActionJustPressed("input_attack") && !disabledInputs.Contains("input_attack"))
 			{
-				Attack();
+				if (powerSurgeActive)
+				{
+					PowerSurgeAttack();
+				}
+				else
+				{
+					Attack();
+				}
 			}
 		}
 	}
@@ -389,7 +395,7 @@ public partial class Player : CharacterBody2D
 		{
 			weakPulseSound.Play();
 			Node attackInstance = weakPulse.Instantiate();
-			((WeakPulse)attackInstance).GlobalPosition = GlobalPosition;
+			((WeakPulse)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0,5);
 			AddChild(attackInstance);
 			if (attackInstance is WeakPulse b)
 			{
@@ -539,8 +545,9 @@ public partial class Player : CharacterBody2D
 		animation.Visible = true;
 		Scale = new Vector2(1.3f, 1.3f);
 		Speed = 300f;
+		JumpStrength -= 50;
 		powerSurgeMusic.Play();
-		powerSurgeTime = 10f;
+		powerSurgeTime = 15f;
 		powerSurgeActive = true;
 		powerSurgeTimer.Visible = true;
 	}
@@ -558,6 +565,7 @@ public partial class Player : CharacterBody2D
 		animation.Visible = true;
 		Scale = new Vector2(1f, 1f);
 		Speed = 200f;
+		JumpStrength += 50;
 		powerSurgeMusic.Stop();
 		powerSurgeActive = false;
 		powerSurgeTimer.Visible = false;
@@ -613,6 +621,19 @@ public partial class Player : CharacterBody2D
 	public float GetPower()
 	{
 		return power;
+	}
+
+	public void PowerSurgeAttack()
+	{
+			//weakPulseSound.Play();
+			Node attackInstance = powerSurgeBlast.Instantiate();
+			((PowerSurgeBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0,5);
+			AddChild(attackInstance);
+			if (attackInstance is PowerSurgeBlast b)
+			{
+				b.Activate(facing);
+				DecreasePower(5);
+			}
 	}
 	
 	public void UpdateVolume()
