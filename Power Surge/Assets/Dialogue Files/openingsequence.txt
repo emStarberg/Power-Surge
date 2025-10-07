@@ -1,4 +1,4 @@
-Lilah| [name]! Hurry—get to the bunker!
+Lilah| [name]! Hurry — get to the bunker!
 Lilah| We don’t have long before they take over the building!
 Lilah| [name]? Where are you?
 Lilah| You’re in the bunker?
@@ -7,9 +7,9 @@ Lilah| Hang on, I’ll put him on the hologram.
 Archie| Hey [name]! Not sure where you are, but it’s definitely not the bunker. What do you see around you?
 Archie| Wait… that sounds like… no, it can’t be. How did you even get in there?
 Lilah| The security system must’ve failed when those… things showed up.
-Archie| “Things”? Those are magnificent feats of engineering—born from The World Conductor itself!
+Archie| “Things”? Those are magnificent feats of engineering — born from The World Conductor itself!
 Archie|They deserve some respect!
-Lilah| Whatever you want to call them, they just took over our facility—and tried to kill us.
+Lilah| Whatever you want to call them, they just took over our facility — and tried to kill us.
 Lilah| Respect doesn’t really make the list for me.
 Archie| I was just sayi—
 Lilah| That thing is corrupt, Archie! It needs to be destroyed. I don’t care if it powers the whole planet —
@@ -32,17 +32,17 @@ Lilah| …You’re right. I hate that you’re right.
 Lilah| [name], listen carefully. You need to know what’s in that room.
 Lilah| Six months ago, we started seeing strange electrical surges acting like they had a mind of their own.
 Lilah| That’s when our team began developing a device to connect with The World Conductor itself.
-Lilah| Remember that incident last month—the girl and the refrigerator? That was the turning point.
+Lilah| Remember that incident last month — the girl and the refrigerator? That was the turning point.
 Lilah| We realized it could possess machines. So we armed the device.
 Lilah| And now those same machines are destroying everything. They’re what attacked us.
 Archie| The device, code-named S.U.R.G.E., is in there with you. See that blue orb?
 Archie| We need you to pilot it. The controls only work from that lab.
 Archie| Through it, you can reach The World Conductor. It may be humanity’s last shot.
-Archie| I get it—you’re unsure. Anyone would be.
+Archie| I get it — you’re unsure. Anyone would be.
 Lilah| But you’re the only one who can, [name]. Please. Do this.
 Archie| We’ll be with you the whole way. Once S.U.R.G.E. boots up, we’ll see your display feed.
 Lilah| …Thank you, [name]. You don’t know how much this means.
 Lilah| Go to the control panel—I’ll guide you through it.
 Lilah| Are you there? Good. See the button that says “Run Simulation”?
-Lilah| Tap that—it’ll transport S.U.R.G.E. into a digital environment for training.
-Archie| Don’t worry—it’s a lot at first, but you’ll get the hang of it. Even I managed it once!
+Lilah| Tap that — it’ll transport S.U.R.G.E. into a digital environment for training.
+Archie| Don’t worry — it’s a lot at first, but you’ll get the hang of it. Even I managed it once!
