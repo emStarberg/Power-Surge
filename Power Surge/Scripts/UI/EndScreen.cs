@@ -9,12 +9,13 @@ public partial class EndScreen : Node2D
 	private int selected = 0;
 	private Texture2D buttonOn, buttonOff;
 	private UICamera camera;
-	private Control effects, currentButton, textEffects;
+	private Control effects, currentButton, textEffects, alert;
 	private AudioStreamPlayer2D zapSound, backgroundMusic, lightningSound;
-	private List<string> levels = new List<string> { "1-1", "1-2", "1-3" };
+	private List<string> levels = new List<string> { "1-1", "1-2"};
 	private float timer = 0;
 	private bool shownFragments = false, shownPower = false, shownTime = false, shownRank = false;
 	private Label rank;
+	
 
 	public override void _Ready()
 	{
@@ -27,6 +28,7 @@ public partial class EndScreen : Node2D
 		zapSound = GetNode<AudioStreamPlayer2D>("Zap Sound");
 		lightningSound = GetNode<AudioStreamPlayer2D>("Lightning Sound");
 		rank = GetNode<Label>("Control/Rank");
+		alert = GetNode<Control>("Control/Alert"); // For MVP
 
 		// Add buttons to list
 		foreach (Node node in GetNode<Control>("Control/Buttons").GetChildren())
@@ -60,6 +62,8 @@ public partial class EndScreen : Node2D
 		labels[2].Text = $"{minutes:D2}:{seconds:D2}";
 		rank.Text = CalculateRank();
 
+		// Last available level
+		alert.Visible = levels.IndexOf(GameData.Instance.CurrentLevel) == levels.Count - 1;
 	}
 
 	public override void _Process(double delta)
@@ -129,8 +133,10 @@ public partial class EndScreen : Node2D
 					// Go to next level
 					int index = levels.IndexOf(GameData.Instance.CurrentLevel);
 					string next = levels[index + 1];
-					GetTree().ChangeSceneToFile("res://Scenes/Levels/level_" + next + ".tscn");
-					GD.Print("Can't go to next level yet!");
+					if (!alert.Visible)
+					{
+						GetTree().ChangeSceneToFile("res://Scenes/Levels/level_" + next + ".tscn");
+					}					
 					break;
 				default:
 					break;

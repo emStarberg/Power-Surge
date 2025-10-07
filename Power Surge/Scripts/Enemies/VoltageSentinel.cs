@@ -44,124 +44,129 @@ public partial class VoltageSentinel : Enemy
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (playerRay.IsColliding() && playerRay.GetCollider() is Player player && canDamagePlayer)
+		if (isAlive)
 		{
-			player.Hurt(25, 2f, 0.2f);
-			canDamagePlayer = false;
-		}
 
 
-		if (!IsOnFloor())
-			velocity += GetGravity() * (float)delta;
-
-
-		if (isFollowingPlayer && targetPlayer != null && animation.Animation != "attack")
-		{
-			groundRay.ForceRaycastUpdate();
-			if (!groundRay.IsColliding())
+			if (playerRay.IsColliding() && playerRay.GetCollider() is Player player && canDamagePlayer)
 			{
-				// Stop following if no ground ahead
-				isFollowingPlayer = false;
-				targetPlayer = null;
-				Speed = 15f;
-				animation.Animation = "idle";
-				animation.Play();
-				return; // Exit early so it doesn't move off the edge
+				player.Hurt(25, 2f, 0.2f);
+				canDamagePlayer = false;
 			}
 
-			Vector2 toPlayer = (targetPlayer.GlobalPosition - GlobalPosition).Normalized();
-			velocity = new Vector2(toPlayer.X * Speed, Velocity.Y);
-			Velocity = velocity;
-			MoveAndSlide();
-		}
 
-		if (isWalking && animation.Animation != "attack")
-		{
-			if (!isFollowingPlayer)
+			if (!IsOnFloor())
+				velocity += GetGravity() * (float)delta;
+
+
+			if (isFollowingPlayer && targetPlayer != null && animation.Animation != "attack")
 			{
-				// Move based on direction
-				float moveStep = Speed * (float)delta;
-				if (direction == "right")
-					velocity = new Vector2(Speed, Velocity.Y);
-				else
-					velocity = new Vector2(-Speed, Velocity.Y);
-
-				// Check for wall ahead
-				wallRay.ForceRaycastUpdate();
-				if (wallRay.IsColliding())
+				groundRay.ForceRaycastUpdate();
+				if (!groundRay.IsColliding())
 				{
-					var Collider = wallRay.GetCollider();
-					if (!(Collider is Node2D node && node.Name == "Player"))
+					// Stop following if no ground ahead
+					isFollowingPlayer = false;
+					targetPlayer = null;
+					Speed = 15f;
+					animation.Animation = "idle";
+					animation.Play();
+					return; // Exit early so it doesn't move off the edge
+				}
+
+				Vector2 toPlayer = (targetPlayer.GlobalPosition - GlobalPosition).Normalized();
+				velocity = new Vector2(toPlayer.X * Speed, Velocity.Y);
+				Velocity = velocity;
+				MoveAndSlide();
+			}
+
+			if (isWalking && animation.Animation != "attack")
+			{
+				if (!isFollowingPlayer)
+				{
+					// Move based on direction
+					float moveStep = Speed * (float)delta;
+					if (direction == "right")
+						velocity = new Vector2(Speed, Velocity.Y);
+					else
+						velocity = new Vector2(-Speed, Velocity.Y);
+
+					// Check for wall ahead
+					wallRay.ForceRaycastUpdate();
+					if (wallRay.IsColliding())
+					{
+						var Collider = wallRay.GetCollider();
+						if (!(Collider is Node2D node && node.Name == "Player"))
+						{
+							direction = direction == "right" ? "left" : "right";
+							Scale = new Vector2(-Scale.X, Scale.Y);
+							walkedDistance = 0f;
+							startPosition = GlobalPosition;
+						}
+					}
+
+					// Check for ground ahead
+					groundRay.ForceRaycastUpdate();
+					if (!groundRay.IsColliding())
 					{
 						direction = direction == "right" ? "left" : "right";
 						Scale = new Vector2(-Scale.X, Scale.Y);
 						walkedDistance = 0f;
 						startPosition = GlobalPosition;
 					}
+
+					// Track distance walked
+					walkedDistance = (GlobalPosition - startPosition).Length();
+					if (walkedDistance >= walkDistance)
+					{
+						isWalking = false;
+						animation.Animation = "idle";
+						stopTimer = stopTime;
+					}
 				}
 
-				// Check for ground ahead
-				groundRay.ForceRaycastUpdate();
-				if (!groundRay.IsColliding())
+				Velocity = velocity;
+				MoveAndSlide();
+
+
+			}
+			else if (animation.Animation != "attack")
+			{
+				// Stopping phase
+				velocity = new Vector2(0, Velocity.Y);
+				Velocity = velocity;
+				MoveAndSlide();
+
+				stopTimer -= (float)delta;
+				if (stopTimer <= 0f && !isFollowingPlayer)
 				{
+					// Reverse direction and start walking again
 					direction = direction == "right" ? "left" : "right";
 					Scale = new Vector2(-Scale.X, Scale.Y);
+					isWalking = true;
+					animation.Animation = "walk";
 					walkedDistance = 0f;
 					startPosition = GlobalPosition;
 				}
+			}
 
-				// Track distance walked
-				walkedDistance = (GlobalPosition - startPosition).Length();
-				if (walkedDistance >= walkDistance)
+			// Player detection via raycast
+			playerRay.ForceRaycastUpdate();
+			if (playerRay.IsColliding() && playerRay.GetCollider() is Node2D collider && collider.Name == "Player")
+			{
+				if (!playerDetectedForAttack)
 				{
-					isWalking = false;
-					animation.Animation = "idle";
-					stopTimer = stopTime;
+					GD.Print("Player detected by raycast");
+					Attack();
+					playerDetectedForAttack = true;
 				}
 			}
-
-			Velocity = velocity;
-			MoveAndSlide();
-
-
-		}
-		else if (animation.Animation != "attack")
-		{
-			// Stopping phase
-			velocity = new Vector2(0, Velocity.Y);
-			Velocity = velocity;
-			MoveAndSlide();
-
-			stopTimer -= (float)delta;
-			if (stopTimer <= 0f && !isFollowingPlayer)
+			else
 			{
-				// Reverse direction and start walking again
-				direction = direction == "right" ? "left" : "right";
-				Scale = new Vector2(-Scale.X, Scale.Y);
-				isWalking = true;
-				animation.Animation = "walk";
-				walkedDistance = 0f;
-				startPosition = GlobalPosition;
-			}
-		}
-
-		// Player detection via raycast
-		playerRay.ForceRaycastUpdate();
-		if (playerRay.IsColliding() && playerRay.GetCollider() is Node2D collider && collider.Name == "Player")
-		{
-			if (!playerDetectedForAttack)
-			{
-				GD.Print("Player detected by raycast");
-				Attack();
-				playerDetectedForAttack = true;
-			}
-		}
-		else
-		{
-			if (playerDetectedForAttack)
-			{
-				GD.Print("Player lost by raycast");
-				playerDetectedForAttack = false;
+				if (playerDetectedForAttack)
+				{
+					GD.Print("Player lost by raycast");
+					playerDetectedForAttack = false;
+				}
 			}
 		}
 	}
@@ -183,6 +188,10 @@ public partial class VoltageSentinel : Enemy
 	/// </summary>
 	public void OnAnimationFinished()
 	{
+		if (animation.Animation == "death")
+		{
+			QueueFree();
+		}
 		if (animation.Animation == "attack")
 		{
 			if (!playerDetectedForAttack)
@@ -196,10 +205,7 @@ public partial class VoltageSentinel : Enemy
 				Attack();
 			}
 		}
-		else if (animation.Animation == "death")
-		{
-			QueueFree();
-		}
+		
 	}
 
 	/// <summary>

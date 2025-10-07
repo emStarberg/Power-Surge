@@ -10,15 +10,17 @@ public partial class Camera : Camera2D
 {
 	[Export]
 	public NodePath playerPath; // Path to player node
-	private Node2D _player; // Reference to player node
+	private Player _player; // Reference to player node
 	private float shakeAmount, shakeTime = 0f; // Parameters for camera shake effect
 	private Random random = new(); // Random number for generating shake effect
 	private Vector2 baseOffset = new Vector2(0, 0); // Camera offset from player pos
+	private Vector2 targetOffset = Vector2.Zero;
+	private float offsetLerpSpeed = 2.5f; // Higher = snappier, lower = smoother
 
 	public override void _Ready()
 	{
 		Zoom = new Vector2(2.4f, 2.4f);
-		_player = GetParent().GetNode<Node2D>("Player");
+		_player = GetParent().GetNode<Player>("Player");
 		Offset = baseOffset;
 		MakeCurrent();
 	}
@@ -35,14 +37,20 @@ public partial class Camera : Camera2D
 			if (_player.Position.X > LimitLeft + halfVisibleWidth && _player.Position.X < LimitRight - halfVisibleWidth)
 				newX = _player.Position.X;
 
-			/*// Y axis: only move if player is near the edge of the visible area
-			float newY = Position.Y;
-			if (_player.Position.Y < Position.Y - halfVisibleHeight * 0.4f)
-				newY = _player.Position.Y + halfVisibleHeight * 0.4f;
-			else if (_player.Position.Y > Position.Y + halfVisibleHeight * 0.4f)
-				newY = _player.Position.Y - halfVisibleHeight * 0.4f; */
-
 			Position = new Vector2(newX, _player.Position.Y);
+			
+			string facing = "right";
+			facing = _player.GetDirection();
+
+			if (facing == "right")
+				targetOffset = new Vector2(25, 0);
+			else if (facing == "left")
+				targetOffset = new Vector2(-25, 0);
+			else
+				targetOffset = Vector2.Zero;
+
+			// Smoothly interpolate baseOffset towards targetOffset
+			baseOffset = baseOffset.Lerp(targetOffset, offsetLerpSpeed * (float)delta);
 		}
 
 		// Shake the camera when required

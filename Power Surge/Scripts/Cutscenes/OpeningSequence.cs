@@ -38,6 +38,8 @@ public partial class OpeningSequence : Node2D
 	private bool panningUp = false;
 	private float panTime = 2f, panTimer = 0f;
 
+	private AnimatedSprite2D orb1, orb2;
+
 
 	public override void _Ready()
 	{
@@ -51,13 +53,18 @@ public partial class OpeningSequence : Node2D
 		runningSound = GetNode<AudioStreamPlayer2D>("Control/Running");
 		doorOpenSound = GetNode<AudioStreamPlayer2D>("Control/Door Open");
 		doorCloseSound = GetNode<AudioStreamPlayer2D>("Control/Door Close");
-		
+
 		videoPlayer = GetNode<VideoStreamPlayer>("Control/Video");
 
 		fadeImage = GetNode<TextureRect>("Control/BackgroundImage");
 		fadeImage.Modulate = new Color(1, 1, 1, 0); // Start fully transparent
 
 		camera = GetNode<Camera2D>("Camera");
+
+		orb1 = GetNode<AnimatedSprite2D>("Control/Orb1");
+		orb2 = GetNode<AnimatedSprite2D>("Control/Orb2");
+		orb1.Visible = false;
+		orb2.Visible = false;
 
 		UpdateVolume(); // Set initial volume
 
@@ -165,6 +172,7 @@ public partial class OpeningSequence : Node2D
 			{
 				fadingIn = false; // Fade complete
 				dialogueBox.Resume();
+				orb1.Visible = true;
 			}
 		}
 		// Fade image out
@@ -183,6 +191,7 @@ public partial class OpeningSequence : Node2D
 		// Zoom camera in when dialogue has finished
 		if (zoomingIn)
 		{
+			orb2.Visible = false;
 			zoomTimer += (float)delta;
 			float t = Mathf.Clamp(zoomTimer / zoomTime, 0, 1);
 
@@ -199,25 +208,30 @@ public partial class OpeningSequence : Node2D
 		// Move to next scene if needed
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
-			if (dialogueBox.GetLineNumber() == 2 && !dialogueBox.IsTyping() && videoPlayer.IsPlaying() && currentVideo == "alarm loop")
+			if (!dialogueBox.IsPaused() && dialogueStarted)
 			{
-				// Pause dialogue and reset video timer
-				dialogueBox.Pause();
-				videoTimer = 0;
-			}
-			else if (dialogueBox.GetLineNumber() == 54 && !dialogueBox.IsTyping())
-			{
-				// Show close up of computer
-				dialogueBox.Pause();
-				dialogueStarted = false;
-				currentVideo = "computer";
-				videoTimer = 0;
-				fadeImage.Texture = GD.Load<Texture2D>("res://Assets/UI/Lab Computer.png");
-			}
-			else if (dialogueBox.GetLineNumber() == 58 && !dialogueBox.IsTyping())
-			{
-				// Zoom in on computer before fading out
-				ZoomIn();
+				if (dialogueBox.GetLineNumber() == 2 && !dialogueBox.IsTyping() && videoPlayer.IsPlaying() && currentVideo == "alarm loop")
+				{
+					// Pause dialogue and reset video timer
+					dialogueBox.Pause();
+					videoTimer = 0;
+				}
+				else if (dialogueBox.GetLineNumber() == 45 && !dialogueBox.IsTyping())
+				{
+					orb1.Visible = false;
+					orb2.Visible = true;
+					// Show close up of computer
+					dialogueBox.Pause();
+					dialogueStarted = false;
+					currentVideo = "computer";
+					videoTimer = 0;
+					fadeImage.Texture = GD.Load<Texture2D>("res://Assets/UI/Lab Computer.png");
+				}
+				else if (dialogueBox.GetLineNumber() == 48 && !dialogueBox.IsTyping())
+				{
+					// Zoom in on computer before fading out
+					ZoomIn();
+				}
 			}
 		}
 	}
@@ -230,6 +244,7 @@ public partial class OpeningSequence : Node2D
 		videoTimer = 0;
 		if (currentVideo == "part 1")
 		{
+			buzzerSound.VolumeLinear ++;
 			videoPlayer.Stream = ResourceLoader.Load<VideoStream>(loop);
 			currentVideo = "alarm loop";
 			videoPlayer.Loop = true;

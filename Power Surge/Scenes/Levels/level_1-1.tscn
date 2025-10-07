@@ -144,6 +144,7 @@ position = Vector2(-131, 16)
 PowerMeter = NodePath("../UI/Control/Power Meter")
 percentageLabel = NodePath("../UI/Control/Percentage Label")
 FragmentSlots = NodePath("../UI/Control/Fragment Slots")
+PowerSurgeEnabled = false
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(-5, 6)
@@ -160,7 +161,7 @@ offset_right = -5.0
 offset_bottom = -24.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Power Meter" type="TextureProgressBar" parent="UI/Control"]
+[node name="Power Meter" type="TextureProgressBar" parent="UI/Control" node_paths=PackedStringArray("Camera")]
 layout_mode = 0
 offset_left = 505.0
 offset_top = 571.0
@@ -170,6 +171,7 @@ scale = Vector2(3.5, 3.533)
 texture_under = ExtResource("6_3lm4w")
 texture_progress = ExtResource("7_t3yd5")
 script = ExtResource("8_ebuj1")
+Camera = NodePath("../../../Camera")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
@@ -199,9 +201,9 @@ anchor_left = 14.75
 anchor_top = 14.275
 anchor_right = 14.75
 anchor_bottom = 14.275
-offset_left = 567.0
+offset_left = 563.0
 offset_top = 564.0
-offset_right = 609.0
+offset_right = 605.0
 offset_bottom = 587.0
 scale = Vector2(1.08018, 1.15144)
 theme_override_fonts/font = ExtResource("10_vo021")
@@ -385,7 +387,7 @@ position = Vector2(2788, 87)
 position = Vector2(3838, 359)
 
 [node name="Circuit Bug4" parent="Enemies" instance=ExtResource("16_ox03y")]
-position = Vector2(4087, 344)
+position = Vector2(4087, 343)
 
 [node name="Checkpoints" type="Node2D" parent="."]
 

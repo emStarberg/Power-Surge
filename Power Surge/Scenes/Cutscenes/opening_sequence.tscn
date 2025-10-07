@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dknc5kxbdjwvk"]
+[gd_scene load_steps=21 format=3 uid="uid://dknc5kxbdjwvk"]
 
 [ext_resource type="Script" uid="uid://bnfrsuonqeowr" path="res://Scripts/Cutscenes/OpeningSequence.cs" id="1_uwh2j"]
 [ext_resource type="VideoStream" uid="uid://c1loxqu00e2tb" path="res://Assets/Videos/Opening Pt. 1.ogv" id="2_clode"]
@@ -11,6 +11,64 @@
 [ext_resource type="AudioStream" uid="uid://bdge72s6vvmeh" path="res://Assets/Audio/DoorClose.mp3" id="8_6qxwc"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="8_n7b67"]
 [ext_resource type="Texture2D" uid="uid://c324rs8m228jw" path="res://Assets/UI/Lab.png" id="9_rx33v"]
+[ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player/Player-Spritesheet.png" id="10_8ss88"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6hqf"]
+atlas = ExtResource("10_8ss88")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1d1d"]
+atlas = ExtResource("10_8ss88")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sua1q"]
+atlas = ExtResource("10_8ss88")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkjnt"]
+atlas = ExtResource("10_8ss88")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2t3tu"]
+atlas = ExtResource("10_8ss88")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d1j1"]
+atlas = ExtResource("10_8ss88")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cp5jm"]
+atlas = ExtResource("10_8ss88")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4o5s3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6hqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1d1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sua1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkjnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2t3tu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7d1j1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cp5jm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="OpeningSequence" type="Node2D"]
 script = ExtResource("1_uwh2j")
@@ -57,7 +115,6 @@ stream = ExtResource("7_rx33v")
 stream = ExtResource("8_6qxwc")
 
 [node name="BackgroundImage" type="TextureRect" parent="Control"]
-visible = false
 layout_mode = 0
 offset_left = -102.0
 offset_top = -19.0
@@ -65,6 +122,22 @@ offset_right = 1169.0
 offset_bottom = 678.0
 scale = Vector2(1.0516, 1.0516)
 texture = ExtResource("9_rx33v")
+
+[node name="Orb1" type="AnimatedSprite2D" parent="Control"]
+position = Vector2(1033, 445)
+scale = Vector2(2.51998, 2.51998)
+sprite_frames = SubResource("SpriteFrames_4o5s3")
+autoplay = "default"
+frame = 6
+frame_progress = 0.994167
+
+[node name="Orb2" type="AnimatedSprite2D" parent="Control"]
+position = Vector2(813, 475)
+scale = Vector2(6.16125, 6.16125)
+sprite_frames = SubResource("SpriteFrames_4o5s3")
+autoplay = "default"
+frame = 1
+frame_progress = 0.73767
 
 [node name="DialogueBox" parent="." instance=ExtResource("3_clode")]
 offset_left = 278.0

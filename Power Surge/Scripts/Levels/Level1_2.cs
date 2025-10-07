@@ -7,7 +7,7 @@ public partial class Level1_2 : GameLevel
 	private DialogueBox dialogueBox;
 	private Control popup;
 	private bool dialogueStarted = false, popupShown = false;
-	private List<int> lineNumbers = new List<int> { 2, 7 }; // Line numbers to pause dialogue at
+	private List<int> lineNumbers = new List<int> { 2, 7, 9 }; // Line numbers to pause dialogue at
 	private float timer;
 
 	public override void _Ready()

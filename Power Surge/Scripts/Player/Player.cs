@@ -18,6 +18,7 @@ public partial class Player : CharacterBody2D
 	[Export] public Label percentageLabel; // Label under power meter
 	[Export] public Control FragmentSlots;
 	[Export] public bool TutorialMode = false;
+	[Export] public bool PowerSurgeEnabled = true;
 	
 	private int power = 100; // Percentage of power left
 	private Vector2 velocity; // For changing player's Velocity property
@@ -37,7 +38,7 @@ public partial class Player : CharacterBody2D
 	private string[] attackNames = { "weak pulse", "strong blast" }; // List of player attacks
 	private string attackSelected = "weak pulse";
 	private int attackIndex = 0;
-	private string facing = "left";
+	private string facing = "right";
 	private Sprite2D attackIcon;
 	private int fragmentCount = 0;
 	private List<TextureRect> fragmentSlots = new List<TextureRect>();
@@ -45,7 +46,8 @@ public partial class Player : CharacterBody2D
 	private float powerSurgeTime = 15f;
 	private bool powerSurgeActive = false;
 	private bool invincible = false;
-	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound;
+	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound, powerSurgeAttackSound;
+	private float timer = 0, regenTimer = 0;
 
 	// FOR TUTORIAL
 	public List<String> disabledInputs = new List<string>();
@@ -63,6 +65,7 @@ public partial class Player : CharacterBody2D
 		hurtSound = GetNode<AudioStreamPlayer2D>("Sounds/Hurt");
 		powerSurgeMusic = GetNode<AudioStreamPlayer2D>("Sounds/Power Surge");
 		fragmentSound = GetNode<AudioStreamPlayer2D>("Sounds/Collect Fragment");
+		powerSurgeAttackSound = GetNode<AudioStreamPlayer2D>("Sounds/Power Surge Attack");
 		// Set up animations
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		animation.Play();
@@ -97,14 +100,25 @@ public partial class Player : CharacterBody2D
 			velocity.Y += Gravity * (float)delta;
 			// Clamp vertical velocity to terminal velocity.
 			velocity.Y = Mathf.Min(velocity.Y, MaxFallSpeed);
-
 			// Update velocity
 			Velocity = velocity;
 			// Move
 			MoveAndSlide();
 		}
 
-		if (Paused){
+		// Regens slowly if standing still
+		if (alive && !Paused && Velocity == new Vector2(0,0))
+		{
+			regenTimer += (float)delta;
+			if (regenTimer >= 2f && power < 100)
+			{
+				power++;
+				regenTimer = 0f;
+			}
+		}
+
+		if (Paused)
+		{
 			velocity.X = 0;
 			return;
 		}
@@ -125,18 +139,16 @@ public partial class Player : CharacterBody2D
 						powerMeter.SetPowerSurgeMode(false);
 					}
 				}
-
 				if (powerSurgeActive)
 				{
 					StopPowerSurgeTimer();
 				}
-
 			}
 			else
 			{
 				// PowerMeter is limited to 100, and displays a new sprite when power is greater than 100
 				PowerMeter.Value = 100;
-				if (PowerMeter is PowerMeter powerMeter)
+				if (PowerMeter is PowerMeter powerMeter && PowerSurgeEnabled)
 				{
 					if (!powerMeter.GetPowerSurgeMode())
 					{
@@ -218,7 +230,7 @@ public partial class Player : CharacterBody2D
 				else
 					fallTime = 0f;
 
-				if (fallTime > 3f)
+				if (fallTime > 2.5f)
 				{
 					// Die after 3 seconds of fall time
 					Die();
@@ -227,8 +239,8 @@ public partial class Player : CharacterBody2D
 				if (Input.IsActionJustPressed("input_shield") && !disabledInputs.Contains("input_shield"))
 				{
 					// Activate shield
-					GetNode<StaticBody2D>("Shield").Visible = true;
-					shield.GetNode<CollisionShape2D>("Collider").Disabled = false;
+					/*GetNode<StaticBody2D>("Shield").Visible = true;
+					shield.GetNode<CollisionShape2D>("Collider").Disabled = false;*/
 				}
 				if (Input.IsActionJustReleased("input_shield"))
 				{
@@ -319,6 +331,7 @@ public partial class Player : CharacterBody2D
 	{
 		if (!invincible)
 		{
+			if(!powerSurgeActive)
 			animation.Animation = "hurt";
 			hurtSound.Play();
 			// Camera shake
@@ -377,6 +390,10 @@ public partial class Player : CharacterBody2D
 		power += amount;
 		var camera = GetParent().GetNode<Camera>("Camera");
 		camera.Shake(2, 0.2f);
+		if (power > 100 && !PowerSurgeEnabled)
+		{
+			power = 100;
+		}
 	}
 
 
@@ -415,7 +432,7 @@ public partial class Player : CharacterBody2D
 			if (attackInstance is StrongBlast b)
 			{
 				b.Activate(facing);
-				DecreasePower(15);
+				DecreasePower(10);
 			}
 		}
 	}
@@ -625,7 +642,7 @@ public partial class Player : CharacterBody2D
 
 	public void PowerSurgeAttack()
 	{
-			//weakPulseSound.Play();
+			powerSurgeAttackSound.Play();
 			Node attackInstance = powerSurgeBlast.Instantiate();
 			((PowerSurgeBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0,5);
 			AddChild(attackInstance);
@@ -634,6 +651,11 @@ public partial class Player : CharacterBody2D
 				b.Activate(facing);
 				DecreasePower(5);
 			}
+	}
+
+	public string GetDirection()
+	{
+		return facing;
 	}
 	
 	public void UpdateVolume()

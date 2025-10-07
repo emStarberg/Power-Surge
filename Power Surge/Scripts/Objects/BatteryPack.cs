@@ -8,16 +8,12 @@ using System;
 //------------------------------------------------------------------------------
 public partial class BatteryPack : Area2D, IWorldObject
 {
+	AudioStreamPlayer2D pickUpSound;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		pickUpSound = GetNode<AudioStreamPlayer2D>("Sound");
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
 	/// <summary>
 	/// Add 20% power when colliding with player
 	/// </summary>
@@ -29,6 +25,7 @@ public partial class BatteryPack : Area2D, IWorldObject
 		{
 			if (body is Player player)
 			{
+				pickUpSound.Play();
 				player.IncreasePower(20);
 				QueueFree();
 			}
