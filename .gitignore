@@ -2,3 +2,7 @@
 .godot/
 /android/
 .dll
+*.dll
+*.exe
+*.json
+*.pdb
