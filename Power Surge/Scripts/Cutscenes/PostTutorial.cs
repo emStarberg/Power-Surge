@@ -54,11 +54,11 @@ public partial class PostTutorial : Node2D
 			if (alpha <= 0)
 			{
 				fadeImage.Visible = false; // Hide when fully faded out
-				GetTree().ChangeSceneToFile("res://Scenes/Levels/level_1-1.tscn");
+				LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/level_1-1.tscn", false);
 			}
 		}
 
-		if (dialogueBox.GetLineNumber() == 19 && !dialogueBox.IsTyping() && Input.IsActionJustPressed("ui_accept") && dialogueStarted)
+		if (dialogueBox.GetLineNumber() == 19 && !dialogueBox.IsTyping() && Input.IsActionJustPressed("ui_accept") && dialogueStarted && !fadingOut)
 		{
 			FadeImageOut();
 		}

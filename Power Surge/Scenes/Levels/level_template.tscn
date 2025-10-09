@@ -23,7 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="20_14037"]
 [ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="22_a6xh0"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nawxm"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ub7cd"]
 texture = ExtResource("4_yiwsm")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -46,7 +46,7 @@ texture = ExtResource("4_yiwsm")
 
 [sub_resource type="TileSet" id="TileSet_5ckws"]
 physics_layer_0/collision_layer = 1
-sources/2 = SubResource("TileSetAtlasSource_nawxm")
+sources/2 = SubResource("TileSetAtlasSource_ub7cd")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
 atlas = ExtResource("10_xdd2k")

@@ -38,6 +38,8 @@ public partial class Level1_1 : GameLevel
 				checkpoint.BodyEntered += (Node2D body) => OnCheckPointEntered(body, checkpoint);
 			}
 		}
+
+		GameData.Instance.GlowEnabled = false;
 	}
 
 	public override void _Process(double delta)

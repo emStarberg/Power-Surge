@@ -44,8 +44,7 @@ public partial class Player : CharacterBody2D
 	private List<TextureRect> fragmentSlots = new List<TextureRect>();
 	private Label powerSurgeTimer;
 	private float powerSurgeTime = 15f;
-	private bool powerSurgeActive = false;
-	private bool invincible = false;
+	private bool powerSurgeActive = false, invincible = false;
 	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound, powerSurgeAttackSound;
 	private float timer = 0, regenTimer = 0;
 
@@ -90,6 +89,15 @@ public partial class Player : CharacterBody2D
 
 		powerSurgeTimer = GetNode<Label>("Timer");
 		powerSurgeTimer.Visible = false;
+
+		// Disable glow light for outdoor levels
+		if (!GameData.Instance.GlowEnabled)
+		{
+			GetNode<PointLight2D>("Light").Visible = false;
+		}
+
+		GD.Print(GameData.Instance.GlowEnabled);
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -307,7 +315,7 @@ public partial class Player : CharacterBody2D
 			GetTree().Root.AddChild(jumpAnimInstance);
 			// Increase no. of jumps, for counting double jumps
 			numJumps++;
-			DecreasePower(2);
+			DecreasePower(1);
 		}
 	}
 

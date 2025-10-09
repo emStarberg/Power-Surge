@@ -313,6 +313,7 @@ PowerMeter = NodePath("../UI/Control/Power Meter")
 percentageLabel = NodePath("../UI/Control/Percentage Label")
 FragmentSlots = NodePath("../UI/Control/Fragment Slots")
 TutorialMode = true
+PowerSurgeEnabled = false
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(2, -2)

@@ -47,6 +47,10 @@ public partial class StrongBlast : Area2D, IPlayerAttack
 	/// </summary>
 	public void Activate(string dir)
 	{
+		if (!GameData.Instance.GlowEnabled)
+		{
+			GetNode<PointLight2D>("Light").Visible = false;
+		}
 
 		doMove = true;
 		direction = dir;
@@ -110,6 +114,6 @@ public partial class StrongBlast : Area2D, IPlayerAttack
 				enemy.Hurt(damage);
 			}
 		}
-		
+
 	}
 }

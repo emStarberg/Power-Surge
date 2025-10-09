@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bignn7lsbeest"]
+[gd_scene load_steps=11 format=3 uid="uid://bignn7lsbeest"]
 
 [ext_resource type="Script" uid="uid://fpaifdgb6hdt" path="res://Scripts/Objects/Fragment.cs" id="1_brxyv"]
 [ext_resource type="Texture2D" uid="uid://nedc1vkwbcn5" path="res://Assets/Objects/Fragment - Spritesheet.png" id="2_glghq"]
@@ -43,6 +43,15 @@ animations = [{
 radius = 6.0
 height = 18.0
 
+[sub_resource type="Gradient" id="Gradient_igrcy"]
+offsets = PackedFloat32Array(0, 0.754601)
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_brxyv"]
+gradient = SubResource("Gradient_igrcy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Fragment" type="Area2D"]
 script = ExtResource("1_brxyv")
 
@@ -54,5 +63,11 @@ frame_progress = 0.703873
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_acifj")
+
+[node name="Light" type="PointLight2D" parent="."]
+scale = Vector2(0.748942, 0.742812)
+color = Color(0.686275, 0.52549, 0.105882, 0.27451)
+energy = 3.0
+texture = SubResource("GradientTexture2D_brxyv")
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
