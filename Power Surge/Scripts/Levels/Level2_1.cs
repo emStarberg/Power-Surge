@@ -2,20 +2,19 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class Level1_2 : GameLevel
+public partial class Level2_1 : GameLevel
 {
 	private DialogueBox dialogueBox;
 	private Control popup;
 	private bool dialogueStarted = false, popupShown = false;
-	private List<int> lineNumbers = new List<int> { 2, 7, 9 }; // Line numbers to pause dialogue at
+	private List<int> lineNumbers = new List<int> { 1 }; // Line numbers to pause dialogue at
 	private float timer;
 
 	public override void _Ready()
 	{
-		GameData.Instance.GlowEnabled = false;
 		// Set up dialogue
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
-		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-1-2.txt");
+		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-2-1.txt");
 
 		camera = GetNode<Camera>("Camera");
 		camera.LimitLeft = -400;
@@ -35,8 +34,6 @@ public partial class Level1_2 : GameLevel
 				checkpoint.BodyEntered += (Node2D body) => OnCheckPointEntered(body, checkpoint);
 			}
 		}
-
-		
 	}
 
 	public override void _Process(double delta)

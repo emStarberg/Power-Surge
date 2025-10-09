@@ -11,9 +11,9 @@ public partial class EndScreen : Node2D
 	private UICamera camera;
 	private Control effects, currentButton, textEffects, alert;
 	private AudioStreamPlayer2D zapSound, backgroundMusic, lightningSound;
-	private List<string> levels = new List<string> { "1-1", "1-2"};
+	private List<string> levels = new List<string> { "1-1", "1-2", "2-1"};
 	private float timer = 0;
-	private bool shownFragments = false, shownPower = false, shownTime = false, shownRank = false;
+	private bool shownFragments = false, shownPower = false, shownTime = false, shownRank = false, glowing = true;
 	private Label rank;
 	
 
@@ -133,9 +133,13 @@ public partial class EndScreen : Node2D
 					// Go to next level
 					int index = levels.IndexOf(GameData.Instance.CurrentLevel);
 					string next = levels[index + 1];
+					if (next == "1-1" || next == "1-2")
+					{
+						glowing = false;
+					}
 					if (!alert.Visible)
 					{
-						GetTree().ChangeSceneToFile("res://Scenes/Levels/level_" + next + ".tscn");
+						LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/level_" + next + ".tscn", glowing);
 					}					
 					break;
 				default:

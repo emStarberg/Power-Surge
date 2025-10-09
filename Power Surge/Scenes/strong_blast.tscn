@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b17yu3txr7pm"]
+[gd_scene load_steps=18 format=3 uid="uid://b17yu3txr7pm"]
 
 [ext_resource type="Texture2D" uid="uid://b1yw2hs5uhn7j" path="res://Assets/Characters/Player/Attacks/Strong Blast (Explode) - Spritesheet.png" id="1_4tqxi"]
 [ext_resource type="Script" uid="uid://kk3boxwtxfw7" path="res://Scripts/Player/Player Attacks/StrongBlast.cs" id="1_ldyde"]
@@ -95,16 +95,31 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4tqxi"]
 radius = 6.08276
 
+[sub_resource type="Gradient" id="Gradient_igrcy"]
+offsets = PackedFloat32Array(0, 0.754601)
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ldyde"]
+gradient = SubResource("Gradient_igrcy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Strong Blast" type="Area2D"]
 script = ExtResource("1_ldyde")
 
 [node name="Anim_StrongBlast" type="AnimatedSprite2D" parent="."]
 position = Vector2(10, 0)
 sprite_frames = SubResource("SpriteFrames_bi64h")
-animation = &"contact"
+animation = &"moving"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4tqxi")
+
+[node name="Light" type="PointLight2D" parent="."]
+scale = Vector2(1.06474, 1.05603)
+color = Color(0.141176, 0.619608, 0.678431, 0.403922)
+energy = 3.0
+texture = SubResource("GradientTexture2D_ldyde")
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
 [connection signal="animation_finished" from="Anim_StrongBlast" to="." method="OnAnimFinished"]

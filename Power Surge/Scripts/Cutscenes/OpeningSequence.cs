@@ -185,7 +185,7 @@ public partial class OpeningSequence : Node2D
 			if (alpha <= 0)
 			{
 				fadeImage.Visible = false; // Hide when fully faded out
-				GetTree().ChangeSceneToFile("res://Scenes/Levels/tutorial.tscn");
+				LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/tutorial.tscn", false);
 			}
 		}
 		// Zoom camera in when dialogue has finished

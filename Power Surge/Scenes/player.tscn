@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://bwvj50vhjjac7"]
+[gd_scene load_steps=73 format=3 uid="uid://bwvj50vhjjac7"]
 
 [ext_resource type="Script" uid="uid://dr47mlmgvnewi" path="res://Scripts/Player/Player.cs" id="1_3smsa"]
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player/Player-Spritesheet.png" id="2_8erm5"]
@@ -15,8 +15,8 @@
 [ext_resource type="AudioStream" uid="uid://b0j6bpgh0pm7d" path="res://Assets/Audio/laser-14792 (mp3cut.net).mp3" id="9_pu2lt"]
 [ext_resource type="AudioStream" uid="uid://dghc3witth3y7" path="res://Assets/Audio/Hurt.mp3" id="10_gymyn"]
 [ext_resource type="AudioStream" uid="uid://bnycau3ogy1fg" path="res://Assets/Audio/Dash.mp3" id="10_tx1dd"]
-[ext_resource type="AudioStream" uid="uid://dkppxtnqyjuwd" path="res://Assets/Audio/fast-paced-doom-metal-instrumental-262778 (mp3cut.net).mp3" id="13_ukyrk"]
 [ext_resource type="AudioStream" uid="uid://b006kt33m325e" path="res://Assets/Audio/arcade-ui-1-229498.mp3" id="14_7dp3o"]
+[ext_resource type="AudioStream" uid="uid://bu4wutc1blsx7" path="res://Assets/Audio/Power Surge Music.mp3" id="16_igrcy"]
 [ext_resource type="AudioStream" uid="uid://8jb3rrfsnj2b" path="res://Assets/Audio/lightning-strike-386161.mp3" id="18_igrcy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k1bk2"]
@@ -424,6 +424,15 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_igrcy"]
+offsets = PackedFloat32Array(0, 0.754601)
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fs7ks"]
+gradient = SubResource("Gradient_igrcy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3smsa")
 
@@ -473,6 +482,12 @@ theme_override_font_sizes/font_size = 24
 text = "10"
 horizontal_alignment = 1
 
+[node name="Light" type="PointLight2D" parent="."]
+scale = Vector2(1.86628, 1.85101)
+color = Color(0.141176, 0.619608, 0.678431, 0.403922)
+energy = 2.5
+texture = SubResource("GradientTexture2D_fs7ks")
+
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="Weak Pulse" type="AudioStreamPlayer2D" parent="Sounds"]
@@ -491,7 +506,7 @@ stream = ExtResource("10_gymyn")
 stream = ExtResource("8_8erm5")
 
 [node name="Power Surge" type="AudioStreamPlayer2D" parent="Sounds"]
-stream = ExtResource("13_ukyrk")
+stream = ExtResource("16_igrcy")
 
 [node name="Collect Fragment" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("14_7dp3o")

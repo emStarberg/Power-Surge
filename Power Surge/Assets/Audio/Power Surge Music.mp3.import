@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bu4wutc1blsx7"
+path="res://.godot/imported/Power Surge Music.mp3-bb44fa0be1d678316c238f06b42b2b58.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Power Surge Music.mp3"
+dest_files=["res://.godot/imported/Power Surge Music.mp3-bb44fa0be1d678316c238f06b42b2b58.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
