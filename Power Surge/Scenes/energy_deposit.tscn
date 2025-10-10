@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://bd8okq273t30m"]
+
+[ext_resource type="Script" uid="uid://cdnnfp163pddk" path="res://Scripts/Objects/EnergyPuddle.cs" id="1_7g0g7"]
+[ext_resource type="Texture2D" uid="uid://m0hcjl7rofgd" path="res://Assets/Objects/Energy Puddle - Spritesheet.png" id="1_q7exv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kigv1"]
+size = Vector2(16, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0q0g"]
+atlas = ExtResource("1_q7exv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2sel"]
+atlas = ExtResource("1_q7exv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_me7ub"]
+atlas = ExtResource("1_q7exv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ge76m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0q0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2sel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_me7ub")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_bck5y"]
+offsets = PackedFloat32Array(0, 0.754601)
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q7exv"]
+gradient = SubResource("Gradient_bck5y")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Energy Deposit" type="Area2D"]
+script = ExtResource("1_7g0g7")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_kigv1")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ge76m")
+autoplay = "default"
+frame_progress = 0.507905
+
+[node name="Light" type="PointLight2D" parent="."]
+scale = Vector2(0.556943, 0.552386)
+color = Color(0.141176, 0.619608, 0.678431, 0.403922)
+energy = 5.0
+texture = SubResource("GradientTexture2D_q7exv")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnBodyExited"]

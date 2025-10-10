@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://ccbfgvaaf44xg"]
+
+[ext_resource type="Script" uid="uid://giioaa15t83x" path="res://Scripts/Enemies/CorruptPuddle.cs" id="1_0qc0l"]
+[ext_resource type="Texture2D" uid="uid://cxf4ku6c04hiw" path="res://Assets/Characters/Enemies/Corrupt Puddle - Spritesheet.png" id="1_xn4eu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qc0l"]
+size = Vector2(16, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pc5r"]
+atlas = ExtResource("1_xn4eu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfnxv"]
+atlas = ExtResource("1_xn4eu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfjuj"]
+atlas = ExtResource("1_xn4eu")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3uu1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pc5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfnxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfjuj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_igrcy"]
+offsets = PackedFloat32Array(0, 0.754601)
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_agm7v"]
+gradient = SubResource("Gradient_igrcy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Corrupt Puddle" type="Area2D"]
+script = ExtResource("1_0qc0l")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_0qc0l")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x3uu1")
+autoplay = "default"
+
+[node name="Light" type="PointLight2D" parent="."]
+scale = Vector2(0.556943, 0.552386)
+color = Color(0.923912, 0.000203689, 0.795848, 0.403922)
+energy = 5.0
+texture = SubResource("GradientTexture2D_agm7v")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnBodyExited"]
