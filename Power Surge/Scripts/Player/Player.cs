@@ -354,6 +354,7 @@ public partial class Player : CharacterBody2D
 	/// </Summary>
 	public void Dash()
 	{
+		fallTime = 0;
 		invincible = true;
 		// For tutorial
 		if (!HasDashed)

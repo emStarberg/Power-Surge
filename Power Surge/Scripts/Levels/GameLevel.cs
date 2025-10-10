@@ -12,6 +12,7 @@ public abstract partial class GameLevel : Node2D
 	protected Player player;
 	protected float levelTimer = 0;
 	protected float expectedTime;
+	protected AudioStreamPlayer2D backgroundMusic;
 	protected Camera camera;
 
 	protected void checkOptionsMenu()
@@ -48,7 +49,7 @@ public abstract partial class GameLevel : Node2D
 	/// </summary>
 	protected virtual void UpdateVolume()
 	{
-
+		backgroundMusic.VolumeDb = GameSettings.Instance.GetFinalMusic();
 	}
 	/// <summary>
 	/// Get the time taken to complete the level

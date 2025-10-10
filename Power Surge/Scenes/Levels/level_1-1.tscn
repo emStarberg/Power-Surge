@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="17_3rrt1"]
 [ext_resource type="Texture2D" uid="uid://dxjb13hojjw0x" path="res://Assets/UI/Button - Highlighted.png" id="17_4yllm"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="18_2egns"]
-[ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="19_3lm4w"]
+[ext_resource type="AudioStream" uid="uid://cgouoj02oqxv6" path="res://Assets/Audio/grasslands-9611.mp3" id="22_axncg"]
 [ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="23_axncg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4yllm"]
@@ -424,7 +424,8 @@ position = Vector2(-19.7413, -2.49435)
 shape = SubResource("RectangleShape2D_bcykt")
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("19_3lm4w")
+visible = false
+stream = ExtResource("22_axncg")
 autoplay = true
 max_distance = 100000.0
 attenuation = 1e-05

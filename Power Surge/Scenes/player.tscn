@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player/Player-Spritesheet.png" id="2_8erm5"]
 [ext_resource type="Texture2D" uid="uid://bmj5ko27wem2n" path="res://Assets/Characters/Player/Player Dash - Power Surge - Spritesheet.png" id="3_7dp3o"]
 [ext_resource type="Texture2D" uid="uid://u1y57kfmcvs4" path="res://Assets/Characters/Player/Player Death - Spritesheet.png" id="3_f1ek2"]
-[ext_resource type="Texture2D" uid="uid://cndd6taxvrma1" path="res://Assets/Characters/Enemies/Circuit Bug/Projectile CB - Explode - Spritesheet.png" id="4_h4iuc"]
+[ext_resource type="Texture2D" uid="uid://cgvm1dcg5gdj2" path="res://Assets/Characters/Enemies/Circuit Bug/Projectile CB - Explode - Spritesheet.png" id="4_h4iuc"]
 [ext_resource type="Texture2D" uid="uid://bptbc7jd1antf" path="res://Assets/Characters/Player/Player Hurt - Spritesheet.png" id="4_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://3wb48qr8yjh1" path="res://Assets/Characters/Player/Player Dash - Spritesheet.png" id="5_gymyn"]
 [ext_resource type="Texture2D" uid="uid://diwq6eaq2306b" path="res://Assets/Characters/Player/Player Idle - Power Surge - Spritesheet.png" id="6_7dp3o"]
