@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://0v3wuwa2wbjd"]
 
 [ext_resource type="Script" uid="uid://bi8gyn1ajlcw4" path="res://Scripts/Enemies/ProjectileCB.cs" id="1_3x12l"]
-[ext_resource type="Texture2D" uid="uid://o5tc3os16h5s" path="res://Assets/Characters/Enemies/Circuit Bug/Circuit bug - Projectile.png" id="2_512mq"]
-[ext_resource type="Texture2D" uid="uid://cndd6taxvrma1" path="res://Assets/Characters/Enemies/Circuit Bug/Projectile CB - Explode - Spritesheet.png" id="3_y43ov"]
+[ext_resource type="Texture2D" uid="uid://c6e1juaicogpp" path="res://Assets/Characters/Enemies/Circuit Bug/Circuit bug - Projectile.png" id="2_512mq"]
+[ext_resource type="Texture2D" uid="uid://cgvm1dcg5gdj2" path="res://Assets/Characters/Enemies/Circuit Bug/Projectile CB - Explode - Spritesheet.png" id="3_y43ov"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6f08y"]
 radius = 5.0

@@ -19,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://dxjb13hojjw0x" path="res://Assets/UI/Button - Highlighted.png" id="16_hll3v"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="17_7a7x1"]
 [ext_resource type="PackedScene" uid="uid://bignn7lsbeest" path="res://Scenes/fragment.tscn" id="18_xa7xj"]
-[ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="19_3vtx2"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="20_clw6j"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="20_d4mm0"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="20_lfndu"]
@@ -28,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="22_dvn6w"]
 [ext_resource type="Texture2D" uid="uid://k8on6iy7yqcn" path="res://Assets/Objects/Stone Bridge - Animation - Spritesheet.png" id="22_me5s4"]
 [ext_resource type="AudioStream" uid="uid://ctoo0el5qp2tp" path="res://Assets/Audio/dropping-rocks-5996.mp3" id="23_yv68g"]
+[ext_resource type="AudioStream" uid="uid://cgouoj02oqxv6" path="res://Assets/Audio/grasslands-9611.mp3" id="26_8d318"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lg2bv"]
 texture = ExtResource("3_lfndu")
@@ -793,7 +793,7 @@ position = Vector2(75.0224, -2.49435)
 shape = SubResource("RectangleShape2D_clw6j")
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("19_3vtx2")
+stream = ExtResource("26_8d318")
 autoplay = true
 max_distance = 100000.0
 attenuation = 1e-05

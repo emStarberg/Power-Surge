@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://drs0lifi4p3np"]
+[gd_scene load_steps=46 format=4 uid="uid://drs0lifi4p3np"]
 
 [ext_resource type="Script" uid="uid://drhfxcc4iblxk" path="res://Scripts/Levels/Level2_1.cs" id="1_1oq1o"]
 [ext_resource type="Texture2D" uid="uid://c7txmddfg8iy3" path="res://Assets/Backgrounds/Cave.png" id="1_ivgmt"]
@@ -19,9 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://dxjb13hojjw0x" path="res://Assets/UI/Button - Highlighted.png" id="16_r71xl"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="17_k8bje"]
 [ext_resource type="PackedScene" uid="uid://bignn7lsbeest" path="res://Scenes/fragment.tscn" id="18_qarcb"]
-[ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="19_rrg5b"]
+[ext_resource type="AudioStream" uid="uid://cmi24nwjtiyc5" path="res://Assets/Audio/Cave.mp3" id="20_1oq1o"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="20_c1o0o"]
 [ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="21_phi1q"]
+[ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="23_urlj5"]
+[ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="24_3mh1t"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1oq1o"]
 polygon = PackedVector2Array(-6.90374, -8, 8, -8, 8, 8, -7.00526, 8)
@@ -177,7 +179,7 @@ tile_set = SubResource("TileSet_t7515")
 
 [node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("4_3mh1t")]
 modulate = Color(1.5, 1, 1, 1)
-position = Vector2(-131, 16)
+position = Vector2(-115, 22)
 PowerMeter = NodePath("../UI/Control/Power Meter")
 percentageLabel = NodePath("../UI/Control/Percentage Label")
 FragmentSlots = NodePath("../UI/Control/Fragment Slots")
@@ -197,7 +199,7 @@ offset_right = -5.0
 offset_bottom = -24.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Power Meter" type="TextureProgressBar" parent="UI/Control"]
+[node name="Power Meter" type="TextureProgressBar" parent="UI/Control" node_paths=PackedStringArray("Camera")]
 layout_mode = 0
 offset_left = 505.0
 offset_top = 571.0
@@ -207,6 +209,7 @@ scale = Vector2(3.5, 3.533)
 texture_under = ExtResource("6_kigv1")
 texture_progress = ExtResource("7_s0q0g")
 script = ExtResource("8_g2sel")
+Camera = NodePath("../../../Camera")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
@@ -394,10 +397,17 @@ scale = Vector2(1.1, 1.1)
 
 [node name="Enemies" type="Node2D" parent="." groups=["Enemy"]]
 
+[node name="Circuit Bug" parent="Enemies" instance=ExtResource("23_urlj5")]
+position = Vector2(43, 23)
+
+[node name="Voltage Sentinel" parent="Enemies" instance=ExtResource("24_3mh1t")]
+position = Vector2(-160, 9)
+
 [node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("19_rrg5b")
+stream = ExtResource("20_1oq1o")
+volume_db = 10.0
 autoplay = true
 max_distance = 100000.0
 attenuation = 1e-05

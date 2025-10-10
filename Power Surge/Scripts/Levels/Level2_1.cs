@@ -25,6 +25,8 @@ public partial class Level2_1 : GameLevel
 
 		expectedTime = 70;
 
+		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
+
 		// Set up checkpoints
 		foreach (Node node in GetNode<Node2D>("Checkpoints").GetChildren())
 		{
