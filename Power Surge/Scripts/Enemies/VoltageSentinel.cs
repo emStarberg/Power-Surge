@@ -7,8 +7,7 @@ public partial class VoltageSentinel : Enemy
 	private Vector2 velocity; // For updating Velocity property
 	private string direction = "left"; // Direction facing
 	private bool playerDetectedForAttack = false; // Whether player has been detected
-	private PackedScene projectile = GD.Load<PackedScene>("Scenes/projectile_cb.tscn"); // For spawning projectiles
-	private RayCast2D groundRay, wallRay, playerRay; // Ground detection, wall/object detection, player detection
+	private RayCast2D groundRay, wallRay, playerRayFront, playerRayBack; // Ground detection, wall/object detection, player detection
 
 	private Vector2 startPosition;
 	private float walkedDistance = 0f;
@@ -21,7 +20,8 @@ public partial class VoltageSentinel : Enemy
 	private bool isFollowingPlayer = false;
 	private bool canDamagePlayer = false;
 	private AudioStreamPlayer2D attackSound;
-
+	private AnimatedSprite2D electricityAnimation;
+	private PointLight2D light;
 	private Camera camera;
 
 	public override void _Ready()
@@ -31,29 +31,40 @@ public partial class VoltageSentinel : Enemy
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		groundRay = GetNode<RayCast2D>("RayCasts/GroundRay");
 		wallRay = GetNode<RayCast2D>("RayCasts/WallRay");
-		playerRay = GetNode<RayCast2D>("RayCasts/PlayerRay");
+		playerRayFront = GetNode<RayCast2D>("RayCasts/PlayerRay Front");
+		playerRayBack = GetNode<RayCast2D>("RayCasts/PlayerRay Back");
 		startPosition = GlobalPosition;
 		player = GetParent().GetParent().GetNode<Player>("Player");
 		targetPlayer = GetParent().GetParent().GetNode<Player>("Player");
 		camera = GetParent().GetParent().GetNode<Camera>("Camera");
 		animation.Animation = "walk";
+		electricityAnimation = GetNode<AnimatedSprite2D>("Electricity");
+		light = electricityAnimation.GetNode<PointLight2D>("Light");
 
 		maxHealth = 30;
 		health = maxHealth;
+
+		if (!GameData.Instance.GlowEnabled)
+		{
+			light.Visible = false;
+		}
+
+		animation.Play();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		if (isAlive)
 		{
-
-
-			if (playerRay.IsColliding() && playerRay.GetCollider() is Player player && canDamagePlayer)
+			if (playerRayFront.IsColliding() && playerRayFront.GetCollider() is Player player && canDamagePlayer)
 			{
 				player.Hurt(25, 2f, 0.2f);
 				canDamagePlayer = false;
+			}else if (playerRayBack.IsColliding() && playerRayBack.GetCollider() is Player player2 && canDamagePlayer)
+			{
+				player2.Hurt(25, 2f, 0.2f);
+				canDamagePlayer = false;
 			}
-
 
 			if (!IsOnFloor())
 				velocity += GetGravity() * (float)delta;
@@ -150,8 +161,8 @@ public partial class VoltageSentinel : Enemy
 			}
 
 			// Player detection via raycast
-			playerRay.ForceRaycastUpdate();
-			if (playerRay.IsColliding() && playerRay.GetCollider() is Node2D collider && collider.Name == "Player")
+			playerRayFront.ForceRaycastUpdate();
+			if (playerRayFront.IsColliding() && playerRayFront.GetCollider() is Node2D collider && collider.Name == "Player")
 			{
 				if (!playerDetectedForAttack)
 				{
@@ -205,7 +216,12 @@ public partial class VoltageSentinel : Enemy
 				Attack();
 			}
 		}
-		
+	}
+
+	public void OnElectricityAnimFinished()
+	{
+		electricityAnimation.Stop();
+		electricityAnimation.Visible = false;
 	}
 
 	/// <summary>
@@ -257,6 +273,8 @@ public partial class VoltageSentinel : Enemy
 			// Can only hurt player between frames 7 and 14
 			if (animation.Frame == 7)
 			{
+				electricityAnimation.Visible = true;
+				electricityAnimation.Play();
 				attackSound.Play();
 				camera.Shake(5, 0.4f);
 				canDamagePlayer = true;

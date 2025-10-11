@@ -29,6 +29,7 @@ public partial class End : Area2D
 			{
 				GameData.Instance.LevelTime = gameLevel.GetLevelTimer();
 				GameData.Instance.LevelExpectedTime = gameLevel.GetExpectedTime();
+				GameData.Instance.LevelEnemyCountFinal = gameLevel.GetEnemiesRemaining();
 			}
 			GetTree().ChangeSceneToFile("res://Scenes/Screens/end_screen.tscn");
 			

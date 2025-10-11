@@ -14,7 +14,18 @@ public abstract partial class GameLevel : Node2D
 	protected float expectedTime;
 	protected AudioStreamPlayer2D backgroundMusic;
 	protected Camera camera;
+	protected Control popup;
 
+	protected void StartLevel()
+	{
+		player = GetNode<Player>("Player");
+		popup = GetNode<Control>("UI/Pop-up");
+		popup.Visible = false;
+		camera = GetNode<Camera>("Camera");
+		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
+		GameData.Instance.LevelEnemyCount = GetEnemiesRemaining();
+	}
+	
 	protected void checkOptionsMenu()
 	{
 		// esc pressed
@@ -66,5 +77,22 @@ public abstract partial class GameLevel : Node2D
 	public float GetExpectedTime()
 	{
 		return expectedTime;
+	}
+
+	/// <summary>
+	/// Get number of enemies remaining in the level
+	/// </summary>
+	/// <returns>Enemies remaining</returns>
+	public int GetEnemiesRemaining()
+	{
+		int count = 0;
+		foreach (Node node in GetNode<Node2D>("Enemies").GetChildren())
+		{
+			if (node is Enemy enemy)
+			{
+				count++;
+			}
+		}
+		return count;
 	}
 }

@@ -19,6 +19,8 @@ public partial class GameData : Node
     public float LevelTime = 0f;
     public float LevelPower = 0f;
     public float LevelExpectedTime = 0f;
+    public int LevelEnemyCount = 0;
+    public int LevelEnemyCountFinal = 0;
 
     public override void _Ready()
     {

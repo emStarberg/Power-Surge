@@ -12,8 +12,8 @@ public partial class EndScreen : Node2D
 	private Control effects, currentButton, textEffects, alert;
 	private AudioStreamPlayer2D zapSound, backgroundMusic, lightningSound;
 	private List<string> levels = new List<string> { "1-1", "1-2", "2-1"};
-	private float timer = 0;
-	private bool shownFragments = false, shownPower = false, shownTime = false, shownRank = false, glowing = true;
+	private float timer = 0, enemiesKilled = 0;
+	private bool shownFragments = false, shownPower = false, shownTime = false, shownRank = false, shownEnemies = false, glowing = true;
 	private Label rank;
 	
 
@@ -61,8 +61,10 @@ public partial class EndScreen : Node2D
 		// Format as "MM:SS"
 		labels[2].Text = $"{minutes:D2}:{seconds:D2}";
 		rank.Text = CalculateRank();
+		enemiesKilled = GameData.Instance.LevelEnemyCount - GameData.Instance.LevelEnemyCountFinal;
+		labels[3].Text = enemiesKilled + "/" + GameData.Instance.LevelEnemyCount;
 
-		// Last available level
+		// Show alert if last available level
 		alert.Visible = levels.IndexOf(GameData.Instance.CurrentLevel) == levels.Count - 1;
 	}
 
@@ -84,11 +86,17 @@ public partial class EndScreen : Node2D
 			shownTime = true;
 			ShowStat(labels[2]);
 		}
-		if (timer >= 6f && !shownRank)
+		if(timer >= 5f && !shownEnemies)
+		{
+			shownEnemies = true;
+			ShowStat(labels[3]);
+		}
+		if (timer >= 7f && !shownRank)
 		{
 			shownRank = true;
 			ShowRank();
 		}
+		
 		// Switch between buttons
 		if (Input.IsActionJustPressed("input_left"))
 		{
@@ -219,7 +227,7 @@ public partial class EndScreen : Node2D
 	}
 
 	/// <summary>
-	/// Calculate final rank using fragments collected, power remaining, and time
+	/// Calculate final rank using fragments collected, power remaining, time, and enemies killed
 	/// </summary>
 	/// <returns>Final letter grade</returns>
 	private string CalculateRank()
@@ -227,33 +235,42 @@ public partial class EndScreen : Node2D
 		string finalRank = "F";
 		int points = 0;
 
-		points += GameData.Instance.LevelFragments;
-		points += (int)Math.Round(GameData.Instance.LevelPower / 40);
+		points += GameData.Instance.LevelFragments; // Max 3
+		float power = GameData.Instance.LevelPower; // Max 3
+		if (power >= 40)
+		{
+			points++;
+		}
+		if (power >= 80)
+		{
+			points++;
+		}
+		if (power >= 120)
+		{
+			points++;
+		}
+		
 		float levelTime = GameData.Instance.LevelTime;
 		float expectedTime = GameData.Instance.LevelExpectedTime;
-		if (levelTime >= expectedTime)
+
+		if (levelTime >= expectedTime) // Max 2
 		{
-			if ((levelTime - expectedTime) < 25)
+			if ((levelTime - expectedTime) > 15)
 			{
 				points++;
 			}
-			if ((levelTime - expectedTime) < 10)
+			if ((levelTime - expectedTime) > 5)
 			{
 				points++;
 			}
 		}
-		else
-		{
-			points += 2;
-			if ((expectedTime - levelTime) > 10)
-			{
-				points++;
-			}
-			if ((expectedTime - levelTime) > 25)
-			{
-				points++;
-			}
-		}
+		float enemyPercentage = enemiesKilled / GameData.Instance.LevelEnemyCount;
+
+		if (enemyPercentage >= 70) // Max 2
+			points++;
+
+		if (enemyPercentage >= 100)
+			points++;
 
 		List<string> ranks = new List<string> { "F", "E", "D", "C", "C+", "B", "B+", "A", "A+", "S" };
 
