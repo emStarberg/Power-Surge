@@ -5,27 +5,21 @@ using System.Collections.Generic;
 public partial class Level2_1 : GameLevel
 {
 	private DialogueBox dialogueBox;
-	private Control popup;
 	private bool dialogueStarted = false, popupShown = false;
 	private List<int> lineNumbers = new List<int> { 1 }; // Line numbers to pause dialogue at
 	private float timer;
 
 	public override void _Ready()
 	{
+		StartLevel();
 		// Set up dialogue
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-2-1.txt");
 
-		camera = GetNode<Camera>("Camera");
 		camera.LimitLeft = -400;
 		camera.LimitRight = 4500;
 
-		popup = GetNode<Control>("UI/Pop-up");
-		player = GetNode<Player>("Player");
-
-		expectedTime = 70;
-
-		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
+		expectedTime = 60;
 
 		// Set up checkpoints
 		foreach (Node node in GetNode<Node2D>("Checkpoints").GetChildren())
@@ -34,6 +28,16 @@ public partial class Level2_1 : GameLevel
 			{
 				// Connect a signal to each checkpoint
 				checkpoint.BodyEntered += (Node2D body) => OnCheckPointEntered(body, checkpoint);
+			}
+		}
+
+		// Set up camera changes
+		foreach (Node node in GetNode<Node2D>("Checkpoints").GetNode<Node2D>("Camera Changes").GetChildren())
+		{
+			if (node is CameraChange change)
+			{
+				// Connect a signal to each checkpoint
+				change.BodyExited += (Node2D body) => OnCameraChangeExited(body, change);
 			}
 		}
 	}
@@ -68,7 +72,12 @@ public partial class Level2_1 : GameLevel
 			}
 		}
 	}
-	
+
+	/// <summary>
+	/// When a checkpoint is passed by the player
+	/// </summary>
+	/// <param name="body"></param>
+	/// <param name="checkpoint"></param>
 	public void OnCheckPointEntered(Node2D body, Area2D checkpoint)
 	{
 		if (body is Player player)
@@ -76,6 +85,30 @@ public partial class Level2_1 : GameLevel
 			string name = checkpoint.Name;
 			dialogueBox.Resume();
 			checkpoint.QueueFree();
+
+		}
+	}
+
+	/// <summary>
+	/// When a camera change point is passed by the player
+	/// </summary>
+	/// <param name="body"></param>
+	/// <param name="checkpoint"></param>
+	public void OnCameraChangeExited(Node2D body, CameraChange change)
+	{
+		if (body is Player player)
+		{
+			if (player.GetDirection() == change.DirectionEnteredFrom)
+			{
+				if (camera.Mode == "horizontal")
+				{
+					camera.Mode = "vertical";
+				}
+				else if (camera.Mode == "vertical")
+				{
+					camera.Mode = "horizontal";
+				}
+			}
 		}
 	}
 

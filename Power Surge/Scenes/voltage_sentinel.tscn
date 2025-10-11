@@ -1,10 +1,11 @@
-[gd_scene load_steps=44 format=3 uid="uid://ch58q6jxnp3qs"]
+[gd_scene load_steps=54 format=3 uid="uid://ch58q6jxnp3qs"]
 
 [ext_resource type="Script" uid="uid://ie77lp106ux2" path="res://Scripts/Enemies/VoltageSentinel.cs" id="1_jwrvh"]
 [ext_resource type="Texture2D" uid="uid://bm3sd3ja7a5n4" path="res://Assets/Characters/Enemies/Voltage Sentinel Idle - Spritesheet.png" id="2_50eub"]
 [ext_resource type="Texture2D" uid="uid://c85lyouvoov6p" path="res://Assets/Characters/Enemies/Voltage Sentinel - Attack - Spritesheet.png" id="2_qxj3x"]
 [ext_resource type="Texture2D" uid="uid://cgvm1dcg5gdj2" path="res://Assets/Characters/Enemies/Circuit Bug/Projectile CB - Explode - Spritesheet.png" id="3_ihxra"]
 [ext_resource type="Texture2D" uid="uid://drq7qe2bqmcys" path="res://Assets/Characters/Enemies/Voltage Sentinel Walk - Spritesheet.png" id="3_qxj3x"]
+[ext_resource type="Texture2D" uid="uid://ccv5uc6suqjuq" path="res://Assets/Characters/Enemies/Voltage Sentinel Attack Electricity - Spritesheet.png" id="6_bbplq"]
 [ext_resource type="AudioStream" uid="uid://7mb6qf0cwo8d" path="res://Assets/Audio/Sentinel Attack.mp3" id="6_n50ty"]
 [ext_resource type="AudioStream" uid="uid://10utki4mrysf" path="res://Assets/Audio/metal-impact-247482.mp3" id="7_n50ty"]
 
@@ -295,6 +296,77 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mymmu"]
+atlas = ExtResource("6_bbplq")
+region = Rect2(0, 0, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8030"]
+atlas = ExtResource("6_bbplq")
+region = Rect2(0, 16, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjvb6"]
+atlas = ExtResource("6_bbplq")
+region = Rect2(0, 32, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ictm"]
+atlas = ExtResource("6_bbplq")
+region = Rect2(0, 48, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvurr"]
+atlas = ExtResource("6_bbplq")
+region = Rect2(0, 64, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkhrp"]
+atlas = ExtResource("6_bbplq")
+region = Rect2(0, 80, 48, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rvurr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mymmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8030")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjvb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ictm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvurr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkhrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvurr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkhrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvurr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkhrp")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_igrcy"]
+offsets = PackedFloat32Array(0, 0.754601)
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bbplq"]
+gradient = SubResource("Gradient_igrcy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_50eub"]
 size = Vector2(160, 33)
 
@@ -310,7 +382,19 @@ shape = SubResource("RectangleShape2D_uv22f")
 position = Vector2(3, -2)
 sprite_frames = SubResource("SpriteFrames_2yo0d")
 animation = &"idle"
-autoplay = "idle"
+
+[node name="Electricity" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-21, 14)
+sprite_frames = SubResource("SpriteFrames_rvurr")
+frame = 9
+frame_progress = 1.0
+
+[node name="Light" type="PointLight2D" parent="Electricity"]
+scale = Vector2(0.556943, 0.552386)
+color = Color(0.923912, 0.000203689, 0.795848, 0.403922)
+energy = 5.0
+texture = SubResource("GradientTexture2D_bbplq")
 
 [node name="RayCasts" type="Node2D" parent="."]
 
@@ -321,9 +405,13 @@ position = Vector2(-12, 0)
 position = Vector2(0, 13)
 target_position = Vector2(-22, 0)
 
-[node name="PlayerRay" type="RayCast2D" parent="RayCasts"]
+[node name="PlayerRay Front" type="RayCast2D" parent="RayCasts"]
 position = Vector2(0, 13)
-target_position = Vector2(-18, 0)
+target_position = Vector2(-49, 0)
+
+[node name="PlayerRay Back" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, 13)
+target_position = Vector2(25, 0)
 
 [node name="PlayerDetection" type="Area2D" parent="."]
 
@@ -343,5 +431,6 @@ volume_db = 10.0
 [connection signal="animation_changed" from="Animations" to="." method="OnAnimationChanged"]
 [connection signal="animation_finished" from="Animations" to="." method="OnAnimationFinished"]
 [connection signal="frame_changed" from="Animations" to="." method="OnAnimationFrameChanged"]
+[connection signal="animation_finished" from="Electricity" to="." method="OnElectricityAnimFinished"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="OnPlayerDetectionBodyEntered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="OnPlayerDetectionBodyExited"]

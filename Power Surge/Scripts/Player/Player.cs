@@ -19,7 +19,8 @@ public partial class Player : CharacterBody2D
 	[Export] public Control FragmentSlots;
 	[Export] public bool TutorialMode = false;
 	[Export] public bool PowerSurgeEnabled = true;
-	
+
+	public string VerticalFacing = "down";
 	private int power = 100; // Percentage of power left
 	private Vector2 velocity; // For changing player's Velocity property
 	private AnimatedSprite2D animation; // Player's animations
@@ -286,6 +287,11 @@ public partial class Player : CharacterBody2D
 					Attack();
 				}
 			}
+
+			if(Velocity.Y > 300f)
+			{
+				VerticalFacing = "down";
+			}
 		}
 	}
 
@@ -294,6 +300,7 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void Jump()
 	{
+		VerticalFacing = "up";
 		// For tutorial
 		if (!HasJumped)
 		{
@@ -649,6 +656,9 @@ public partial class Player : CharacterBody2D
 		return power;
 	}
 
+	/// <summary>
+	/// Use the power surge attack
+	/// </summary>
 	public void PowerSurgeAttack()
 	{
 			powerSurgeAttackSound.Play();

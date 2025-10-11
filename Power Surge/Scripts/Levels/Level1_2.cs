@@ -5,28 +5,22 @@ using System.Collections.Generic;
 public partial class Level1_2 : GameLevel
 {
 	private DialogueBox dialogueBox;
-	private Control popup;
 	private bool dialogueStarted = false, popupShown = false;
 	private List<int> lineNumbers = new List<int> { 2, 7, 9 }; // Line numbers to pause dialogue at
 	private float timer;
 
 	public override void _Ready()
 	{
-		GameData.Instance.GlowEnabled = false;
+		StartLevel();
 		// Set up dialogue
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-1-2.txt");
 
-		camera = GetNode<Camera>("Camera");
 		camera.LimitLeft = -400;
 		camera.LimitRight = 4500;
 
-		popup = GetNode<Control>("UI/Pop-up");
-		player = GetNode<Player>("Player");
-
 		expectedTime = 70;
 
-		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
 
 		// Set up checkpoints
 		foreach (Node node in GetNode<Node2D>("Checkpoints").GetChildren())

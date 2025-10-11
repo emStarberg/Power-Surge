@@ -11,11 +11,14 @@ public partial class Camera : Camera2D
 	[Export]
 	public NodePath playerPath; // Path to player node
 	private Player _player; // Reference to player node
+	public string Mode = "horizontal"; // horizontal, vertical, still
 	private float shakeAmount, shakeTime = 0f; // Parameters for camera shake effect
 	private Random random = new(); // Random number for generating shake effect
 	private Vector2 baseOffset = new Vector2(0, 0); // Camera offset from player pos
 	private Vector2 targetOffset = Vector2.Zero;
-	private float offsetLerpSpeed = 2.5f; // Higher = snappier, lower = smoother
+	private float offsetLerpSpeed = 2.5f;
+	private string facingVertical = "down";
+	
 
 	public override void _Ready()
 	{
@@ -29,28 +32,19 @@ public partial class Camera : Camera2D
 	{
 		if (_player != null)
 		{
-			float halfVisibleWidth = GetViewportRect().Size.X * 0.5f / Zoom.X;
-			float halfVisibleHeight = GetViewportRect().Size.Y * 0.5f / Zoom.Y;
+			switch (Mode)
+			{
+				case "horizontal":
+					HorizontalMode(delta);
+					break;
+				
+				case "vertical":
+					VerticalMode(delta);
+					break;
 
-			// X axis: clamp as before
-			float newX = Position.X;
-			if (_player.Position.X > LimitLeft + halfVisibleWidth && _player.Position.X < LimitRight - halfVisibleWidth)
-				newX = _player.Position.X;
-
-			Position = new Vector2(newX, _player.Position.Y);
-			
-			string facing = "right";
-			facing = _player.GetDirection();
-
-			if (facing == "right")
-				targetOffset = new Vector2(25, 0);
-			else if (facing == "left")
-				targetOffset = new Vector2(-25, 0);
-			else
-				targetOffset = Vector2.Zero;
-
-			// Smoothly interpolate baseOffset towards targetOffset
-			baseOffset = baseOffset.Lerp(targetOffset, offsetLerpSpeed * (float)delta);
+				default:
+					break;
+			}
 		}
 
 		// Shake the camera when required
@@ -79,5 +73,60 @@ public partial class Camera : Camera2D
 	{
 		shakeAmount = amount;
 		shakeTime = duration;
+	}
+
+	/// <summary>
+	/// For when the player is in a horizontal camera area
+	/// </summary>
+	/// <param name="delta">_Process</param>
+	public void HorizontalMode(double delta)
+	{
+		offsetLerpSpeed = 2.5f;
+		float halfVisibleWidth = GetViewportRect().Size.X * 0.5f / Zoom.X;
+
+		float newX = Position.X;
+		if (_player.Position.X > LimitLeft + halfVisibleWidth && _player.Position.X < LimitRight - halfVisibleWidth)
+			newX = _player.Position.X;
+
+		Position = new Vector2(newX, _player.Position.Y);
+
+		string facing = "right";
+		facing = _player.GetDirection();
+
+		if (facing == "right")
+			targetOffset = new Vector2(25, 0);
+		else if (facing == "left")
+			targetOffset = new Vector2(-25, 0);
+		else
+			targetOffset = Vector2.Zero;
+
+		// Smoothly interpolate baseOffset towards targetOffset
+		baseOffset = baseOffset.Lerp(targetOffset, offsetLerpSpeed * (float)delta);
+	}
+	
+	/// <summary>
+	/// For when the player is in a vertical camera area
+	/// </summary>
+	/// <param name="delta">_Process</param>
+	public void VerticalMode(double delta)
+	{
+		offsetLerpSpeed = 1.0f;
+		float halfVisibleWidth = GetViewportRect().Size.X * 0.5f / Zoom.X;
+
+		float newX = Position.X;
+		if (_player.Position.X > LimitLeft + halfVisibleWidth && _player.Position.X < LimitRight - halfVisibleWidth)
+			newX = _player.Position.X;
+
+		Position = new Vector2(newX, _player.Position.Y);
+			
+		if (_player.VerticalFacing == "down")
+			targetOffset = new Vector2(0, 60);
+		else if (_player.VerticalFacing == "up")
+			targetOffset = new Vector2(0, -60);
+		else
+			targetOffset = Vector2.Zero;
+
+		// Smoothly interpolate baseOffset towards targetOffset
+		baseOffset = baseOffset.Lerp(targetOffset, offsetLerpSpeed * (float)delta);
 	}
 }

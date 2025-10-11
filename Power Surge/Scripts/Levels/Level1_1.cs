@@ -11,25 +11,19 @@ public partial class Level1_1 : GameLevel
 	private List<int> lineNumbers = new List<int> { 3, 7, 9, 11, 14, 16, 17 }; // Line numbers to pause dialogue at
 	private Enemy enemy;
 	private BatteryPack battery;
-	private Control popup;
 	public override void _Ready()
 	{
-		player = GetNode<Player>("Player");
+		StartLevel();
 		enemy = GetNode<Enemy>("Enemies/First Enemy");
 		battery = GetNode<BatteryPack>("Objects/First Battery");
-		popup = GetNode<Control>("UI/Pop-up");
-		popup.Visible = false;
 		// Set up dialogue
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-1-1.txt");
 
-		camera = GetNode<Camera>("Camera");
 		camera.LimitLeft = -400;
 		camera.LimitRight = 4500;
 
 		expectedTime = 80;
-
-		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
 
 		// Set up checkpoints
 		foreach (Node node in GetNode<Node2D>("Checkpoints").GetChildren())
@@ -90,6 +84,11 @@ public partial class Level1_1 : GameLevel
 		}
 	}
 
+	/// <summary>
+	/// When a checkpoint is passed by the player
+	/// </summary>
+	/// <param name="body"></param>
+	/// <param name="checkpoint"></param>
 	public void OnCheckPointEntered(Node2D body, Area2D checkpoint)
 	{
 		if (body is Player player)
