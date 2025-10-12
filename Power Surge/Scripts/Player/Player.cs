@@ -92,13 +92,7 @@ public partial class Player : CharacterBody2D
 		powerSurgeTimer.Visible = false;
 
 		// Disable glow light for outdoor levels
-		if (!GameData.Instance.GlowEnabled)
-		{
-			GetNode<PointLight2D>("Light").Visible = false;
-		}
-
-		GD.Print(GameData.Instance.GlowEnabled);
-
+		GetNode<PointLight2D>("Light").Visible = GameData.Instance.GlowEnabled;		
 	}
 
 	public override void _PhysicsProcess(double delta)

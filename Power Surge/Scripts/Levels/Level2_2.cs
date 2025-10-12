@@ -2,22 +2,22 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class Level2_1 : GameLevel
+public partial class Level2_2 : GameLevel
 {
 	private DialogueBox dialogueBox;
-	private bool dialogueStarted = false, popupShown = false;
-	private List<int> lineNumbers = new List<int> { 5 }; // Line numbers to pause dialogue at
-	private float timer;
+	private bool dialogueStarted = false, popupShown = false, resumedAfterPan = false, timerRunning = false;
+	private List<int> lineNumbers = new List<int> { 1, 11 }; // Line numbers to pause dialogue at
+	private float timer = 0;
 
 	public override void _Ready()
 	{
 		StartLevel();
 		// Set up dialogue
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
-		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-2-1.txt");
-
+		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-2-2.txt");
+		dialogueBox.Pause();
 		camera.LimitLeft = -400;
-		camera.LimitRight = 4500;
+		camera.LimitRight = 1550;
 
 		expectedTime = 60;
 
@@ -48,12 +48,11 @@ public partial class Level2_1 : GameLevel
 		checkOptionsMenu();
 		player.Paused = !dialogueBox.IsPaused();
 
-		timer += (float)delta;
-		if (timer > 1f && !dialogueStarted)
+		if (timerRunning)
 		{
-			dialogueStarted = true;
-			dialogueBox.Start();
+			timer += (float)delta;
 		}
+
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
 			if (popup.Visible)
@@ -63,7 +62,24 @@ public partial class Level2_1 : GameLevel
 			if (lineNumbers.Contains(dialogueBox.GetLineNumber()) && !dialogueBox.IsTyping())
 			{
 				dialogueBox.Pause();
+				if (dialogueBox.GetLineNumber() == 1)
+				{
+					camera.Pan(new Vector2(1300, 0), 1.2f);
+					timer = 0;
+					timerRunning = true;
+				}
+				if(dialogueBox.GetLineNumber() == 11)
+				{
+					camera.CancelPan();
+				}
 			}
+		}
+		if(timer >= 1.8f && !resumedAfterPan)
+		{
+			dialogueBox.Resume();
+			resumedAfterPan = true;
+			timerRunning = false;
+			timer = 0;
 		}
 	}
 
@@ -77,10 +93,21 @@ public partial class Level2_1 : GameLevel
 		if (body is Player player)
 		{
 			string name = checkpoint.Name;
-			dialogueBox.Resume();
+
+			if (name == "Gate")
+			{
+				dialogueBox.Start();
+				dialogueStarted = true;
+			}
+			else
+			{
+				dialogueBox.Resume();
+			}
+
+			
 			checkpoint.QueueFree();
 
 		}
 	}
-
+	
 }

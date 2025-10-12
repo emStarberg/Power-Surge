@@ -18,6 +18,11 @@ public partial class Camera : Camera2D
 	private Vector2 targetOffset = Vector2.Zero;
 	private float offsetLerpSpeed = 2.5f;
 	private string facingVertical = "down";
+	// Pan state
+	private bool isPanning = false;
+	private Vector2 panTarget = Vector2.Zero;
+	private float panLerpSpeed = 3.5f;
+	private string savedMode = null;
 	
 
 	public override void _Ready()
@@ -32,18 +37,26 @@ public partial class Camera : Camera2D
 	{
 		if (_player != null)
 		{
-			switch (Mode)
+			if (isPanning)
 			{
-				case "horizontal":
-					HorizontalMode(delta);
-					break;
-				
-				case "vertical":
-					VerticalMode(delta);
-					break;
+				// Pan
+				Position = Position.Lerp(panTarget, panLerpSpeed * (float)delta);
+			}
+			else
+			{
+				switch (Mode)
+				{
+					case "horizontal":
+						HorizontalMode(delta);
+						break;
+					
+					case "vertical":
+						VerticalMode(delta);
+						break;
 
-				default:
-					break;
+					default:
+						break;
+				}
 			}
 		}
 
@@ -103,7 +116,7 @@ public partial class Camera : Camera2D
 		// Smoothly interpolate baseOffset towards targetOffset
 		baseOffset = baseOffset.Lerp(targetOffset, offsetLerpSpeed * (float)delta);
 	}
-	
+
 	/// <summary>
 	/// For when the player is in a vertical camera area
 	/// </summary>
@@ -118,7 +131,7 @@ public partial class Camera : Camera2D
 			newX = _player.Position.X;
 
 		Position = new Vector2(newX, _player.Position.Y);
-			
+
 		if (_player.VerticalFacing == "down")
 			targetOffset = new Vector2(0, 60);
 		else if (_player.VerticalFacing == "up")
@@ -128,5 +141,39 @@ public partial class Camera : Camera2D
 
 		// Smoothly interpolate baseOffset towards targetOffset
 		baseOffset = baseOffset.Lerp(targetOffset, offsetLerpSpeed * (float)delta);
+	}
+	
+	/// <summary>
+	/// Pan the camera smoothly to the given world-space focus position.
+	/// Call CancelPan() to return to the previous follow behaviour.
+	/// </summary>
+	public void Pan(Vector2 focus, float lerpSpeed = 3.5f, bool immediate = false)
+	{
+		if (!isPanning)
+			savedMode = Mode;
+		isPanning = true;
+		panTarget = focus;
+		panLerpSpeed = lerpSpeed;
+		if (immediate)
+			Position = panTarget;
+	}
+
+	/// <summary>
+	/// Cancel pan and resume previous behaviour.
+	/// </summary>
+	public void CancelPan()
+	{
+		isPanning = false;
+		if (!string.IsNullOrEmpty(savedMode))
+			Mode = savedMode;
+		savedMode = null;
+	}
+
+	/// <summary>
+	/// Return whether the pan has completed or not
+	/// </summary>
+	public bool PanCompleted()
+	{
+		return Position == panTarget;
 	}
 }

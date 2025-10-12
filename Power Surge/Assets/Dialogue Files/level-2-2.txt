@@ -1,0 +1,11 @@
+Archie|The entrance should be just over there, let's take a look...
+Archie|Yes! That's it right there!
+Archie|There's uh... one issue though...
+Lilah|...
+Archie|I dunno how to open it
+Lilah|You're kidding!
+Archie|Rumor has it there's some kind of puzzle to solve, I'd say it has something to do with that switch there
+Archie|We went past another one just before
+Lilah|Well that's a start at least.
+Lilah|[name]. Archie and I will look into it.
+Lilah|In the meantime, have a go at figuring it out yourself. I would suggest using an attack on one of those switches

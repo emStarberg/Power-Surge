@@ -1,7 +1,12 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-
+//------------------------------------------------------------------------------
+// <summary>
+//   Screen that shows after a level is complete. Calculates a rank based on player stats throughout the level.
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class EndScreen : Node2D
 {
 	private List<Control> buttons = new List<Control>();
