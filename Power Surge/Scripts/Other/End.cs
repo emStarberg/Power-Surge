@@ -31,8 +31,13 @@ public partial class End : Area2D
 				GameData.Instance.LevelExpectedTime = gameLevel.GetExpectedTime();
 				GameData.Instance.LevelEnemyCountFinal = gameLevel.GetEnemiesRemaining();
 			}
-			GetTree().ChangeSceneToFile("res://Scenes/Screens/end_screen.tscn");
-			
+			CallDeferred(nameof(DeferredChangeScene), "res://Scenes/Screens/end_screen.tscn");
+
 		}
 	}
+	
+	private void DeferredChangeScene(string path)
+{
+	GetTree().ChangeSceneToFile(path);
+}
 }

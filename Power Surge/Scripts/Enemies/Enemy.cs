@@ -44,6 +44,7 @@ public abstract partial class Enemy : CharacterBody2D
 	public virtual void Die()
 	{
 		isAlive = false;
+		canBeHurt = false;
 		animation.Animation = "death";
 		if (player.GetPower() <= 100)
 		{

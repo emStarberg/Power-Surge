@@ -287,7 +287,7 @@ tile_set = SubResource("TileSet_t7515")
 
 [node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("4_3mh1t")]
 modulate = Color(1.5, 1, 1, 1)
-position = Vector2(-128, 24)
+position = Vector2(1712, 432)
 PowerMeter = NodePath("../UI/Control/Power Meter")
 percentageLabel = NodePath("../UI/Control/Percentage Label")
 FragmentSlots = NodePath("../UI/Control/Fragment Slots")
@@ -500,14 +500,14 @@ position = Vector2(3920, 1752)
 scale = Vector2(1.1, 1.1)
 
 [node name="Fragment" parent="Objects" instance=ExtResource("18_qarcb")]
-position = Vector2(352, 384)
+position = Vector2(352, 356)
 scale = Vector2(1.1, 1.1)
 
 [node name="Energy Deposit" parent="Objects" instance=ExtResource("20_a23p3")]
 position = Vector2(-82, 135)
 
 [node name="Stone Bridge" type="Node2D" parent="Objects"]
-position = Vector2(272, 400)
+position = Vector2(272, 375)
 script = ExtResource("21_g2sel")
 
 [node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge"]
@@ -1125,7 +1125,6 @@ script = ExtResource("27_ge76m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/Camera Changes/1"]
 position = Vector2(35.5491, 4.40244)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_me7ub")
 
 [node name="2" type="Area2D" parent="Checkpoints/Camera Changes"]
@@ -1136,7 +1135,6 @@ script = ExtResource("27_ge76m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/Camera Changes/2"]
 position = Vector2(37.5416, 3.82089)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_me7ub")
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
