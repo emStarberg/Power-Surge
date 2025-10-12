@@ -6,7 +6,7 @@ public partial class Level2_1 : GameLevel
 {
 	private DialogueBox dialogueBox;
 	private bool dialogueStarted = false, popupShown = false;
-	private List<int> lineNumbers = new List<int> { 1 }; // Line numbers to pause dialogue at
+	private List<int> lineNumbers = new List<int> { 5 }; // Line numbers to pause dialogue at
 	private float timer;
 
 	public override void _Ready()

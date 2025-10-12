@@ -60,12 +60,13 @@ public partial class EndScreen : Node2D
 		int seconds = (int)(totalSeconds % 60);
 		// Format as "MM:SS"
 		labels[2].Text = $"{minutes:D2}:{seconds:D2}";
-		rank.Text = CalculateRank();
 		enemiesKilled = GameData.Instance.LevelEnemyCount - GameData.Instance.LevelEnemyCountFinal;
 		labels[3].Text = enemiesKilled + "/" + GameData.Instance.LevelEnemyCount;
 
 		// Show alert if last available level
 		alert.Visible = levels.IndexOf(GameData.Instance.CurrentLevel) == levels.Count - 1;
+
+		rank.Text = CalculateRank();
 	}
 
 	public override void _Process(double delta)
@@ -232,49 +233,72 @@ public partial class EndScreen : Node2D
 	/// <returns>Final letter grade</returns>
 	private string CalculateRank()
 	{
+		GD.Print("RESULTS:");
+		GD.Print("-------------------------------");
 		string finalRank = "F";
 		int points = 0;
 
 		points += GameData.Instance.LevelFragments; // Max 3
-		float power = GameData.Instance.LevelPower; // Max 3
-		if (power >= 40)
+		GD.Print("+ " + points + " for " + GameData.Instance.LevelFragments + " fragments collected");
+		float power = GameData.Instance.LevelPower; // Max 2
+		if (power >= 70)
 		{
 			points++;
+			GD.Print("+ 1 for power >= 80");
 		}
-		if (power >= 80)
+		if (power >= 110)
 		{
 			points++;
-		}
-		if (power >= 120)
-		{
-			points++;
+			GD.Print("+ 1 for power >= 110");
 		}
 		
 		float levelTime = GameData.Instance.LevelTime;
 		float expectedTime = GameData.Instance.LevelExpectedTime;
 
-		if (levelTime >= expectedTime) // Max 2
+		if (levelTime <= expectedTime) // Max 2
 		{
-			if ((levelTime - expectedTime) > 15)
+			if ((expectedTime - levelTime) > 15)
 			{
 				points++;
+				GD.Print("+ 1 for 15s faster than expected time");
 			}
-			if ((levelTime - expectedTime) > 5)
+			if ((expectedTime - levelTime) > 5)
 			{
 				points++;
+				GD.Print("+ 1 for 5s faster than expected time");
 			}
 		}
-		float enemyPercentage = enemiesKilled / GameData.Instance.LevelEnemyCount;
-
-		if (enemyPercentage >= 70) // Max 2
+		float enemyPercentage = (enemiesKilled / GameData.Instance.LevelEnemyCount) * 100;
+		// Max 2
+		if (enemyPercentage >= 50) { 
 			points++;
-
-		if (enemyPercentage >= 100)
+			GD.Print("+1 for 70% of enemies defeated");
+		}
+		if (enemyPercentage >= 100) {
 			points++;
+			GD.Print("+1 for 100% of enemies defeated");
+		}
 
-		List<string> ranks = new List<string> { "F", "E", "D", "C", "C+", "B", "B+", "A", "A+", "S" };
+		List<string> ranks = new List<string> { "F", "E", "D", "C", "C+", "B", "B+", "A", "A+", "S" }; // The maximum 9 points is needed for 'S' rank
 
 		finalRank = ranks[points];
+
+		GD.Print("-------------------------------");
+		GD.Print("Time: " + levelTime);
+		GD.Print("Fragments: " + GameData.Instance.LevelFragments);
+		GD.Print("Power: " + power);
+		GD.Print("Enemies Defeated: " + enemiesKilled);
+
+		GD.Print("-------------------------------");
+		GD.Print("Final Rank: " + finalRank);
+		GD.Print("Points: " + points);
+		GD.Print("-------------------------------");
+		GD.Print("EnemyCount: " + GameData.Instance.LevelEnemyCount);
+		GD.Print("EnemyCountFinal: " + GameData.Instance.LevelEnemyCountFinal);
+
 		return finalRank;
+
+
+		
 	}
 }

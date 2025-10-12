@@ -37,6 +37,10 @@ public abstract partial class GameLevel : Node2D
 			GetTree().CurrentScene.GetNode<Control>("UI/Control").AddChild(optionsInstance);
 			optionsInstance.TreeExited += OnOptionsClosed;
 		}
+
+		if(Input.IsActionJustPressed("input_reload")){
+			GetTree().ReloadCurrentScene();
+		}
 	}
 	/// <summary>
 	/// Called when the options menu closes

@@ -213,7 +213,10 @@ public partial class VoltageSentinel : Enemy
 			}
 			else
 			{
-				Attack();
+				if (isAlive)
+				{
+					Attack();
+				}
 			}
 		}
 	}
