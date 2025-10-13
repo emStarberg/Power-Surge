@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkt4btwct5snw"]
+
+[ext_resource type="Script" uid="uid://botufabechkhj" path="res://Scripts/Objects/Switch.cs" id="1_og4gy"]
+[ext_resource type="Texture2D" uid="uid://6utj2kaetbvq" path="res://Assets/Objects/Switch - On.png" id="1_v71cw"]
+[ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3_1xkr6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jg1gy"]
+size = Vector2(16, 39)
+
+[node name="Switch" type="Area2D"]
+scale = Vector2(1, 0.994944)
+script = ExtResource("1_og4gy")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_v71cw")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -4.0
+offset_top = -16.0
+offset_right = 12.0
+offset_bottom = 7.0
+scale = Vector2(0.497552, 0.497552)
+theme_override_fonts/font = ExtResource("3_1xkr6")
+text = "1"
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 12.5)
+shape = SubResource("RectangleShape2D_jg1gy")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="area_exited" from="." to="." method="OnAreaExited"]

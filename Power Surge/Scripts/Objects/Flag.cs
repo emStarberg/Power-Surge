@@ -7,7 +7,7 @@ using System;
 // </summary>
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
-public partial class Flag : Area2D
+public partial class Flag : Area2D, IWorldObject
 {
 	public void OnBodyEntered(Node2D body)
 	{

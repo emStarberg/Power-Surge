@@ -6,7 +6,7 @@ using System;
 // </summary>
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
-public partial class Fragment : Area2D
+public partial class Fragment : Area2D, IWorldObject
 {
 	private PointLight2D light;
 
