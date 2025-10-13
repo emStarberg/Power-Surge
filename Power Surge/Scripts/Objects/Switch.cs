@@ -32,6 +32,7 @@ public partial class Switch : Area2D
 		{
 			sprite.Texture = offTexture;
 		}
+		SwitchObject.UpdateState(IsOn);
 	}
 
 	/// <summary>
@@ -43,7 +44,7 @@ public partial class Switch : Area2D
 		IsOn = !IsOn;
 
 		// Change object state
-		SwitchObject.IsOn = IsOn;
+		SwitchObject.UpdateState(IsOn);
 
 		if (fromSelf)
 		{
@@ -64,7 +65,7 @@ public partial class Switch : Area2D
 
 	/// <summary>
 	/// Called when a Node2D enters Area2D collider
-	/// If body is a PlayerAttack, change states
+	/// If area is a PlayerAttack, change states
 	/// </summary>
 	public void OnAreaEntered(Node2D area)
 	{
@@ -77,7 +78,7 @@ public partial class Switch : Area2D
 
 	/// <summary>
 	/// Called when a Node2D exits Area2D collider
-	/// If body is a PlayerAttack, canBeHit = true;
+	/// If area is a PlayerAttack, canBeHit = true;
 	/// </summary>
 	public void OnAreaExited(Node2D area)
 	{

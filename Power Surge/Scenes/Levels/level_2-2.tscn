@@ -24,7 +24,7 @@
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="20_465fl"]
 [ext_resource type="PackedScene" uid="uid://bkt4btwct5snw" path="res://Scenes/switch.tscn" id="21_no63c"]
 [ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="21_pe45j"]
-[ext_resource type="Script" uid="uid://dn5o61r1icumy" path="res://Scripts/Objects/Gate.cs" id="21_yux1w"]
+[ext_resource type="PackedScene" uid="uid://c8of26kvgpu7s" path="res://Scenes/gate.tscn" id="21_yux1w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_no63c"]
 texture = ExtResource("4_0obw8")
@@ -373,19 +373,24 @@ scale = Vector2(1.1, 1.1)
 position = Vector2(-422, -232)
 scale = Vector2(1.1, 1.1)
 
-[node name="Switch" parent="Objects" node_paths=PackedStringArray("SwitchObject", "PairedSwitch") instance=ExtResource("21_no63c")]
-position = Vector2(86, -241)
-SwitchObject = NodePath("../Node2D")
+[node name="Gate" parent="Objects" instance=ExtResource("21_yux1w")]
+position = Vector2(220, -241)
+
+[node name="Switches" type="Node2D" parent="Objects"]
+
+[node name="Switch" parent="Objects/Switches" node_paths=PackedStringArray("SwitchObject", "PairedSwitch") instance=ExtResource("21_no63c")]
+position = Vector2(189, -241)
+SwitchObject = NodePath("../../Gate")
 PairedSwitch = NodePath("../Switch2")
 
-[node name="Node2D" type="Node2D" parent="Objects"]
-script = ExtResource("21_yux1w")
-
-[node name="Switch2" parent="Objects" node_paths=PackedStringArray("SwitchObject", "PairedSwitch") instance=ExtResource("21_no63c")]
-position = Vector2(218, -241)
-SwitchObject = NodePath("../Node2D")
+[node name="Switch2" parent="Objects/Switches" node_paths=PackedStringArray("SwitchObject", "PairedSwitch") instance=ExtResource("21_no63c")]
+position = Vector2(86, -241)
+SwitchObject = NodePath("../../Gate2")
 PairedSwitch = NodePath("../Switch")
 IsOn = true
+
+[node name="Gate2" parent="Objects" instance=ExtResource("21_yux1w")]
+position = Vector2(61, -241)
 
 [node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("4_no63c")]
 position = Vector2(146, -218)
