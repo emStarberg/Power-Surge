@@ -19,11 +19,14 @@ public partial class Gate : SwitchOperatedObject
 		animation = GetNode<AnimatedSprite2D>("Animation");
 		body = GetNode<StaticBody2D>("Body");
 
+		body.GetNode<CollisionShape2D>("Collider").Disabled = open;
+
 		// Show beginning state
 		if (open)
 		{
 			animation.Frame = 5;
-		}
+
+		}	
 		else
 		{
 			animation.Frame = 0;

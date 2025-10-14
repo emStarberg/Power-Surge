@@ -1,15 +1,16 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 //------------------------------------------------------------------------------
 // <summary>
-//   Switches a SwitchOperatedObject on/off
-//   Can have a paired switch that is in the opposite state (on/off)
+//   Switches one or many SwitchOperatedObjects on/off
+//   Can have a paired switch that is always in the opposite state (on/off)
 // </summary>
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
 public partial class Switch : Area2D
 {
-	[Export] public SwitchOperatedObject SwitchObject; // Object that the swith operates
+	[Export] public SwitchOperatedObject[] SwitchObjects; // Array of objects that the switch operates
 	[Export] public Switch PairedSwitch = null; // Switch that it is paired with (can be null if standalone)
 	[Export] public bool IsOn = false;
 
@@ -32,7 +33,10 @@ public partial class Switch : Area2D
 		{
 			sprite.Texture = offTexture;
 		}
-		SwitchObject.UpdateState(IsOn);
+				foreach(SwitchOperatedObject o in SwitchObjects)
+		{
+			o.UpdateState(IsOn);
+		}
 	}
 
 	/// <summary>
@@ -43,8 +47,11 @@ public partial class Switch : Area2D
 		// Change own state
 		IsOn = !IsOn;
 
-		// Change object state
-		SwitchObject.UpdateState(IsOn);
+		// Change object states
+		foreach(SwitchOperatedObject o in SwitchObjects)
+		{
+			o.UpdateState(IsOn);
+		}
 
 		if (fromSelf)
 		{

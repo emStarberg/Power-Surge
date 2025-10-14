@@ -7,9 +7,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jg1gy"]
 size = Vector2(16, 39)
 
-[node name="Switch" type="Area2D"]
+[node name="Switch" type="Area2D" node_paths=PackedStringArray("SwitchObjects")]
 scale = Vector2(1, 0.994944)
 script = ExtResource("1_og4gy")
+SwitchObjects = []
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_v71cw")

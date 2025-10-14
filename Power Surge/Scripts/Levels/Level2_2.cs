@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public partial class Level2_2 : GameLevel
 {
 	private DialogueBox dialogueBox;
-	private bool dialogueStarted = false, popupShown = false, resumedAfterPan = false, timerRunning = false;
-	private List<int> lineNumbers = new List<int> { 1, 11 }; // Line numbers to pause dialogue at
+	private bool dialogueStarted = false, popupShown = false, resumedAfterPan = false, timerRunning = true;
+	private List<int> lineNumbers = new List<int> { 1, 2, 11 }; // Line numbers to pause dialogue at
 	private float timer = 0;
 
 	public override void _Ready()
@@ -53,6 +53,14 @@ public partial class Level2_2 : GameLevel
 			timer += (float)delta;
 		}
 
+		if (timer > 1f && !dialogueStarted)
+		{
+			dialogueStarted = true;
+			dialogueBox.Start();
+			timerRunning = false;
+		}
+
+
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
 			if (popup.Visible)
@@ -62,7 +70,7 @@ public partial class Level2_2 : GameLevel
 			if (lineNumbers.Contains(dialogueBox.GetLineNumber()) && !dialogueBox.IsTyping())
 			{
 				dialogueBox.Pause();
-				if (dialogueBox.GetLineNumber() == 1)
+				if (dialogueBox.GetLineNumber() == 2)
 				{
 					camera.Pan(new Vector2(1300, 0), 1.2f);
 					timer = 0;
@@ -93,20 +101,8 @@ public partial class Level2_2 : GameLevel
 		if (body is Player player)
 		{
 			string name = checkpoint.Name;
-
-			if (name == "Gate")
-			{
-				dialogueBox.Start();
-				dialogueStarted = true;
-			}
-			else
-			{
-				dialogueBox.Resume();
-			}
-
-			
+			dialogueBox.Resume();
 			checkpoint.QueueFree();
-
 		}
 	}
 	
