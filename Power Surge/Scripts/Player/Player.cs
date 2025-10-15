@@ -17,36 +17,53 @@ public partial class Player : CharacterBody2D
 	[Export] public TextureProgressBar PowerMeter; // Power meter
 	[Export] public Label percentageLabel; // Label under power meter
 	[Export] public Control FragmentSlots;
-	[Export] public bool TutorialMode = false;
-	[Export] public bool PowerSurgeEnabled = true;
+	[Export] public bool TutorialMode = false, PowerSurgeEnabled = true;
 
-	public string VerticalFacing = "down";
+	public string VerticalFacing = "down"; // For when camera is in vertical mode
+
 	private int power = 100; // Percentage of power left
-	private Vector2 velocity; // For changing player's Velocity property
 	private AnimatedSprite2D animation; // Player's animations
 	private StaticBody2D shield; // Player's shield ability when activated
+	
+	// Jump
+	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground hit
+	private float fallTime = 0f; // For checking if the player has fallen off the map
 	private PackedScene jumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn"); // For spawning jump animations
+
+	// Dash
 	private PackedScene dashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn"); // For spawning dash animations
+	private float dashSpeed = 800f; // Speed of dash
+	private bool isDashing = false, canDash = false; // Player can't dash again without touching ground in between
+
+	// States
+	private bool alive = true, powerSurgeActive = false, invincible = false;
+
+	// Direction/Movement
+	private float direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
+	private string facing = "right";
+	private Vector2 velocity; // For changing player's Velocity property
+	
+	// Attacks
+	private string[] attackNames = {"weak pulse", "strong blast"}; // List of player attacks
+	private string attackSelected = "weak pulse";
+	private int attackIndex = 0;
+	private Sprite2D attackIcon;
 	private PackedScene strongBlast = GD.Load<PackedScene>("Scenes/strong_blast.tscn");
 	private PackedScene weakPulse = GD.Load<PackedScene>("Scenes/weak_pulse.tscn");
 	private PackedScene powerSurgeBlast = GD.Load<PackedScene>("Scenes/power_surge_blast.tscn");
-	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground hit
-	private float fallTime = 0f; // For checking if the player has fallen off the map
-	private bool alive = true; // True if player has died
-	private bool isDashing = false; // Whether player is dashing
-	private float dashSpeed = 800f; // Speed of dash
-	private float direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
-	private string[] attackNames = { "weak pulse", "strong blast" }; // List of player attacks
-	private string attackSelected = "weak pulse";
-	private int attackIndex = 0;
-	private string facing = "right";
-	private Sprite2D attackIcon;
+	
+	// Fragments
 	private int fragmentCount = 0;
 	private List<TextureRect> fragmentSlots = new List<TextureRect>();
+
+	// Power Surge
 	private Label powerSurgeTimer;
 	private float powerSurgeTime = 15f;
-	private bool powerSurgeActive = false, invincible = false;
+
+	// Audio
 	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound, powerSurgeAttackSound;
+
+	// Timers
 	private float timer = 0, regenTimer = 0;
 
 	// FOR TUTORIAL
@@ -54,6 +71,7 @@ public partial class Player : CharacterBody2D
 	private float mileage = 0; // How far the player has moved left/right
 	public bool HasDashed = false, HasJumped = false, HasCycled = false, HasAttacked = false;
 	public bool Paused = false;
+
 
 	public override void _Ready()
 	{
@@ -183,7 +201,7 @@ public partial class Player : CharacterBody2D
 			if (Input.IsActionJustPressed("input_dash") && !disabledInputs.Contains("input_dash"))
 			{
 				// No stationary dashes
-				if (velocity.X != 0)
+				if (velocity.X != 0 && canDash)
 				{
 					// Begin dash
 					Dash();
@@ -286,6 +304,10 @@ public partial class Player : CharacterBody2D
 			{
 				VerticalFacing = "down";
 			}
+
+			if(IsOnFloor() && !canDash){
+				canDash = true;
+			}
 		}
 	}
 
@@ -362,8 +384,9 @@ public partial class Player : CharacterBody2D
 		{
 			HasDashed = true;
 		}
-		if (!isDashing && alive)
+		if (!isDashing && alive && canDash)
 		{
+			canDash = false;
 			dashSound.Play();
 			animation.Animation = "dash";
 			isDashing = true;

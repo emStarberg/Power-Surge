@@ -400,6 +400,7 @@ texture = SubResource("GradientTexture2D_bbplq")
 
 [node name="GroundRay" type="RayCast2D" parent="RayCasts"]
 position = Vector2(-12, 0)
+target_position = Vector2(0, 26)
 
 [node name="WallRay" type="RayCast2D" parent="RayCasts"]
 position = Vector2(0, 13)

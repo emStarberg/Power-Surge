@@ -28,6 +28,5 @@ public abstract partial class SwitchOperatedObject: Node2D, IWorldObject
 	/// </summary>
 	protected virtual void OnStateSwitched()
 	{
-		
 	}
 }

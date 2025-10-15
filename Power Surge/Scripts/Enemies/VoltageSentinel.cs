@@ -56,6 +56,19 @@ public partial class VoltageSentinel : Enemy
 	{
 		if (isAlive)
 		{
+			if (!IsOnFloor())
+			{
+				velocity += GetGravity() * (float)delta;
+				// apply gravity to vertical velocity and clamp to terminal velocity
+				velocity.Y = Mathf.Min(velocity.Y + gravity * (float)delta, maxFallSpeed);
+			}
+			else
+			{
+				// ensure small downward velocity is cleared when on floor
+				if (velocity.Y > 0)
+					velocity.Y = 0;
+			}
+
 			if (playerRayFront.IsColliding() && playerRayFront.GetCollider() is Player player && canDamagePlayer)
 			{
 				player.Hurt(25, 2f, 0.2f);
@@ -201,7 +214,9 @@ public partial class VoltageSentinel : Enemy
 	{
 		if (animation.Animation == "death")
 		{
-			QueueFree();
+			GD.Print($"{Name}: death animation finished -> QueueFree deferred");
+			CallDeferred("queue_free");
+			return;
 		}
 		if (animation.Animation == "attack")
 		{

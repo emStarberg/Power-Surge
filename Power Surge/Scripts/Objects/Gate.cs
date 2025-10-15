@@ -42,6 +42,7 @@ public partial class Gate : SwitchOperatedObject
 		if (ready)
 		{
 			open = IsOn;
+			CallDeferred("SetCollider");
 			// Open or close
 			if (open)
 				Open();
@@ -61,8 +62,8 @@ public partial class Gate : SwitchOperatedObject
 		animation.Frame = 5;
 		animation.PlayBackwards();
 	}
-	
-	public void OnAnimationFinished()
+
+	private void SetCollider()
 	{
 		body.GetNode<CollisionShape2D>("Collider").Disabled = open;
 	}

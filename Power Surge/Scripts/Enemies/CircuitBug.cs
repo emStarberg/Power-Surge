@@ -47,13 +47,21 @@ public partial class CircuitBug : Enemy
 	public override void _PhysicsProcess(double delta)
 	{
 		if (isAlive)
-		{
-
-			// Gravity
+		{				
 			if (!IsOnFloor())
+			{
 				velocity += GetGravity() * (float)delta;
+				// apply gravity to vertical velocity and clamp to terminal velocity
+				velocity.Y = Mathf.Min(velocity.Y + gravity * (float)delta, maxFallSpeed);
+			}
+			else
+			{
+				// ensure small downward velocity is cleared when on floor
+				if (velocity.Y > 0)
+					velocity.Y = 0;
+			}
 
-			if (isRunning)
+			if (isRunning && IsOnFloor())
 			{
 				// Move based on direction
 				if (direction == "right")
@@ -101,7 +109,6 @@ public partial class CircuitBug : Enemy
 			Velocity = velocity;
 			MoveAndSlide();
 		}
-
 	}
 
 	/// <summary>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class Level2_2 : GameLevel
 {
-	private DialogueBox dialogueBox;
+	private DialogueBox dialogueBox, wrongWayDialogue;
 	private bool dialogueStarted = false, popupShown = false, resumedAfterPan = false, timerRunning = true;
 	private List<int> lineNumbers = new List<int> { 1, 2, 11 }; // Line numbers to pause dialogue at
 	private float timer = 0;
@@ -16,8 +16,12 @@ public partial class Level2_2 : GameLevel
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-2-2.txt");
 		dialogueBox.Pause();
+		wrongWayDialogue = GetNode<DialogueBox>("UI/Wrong Way Dialogue");
+		wrongWayDialogue.AddLinesFromFile("res://Assets/Dialogue Files/2-2-wrong-way.txt");
+		wrongWayDialogue.Pause();
 		camera.LimitLeft = -400;
 		camera.LimitRight = 1550;
+		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
 
 		expectedTime = 60;
 
@@ -60,14 +64,13 @@ public partial class Level2_2 : GameLevel
 			timerRunning = false;
 		}
 
-
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
 			if (popup.Visible)
 			{
 				popup.Visible = false;
 			}
-			if (lineNumbers.Contains(dialogueBox.GetLineNumber()) && !dialogueBox.IsTyping())
+			if (lineNumbers.Contains(dialogueBox.GetLineNumber()) && !dialogueBox.IsTyping() && !dialogueBox.IsPaused())
 			{
 				dialogueBox.Pause();
 				if (dialogueBox.GetLineNumber() == 2)
@@ -76,9 +79,11 @@ public partial class Level2_2 : GameLevel
 					timer = 0;
 					timerRunning = true;
 				}
-				if(dialogueBox.GetLineNumber() == 11)
+				if (dialogueBox.GetLineNumber() == 11)
 				{
 					camera.CancelPan();
+					GetNode<StaticBody2D>("Objects/Barrier").QueueFree();
+					GetNode<Area2D>("Checkpoints/Wrong Way").QueueFree();
 				}
 			}
 		}
@@ -101,9 +106,16 @@ public partial class Level2_2 : GameLevel
 		if (body is Player player)
 		{
 			string name = checkpoint.Name;
-			dialogueBox.Resume();
-			checkpoint.QueueFree();
+			if(name == "Wrong Way")
+			{
+				wrongWayDialogue.Start();
+			}
+			else
+			{
+				dialogueBox.Resume();
+				checkpoint.QueueFree();
+			}
+
 		}
 	}
-	
 }

@@ -13,6 +13,7 @@ public partial class Switch : Area2D
 	[Export] public SwitchOperatedObject[] SwitchObjects; // Array of objects that the switch operates
 	[Export] public Switch PairedSwitch = null; // Switch that it is paired with (can be null if standalone)
 	[Export] public bool IsOn = false;
+	[Export] public int number = 1;
 
 	private Label label;
 	private Texture2D onTexture, offTexture;
@@ -22,6 +23,7 @@ public partial class Switch : Area2D
 	public override void _Ready()
 	{
 		label = GetNode<Label>("Label");
+		label.Text = number.ToString();
 		onTexture = GD.Load<Texture2D>("res://Assets/Objects/Switch - On.png");
 		offTexture = GD.Load<Texture2D>("res://Assets/Objects/Switch - Off.png");
 		sprite = GetNode<Sprite2D>("Sprite");
