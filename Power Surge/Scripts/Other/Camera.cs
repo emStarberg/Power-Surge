@@ -54,6 +54,10 @@ public partial class Camera : Camera2D
 						VerticalMode(delta);
 						break;
 
+					case "centered":
+						CenteredMode(delta);
+						break;
+
 					default:
 						break;
 				}
@@ -141,6 +145,11 @@ public partial class Camera : Camera2D
 
 		// Smoothly interpolate baseOffset towards targetOffset
 		baseOffset = baseOffset.Lerp(targetOffset, offsetLerpSpeed * (float)delta);
+	}
+
+	public void CenteredMode(double delta)
+	{
+		Position = new Vector2(_player.Position.X, 200);
 	}
 	
 	/// <summary>

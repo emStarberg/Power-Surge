@@ -483,7 +483,8 @@ text = "10"
 horizontal_alignment = 1
 
 [node name="Light" type="PointLight2D" parent="."]
-scale = Vector2(1.86628, 1.85101)
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(1.19877, 1.18896)
 color = Color(0.141176, 0.619608, 0.678431, 0.403922)
 energy = 2.5
 texture = SubResource("GradientTexture2D_fs7ks")
