@@ -176,4 +176,9 @@ public partial class Camera : Camera2D
 	{
 		return Position == panTarget;
 	}
+
+	public bool IsPanning()
+	{
+		return isPanning;
+	}
 }

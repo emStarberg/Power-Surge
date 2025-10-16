@@ -16,7 +16,7 @@ public partial class EndScreen : Node2D
 	private UICamera camera;
 	private Control effects, currentButton, textEffects, alert;
 	private AudioStreamPlayer2D zapSound, backgroundMusic, lightningSound;
-	private List<string> levels = new List<string> { "1-1", "1-2", "2-1"};
+	private List<string> levels = new List<string> { "1-1", "1-2", "2-1", "2-2"};
 	private float timer = 0, enemiesKilled = 0;
 	private bool shownFragments = false, shownPower = false, shownTime = false, shownRank = false, shownEnemies = false, glowing = true;
 	private Label rank;

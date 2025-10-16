@@ -6,7 +6,7 @@ public partial class Level2_2 : GameLevel
 {
 	private DialogueBox dialogueBox, wrongWayDialogue;
 	private bool dialogueStarted = false, popupShown = false, resumedAfterPan = false, timerRunning = true;
-	private List<int> lineNumbers = new List<int> { 1, 2, 11 }; // Line numbers to pause dialogue at
+	private List<int> lineNumbers = new List<int> { 1, 2, 12, 17 }; // Line numbers to pause dialogue at
 	private float timer = 0;
 
 	public override void _Ready()
@@ -19,11 +19,11 @@ public partial class Level2_2 : GameLevel
 		wrongWayDialogue = GetNode<DialogueBox>("UI/Wrong Way Dialogue");
 		wrongWayDialogue.AddLinesFromFile("res://Assets/Dialogue Files/2-2-wrong-way.txt");
 		wrongWayDialogue.Pause();
-		camera.LimitLeft = -400;
-		camera.LimitRight = 1550;
+		camera.LimitLeft = -450;
+		camera.LimitRight = 1750;
 		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
 
-		expectedTime = 60;
+		expectedTime = 150;
 
 		// Set up checkpoints
 		foreach (Node node in GetNode<Node2D>("Checkpoints").GetChildren())
@@ -79,7 +79,7 @@ public partial class Level2_2 : GameLevel
 					timer = 0;
 					timerRunning = true;
 				}
-				if (dialogueBox.GetLineNumber() == 11)
+				if (dialogueBox.GetLineNumber() == 12)
 				{
 					camera.CancelPan();
 					GetNode<StaticBody2D>("Objects/Barrier").QueueFree();

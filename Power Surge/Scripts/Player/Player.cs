@@ -24,6 +24,7 @@ public partial class Player : CharacterBody2D
 	private int power = 100; // Percentage of power left
 	private AnimatedSprite2D animation; // Player's animations
 	private StaticBody2D shield; // Player's shield ability when activated
+	private Camera camera;
 	
 	// Jump
 	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground hit
@@ -95,6 +96,8 @@ public partial class Player : CharacterBody2D
 		attackIcon = GetParent().GetNode<Sprite2D>("UI/Control/Attacks-ui/Attack Sprite");
 		attackIcon.Texture = GD.Load<Texture2D>("res://Assets/UI/Icons/weak pulse.png");
 
+		camera = GetParent().GetNode<Camera>("Camera");
+
 		UpdateVolume();
 
 		// Load all empty fragment slots
@@ -115,6 +118,10 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (camera.IsPanning())
+		{
+			Paused = true;
+		}
 		if (alive)
 		{
 			// Apply gravity to Y velocity.
@@ -305,9 +312,12 @@ public partial class Player : CharacterBody2D
 				VerticalFacing = "down";
 			}
 
-			if(IsOnFloor() && !canDash){
+			if (IsOnFloor() && !canDash)
+			{
 				canDash = true;
 			}
+
+
 		}
 	}
 
@@ -366,7 +376,6 @@ public partial class Player : CharacterBody2D
 			animation.Animation = "hurt";
 			hurtSound.Play();
 			// Camera shake
-			var camera = GetParent().GetNode<Camera>("Camera");
 			camera.Shake(shakeAmount, shakeDuration);
 			DecreasePower(damage);
 		}
@@ -421,7 +430,6 @@ public partial class Player : CharacterBody2D
 	public void IncreasePower(int amount)
 	{
 		power += amount;
-		var camera = GetParent().GetNode<Camera>("Camera");
 		camera.Shake(2, 0.2f);
 		if (power > 100 && !PowerSurgeEnabled)
 		{
