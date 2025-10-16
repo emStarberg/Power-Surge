@@ -15,6 +15,9 @@ public abstract partial class Enemy : CharacterBody2D
 	protected Timer hurtCooldownTimer;
 	protected AudioStreamPlayer2D hurtSound;
 	protected Player player;
+	// gravity for the enemy (world units / second^2) and terminal velocity
+	protected float gravity = 1000f;
+	protected float maxFallSpeed = 500f;
 
 	/// <summary>
 	/// Called when enemy is hit by an attack

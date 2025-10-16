@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8of26kvgpu7s"]
+
+[ext_resource type="Script" uid="uid://dn5o61r1icumy" path="res://Scripts/Objects/Gate.cs" id="1_1lkl7"]
+[ext_resource type="Texture2D" uid="uid://leo4wv5quytd" path="res://Assets/Objects/Gate - Spritesheet.png" id="2_hn85u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kfxhe"]
+size = Vector2(16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dmbs"]
+atlas = ExtResource("2_hn85u")
+region = Rect2(0, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyksl"]
+atlas = ExtResource("2_hn85u")
+region = Rect2(16, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03n5m"]
+atlas = ExtResource("2_hn85u")
+region = Rect2(32, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atm3l"]
+atlas = ExtResource("2_hn85u")
+region = Rect2(48, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3dsh"]
+atlas = ExtResource("2_hn85u")
+region = Rect2(64, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23fo7"]
+atlas = ExtResource("2_hn85u")
+region = Rect2(80, 0, 16, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pmoae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4dmbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyksl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03n5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atm3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3dsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23fo7")
+}],
+"loop": false,
+"name": &"default",
+"speed": 14.0
+}]
+
+[node name="Gate" type="Node2D"]
+script = ExtResource("1_1lkl7")
+
+[node name="Body" type="StaticBody2D" parent="."]
+
+[node name="Collider" type="CollisionShape2D" parent="Body"]
+shape = SubResource("RectangleShape2D_kfxhe")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pmoae")
+frame = 5
+frame_progress = 1.0

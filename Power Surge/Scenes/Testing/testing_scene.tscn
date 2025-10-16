@@ -369,7 +369,7 @@ position = Vector2(-47, 5)
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Circuit Bug" parent="Enemies" instance=ExtResource("9_xf330")]
-position = Vector2(142, 67)
+position = Vector2(248, 16)
 scale = Vector2(1.11998, 1.11998)
 
 [node name="Voltage Sentinel" parent="Enemies" instance=ExtResource("13_6hp8k")]

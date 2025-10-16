@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class EnergyPuddle : Area2D
+public partial class EnergyPuddle : Area2D, IWorldObject
 {
 	private bool playerDetected = false;
 	private float timer = 0;

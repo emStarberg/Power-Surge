@@ -99,4 +99,27 @@ public abstract partial class GameLevel : Node2D
 		}
 		return count;
 	}
+
+	/// <summary>
+	/// When a camera change point is passed by the player
+	/// </summary>
+	/// <param name="body"></param>
+	/// <param name="checkpoint"></param>
+	public void OnCameraChangeExited(Node2D body, CameraChange change)
+	{
+		if (body is Player player)
+		{
+			if (player.GetDirection() == change.DirectionEnteredFrom)
+			{
+				if (camera.Mode == "horizontal")
+				{
+					camera.Mode = "vertical";
+				}
+				else if (camera.Mode == "vertical")
+				{
+					camera.Mode = "horizontal";
+				}
+			}
+		}
+	}
 }

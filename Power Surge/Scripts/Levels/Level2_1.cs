@@ -62,12 +62,6 @@ public partial class Level2_1 : GameLevel
 			}
 			if (lineNumbers.Contains(dialogueBox.GetLineNumber()) && !dialogueBox.IsTyping())
 			{
-
-				if (dialogueBox.GetLineNumber() == 7 && !popupShown && dialogueStarted)
-				{
-					popup.Visible = true;
-					popupShown = true;
-				}
 				dialogueBox.Pause();
 			}
 		}
@@ -88,30 +82,5 @@ public partial class Level2_1 : GameLevel
 
 		}
 	}
-
-	/// <summary>
-	/// When a camera change point is passed by the player
-	/// </summary>
-	/// <param name="body"></param>
-	/// <param name="checkpoint"></param>
-	public void OnCameraChangeExited(Node2D body, CameraChange change)
-	{
-		if (body is Player player)
-		{
-			if (player.GetDirection() == change.DirectionEnteredFrom)
-			{
-				if (camera.Mode == "horizontal")
-				{
-					camera.Mode = "vertical";
-				}
-				else if (camera.Mode == "vertical")
-				{
-					camera.Mode = "horizontal";
-				}
-			}
-		}
-	}
-
-	
 
 }

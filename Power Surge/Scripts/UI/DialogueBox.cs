@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 //------------------------------------------------------------------------------
 // <summary>
 //   Handles displaying a dialogue box for communicating with the player
@@ -51,13 +52,14 @@ public partial class DialogueBox : Control
 					dialogueLabel.Text = FormatTextWithLineBreaks(currentLine.Text);
 					typing = false;
 				}
-				else
+				else if (GetLineNumber() == dialogueList.Count - 1)
 				{
+					Pause();
+				}else{
 					Texture2D prev = portrait.Texture; // Get current texture for later comparison
-													   // Show next line
-					ShowNextLine();
+					ShowNextLine(); // Show next line
 					Texture2D current = portrait.Texture; // Get new texture
-														  // Play startup sound if speaker has changed
+					// Play startup sound if speaker has changed									  
 					if (current != prev)
 					{
 						startupSound.Play();

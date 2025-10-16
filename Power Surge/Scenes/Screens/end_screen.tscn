@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Audio/Zap.mp3" id="8_s5tx8"]
 [ext_resource type="AudioStream" uid="uid://b63crk43h6eee" path="res://Assets/Audio/Tutorial.mp3" id="9_jassw"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_g2f4h")
 
 [node name="Control" type="Control" parent="."]
@@ -22,9 +22,10 @@ offset_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 layout_mode = 0
-offset_top = -8.0
-offset_right = 1155.0
-offset_bottom = 651.0
+offset_left = -64.0
+offset_top = -40.0
+offset_right = 1243.0
+offset_bottom = 706.0
 color = Color(0.140447, 0.140447, 0.140447, 1)
 
 [node name="Title" type="Label" parent="Control"]
