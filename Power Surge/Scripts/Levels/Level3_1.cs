@@ -19,6 +19,7 @@ public partial class Level3_1 : GameLevel
 		camera.LimitLeft = -450;
 		camera.LimitRight = 1750;
 		camera.Mode = "centered";
+		camera.SetCenterY(200f);
 		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
 
 		expectedTime = 150;
@@ -85,6 +86,44 @@ public partial class Level3_1 : GameLevel
 		if (body is Player player)
 		{
 			string name = checkpoint.Name;
+		}
+	}
+
+	/// <summary>
+	/// When a camera change point is passed by the player
+	/// </summary>
+	/// <param name="body"></param>
+	/// <param name="checkpoint"></param>
+	protected override void OnCameraChangeExited(Node2D body, CameraChange change)
+	{
+		if (body is Player player)
+		{
+			if (player.GetDirection() == change.DirectionEnteredFrom)
+			{
+				switch (change.Name)
+				{
+					case "1":
+						if (change.DirectionEnteredFrom == "left")
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(200f);
+							camera.ChangeToCentered();
+						}
+						break;
+					case "2":
+						if (change.DirectionEnteredFrom == "right")
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(136f);
+							camera.ChangeToCentered();
+						}
+						break;
+				}
+				if (change.Name == "1")
+				{
+					
+				}
+			}
 		}
 	}
 }

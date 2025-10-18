@@ -18,11 +18,13 @@ public partial class Camera : Camera2D
 	private Vector2 targetOffset = Vector2.Zero;
 	private float offsetLerpSpeed = 2.5f;
 	private string facingVertical = "down";
+	private float centerY = 200;
 	// Pan state
 	private bool isPanning = false;
 	private Vector2 panTarget = Vector2.Zero;
 	private float panLerpSpeed = 3.5f;
 	private string savedMode = null;
+	private bool transitioningToCentered = false;
 	
 
 	public override void _Ready()
@@ -39,8 +41,29 @@ public partial class Camera : Camera2D
 		{
 			if (isPanning)
 			{
-				// Pan
-				Position = Position.Lerp(panTarget, panLerpSpeed * (float)delta);
+				if (transitioningToCentered)
+				{
+					float newX = _player.Position.X;
+					float newY = Mathf.Lerp(Position.Y, panTarget.Y, panLerpSpeed * (float)delta);
+					Position = new Vector2(newX, newY);
+
+					if (Mathf.Abs(Position.Y - panTarget.Y) < 1.0f)
+					{
+						Position = new Vector2(newX, panTarget.Y);
+						isPanning = false;
+						Mode = "centered";
+						transitioningToCentered = false;
+					}
+				}
+				else
+				{
+					Position = Position.Lerp(panTarget, panLerpSpeed * (float)delta);
+					if (Position.DistanceTo(panTarget) < 1.0f)
+					{
+						Position = panTarget;
+						isPanning = false;
+					}
+				}
 			}
 			else
 			{
@@ -149,7 +172,34 @@ public partial class Camera : Camera2D
 
 	public void CenteredMode(double delta)
 	{
-		Position = new Vector2(_player.Position.X, 200);
+		float ySmoothSpeed = 3.5f;
+		float targetX = _player.Position.X;
+		float targetY = centerY;
+		float newY = Mathf.Lerp(Position.Y, targetY, ySmoothSpeed * (float)delta);
+		Position = new Vector2(targetX, newY);
+	}
+
+	/// <summary>
+	/// Change to centered mode by first panning smoothly to the centered position, then letting CenteredMode take over.
+	/// </summary>
+	public void ChangeToCentered(float lerpSpeed = 4.5f, bool immediate = false)
+	{
+		if (_player == null)
+			return;
+
+		if (!isPanning)
+			savedMode = Mode;
+
+		transitioningToCentered = true;
+		panLerpSpeed = lerpSpeed;
+		panTarget = new Vector2(_player.Position.X, centerY);
+
+		if (immediate)
+		{
+			Position = panTarget;
+			Mode = "centered";
+			transitioningToCentered = false;
+		}
 	}
 	
 	/// <summary>
@@ -189,5 +239,10 @@ public partial class Camera : Camera2D
 	public bool IsPanning()
 	{
 		return isPanning;
+	}
+
+	public void SetCenterY(float num)
+	{
+		centerY = num;
 	}
 }

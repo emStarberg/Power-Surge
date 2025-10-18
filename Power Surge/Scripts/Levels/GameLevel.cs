@@ -105,7 +105,7 @@ public abstract partial class GameLevel : Node2D
 	/// </summary>
 	/// <param name="body"></param>
 	/// <param name="checkpoint"></param>
-	public void OnCameraChangeExited(Node2D body, CameraChange change)
+	protected virtual void OnCameraChangeExited(Node2D body, CameraChange change)
 	{
 		if (body is Player player)
 		{

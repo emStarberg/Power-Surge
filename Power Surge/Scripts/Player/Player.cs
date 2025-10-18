@@ -132,192 +132,187 @@ public partial class Player : CharacterBody2D
 			Velocity = velocity;
 			// Move
 			MoveAndSlide();
-		}
 
-		// Regens slowly if standing still
-		if (alive && !Paused && Velocity == new Vector2(0,0))
-		{
-			regenTimer += (float)delta;
-			if (regenTimer >= 2f && power < 100)
-			{
-				power++;
-				regenTimer = 0f;
-			}
-		}
 
-		if (Paused)
-		{
-			velocity.X = 0;
-			return;
-		}
-		if (power < 0)
-		{
-			power = 0;
-		}
-		if (alive)
-		{
-			// Don't allow negative numbers
-			if (power <= 100)
+			// Regens slowly if standing still
+			if (!Paused && Velocity == new Vector2(0, 0))
 			{
-				PowerMeter.Value = power;
-				if (PowerMeter is PowerMeter powerMeter)
+				regenTimer += (float)delta;
+				if (regenTimer >= 2f && power < 100)
 				{
-					if (powerMeter.GetPowerSurgeMode())
+					power++;
+					regenTimer = 0f;
+				}
+			}
+
+			if (Paused)
+			{
+				velocity.X = 0;
+				return;
+			}
+			if (power < 0)
+			{
+				power = 0;
+			}
+			if (alive)
+			{
+				// Don't allow negative numbers
+				if (power <= 100)
+				{
+					PowerMeter.Value = power;
+					if (PowerMeter is PowerMeter powerMeter)
 					{
-						powerMeter.SetPowerSurgeMode(false);
+						if (powerMeter.GetPowerSurgeMode())
+						{
+							powerMeter.SetPowerSurgeMode(false);
+						}
 					}
-				}
-				if (powerSurgeActive)
-				{
-					StopPowerSurgeTimer();
-				}
-			}
-			else
-			{
-				// PowerMeter is limited to 100, and displays a new sprite when power is greater than 100
-				PowerMeter.Value = 100;
-				if (PowerMeter is PowerMeter powerMeter && PowerSurgeEnabled)
-				{
-					if (!powerMeter.GetPowerSurgeMode())
+					if (powerSurgeActive)
 					{
-						powerMeter.SetPowerSurgeMode(true);
+						StopPowerSurgeTimer();
 					}
-					if (!powerSurgeActive)
-					{
-						StartPowerSurgeTimer();
-					}
-				}
-
-			}
-
-			if (powerSurgeActive)
-			{
-				powerSurgeTime -= (float)delta;
-				if (powerSurgeTime < 0)
-					powerSurgeTime = 0;
-
-				powerSurgeTimer.Text = ((int)Math.Ceiling(powerSurgeTime)).ToString();
-
-				if (powerSurgeTime <= 0)
-				{
-					Die();
-				}
-			}
-
-			// Check whether to dash
-			if (Input.IsActionJustPressed("input_dash") && !disabledInputs.Contains("input_dash"))
-			{
-				// No stationary dashes
-				if (velocity.X != 0 && canDash)
-				{
-					// Begin dash
-					Dash();
-				}
-			}
-			if (isDashing)
-			{
-				// Continue dashing until animation has finished
-				velocity.X = direction * dashSpeed;
-				// Ignore gravity during dash
-				velocity.Y = 0;
-			}
-			else
-			{
-				
-				direction = 0;
-				// Get input direction
-				if (Input.IsActionPressed("input_left") && !disabledInputs.Contains("input_left"))
-				{
-					direction -= 1.0f;
-					mileage++; // For tutorial
-					facing = "left";
-				}
-
-				if (Input.IsActionPressed("input_right") && !disabledInputs.Contains("input_left"))
-				{
-					direction += 1.0f;
-					mileage++; // For tutorial
-					facing = "right";
-				}
-
-
-				// Handle horizontal movement
-				velocity.X = direction * Speed;
-
-				// Handle jump
-				if (Input.IsActionJustPressed("input_jump") && !disabledInputs.Contains("input_jump"))
-				{
-					Jump();
-				}
-
-				// Check how long the player has fallen for
-				if (!IsOnFloor() && !isDashing)
-				{
-					fallTime += (float)delta;
-				}
-				else
-					fallTime = 0f;
-
-				if (fallTime > 2.5f)
-				{
-					// Die after 3 seconds of fall time
-					Die();
-				}
-
-				if (Input.IsActionJustPressed("input_shield") && !disabledInputs.Contains("input_shield"))
-				{
-					// Activate shield
-					/*GetNode<StaticBody2D>("Shield").Visible = true;
-					shield.GetNode<CollisionShape2D>("Collider").Disabled = false;*/
-				}
-				if (Input.IsActionJustReleased("input_shield"))
-				{
-					// Deactivate shield
-					shield.Visible = false;
-					shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
-				}
-			}
-
-			if (Input.IsActionJustPressed("input_cycle_forward") && !disabledInputs.Contains("input_cycle_forward"))
-			{
-				CycleAttack("forward");
-			}
-
-			if (Input.IsActionJustPressed("input_cycle_backward") && !disabledInputs.Contains("input_cycle_backward"))
-			{
-				CycleAttack("backward");
-			}
-			// Update label to correct percentage
-			percentageLabel.Text = power + "%";
-			// If run out of power, die
-			if (power <= 0)
-			{
-				Die();
-			}
-
-			if (Input.IsActionJustPressed("input_attack") && !disabledInputs.Contains("input_attack"))
-			{
-				if (powerSurgeActive)
-				{
-					PowerSurgeAttack();
 				}
 				else
 				{
-					Attack();
+					// PowerMeter is limited to 100, and displays a new sprite when power is greater than 100
+					PowerMeter.Value = 100;
+					if (PowerMeter is PowerMeter powerMeter && PowerSurgeEnabled)
+					{
+						if (!powerMeter.GetPowerSurgeMode())
+						{
+							powerMeter.SetPowerSurgeMode(true);
+						}
+						if (!powerSurgeActive)
+						{
+							StartPowerSurgeTimer();
+						}
+					}
+
+				}
+				if (powerSurgeActive)
+				{
+					powerSurgeTime -= (float)delta;
+					if (powerSurgeTime < 0)
+						powerSurgeTime = 0;
+
+					powerSurgeTimer.Text = ((int)Math.Ceiling(powerSurgeTime)).ToString();
+
+					if (powerSurgeTime <= 0)
+					{
+						Die();
+					}
+				}
+
+				// Check whether to dash
+				if (Input.IsActionJustPressed("input_dash") && !disabledInputs.Contains("input_dash"))
+				{
+					// No stationary dashes
+					if (velocity.X != 0 && canDash)
+					{
+						// Begin dash
+						Dash();
+					}
+				}
+				if (isDashing)
+				{
+					// Continue dashing until animation has finished
+					velocity.X = direction * dashSpeed;
+					// Ignore gravity during dash
+					velocity.Y = 0;
+				}
+				else
+				{
+					direction = 0;
+					// Get input direction
+					if (Input.IsActionPressed("input_left") && !disabledInputs.Contains("input_left"))
+					{
+						direction -= 1.0f;
+						mileage++; // For tutorial
+						facing = "left";
+					}
+
+					if (Input.IsActionPressed("input_right") && !disabledInputs.Contains("input_left"))
+					{
+						direction += 1.0f;
+						mileage++; // For tutorial
+						facing = "right";
+					}
+
+
+					// Handle horizontal movement
+					velocity.X = direction * Speed;
+
+					// Handle jump
+					if (Input.IsActionJustPressed("input_jump") && !disabledInputs.Contains("input_jump"))
+					{
+						Jump();
+					}
+
+					// Check how long the player has fallen for
+					if (!IsOnFloor() && !isDashing)
+					{
+						fallTime += (float)delta;
+					}
+					else
+						fallTime = 0f;
+
+					if (fallTime > 2.5f)
+					{
+						// Die after 3 seconds of fall time
+						Die();
+					}
+
+					if (Input.IsActionJustPressed("input_shield") && !disabledInputs.Contains("input_shield"))
+					{
+						// Activate shield
+						/*GetNode<StaticBody2D>("Shield").Visible = true;
+						shield.GetNode<CollisionShape2D>("Collider").Disabled = false;*/
+					}
+					if (Input.IsActionJustReleased("input_shield"))
+					{
+						// Deactivate shield
+						shield.Visible = false;
+						shield.GetNode<CollisionShape2D>("Collider").Disabled = true;
+					}
+				}
+
+				if (Input.IsActionJustPressed("input_cycle_forward") && !disabledInputs.Contains("input_cycle_forward"))
+				{
+					CycleAttack("forward");
+				}
+
+				if (Input.IsActionJustPressed("input_cycle_backward") && !disabledInputs.Contains("input_cycle_backward"))
+				{
+					CycleAttack("backward");
+				}
+				// Update label to correct percentage
+				percentageLabel.Text = power + "%";
+				// If run out of power, die
+				if (power <= 0)
+				{
+					Die();
+				}
+
+				if (Input.IsActionJustPressed("input_attack") && !disabledInputs.Contains("input_attack"))
+				{
+					if (powerSurgeActive)
+					{
+						PowerSurgeAttack();
+					}
+					else
+					{
+						Attack();
+					}
+				}
+				if (Velocity.Y > 300f)
+				{
+					VerticalFacing = "down";
+				}
+				if (IsOnFloor() && !canDash)
+				{
+					canDash = true;
 				}
 			}
-
-			if(Velocity.Y > 300f)
-			{
-				VerticalFacing = "down";
-			}
-
-			if (IsOnFloor() && !canDash)
-			{
-				canDash = true;
-			}
-
-
 		}
 	}
 
@@ -516,19 +511,38 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void OnAnimationFinished()
 	{
-		if (animation.Animation == "hurt")
+		if (alive)
 		{
-			if (alive)
+			if (animation.Animation == "hurt")
 			{
-				animation.Animation = "idle";
-				animation.Play();
+				if (alive)
+				{
+					animation.Animation = "idle";
+					animation.Play();
+				}
+				else
+				{
+					animation.Visible = false;
+				}
 			}
-			else
+			if (animation.Animation == "dash")
 			{
-				animation.Visible = false;
+				invincible = false;
+				isDashing = false;
+				velocity.X = 0; // Stop horizontal movement after dash
+
+				if (alive)
+				{
+					animation.Animation = "idle";
+					animation.Play();
+				}
+				else
+				{
+					animation.Visible = false;
+				}
 			}
 		}
-		else if (animation.Animation == "death")
+		if (animation.Animation == "death")
 		{
 			animation.Visible = false;
 
@@ -559,22 +573,7 @@ public partial class Player : CharacterBody2D
 
 			timer.Start();
 		}
-		else if (animation.Animation == "dash")
-		{
-			invincible = false;
-			isDashing = false;
-			velocity.X = 0; // Stop horizontal movement after dash
 
-			if (alive)
-			{
-				animation.Animation = "idle";
-				animation.Play();
-			}
-			else
-			{
-				animation.Visible = false;
-			}
-		}
 	}
 
 	/// <summary>
