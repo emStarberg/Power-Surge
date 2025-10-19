@@ -58,6 +58,13 @@ public abstract partial class GameLevel : Node2D
 				enemy.UpdateVolume();
 			}
 		}
+		foreach (Node node in GetNode<Node2D>("Enemies").GetChildren())
+		{
+			if (node is IWorldObject obj)
+			{
+				obj.UpdateVolume();
+			}
+		}
 	}
 	/// <summary>
 	/// For updating volume levels after options menu has closed
@@ -105,7 +112,7 @@ public abstract partial class GameLevel : Node2D
 	/// </summary>
 	/// <param name="body"></param>
 	/// <param name="checkpoint"></param>
-	public void OnCameraChangeExited(Node2D body, CameraChange change)
+	protected virtual void OnCameraChangeExited(Node2D body, CameraChange change)
 	{
 		if (body is Player player)
 		{

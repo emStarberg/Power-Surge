@@ -33,7 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://bd8okq273t30m" path="res://Scenes/energy_deposit.tscn" id="25_js8qt"]
 [ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="27_3sdf5"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_no63c"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_js8qt"]
 texture = ExtResource("4_0obw8")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.65477, -8, 8, -8, 8, 8, -6.80221, 8)
@@ -55,7 +55,7 @@ texture = ExtResource("4_0obw8")
 2:2/0 = 0
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 6.47491, -8, 6.47491, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5w8k"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xhps1"]
 texture = ExtResource("3_0obw8")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -78,8 +78,8 @@ texture = ExtResource("3_0obw8")
 
 [sub_resource type="TileSet" id="TileSet_i7hc7"]
 physics_layer_0/collision_layer = 1
-sources/2 = SubResource("TileSetAtlasSource_l5w8k")
-sources/0 = SubResource("TileSetAtlasSource_no63c")
+sources/2 = SubResource("TileSetAtlasSource_xhps1")
+sources/0 = SubResource("TileSetAtlasSource_js8qt")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
 atlas = ExtResource("9_13eah")
