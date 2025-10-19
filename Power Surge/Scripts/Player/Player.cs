@@ -25,6 +25,7 @@ public partial class Player : CharacterBody2D
 	private AnimatedSprite2D animation; // Player's animations
 	private StaticBody2D shield; // Player's shield ability when activated
 	private Camera camera;
+	private AudioStreamPlayer2D backgroundMusic; // Music is disabled while in power surge mode
 	
 	// Jump
 	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground hit
@@ -85,6 +86,7 @@ public partial class Player : CharacterBody2D
 		powerSurgeMusic = GetNode<AudioStreamPlayer2D>("Sounds/Power Surge");
 		fragmentSound = GetNode<AudioStreamPlayer2D>("Sounds/Collect Fragment");
 		powerSurgeAttackSound = GetNode<AudioStreamPlayer2D>("Sounds/Power Surge Attack");
+		backgroundMusic = GetParent().GetNode<AudioStreamPlayer2D>("Background Music");
 		// Set up animations
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		animation.Play();
@@ -597,6 +599,7 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void StartPowerSurgeTimer()
 	{
+		backgroundMusic.Stop();
 		animation.Visible = false;
 		animation = GetNode<AnimatedSprite2D>("Animations - Power Surge");
 		animation.Visible = true;
@@ -617,6 +620,7 @@ public partial class Player : CharacterBody2D
 		{
 			isDashing = false;
 		}
+		backgroundMusic.Play();
 		animation.Visible = false;
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		animation.Visible = true;

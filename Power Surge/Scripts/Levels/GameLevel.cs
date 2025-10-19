@@ -58,6 +58,13 @@ public abstract partial class GameLevel : Node2D
 				enemy.UpdateVolume();
 			}
 		}
+		foreach (Node node in GetNode<Node2D>("Enemies").GetChildren())
+		{
+			if (node is IWorldObject obj)
+			{
+				obj.UpdateVolume();
+			}
+		}
 	}
 	/// <summary>
 	/// For updating volume levels after options menu has closed

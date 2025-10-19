@@ -277,7 +277,7 @@ public partial class VoltageSentinel : Enemy
 	/// <param name="body">Body detected</param>
 	public void OnPlayerDetectionBodyEntered(Node2D body)
 	{
-		if (body is Player player && !attacking)
+		if (body is Player player && !attacking && isAlive)
 		{
 			Speed = 25f;
 			targetPlayer = player;
@@ -302,7 +302,7 @@ public partial class VoltageSentinel : Enemy
 	/// <param name="body"></param>
 	public void OnPlayerDetectionBodyExited(Node2D body)
 	{
-		if (body == targetPlayer && !attacking)
+		if (body == targetPlayer && !attacking && isAlive)
 		{
 			Speed = 15f;
 			isFollowingPlayer = false;
@@ -315,7 +315,7 @@ public partial class VoltageSentinel : Enemy
 	/// </summary>
 	public void OnAnimationFrameChanged()
 	{
-		if (animation.Animation == "attack")
+		if (animation.Animation == "attack" && isAlive)
 		{
 			// Can only hurt player between frames 7 and 14
 			if (animation.Frame == 7)

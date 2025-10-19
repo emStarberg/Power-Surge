@@ -245,4 +245,9 @@ public partial class Camera : Camera2D
 	{
 		centerY = num;
 	}
+
+	public float GetCenterY()
+	{
+		return centerY;
+	}
 }

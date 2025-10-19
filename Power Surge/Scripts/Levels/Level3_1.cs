@@ -17,7 +17,7 @@ public partial class Level3_1 : GameLevel
 		//dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-2-2.txt");
 		dialogueBox.Pause();
 		camera.LimitLeft = -450;
-		camera.LimitRight = 1750;
+		camera.LimitRight = 3850;
 		camera.Mode = "centered";
 		camera.SetCenterY(200f);
 		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
@@ -118,10 +118,37 @@ public partial class Level3_1 : GameLevel
 							camera.ChangeToCentered();
 						}
 						break;
-				}
-				if (change.Name == "1")
-				{
-					
+					case "3":
+						if(camera.GetCenterY() == 136)
+						{
+							GD.Print("called A");
+							camera.Mode = "centered";
+							camera.SetCenterY(536f);
+							camera.ChangeToCentered();
+						}
+						else
+						{
+							GD.Print("called B");
+							camera.Mode = "centered";
+							camera.SetCenterY(136f);
+							camera.ChangeToCentered();
+						}
+						break;
+
+					case "4":
+						if(camera.GetCenterY() == 136)
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(232f);
+							camera.ChangeToCentered();
+						}
+						else
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(136f);
+							camera.ChangeToCentered();
+						}
+						break;
 				}
 			}
 		}
