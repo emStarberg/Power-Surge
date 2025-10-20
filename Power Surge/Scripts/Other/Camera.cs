@@ -179,6 +179,7 @@ public partial class Camera : Camera2D
 		Position = new Vector2(targetX, newY);
 	}
 
+
 	/// <summary>
 	/// Change to centered mode by first panning smoothly to the centered position, then letting CenteredMode take over.
 	/// </summary>
@@ -250,4 +251,5 @@ public partial class Camera : Camera2D
 	{
 		return centerY;
 	}
+	
 }
