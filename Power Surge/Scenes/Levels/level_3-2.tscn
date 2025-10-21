@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://bab3gjcwq4aym"]
+[gd_scene load_steps=48 format=4 uid="uid://bab3gjcwq4aym"]
 
 [ext_resource type="Texture2D" uid="uid://cma4tajk7qt36" path="res://Assets/Tilemaps/Circuit Lab - Background.png" id="1_fhj0x"]
 [ext_resource type="Script" uid="uid://b7wmr48ib3n4y" path="res://Scripts/Levels/Level3_2.cs" id="1_ftj2i"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="23_wf6fj"]
 [ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="24_q7kq4"]
 [ext_resource type="PackedScene" uid="uid://dn6bc3w5o21ns" path="res://Scenes/lab_boss.tscn" id="26_671rg"]
+[ext_resource type="PackedScene" uid="uid://ccbfgvaaf44xg" path="res://Scenes/corrupt_puddle.tscn" id="27_fhj0x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6ycy"]
 texture = ExtResource("3_dhq40")
@@ -512,6 +513,98 @@ scale = Vector2(1.1, 1.1)
 
 [node name="Lab Boss" parent="Enemies" instance=ExtResource("26_671rg")]
 position = Vector2(198, 38)
+
+[node name="Corrupt Puddles" type="Node2D" parent="Enemies"]
+
+[node name="Corrupt Puddle" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-232, 93)
+
+[node name="Corrupt Puddle2" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-216, 93)
+
+[node name="Corrupt Puddle3" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-200, 93)
+
+[node name="Corrupt Puddle4" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-184, 93)
+
+[node name="Corrupt Puddle5" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-168, 93)
+
+[node name="Corrupt Puddle6" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-152, 93)
+
+[node name="Corrupt Puddle7" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-136, 93)
+
+[node name="Corrupt Puddle8" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-120, 93)
+
+[node name="Corrupt Puddle9" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-104, 93)
+
+[node name="Corrupt Puddle10" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-88, 93)
+
+[node name="Corrupt Puddle11" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-72, 93)
+
+[node name="Corrupt Puddle12" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-56, 93)
+
+[node name="Corrupt Puddle13" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-40, 93)
+
+[node name="Corrupt Puddle14" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-24, 93)
+
+[node name="Corrupt Puddle15" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(-8, 93)
+
+[node name="Corrupt Puddle16" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(8, 93)
+
+[node name="Corrupt Puddle17" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(24, 93)
+
+[node name="Corrupt Puddle18" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(40, 93)
+
+[node name="Corrupt Puddle19" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(56, 93)
+
+[node name="Corrupt Puddle20" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(72, 93)
+
+[node name="Corrupt Puddle21" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(88, 93)
+
+[node name="Corrupt Puddle22" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(104, 93)
+
+[node name="Corrupt Puddle23" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(120, 93)
+
+[node name="Corrupt Puddle24" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(136, 93)
+
+[node name="Corrupt Puddle25" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(152, 93)
+
+[node name="Corrupt Puddle26" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(168, 93)
+
+[node name="Corrupt Puddle27" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(184, 93)
+
+[node name="Corrupt Puddle28" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(200, 93)
+
+[node name="Corrupt Puddle29" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(216, 93)
+
+[node name="Corrupt Puddle30" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
+position = Vector2(232, 93)
 
 [node name="Checkpoints" type="Node2D" parent="."]
 

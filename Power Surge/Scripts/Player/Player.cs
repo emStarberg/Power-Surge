@@ -114,12 +114,14 @@ public partial class Player : CharacterBody2D
 		powerSurgeTimer = GetNode<Label>("Timer");
 		powerSurgeTimer.Visible = false;
 
-		// Disable glow light for outdoor levels
-		GetNode<PointLight2D>("Light").Visible = GameData.Instance.GlowEnabled;		
+
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		// Disable glow light for outdoor levels
+		GetNode<PointLight2D>("Light").Visible = GameData.Instance.GlowEnabled;		
+		
 		if (camera.IsPanning())
 		{
 			Paused = true;
