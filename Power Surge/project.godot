@@ -132,6 +132,15 @@ input_reload={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="EnemyBody"
+2d_physics/layer_3="Ground"
+2d_physics/layer_4="EnemyHitbox"
+2d_physics/layer_5="PlayerAttack"
+2d_physics/layer_6="EnemyAttack"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

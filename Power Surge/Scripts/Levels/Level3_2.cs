@@ -21,6 +21,7 @@ public partial class Level3_2 : GameLevel
 		camera.LimitRight = 3850;
 		camera.Mode = "fixed";
 		camera.Position = new Vector2(0, 0);
+		camera.Zoom = new Vector2(2, 2);
 
 		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
 

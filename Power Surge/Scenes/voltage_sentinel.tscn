@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://ch58q6jxnp3qs"]
+[gd_scene load_steps=55 format=3 uid="uid://ch58q6jxnp3qs"]
 
 [ext_resource type="Script" uid="uid://ie77lp106ux2" path="res://Scripts/Enemies/VoltageSentinel.cs" id="1_jwrvh"]
 [ext_resource type="Texture2D" uid="uid://bm3sd3ja7a5n4" path="res://Assets/Characters/Enemies/Voltage Sentinel Idle - Spritesheet.png" id="2_50eub"]
@@ -370,7 +370,12 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_50eub"]
 size = Vector2(160, 33)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbplq"]
+size = Vector2(17, 40)
+
 [node name="Voltage Sentinel" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_jwrvh")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -416,6 +421,7 @@ position = Vector2(0, 13)
 target_position = Vector2(25, 0)
 
 [node name="PlayerDetection" type="Area2D" parent="."]
+collision_layer = 32
 
 [node name="Collider" type="CollisionShape2D" parent="PlayerDetection"]
 position = Vector2(1, -1.5)
@@ -429,6 +435,14 @@ stream = ExtResource("6_n50ty")
 [node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("7_n50ty")
 volume_db = 10.0
+
+[node name="Hit Box" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Collider" type="CollisionShape2D" parent="Hit Box"]
+position = Vector2(1.5, 1)
+shape = SubResource("RectangleShape2D_bbplq")
 
 [connection signal="animation_changed" from="Animations" to="." method="OnAnimationChanged"]
 [connection signal="animation_finished" from="Animations" to="." method="OnAnimationFinished"]

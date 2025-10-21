@@ -77,6 +77,8 @@ animations = [{
 }]
 
 [node name="Power Surge Blast" type="Area2D"]
+collision_layer = 16
+collision_mask = 12
 script = ExtResource("1_s28rj")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -89,5 +91,5 @@ sprite_frames = SubResource("SpriteFrames_chf64")
 frame = 4
 frame_progress = 0.436422
 
-[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="animation_finished" from="Animation" to="." method="OnAnimationFinished"]

@@ -60,14 +60,11 @@ public partial class PowerSurgeBlast : Node2D, IPlayerAttack
 	/// Handles collision with other bodies, applies damage to enemies.
 	/// Calls Hurt on enemy if applicable.
 	/// </summary>
-	public void OnBodyEntered(Node2D body)
+	public void OnAreaEntered(Area2D area)
 	{
-		if (body.Name != "Player" && !hurtCalled)
+		if (area.GetParent() is Enemy enemy && !hurtCalled)
 		{
-			if (body is Enemy enemy)
-			{
-				enemy.Hurt(damage);
-			}
+			enemy.Hurt(damage);
 		}
 	}	
 }

@@ -23,7 +23,7 @@ public abstract partial class Enemy : CharacterBody2D
 	/// Called when enemy is hit by an attack
 	/// </summary>
 	/// <param name="amount">Amount of health to subtract</param>
-	public void Hurt(float amount)
+	public virtual void Hurt(float amount)
 	{
 		if (!canBeHurt)
 			return;
