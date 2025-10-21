@@ -24,6 +24,7 @@ public partial class LabBoss : Enemy
 	private Node2D visualRoot; // Nodes that should be flipped. AnimationPlayer causes odd behaviour, this is a workaround
 	private Node2D corruptPuddles; // For shock attack
 	private Node2D electricity; // For jump damage
+	private PackedScene projectile = GD.Load<PackedScene>("Scenes/projectile_lab_boss.tscn"); // For projectiles
 
 
 	public override void _Ready()
@@ -378,7 +379,11 @@ public partial class LabBoss : Enemy
 			}
 		}
 	}
-	
+
+	/// <summary>
+	/// Called when electricity animations finish
+	/// Remove electricity
+	/// </summary>
 	public void OnElectricityAnimFinished()
 	{
 		foreach (Node n in electricity.GetChildren())
@@ -392,5 +397,17 @@ public partial class LabBoss : Enemy
 				area.GetNode<CollisionShape2D>("Collider").Disabled = true;
 			}
 		}
+	}
+	
+	public void ShootProjectile()
+	{
+		Node attackInstance = projectile.Instantiate();
+		((ProjectileLabBoss)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0, 20);
+		GetTree().Root.AddChild(attackInstance);
+		if (attackInstance is ProjectileLabBoss p)
+		{
+			p.Activate(direction);
+		}
+		
 	}
 }

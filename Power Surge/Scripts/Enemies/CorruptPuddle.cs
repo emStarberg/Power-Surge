@@ -10,7 +10,7 @@ public partial class CorruptPuddle : Area2D
 
 	public override void _Ready()
 	{
-		player = GetParent().GetParent().GetNode<Player>("Player");
+		player = GetParent().GetParent().GetNodeOrNull<Player>("Player");
 		light = GetNode<PointLight2D>("Light");
 
 		if(player == null)

@@ -9,13 +9,13 @@ using System;
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
 
-public partial class StrongBlast : Area2D, IPlayerAttack
+public partial class ProjectileLabBoss : Area2D
 {
 	private string direction;
 	private AnimatedSprite2D animatedSprite;
 	private bool doMove = false;
 	private float speed = 350f;
-	private float damage = 20;
+	private int damage = 20;
 
 	/// <summary>
 	/// Called when the node enters the scene tree.
@@ -23,7 +23,7 @@ public partial class StrongBlast : Area2D, IPlayerAttack
 	/// </summary>
 	public override void _Ready()
 	{
-		animatedSprite = GetNode<AnimatedSprite2D>("Anim_StrongBlast");
+		animatedSprite = GetNode<AnimatedSprite2D>("Animations");
 	}
 
 	/// <summary>
@@ -100,26 +100,22 @@ public partial class StrongBlast : Area2D, IPlayerAttack
 	}
 
 	/// <summary>
-	/// Handles collision with other bodies, applies damage to enemies.
+	/// Handles collision with other bodies, applies damage to Player.
 	/// </summary>
 	public void OnBodyEntered(Node2D body)
 	{
-		if (body.Name != "Player")
+		if (body is Player player)
 		{
 			Stop();
+			player.Hurt(damage, 0.2f, 0.2f);
 		}
 	}
 
 	/// <summary>
-	/// Handles collision with other bodies, applies damage to enemies.
-	/// Stops and calls Hurt on enemy if applicable.
+	/// Handles collision with other areas.
 	/// </summary>
 	public void OnAreaEntered(Area2D area)
 	{
 		Stop();
-		if (area.GetParent() is Enemy enemy)
-		{
-			enemy.Hurt(damage);
-		}
 	}	
 }
