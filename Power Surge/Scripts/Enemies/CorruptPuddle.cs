@@ -53,7 +53,9 @@ public partial class CorruptPuddle : Area2D
 	public void Enable()
 	{
 		Visible = true;
-		GetNode<CollisionShape2D>("Collider").Disabled = false;
+		var collider = GetNodeOrNull<CollisionShape2D>("Collider");
+		if (collider != null)
+			collider.CallDeferred("set_disabled", false);
 
 	}
 	
@@ -63,7 +65,9 @@ public partial class CorruptPuddle : Area2D
 	public void Disable()
 	{
 		Visible = false;
-		GetNode<CollisionShape2D>("Collider").Disabled = true;
+		var collider = GetNodeOrNull<CollisionShape2D>("Collider");
+   	 	if (collider != null)
+			collider.CallDeferred("set_disabled", true);
 	}
 	
 }
