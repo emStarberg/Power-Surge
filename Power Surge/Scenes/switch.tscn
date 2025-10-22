@@ -9,6 +9,8 @@ size = Vector2(16, 39)
 
 [node name="Switch" type="Area2D" node_paths=PackedStringArray("SwitchObjects")]
 scale = Vector2(1, 0.994944)
+collision_layer = 64
+collision_mask = 16
 script = ExtResource("1_og4gy")
 SwitchObjects = []
 

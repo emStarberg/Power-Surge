@@ -73,6 +73,7 @@ public partial class CircuitBug : Enemy
 				wallRay.ForceRaycastUpdate();
 				if (wallRay.IsColliding())
 				{
+					GD.Print("Wall ray colliding");
 					direction = direction == "right" ? "left" : "right";
 					Scale = new Vector2(-Scale.X, Scale.Y);
 				}
@@ -81,6 +82,7 @@ public partial class CircuitBug : Enemy
 				groundRay.ForceRaycastUpdate();
 				if (!groundRay.IsColliding())
 				{
+					GD.Print("Ground ray colliding");
 					direction = direction == "right" ? "left" : "right";
 					Scale = new Vector2(-Scale.X, Scale.Y);
 				}

@@ -24,7 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://bwvj50vhjjac7" path="res://Scenes/player.tscn" id="21_adkqn"]
 [ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="21_xng2i"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="22_b3ej1"]
-[ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="22_nupd1"]
 [ext_resource type="PackedScene" uid="uid://dvpsoauctkc3k" path="res://Scenes/elevator.tscn" id="23_3dat3"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="23_0816u"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="23_n62go"]
@@ -32,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://bkt4btwct5snw" path="res://Scenes/switch.tscn" id="24_rvb17"]
 [ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="24_wwu6o"]
 [ext_resource type="PackedScene" uid="uid://c5qev7r17xi72" path="res://Scenes/hammer.tscn" id="25_jpomb"]
+[ext_resource type="AudioStream" uid="uid://cw3v1frdyalon" path="res://Assets/Audio/Circuit Labs.ogg" id="30_jpomb"]
 [ext_resource type="Texture2D" uid="uid://c3fmxgxr5ej7q" path="res://Assets/Characters/Enemies/Lab Boss/Lab Boss - Jump - Spritesheet.png" id="33_qex3c"]
 [ext_resource type="Texture2D" uid="uid://dw73ehb3jcjcd" path="res://Assets/Characters/Enemies/Lab Boss/Lab Boss - Shock - Spritesheet.png" id="34_ehw2n"]
 [ext_resource type="Texture2D" uid="uid://cp2kwmfutwrsg" path="res://Assets/Characters/Enemies/Lab Boss/Lab Boss - Shoot - Spritesheet.png" id="35_384r7"]
@@ -194,7 +194,8 @@ texture = ExtResource("7_6t4jb")
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_t34my"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
 sources/2 = SubResource("TileSetAtlasSource_ulje2")
 sources/0 = SubResource("TileSetAtlasSource_p8yg7")
 sources/1 = SubResource("TileSetAtlasSource_0aipc")
@@ -632,7 +633,7 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_5wb80")
 
 [node name="Backgrounds" type="Node2D" parent="."]
@@ -1102,7 +1103,7 @@ shadow_filter_smooth = 3.0
 texture = SubResource("GradientTexture2D_xng2i")
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("22_nupd1")
+stream = ExtResource("30_jpomb")
 autoplay = true
 max_distance = 100000.0
 attenuation = 1e-05

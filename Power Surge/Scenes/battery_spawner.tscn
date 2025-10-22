@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0w4do7l73nit"]
+
+[ext_resource type="Script" uid="uid://c1wfishtx71u5" path="res://Scripts/Objects/BatterySpawner.cs" id="1_3fp30"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4twr"]
+
+[node name="Battery Spawner" type="Area2D"]
+script = ExtResource("1_3fp30")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y4twr")
+
+[connection signal="area_exited" from="." to="." method="OnAreaExited"]

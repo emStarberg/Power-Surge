@@ -11,6 +11,7 @@ public partial class Level3_2 : GameLevel
 
 	public override void _Ready()
 	{
+		
 		StartLevel();
 		GameData.Instance.GlowEnabled = false;
 		// Set up dialogue
@@ -20,12 +21,14 @@ public partial class Level3_2 : GameLevel
 		camera.LimitLeft = -450;
 		camera.LimitRight = 3850;
 		camera.Mode = "fixed";
-		camera.Position = new Vector2(0, 0);
+		camera.Position = new Vector2(0, -20);
 		camera.Zoom = new Vector2(2, 2);
 
 		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
 
 		expectedTime = 150;
+
+		UpdateVolume();
 
 		// Set up checkpoints
 		foreach (Node node in GetNode<Node2D>("Checkpoints").GetChildren())

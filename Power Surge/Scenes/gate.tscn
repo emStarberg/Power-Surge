@@ -60,6 +60,8 @@ animations = [{
 script = ExtResource("1_1lkl7")
 
 [node name="Body" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Collider" type="CollisionShape2D" parent="Body"]
 shape = SubResource("RectangleShape2D_kfxhe")

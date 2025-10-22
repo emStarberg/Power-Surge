@@ -14,17 +14,28 @@ public partial class Elevator : SwitchOperatedObject
 	private float maxHeight, minHeight;
 	private string direction = "up";
 	private bool returning = false;
+	private RayCast2D downRay;
 
 	public override void _Ready()
 	{
 		minHeight = Position.Y;
 		maxHeight = Position.Y - MaxHeight;
+		downRay = GetNode<RayCast2D>("Down Ray");
 	}
 
 	public override void _Process(double delta)
 	{
 		if (IsOn)
 		{
+			downRay.ForceRaycastUpdate();
+			if (downRay.IsColliding())
+			{
+				var collider = downRay.GetCollider();
+				if(collider is Enemy || collider is Player)
+				{
+					direction = "up";
+				}
+			}
 			if (direction == "up")
 			{
 				// Move up until maxHeight, then switch direction

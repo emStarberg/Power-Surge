@@ -704,7 +704,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1qyk"]
-size = Vector2(22, 10)
+size = Vector2(20, 14.75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d0khb"]
 atlas = ExtResource("8_6b0pm")
@@ -1222,6 +1222,34 @@ tracks/7/keys = {
 "method": &"DisablePuddles"
 }]
 }
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sounds/Jump")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sounds/Shock")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_d0khb"]
 resource_name = "Shoot"
@@ -1347,6 +1375,11 @@ position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_6b0pm")
 disabled = true
 
+[node name="Wall Ray" type="RayCast2D" parent="VisualRoot"]
+position = Vector2(0, -11)
+target_position = Vector2(-72, 0)
+collision_mask = 4
+
 [node name="Collider (Torso)" type="CollisionShape2D" parent="."]
 position = Vector2(5, 14)
 shape = SubResource("RectangleShape2D_s8h76")
@@ -1358,6 +1391,7 @@ collision_mask = 0
 
 [node name="Collider" type="CollisionShape2D" parent="Hit Box"]
 position = Vector2(0, 3)
+scale = Vector2(1.28075, 1.28075)
 shape = SubResource("CircleShape2D_dhq40")
 
 [node name="Animation Player" type="AnimationPlayer" parent="."]

@@ -9,6 +9,8 @@ using System.Data.Common;
 //------------------------------------------------------------------------------
 public partial class LabBoss : Enemy
 {
+	[Export] public TextureProgressBar HealthBar;
+	[Export] public Camera camera;
 	private Area2D hitBox; // Area where boss can be hit
 	private Sprite2D sign; // Part that flashes red when hit
 	private String currentAction = "idle"; // What the boss is currently doing (move, idle, shock, shoot, die)
@@ -18,6 +20,7 @@ public partial class LabBoss : Enemy
 	private const float Speed = 100.0f; // Movement speed
 	private bool movementPaused = false; // For short pauses in between "jumps"
 	private bool gravityEnabled = true;
+	private bool canMove = true;
 	private float timer = 0; // For idle and move
 	private int attackStartSide = 0;
 	private Vector2 originalScale;
@@ -26,10 +29,12 @@ public partial class LabBoss : Enemy
 	private Node2D electricity; // For jump damage
 	private PackedScene projectile = GD.Load<PackedScene>("Scenes/projectile_lab_boss.tscn"); // For projectiles
 	private AudioStreamPlayer2D shootSound, shockSound, jumpSound;
+	private RayCast2D wallRay;
 
 
 	public override void _Ready()
 	{
+		UpdateVolume();
 		visualRoot = GetNode<Node2D>("VisualRoot");
 		originalScale = visualRoot.Scale;
 
@@ -41,7 +46,9 @@ public partial class LabBoss : Enemy
 		shockSound = GetNode<AudioStreamPlayer2D>("Sounds/Shock");
 		jumpSound = GetNode<AudioStreamPlayer2D>("Sounds/Jump");
 
-		health = 250;
+		wallRay = GetNode<RayCast2D>("VisualRoot/Wall Ray");
+
+		health = 20;
 
 		animationPlayer.CurrentAnimation = "Idle";
 		animationPlayer.Play();
@@ -59,6 +66,25 @@ public partial class LabBoss : Enemy
 	{
 		if (isAlive)
 		{
+			wallRay.ForceRaycastUpdate();
+			if (wallRay.IsColliding())
+			{
+				if(wallRay.GetCollider() is TileMapLayer)
+				{
+					if (canMove)
+					{
+						canMove = false;
+						if(currentAction == "move")
+						ChooseNewAction();
+					}
+					
+				}
+			}
+			else
+			{
+				canMove = true;
+			}
+			HealthBar.Value = health;
 			velocity = Velocity;
 
 			// Face player if not attacking
@@ -111,7 +137,6 @@ public partial class LabBoss : Enemy
 	/// </summary>
 	public void PauseMovement()
 	{
-		GD.Print("paused");
 		movementPaused = true;
 	}
 
@@ -120,7 +145,6 @@ public partial class LabBoss : Enemy
 	/// </summary>
 	public void UnpauseMovement()
 	{
-		GD.Print("unpaused");
 		movementPaused = false;
 	}
 
@@ -191,7 +215,8 @@ public partial class LabBoss : Enemy
 	{
 		if (body is Player player)
 		{
-			player.Hurt(2000, 0.2f, 0.2f);
+			player.Hurt(2000, 0.2f, 0.2f); // Kill player
+
 		}
 	}
 
@@ -258,9 +283,16 @@ public partial class LabBoss : Enemy
 				break;
 
 			case "move":
-				animationPlayer.CurrentAnimation = "Jump";
-				animationPlayer.Play(); ;
-				FacePlayerIfNeeded();
+				if (canMove)
+				{
+					animationPlayer.CurrentAnimation = "Jump";
+					animationPlayer.Play(); ;
+					FacePlayerIfNeeded();
+				}
+				else
+				{
+					ChooseNewAction();
+				}
 				break;
 
 			case "shock":
@@ -442,12 +474,13 @@ public partial class LabBoss : Enemy
 		}
 
 	}
-	
+
 	/// <summary>
 	/// Called when health = 0
 	/// </summary>
 	public override void Die()
 	{
+		camera.Shake(2, 0.4f);
 		isAlive = false;
 		canBeHurt = false;
 		animationPlayer.CurrentAnimation = "Death";
@@ -456,4 +489,20 @@ public partial class LabBoss : Enemy
 		DisableElectricity();
 		PauseMovement();
 	}
+
+	public override void UpdateVolume()
+	{
+		foreach(Node n in GetNode<Node2D>("Sounds").GetChildren())
+		{
+			if(n is AudioStreamPlayer2D sound)
+			{
+				sound.VolumeDb = GameSettings.Instance.GetFinalSfx();
+				if(sound.Name == "Jump" && sound.VolumeDb != 0)
+				{
+					sound.VolumeDb += 5; 
+				}
+			}
+		}
+	}
+
 }

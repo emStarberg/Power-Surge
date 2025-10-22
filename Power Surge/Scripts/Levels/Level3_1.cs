@@ -24,6 +24,8 @@ public partial class Level3_1 : GameLevel
 
 		expectedTime = 150;
 
+		UpdateVolume();
+
 		// Set up checkpoints
 		foreach (Node node in GetNode<Node2D>("Checkpoints").GetChildren())
 		{
