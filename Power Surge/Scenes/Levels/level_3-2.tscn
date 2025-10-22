@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://bab3gjcwq4aym"]
+[gd_scene load_steps=64 format=4 uid="uid://bab3gjcwq4aym"]
 
 [ext_resource type="Texture2D" uid="uid://cma4tajk7qt36" path="res://Assets/Tilemaps/Circuit Lab - Background.png" id="1_fhj0x"]
 [ext_resource type="Script" uid="uid://b7wmr48ib3n4y" path="res://Scripts/Levels/Level3_2.cs" id="1_ftj2i"]
@@ -34,6 +34,12 @@
 [ext_resource type="PackedScene" uid="uid://bd8okq273t30m" path="res://Scenes/energy_deposit.tscn" id="28_mctyk"]
 [ext_resource type="PackedScene" uid="uid://c8of26kvgpu7s" path="res://Scenes/gate.tscn" id="29_y4twr"]
 [ext_resource type="PackedScene" uid="uid://d0w4do7l73nit" path="res://Scenes/battery_spawner.tscn" id="30_qdt6i"]
+[ext_resource type="Texture2D" uid="uid://c0crxwb4sd64q" path="res://Assets/Characters/Enemies/Lab Boss/Box.png" id="35_5c3be"]
+[ext_resource type="Texture2D" uid="uid://xsk7niekv0cr" path="res://Assets/Characters/Enemies/Lab Boss/Computer - Desk.png" id="35_g8jl2"]
+[ext_resource type="Texture2D" uid="uid://dnd781cctox5f" path="res://Assets/Characters/Enemies/Lab Boss/Cabinet.png" id="36_0h0fy"]
+[ext_resource type="Texture2D" uid="uid://dufvc3bl6ryu8" path="res://Assets/Characters/Enemies/Lab Boss/Desk.png" id="38_ypnpd"]
+[ext_resource type="Texture2D" uid="uid://dsbr4gw285lch" path="res://Assets/Characters/Enemies/Lab Boss/Warning Sign.png" id="39_h1p6c"]
+[ext_resource type="Texture2D" uid="uid://h0ek2lqjmaea" path="res://Assets/Characters/Enemies/Lab Boss/Computer - Monitor.png" id="39_ypnpd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6ycy"]
 texture = ExtResource("3_dhq40")
@@ -278,6 +284,415 @@ gradient = SubResource("Gradient_5wb80")
 fill_from = Vector2(0.444934, 1)
 fill_to = Vector2(0.431718, 0)
 
+[sub_resource type="Animation" id="Animation_0h0fy"]
+resource_name = "Start"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box5:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.866667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-19, 96), Vector2(193, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cabinet:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.610127, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-181, 88), Vector2(193, 81)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Desk:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.4, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(97, 96), Vector2(195, 56)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Desk:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.4, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.57079]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Box3:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.6, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-63, 81), Vector2(195, 40)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Cabinet2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.2, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-192, 88), Vector2(194, 40)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Computer-Monitor:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.96667, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-163, 89), Vector2(195, 19)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Computer-Desk:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2.96667, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-170, 94), Vector2(209, 57)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Box6:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(2.63333, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-42, 81), Vector2(186, 36)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Box4:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(2.63333, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-40, 96), Vector2(211, 36)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Computer-Desk2:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(3.06667, 3.76667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(133.5, 94), Vector2(179, 57)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Computer-Desk2:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(3.06667, 3.76667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.57079]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Computer-Desk:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(2.96667, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.57079]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Computer-Monitor:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(2.96667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Box2:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(3.76667, 4.73333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-57, 96), Vector2(194, 68)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Box:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(3.76667, 4.73333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-69, 96), Vector2(164, 67)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("WarningSign:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(4.3, 5.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-218, -16), Vector2(191, 38)]
+}
+
+[sub_resource type="Animation" id="Animation_g8jl2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box5:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(193, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cabinet:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-112, 22)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Desk:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(195, 56)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Desk:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.57079]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Box3:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(195, 40)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Cabinet2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(194, 40)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Computer-Monitor:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(194, 19)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Box6:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(186, 36)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Box4:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(211, 36)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Computer-Desk2:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(179, 57)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Computer-Desk2:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.57079]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Computer-Desk:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-170, 94)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Computer-Desk:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.57079]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Box2:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(194, 68)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Box:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(164, 67)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("WarningSign:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(192, 38)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ypnpd"]
+_data = {
+&"RESET": SubResource("Animation_g8jl2"),
+&"Start": SubResource("Animation_0h0fy")
+}
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ftj2i")
 
@@ -320,6 +735,7 @@ position = Vector2(-5, 6)
 script = ExtResource("7_y4twr")
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Control" type="Control" parent="UI"]
 layout_mode = 3
@@ -427,11 +843,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Boss Health Bar" type="TextureProgressBar" parent="UI/Control"]
 layout_mode = 0
-offset_left = 356.0
-offset_top = 51.0
-offset_right = 484.0
-offset_bottom = 91.0
-scale = Vector2(3.57701, 3.57701)
+offset_left = 411.0
+offset_top = 62.0
+offset_right = 539.0
+offset_bottom = 102.0
+scale = Vector2(2.64435, 2.4162)
 max_value = 200.0
 value = 200.0
 texture_over = ExtResource("16_dhq40")
@@ -527,11 +943,13 @@ vertical_alignment = 1
 [node name="Enemies" type="Node2D" parent="." groups=["Enemy"]]
 
 [node name="Lab Boss" parent="Enemies" node_paths=PackedStringArray("HealthBar", "camera") instance=ExtResource("26_671rg")]
-position = Vector2(166, 38)
+visible = false
+position = Vector2(189, 40)
 HealthBar = NodePath("../../UI/Control/Boss Health Bar")
 camera = NodePath("../../Camera")
 
 [node name="Corrupt Puddles" type="Node2D" parent="Enemies"]
+visible = false
 position = Vector2(0, 3)
 
 [node name="Corrupt Puddle" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
@@ -625,6 +1043,7 @@ position = Vector2(216, 93)
 position = Vector2(232, 93)
 
 [node name="Objects" type="Node2D" parent="."]
+visible = false
 
 [node name="Fragment3" parent="Objects" instance=ExtResource("20_gpe30")]
 position = Vector2(-288, -303)
@@ -685,7 +1104,7 @@ position = Vector2(-76, 92)
 [node name="Camera Changes" type="Node2D" parent="Checkpoints"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("21_gur83")]
-position = Vector2(-1, 0)
+position = Vector2(-273, -68)
 PowerMeter = NodePath("../UI/Control/Power Meter")
 percentageLabel = NodePath("../UI/Control/Percentage Label")
 FragmentSlots = NodePath("../UI/Control/Fragment Slots")
@@ -714,3 +1133,65 @@ script = ExtResource("23_wf6fj")
 [node name="End" parent="." instance=ExtResource("24_q7kq4")]
 position = Vector2(-389, -303)
 scale = Vector2(1.94694, 4.56414)
+
+[node name="Boss Start" type="Node2D" parent="."]
+
+[node name="Computer-Desk2" type="Sprite2D" parent="Boss Start"]
+position = Vector2(179, 57)
+rotation = -1.57079
+texture = ExtResource("35_g8jl2")
+
+[node name="Box6" type="Sprite2D" parent="Boss Start"]
+position = Vector2(186, 36)
+texture = ExtResource("35_5c3be")
+
+[node name="Cabinet" type="Sprite2D" parent="Boss Start"]
+position = Vector2(-112, 22)
+texture = ExtResource("36_0h0fy")
+
+[node name="Cabinet2" type="Sprite2D" parent="Boss Start"]
+position = Vector2(194, 40)
+texture = ExtResource("36_0h0fy")
+
+[node name="Desk" type="Sprite2D" parent="Boss Start"]
+position = Vector2(195, 56)
+rotation = 1.57079
+texture = ExtResource("38_ypnpd")
+
+[node name="Computer-Desk" type="Sprite2D" parent="Boss Start"]
+position = Vector2(-170, 94)
+rotation = -1.57079
+texture = ExtResource("35_g8jl2")
+
+[node name="Box" type="Sprite2D" parent="Boss Start"]
+position = Vector2(164, 67)
+texture = ExtResource("35_5c3be")
+
+[node name="Box2" type="Sprite2D" parent="Boss Start"]
+position = Vector2(194, 68)
+texture = ExtResource("35_5c3be")
+
+[node name="Box4" type="Sprite2D" parent="Boss Start"]
+position = Vector2(211, 36)
+texture = ExtResource("35_5c3be")
+
+[node name="Box3" type="Sprite2D" parent="Boss Start"]
+position = Vector2(195, 40)
+texture = ExtResource("35_5c3be")
+
+[node name="Box5" type="Sprite2D" parent="Boss Start"]
+position = Vector2(193, 96)
+texture = ExtResource("35_5c3be")
+
+[node name="Computer-Monitor" type="Sprite2D" parent="Boss Start"]
+position = Vector2(194, 19)
+texture = ExtResource("39_ypnpd")
+
+[node name="WarningSign" type="Sprite2D" parent="Boss Start"]
+position = Vector2(192, 38)
+texture = ExtResource("39_h1p6c")
+
+[node name="Boss Start" type="AnimationPlayer" parent="Boss Start"]
+libraries = {
+&"": SubResource("AnimationLibrary_ypnpd")
+}
