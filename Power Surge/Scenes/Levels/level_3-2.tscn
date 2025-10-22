@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://bab3gjcwq4aym"]
+[gd_scene load_steps=49 format=4 uid="uid://bab3gjcwq4aym"]
 
 [ext_resource type="Texture2D" uid="uid://cma4tajk7qt36" path="res://Assets/Tilemaps/Circuit Lab - Background.png" id="1_fhj0x"]
 [ext_resource type="Script" uid="uid://b7wmr48ib3n4y" path="res://Scripts/Levels/Level3_2.cs" id="1_ftj2i"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://bwvj50vhjjac7" path="res://Scenes/player.tscn" id="21_gur83"]
 [ext_resource type="AudioStream" uid="uid://dqm7pgn4ixtxs" path="res://Assets/Audio/Luminescent Plains.ogg" id="22_5d62w"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="23_wf6fj"]
+[ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="24_ftj2i"]
 [ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="24_q7kq4"]
 [ext_resource type="PackedScene" uid="uid://dn6bc3w5o21ns" path="res://Scenes/lab_boss.tscn" id="26_671rg"]
 [ext_resource type="PackedScene" uid="uid://ccbfgvaaf44xg" path="res://Scenes/corrupt_puddle.tscn" id="27_fhj0x"]
@@ -606,13 +607,15 @@ position = Vector2(216, 93)
 [node name="Corrupt Puddle30" parent="Enemies/Corrupt Puddles" instance=ExtResource("27_fhj0x")]
 position = Vector2(232, 93)
 
+[node name="Circuit Bug" parent="Enemies" instance=ExtResource("24_ftj2i")]
+position = Vector2(-198, 66)
+
 [node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="Camera Changes" type="Node2D" parent="Checkpoints"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("21_gur83")]
 position = Vector2(-1, 0)
-collision_mask = 6
 PowerMeter = NodePath("../UI/Control/Power Meter")
 percentageLabel = NodePath("../UI/Control/Percentage Label")
 FragmentSlots = NodePath("../UI/Control/Fragment Slots")

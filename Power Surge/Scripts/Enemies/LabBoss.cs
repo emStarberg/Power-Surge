@@ -25,6 +25,7 @@ public partial class LabBoss : Enemy
 	private Node2D corruptPuddles; // For shock attack
 	private Node2D electricity; // For jump damage
 	private PackedScene projectile = GD.Load<PackedScene>("Scenes/projectile_lab_boss.tscn"); // For projectiles
+	private AudioStreamPlayer2D shootSound, shockSound, jumpSound;
 
 
 	public override void _Ready()
@@ -35,7 +36,10 @@ public partial class LabBoss : Enemy
 		hitBox = GetNode<Area2D>("Hit Box");
 		animationPlayer = GetNode<AnimationPlayer>("Animation Player");
 		sign = GetNode<Sprite2D>("VisualRoot/Sign");
-		hurtSound = GetNode<AudioStreamPlayer2D>("VisualRoot/Sounds/Hurt");
+		hurtSound = GetNode<AudioStreamPlayer2D>("Sounds/Hurt");
+		shootSound = GetNode<AudioStreamPlayer2D>("Sounds/Shoot");
+		shockSound = GetNode<AudioStreamPlayer2D>("Sounds/Shock");
+		jumpSound = GetNode<AudioStreamPlayer2D>("Sounds/Jump");
 
 		health = 250;
 
@@ -53,50 +57,53 @@ public partial class LabBoss : Enemy
 
 	public override void _PhysicsProcess(double delta)
 	{
-		velocity = Velocity;
-
-		// Face player if not attacking
-		if (currentAction == "move" || currentAction == "idle")
+		if (isAlive)
 		{
-			FacePlayerIfNeeded();
-			timer += (float)delta;
-			if (timer >= 3)
+			velocity = Velocity;
+
+			// Face player if not attacking
+			if (currentAction == "move" || currentAction == "idle")
 			{
-				timer = 0;
-				ChooseNewAction();
+				FacePlayerIfNeeded();
+				timer += (float)delta;
+				if (timer >= 3)
+				{
+					timer = 0;
+					ChooseNewAction();
+				}
 			}
-		}
 
-		if (gravityEnabled)
-		{
-			if (!IsOnFloor())
-				velocity.Y = Mathf.Min(velocity.Y + gravity * (float)delta, maxFallSpeed);
-			else if (velocity.Y > 0)
-				velocity.Y = 0;
-		}
-
-		// Don't move when not in the air
-		if (movementPaused)
-		{
-			velocity.X = 0;
-		}
-		else
-		{
-			switch (currentAction)
+			if (gravityEnabled)
 			{
-				case "idle":
-					velocity.X = 0;
-					break;
-
-				case "move":
-					velocity.X = (direction == "left") ? -Speed : Speed;
-					break;
+				if (!IsOnFloor())
+					velocity.Y = Mathf.Min(velocity.Y + gravity * (float)delta, maxFallSpeed);
+				else if (velocity.Y > 0)
+					velocity.Y = 0;
 			}
-		}
 
-		// Apply movement
-		Velocity = velocity;
-		MoveAndSlide();
+			// Don't move when not in the air
+			if (movementPaused)
+			{
+				velocity.X = 0;
+			}
+			else
+			{
+				switch (currentAction)
+				{
+					case "idle":
+						velocity.X = 0;
+						break;
+
+					case "move":
+						velocity.X = (direction == "left") ? -Speed : Speed;
+						break;
+				}
+			}
+
+			// Apply movement
+			Velocity = velocity;
+			MoveAndSlide();
+		}
 	}
 
 	/// <summary>
@@ -277,16 +284,22 @@ public partial class LabBoss : Enemy
 	/// </summary>
 	public void OnAnimationFinished()
 	{
-		if (attackStartSide != 0)
+		if (isAlive)
 		{
-			int currentSide = player != null ? Math.Sign(player.GlobalPosition.X - GlobalPosition.X) : 0;
-			if (currentSide != 0 && currentSide != attackStartSide)
+			if (attackStartSide != 0)
 			{
-				SetDirection(currentSide > 0 ? "right" : "left");
+				int currentSide = player != null ? Math.Sign(player.GlobalPosition.X - GlobalPosition.X) : 0;
+				if (currentSide != 0 && currentSide != attackStartSide)
+				{
+					SetDirection(currentSide > 0 ? "right" : "left");
+				}
+				attackStartSide = 0;
 			}
-			attackStartSide = 0;
+			ChooseNewAction();
+		}else if (animationPlayer.CurrentAnimation == "death")
+		{
+			QueueFree();
 		}
-		ChooseNewAction();
 	}
 
 	/// <summary>
@@ -380,6 +393,24 @@ public partial class LabBoss : Enemy
 		}
 	}
 
+		/// <summary>
+	/// Enable electricity
+	/// </summary>
+	public void DisableElectricity()
+	{
+		foreach (Node n in electricity.GetChildren())
+		{
+			if (n is AnimatedSprite2D anim)
+			{
+				anim.Visible = false;
+			}
+			else if (n is Area2D area)
+			{
+				area.GetNode<CollisionShape2D>("Collider").Disabled = true;
+			}
+		}
+	}
+
 	/// <summary>
 	/// Called when electricity animations finish
 	/// Remove electricity
@@ -398,16 +429,31 @@ public partial class LabBoss : Enemy
 			}
 		}
 	}
-	
+
 	public void ShootProjectile()
 	{
 		Node attackInstance = projectile.Instantiate();
 		((ProjectileLabBoss)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0, 20);
 		GetTree().Root.AddChild(attackInstance);
+		shootSound.Play();
 		if (attackInstance is ProjectileLabBoss p)
 		{
 			p.Activate(direction);
 		}
-		
+
+	}
+	
+	/// <summary>
+	/// Called when health = 0
+	/// </summary>
+	public override void Die()
+	{
+		isAlive = false;
+		canBeHurt = false;
+		animationPlayer.CurrentAnimation = "Death";
+		sign.Visible = false;
+		DisablePuddles();
+		DisableElectricity();
+		PauseMovement();
 	}
 }

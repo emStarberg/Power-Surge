@@ -369,14 +369,15 @@ public partial class Player : CharacterBody2D
 	/// <param name="shakeDuration">Camera shake duration</param>
 	public void Hurt(int damage, float shakeAmount, float shakeDuration)
 	{
-		if (!invincible)
+		if (!invincible && alive)
 		{
+			DecreasePower(damage);
 			if(!powerSurgeActive)
 			animation.Animation = "hurt";
 			hurtSound.Play();
 			// Camera shake
 			camera.Shake(shakeAmount, shakeDuration);
-			DecreasePower(damage);
+			
 		}
 	}
 
