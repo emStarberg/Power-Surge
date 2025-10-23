@@ -101,8 +101,9 @@ public abstract partial class GameLevel : Node2D
 		int count = 0;
 		foreach (Node node in GetNode<Node2D>("Enemies").GetChildren())
 		{
-			if (node is Enemy enemy)
+			if (node is Enemy)
 			{
+				if(node is not LabBoss)
 				count++;
 			}
 		}

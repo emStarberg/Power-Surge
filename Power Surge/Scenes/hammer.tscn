@@ -104,6 +104,7 @@ position = Vector2(0, 13.5)
 shape = SubResource("RectangleShape2D_010gp")
 
 [node name="StaticBody" type="StaticBody2D" parent="."]
+collision_layer = 4
 
 [node name="Collider" type="CollisionShape2D" parent="StaticBody"]
 position = Vector2(0, -16)

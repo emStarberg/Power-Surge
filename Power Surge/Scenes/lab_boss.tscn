@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://dn6bc3w5o21ns"]
+[gd_scene load_steps=119 format=3 uid="uid://dn6bc3w5o21ns"]
 
 [ext_resource type="Texture2D" uid="uid://crvtpaj2oq66v" path="res://Assets/Characters/Enemies/Lab Boss/Lab Boss - Idle - Spritesheet.png" id="1_fgqkn"]
 [ext_resource type="Script" uid="uid://cjxomada1g357" path="res://Scripts/Enemies/LabBoss.cs" id="1_jy7d0"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cjimrlhj0qdfl" path="res://Assets/Audio/Metal Hit.wav" id="9_i63y3"]
 [ext_resource type="AudioStream" uid="uid://b0j6bpgh0pm7d" path="res://Assets/Audio/laser-14792 (mp3cut.net).mp3" id="10_qhxyw"]
 [ext_resource type="AudioStream" uid="uid://8jb3rrfsnj2b" path="res://Assets/Audio/lightning-strike-386161.mp3" id="11_i63y3"]
+[ext_resource type="AudioStream" uid="uid://c82clcrkjl8h5" path="res://Assets/Audio/cans-falling-over-259533.mp3" id="13_1aeax"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cwnxc"]
 atlas = ExtResource("2_d0khb")
@@ -816,6 +817,40 @@ tracks/3/keys = {
 "update": 1,
 "values": [Vector2(5, 14), Vector2(5, 38)]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/Rumble")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.86667, 3.86667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0666667, 3.86667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"OnDeathStart"
+}, {
+"args": [],
+"method": &"OnDeathFinish"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_ux2y6"]
 resource_name = "Idle"
@@ -1413,6 +1448,10 @@ stream = ExtResource("11_i63y3")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("7_q1qyk")
+volume_db = 10.0
+
+[node name="Rumble" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("13_1aeax")
 volume_db = 10.0
 
 [connection signal="body_entered" from="VisualRoot/Foot" to="." method="OnFootBodyEntered"]

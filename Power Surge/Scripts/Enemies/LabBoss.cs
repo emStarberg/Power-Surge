@@ -30,6 +30,7 @@ public partial class LabBoss : Enemy
 	private PackedScene projectile = GD.Load<PackedScene>("Scenes/projectile_lab_boss.tscn"); // For projectiles
 	private AudioStreamPlayer2D shootSound, shockSound, jumpSound;
 	private RayCast2D wallRay;
+	private bool hasStarted = false;
 
 
 	public override void _Ready()
@@ -48,7 +49,7 @@ public partial class LabBoss : Enemy
 
 		wallRay = GetNode<RayCast2D>("VisualRoot/Wall Ray");
 
-		health = 20;
+		health = 200;
 
 		animationPlayer.CurrentAnimation = "Idle";
 		animationPlayer.Play();
@@ -59,12 +60,14 @@ public partial class LabBoss : Enemy
 		DisablePuddles();
 
 		electricity = GetNode<Node2D>("VisualRoot/Electricity");
+
+		Visible = false;
 	}
 
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (isAlive)
+		if (isAlive && hasStarted)
 		{
 			wallRay.ForceRaycastUpdate();
 			if (wallRay.IsColliding())
@@ -420,12 +423,16 @@ public partial class LabBoss : Enemy
 			}
 			else if (n is Area2D area)
 			{
-				area.GetNode<CollisionShape2D>("Collider").Disabled = false;
+				var collider = area.GetNodeOrNull<CollisionShape2D>("Collider");
+				if (collider != null)
+				{
+					collider.CallDeferred("set_disabled", false);
+				}
 			}
 		}
 	}
 
-		/// <summary>
+	/// <summary>
 	/// Enable electricity
 	/// </summary>
 	public void DisableElectricity()
@@ -438,7 +445,11 @@ public partial class LabBoss : Enemy
 			}
 			else if (n is Area2D area)
 			{
-				area.GetNode<CollisionShape2D>("Collider").Disabled = true;
+				var collider = area.GetNodeOrNull<CollisionShape2D>("Collider");
+				if (collider != null)
+				{
+					collider.CallDeferred("set_disabled", true);
+				}
 			}
 		}
 	}
@@ -457,7 +468,11 @@ public partial class LabBoss : Enemy
 			}
 			else if (n is Area2D area)
 			{
-				area.GetNode<CollisionShape2D>("Collider").Disabled = true;
+				var collider = area.GetNodeOrNull<CollisionShape2D>("Collider");
+				if (collider != null)
+				{
+					collider.CallDeferred("set_disabled", true);
+				}
 			}
 		}
 	}
@@ -492,16 +507,40 @@ public partial class LabBoss : Enemy
 
 	public override void UpdateVolume()
 	{
-		foreach(Node n in GetNode<Node2D>("Sounds").GetChildren())
+		foreach (Node n in GetNode<Node2D>("Sounds").GetChildren())
 		{
-			if(n is AudioStreamPlayer2D sound)
+			if (n is AudioStreamPlayer2D sound)
 			{
 				sound.VolumeDb = GameSettings.Instance.GetFinalSfx();
-				if(sound.Name == "Jump" && sound.VolumeDb != 0)
+				if (sound.Name == "Jump" && sound.VolumeDb != 0)
 				{
-					sound.VolumeDb += 5; 
+					sound.VolumeDb += 5;
 				}
 			}
+		}
+	}
+
+	public void Start()
+	{
+		camera.Shake(2f, 0.2f);
+		hasStarted = true;
+		Visible = true;
+		HealthBar.Visible = true;
+	}
+
+	public void OnDeathStart()
+	{
+		if (GetParent().GetParent() is Level3_2 level)
+		{
+			level.OnBossDeathStart();
+		}
+	}
+	
+	public void OnDeathFinish()
+	{
+		if (GetParent().GetParent() is Level3_2 level)
+		{
+			level.OnBossDeathFinish();
 		}
 	}
 

@@ -4,11 +4,12 @@ using System.Collections.Generic;
 
 public partial class Level3_2 : GameLevel
 {
+	[Export] public Gate EndGate;
 	private DialogueBox dialogueBox;
-	private bool dialogueStarted = false, popupShown = false, resumedAfterPan = false, timerRunning = true;
-	private List<int> lineNumbers = new List<int> { 1 }; // Line numbers to pause dialogue at
+	private bool dialogueStarted = false, popupShown = false, resumedAfterPan = false, timerRunning = true, resumedAfterBoss = false;
+	private List<int> lineNumbers = new List<int> {1, 3, 10}; // Line numbers to pause dialogue at
 	private float timer = 0;
-
+	private AnimationPlayer bossStartAnimation;
 	public override void _Ready()
 	{
 		
@@ -16,17 +17,21 @@ public partial class Level3_2 : GameLevel
 		GameData.Instance.GlowEnabled = false;
 		// Set up dialogue
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
-		//dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-2-2.txt");
-		dialogueBox.Pause();
-		camera.LimitLeft = -450;
+		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-3-2.txt");
+		camera.LimitLeft = -1175;
 		camera.LimitRight = 3850;
-		camera.Mode = "fixed";
-		camera.Position = new Vector2(0, -20);
-		camera.Zoom = new Vector2(2, 2);
+		camera.Mode = "centered";
+		camera.SetCenterY(-470f);
 
 		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
+		
+		bossStartAnimation = GetNode<AnimationPlayer>("Boss Start Animation");
 
-		expectedTime = 150;
+		bossStartAnimation.CurrentAnimation = "Start";
+		bossStartAnimation.Stop();
+		backgroundMusic.Play();
+
+		expectedTime = 200;
 
 		UpdateVolume();
 
@@ -62,12 +67,21 @@ public partial class Level3_2 : GameLevel
 			timer += (float)delta;
 		}
 
-		/*if (timer > 1f && !dialogueStarted)
+		if (timer > 1f && !dialogueStarted)
 		{
 			dialogueStarted = true;
 			dialogueBox.Start();
 			timerRunning = false;
-		}*/
+			timer = 0;
+		}
+
+		if(timer > 2f && !resumedAfterBoss)
+		{
+			resumedAfterBoss = true;
+			dialogueBox.Resume();
+		}
+
+
 
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
@@ -92,6 +106,7 @@ public partial class Level3_2 : GameLevel
 		if (body is Player player)
 		{
 			string name = checkpoint.Name;
+			dialogueBox.Resume();
 		}
 	}
 
@@ -109,54 +124,95 @@ public partial class Level3_2 : GameLevel
 				switch (change.Name)
 				{
 					case "1":
-						if (change.DirectionEnteredFrom == "left")
+						if (change.DirectionEnteredFrom == "right")
 						{
 							camera.Mode = "centered";
-							camera.SetCenterY(200f);
+							camera.SetCenterY(-350f);
+							camera.ChangeToCentered();
+						}
+						else
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(-470f);
 							camera.ChangeToCentered();
 						}
 						break;
 					case "2":
-						if (change.DirectionEnteredFrom == "right")
-						{
-							camera.Mode = "centered";
-							camera.SetCenterY(136f);
-							camera.ChangeToCentered();
-						}
-						break;
-					case "3":
-						if(camera.GetCenterY() == 136)
-						{
-							GD.Print("called A");
-							camera.Mode = "centered";
-							camera.SetCenterY(536f);
-							camera.ChangeToCentered();
-						}
-						else
-						{
-							GD.Print("called B");
-							camera.Mode = "centered";
-							camera.SetCenterY(136f);
-							camera.ChangeToCentered();
-						}
-						break;
+						camera.Mode = "fixed";
+						camera.Position = new Vector2(0, -15);
+						camera.Zoom = new Vector2(2, 2);
 
-					case "4":
-						if(camera.GetCenterY() == 136)
-						{
-							camera.Mode = "centered";
-							camera.SetCenterY(232f);
-							camera.ChangeToCentered();
-						}
-						else
-						{
-							camera.Mode = "centered";
-							camera.SetCenterY(136f);
-							camera.ChangeToCentered();
-						}
+						player.DisableAllInputs();
 						break;
 				}
 			}
 		}
 	}
+
+	/// <summary>
+	/// Starts the boss fight once the player is in position
+	/// </summary>
+	public void OnBossTriggerEntered(Node2D body)
+	{
+		if (body is Player player)
+		{
+			player.Paused = true;
+			camera.Shake(1, 7.5f);
+			bossStartAnimation.CurrentAnimation = "Start";
+			bossStartAnimation.Play();
+			backgroundMusic.Stop();
+			backgroundMusic.Stream = GD.Load<AudioStream>("res://Assets/Audio/Lab Boss.ogg");
+			GetNode<Area2D>("Boss Start Trigger").QueueFree();
+		}
+	}
+	/// <summary>
+	/// Called by Lab Boss when boss dies
+	/// </summary>
+	public void OnBossDeathStart()
+	{
+		//Remove power surge mode if active
+		if (player.PowerSurgeEnabled)
+		{
+			player.SetPower(100);
+			player.StopPowerSurgeTimer();
+		}
+		// Stop music
+		backgroundMusic.Stop();
+		
+
+	}
+
+	/// <summary>
+	/// Called by Lab Boss when boss death animation finishes
+	/// </summary>
+	public void OnBossDeathFinish()
+	{
+		// Open gate
+		EndGate.UpdateState(true);
+		// Resume default level music
+		backgroundMusic.Stream = GD.Load<AudioStream>("res://Assets/Audio/Cave.mp3");
+		backgroundMusic.Play();
+		// Resume dialogue after timer
+		timer = 0;
+		timerRunning = true;
+
+	}
+	
+	/// <summary>
+	/// Start moving elevators and platforms when boss fight starts
+	/// </summary>
+	public void StartPlatforms()
+	{
+		foreach(Node n in GetNode<Node2D>("Objects").GetChildren())
+		{
+			if(n is SwitchOperatedObject s)
+			{
+				if(s is not Gate)
+				{
+					s.UpdateState(true);
+				}
+			}
+		}
+	}
+	
 }

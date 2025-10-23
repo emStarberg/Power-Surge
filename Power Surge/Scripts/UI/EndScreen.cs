@@ -147,13 +147,9 @@ public partial class EndScreen : Node2D
 					// Go to next level
 					int index = levels.IndexOf(GameData.Instance.CurrentLevel);
 					string next = levels[index + 1];
-					if (next == "1-1" || next == "1-2" || next == "3-1" || next == "3-2")
-					{
-						glowing = false;
-					}
 					if (!alert.Visible)
 					{
-						LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/level_" + next + ".tscn", glowing);
+						LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/level_" + next + ".tscn");
 					}					
 					break;
 				default:

@@ -6,7 +6,7 @@ public partial class Level3_1 : GameLevel
 {
 	private DialogueBox dialogueBox;
 	private bool dialogueStarted = false, popupShown = false, resumedAfterPan = false, timerRunning = true;
-	private List<int> lineNumbers = new List<int> { 1 }; // Line numbers to pause dialogue at
+	private List<int> lineNumbers = new List<int> {3 }; // Line numbers to pause dialogue at
 	private float timer = 0;
 
 	public override void _Ready()
@@ -14,10 +14,10 @@ public partial class Level3_1 : GameLevel
 		StartLevel();
 		// Set up dialogue
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
-		//dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-2-2.txt");
-		dialogueBox.Pause();
+		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-3-1.txt");
+		//dialogueBox.Pause();
 		camera.LimitLeft = -450;
-		camera.LimitRight = 3850;
+		camera.LimitRight = 6600;
 		camera.Mode = "centered";
 		camera.SetCenterY(200f);
 		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
@@ -58,12 +58,12 @@ public partial class Level3_1 : GameLevel
 			timer += (float)delta;
 		}
 
-		/*if (timer > 1f && !dialogueStarted)
+		if (timer > 1f && !dialogueStarted)
 		{
 			dialogueStarted = true;
 			dialogueBox.Start();
 			timerRunning = false;
-		}*/
+		}
 
 		if (Input.IsActionJustPressed("ui_accept"))
 		{
@@ -121,7 +121,7 @@ public partial class Level3_1 : GameLevel
 						}
 						break;
 					case "3":
-						if(camera.GetCenterY() == 136)
+						if (camera.GetCenterY() == 136)
 						{
 							GD.Print("called A");
 							camera.Mode = "centered";
@@ -138,7 +138,7 @@ public partial class Level3_1 : GameLevel
 						break;
 
 					case "4":
-						if(camera.GetCenterY() == 136)
+						if (camera.GetCenterY() == 136)
 						{
 							camera.Mode = "centered";
 							camera.SetCenterY(232f);
@@ -148,6 +148,48 @@ public partial class Level3_1 : GameLevel
 						{
 							camera.Mode = "centered";
 							camera.SetCenterY(136f);
+							camera.ChangeToCentered();
+						}
+						break;
+
+					case "5":
+						if (change.DirectionEnteredFrom == "right")
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(136f);
+							camera.ChangeToCentered();
+						}
+						break;
+						
+					case "6":
+						if (change.DirectionEnteredFrom == "left")
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(232f);
+							camera.ChangeToCentered();
+						}
+						break;
+
+					case "7":
+						camera.Mode = "centered";
+						camera.SetCenterY(490f);
+						camera.ChangeToCentered();
+						break;
+
+					case "8":
+						if (change.DirectionEnteredFrom == "left")
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(232f);
+							camera.ChangeToCentered();
+						}
+						break;
+
+					case "9":
+						if (change.DirectionEnteredFrom == "right")
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(490f);
 							camera.ChangeToCentered();
 						}
 						break;

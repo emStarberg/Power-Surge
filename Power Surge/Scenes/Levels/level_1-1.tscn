@@ -47,7 +47,8 @@ texture = ExtResource("3_ox03y")
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_gv0h3"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
 sources/2 = SubResource("TileSetAtlasSource_4yllm")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
@@ -128,8 +129,8 @@ size = Vector2(2.27703, 14.7307)
 script = ExtResource("1_bcykt")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(3, -18)
-scale = Vector2(1.08203, 1.13281)
+position = Vector2(29.7452, -44.0001)
+scale = Vector2(1.1865, 1.24219)
 texture = ExtResource("1_booo5")
 script = ExtResource("2_w4kc1")
 cameraPath = NodePath("../Camera")

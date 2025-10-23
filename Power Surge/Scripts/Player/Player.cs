@@ -651,6 +651,14 @@ public partial class Player : CharacterBody2D
 	}
 
 	/// <summary>
+	/// Disable all input mappings
+	/// </summary>
+	public void DisableAllInputs()
+	{
+		DisableInputs("input_left", "input_right", "input_dash", "input_jump", "input_attack");
+	}
+
+	/// <summary>
 	/// Enable any number of input mappings
 	/// </summary>
 	/// <param name="input">Names of mappings to be enabled</param>
@@ -661,6 +669,14 @@ public partial class Player : CharacterBody2D
 			disabledInputs.Remove(input);
 		}
 
+	}
+
+	/// <summary>
+	/// Enable all input mappings
+	/// </summary>
+	public void EnableAllInputs()
+	{
+		EnableInputs("input_left", "input_right", "input_dash", "input_jump", "input_attack");
 	}
 
 	/// <summary>
@@ -685,6 +701,11 @@ public partial class Player : CharacterBody2D
 	public float GetPower()
 	{
 		return power;
+	}
+
+	public void SetPower(int set)
+	{
+		power = set;
 	}
 
 	/// <summary>

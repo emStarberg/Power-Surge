@@ -9,7 +9,6 @@ public partial class Tutorial : GameLevel
 	private bool dialogueWasPlaying = false, deathDialogueStarted = false, dialogueStarted = false;
 	private Control tutorials;
 	private float timer = 0;
-	private AudioStreamPlayer2D backgroundMusic;
 	public override void _Ready()
 
 	{
@@ -25,8 +24,6 @@ public partial class Tutorial : GameLevel
 		// Set up dialogue
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/tutorial.txt");
 		deathDialogue.AddLinesFromFile("res://Assets/Dialogue Files/tutorialdeath.txt");
-		
-		
 	}
 
 	public override void _Process(double delta)
@@ -95,6 +92,7 @@ public partial class Tutorial : GameLevel
 			if (dialogueBox.GetLineNumber() == 31 && !dialogueBox.IsTyping())
 			{
 				dialogueBox.Pause();
+				EnableAllInputs();
 			}
 
 			if (!dialogueBox.IsPaused())

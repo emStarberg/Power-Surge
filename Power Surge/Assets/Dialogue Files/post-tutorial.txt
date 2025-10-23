@@ -17,3 +17,4 @@ Lilah|We'll see.
 Lilah|[name]. I'm going to send you some coordinates to a spawn point set up near the old lab.
 Lilah|S.U.R.G.E is able to create its own spawn points, but we don't have any down there.
 Lilah|Good luck [name]. We'll be with you the whole way.
+Lilah|
