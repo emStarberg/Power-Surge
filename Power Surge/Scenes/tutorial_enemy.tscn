@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d2jbpab1pvd5l"]
+[gd_scene load_steps=19 format=3 uid="uid://d2jbpab1pvd5l"]
 
 [ext_resource type="Script" uid="uid://cq4ngrnt3s8qu" path="res://Scripts/Enemies/TutorialEnemy.cs" id="1_6ukwf"]
 [ext_resource type="Texture2D" uid="uid://bmunycu1jeije" path="res://Assets/Characters/Enemies/Circuit Bug/Circuit Bug (Tutorial) - Spritesheet.png" id="1_6xtvk"]
@@ -92,9 +92,12 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_le8o7"]
+size = Vector2(17, 13)
+
 [node name="Enemy" type="CharacterBody2D"]
-position = Vector2(-2, -1)
-collision_mask = 3
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_6ukwf")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -103,9 +106,11 @@ shape = SubResource("RectangleShape2D_8ritr")
 
 [node name="GroundRay" type="RayCast2D" parent="." groups=["Enemy"]]
 position = Vector2(-13, 7)
+collision_mask = 4
 
 [node name="WallRay" type="RayCast2D" parent="."]
 target_position = Vector2(-14, 1)
+collision_mask = 4
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_86n1f")
@@ -119,3 +124,11 @@ stream = ExtResource("4_le8o7")
 
 [node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("5_86n1f")
+
+[node name="Hit Box" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Collider" type="CollisionShape2D" parent="Hit Box"]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_le8o7")

@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpbsoap7kjpfk"]
+
+[ext_resource type="Script" uid="uid://dgwld8tpq1tve" path="res://Scripts/Objects/MovingPlatform.cs" id="1_anqd2"]
+[ext_resource type="Texture2D" uid="uid://op2hunn5xc3g" path="res://Assets/Objects/Elevator - On.png" id="2_tdwu5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjjwr"]
+size = Vector2(32, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anqd2"]
+size = Vector2(34, 1)
+
+[node name="Moving Platform" type="Node2D"]
+script = ExtResource("1_anqd2")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_tdwu5")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Collider" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_vjjwr")
+
+[node name="Rider Detector" type="Area2D" parent="."]
+collision_layer = 64
+
+[node name="Collider" type="CollisionShape2D" parent="Rider Detector"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_anqd2")
+
+[node name="Right Ray" type="RayCast2D" parent="."]
+position = Vector2(16, 5)
+target_position = Vector2(11, 0)
+collision_mask = 2
+
+[node name="Left Ray" type="RayCast2D" parent="."]
+position = Vector2(-15, 5)
+target_position = Vector2(-12, 0)
+collision_mask = 2
+
+[connection signal="body_entered" from="Rider Detector" to="." method="OnRiderEntered"]
+[connection signal="body_exited" from="Rider Detector" to="." method="OnRiderExited"]

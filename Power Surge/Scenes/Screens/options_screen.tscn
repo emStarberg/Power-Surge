@@ -33,9 +33,9 @@ offset_bottom = 40.0
 
 [node name="Title" type="Label" parent="Menus/Main"]
 layout_mode = 0
-offset_left = 339.0
+offset_left = 345.0
 offset_top = 74.0
-offset_right = 1039.0
+offset_right = 1045.0
 offset_bottom = 182.0
 scale = Vector2(0.687646, 0.687646)
 theme_override_fonts/font = ExtResource("1_bpa1g")
@@ -46,8 +46,9 @@ vertical_alignment = 1
 
 [node name="Buttons" type="Control" parent="Menus/Main"]
 anchors_preset = 0
+offset_left = 5.0
 offset_top = 8.0
-offset_right = 40.0
+offset_right = 45.0
 offset_bottom = 48.0
 
 [node name="AUDIO" type="Control" parent="Menus/Main/Buttons"]

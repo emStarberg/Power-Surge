@@ -29,7 +29,7 @@ public partial class Camera : Camera2D
 
 	public override void _Ready()
 	{
-		Zoom = new Vector2(2.4f, 2.4f);
+		Zoom = new Vector2(2.1f, 2.1f);
 		_player = GetParent().GetNode<Player>("Player");
 		Offset = baseOffset;
 		MakeCurrent();
@@ -179,6 +179,7 @@ public partial class Camera : Camera2D
 		Position = new Vector2(targetX, newY);
 	}
 
+
 	/// <summary>
 	/// Change to centered mode by first panning smoothly to the centered position, then letting CenteredMode take over.
 	/// </summary>
@@ -250,4 +251,5 @@ public partial class Camera : Camera2D
 	{
 		return centerY;
 	}
+	
 }

@@ -23,6 +23,7 @@ public partial class PostTutorial : Node2D
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/post-tutorial.txt");
 
 		FadeImageIn();
+		fadingOut = false;
 	}
 
 	public override void _Process(double delta)
@@ -57,10 +58,13 @@ public partial class PostTutorial : Node2D
 				LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/level_1-1.tscn", false);
 			}
 		}
-
-		if (dialogueBox.GetLineNumber() == 19 && !dialogueBox.IsTyping() && Input.IsActionJustPressed("ui_accept") && dialogueStarted && !fadingOut)
+		if (Input.IsActionJustPressed("ui_accept"))
 		{
-			FadeImageOut();
+			GD.Print("Accept pressed on line: " + dialogueBox.GetLineNumber());
+			if (dialogueBox.GetLineNumber() == 19 && !dialogueBox.IsTyping() && dialogueStarted && !fadingOut)
+			{
+				FadeImageOut();
+			}
 		}
 	}
 

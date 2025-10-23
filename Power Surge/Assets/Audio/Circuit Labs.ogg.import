@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cw3v1frdyalon"
+path="res://.godot/imported/Circuit Labs.ogg-7e68a1b2a37de514811869dee896ecdc.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/Circuit Labs.ogg"
+dest_files=["res://.godot/imported/Circuit Labs.ogg-7e68a1b2a37de514811869dee896ecdc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

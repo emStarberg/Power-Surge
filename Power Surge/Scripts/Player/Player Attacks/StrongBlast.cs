@@ -101,19 +101,25 @@ public partial class StrongBlast : Area2D, IPlayerAttack
 
 	/// <summary>
 	/// Handles collision with other bodies, applies damage to enemies.
-	/// Stops and calls Hurt on enemy if applicable.
 	/// </summary>
 	public void OnBodyEntered(Node2D body)
 	{
 		if (body.Name != "Player")
 		{
 			Stop();
-			// Hurt enemy
-			if (body is Enemy enemy)
-			{
-				enemy.Hurt(damage);
-			}
 		}
-
 	}
+
+	/// <summary>
+	/// Handles collision with other bodies, applies damage to enemies.
+	/// Stops and calls Hurt on enemy if applicable.
+	/// </summary>
+	public void OnAreaEntered(Area2D area)
+	{
+		Stop();
+		if (area.GetParent() is Enemy enemy)
+		{
+			enemy.Hurt(damage);
+		}
+	}	
 }

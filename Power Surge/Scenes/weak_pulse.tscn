@@ -64,6 +64,8 @@ animations = [{
 }]
 
 [node name="Weak Pulse" type="Area2D"]
+collision_layer = 16
+collision_mask = 12
 script = ExtResource("1_x56c3")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -75,5 +77,5 @@ sprite_frames = SubResource("SpriteFrames_d3rkf")
 frame = 6
 frame_progress = 1.0
 
-[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="animation_finished" from="Anim_WeakPulse" to="." method="OnAnimationFinished"]

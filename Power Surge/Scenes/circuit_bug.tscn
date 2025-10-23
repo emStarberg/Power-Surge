@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dso2d7b5ykmol"]
+[gd_scene load_steps=38 format=3 uid="uid://dso2d7b5ykmol"]
 
 [ext_resource type="Script" uid="uid://cwcle1kyugf2e" path="res://Scripts/Enemies/CircuitBug.cs" id="1_pjp8a"]
 [ext_resource type="Texture2D" uid="uid://ckuettnld20c6" path="res://Assets/Characters/Enemies/Circuit Bug/Circuit Bug Run - Spritesheet.png" id="2_hrnt5"]
@@ -224,8 +224,12 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hl3up"]
+size = Vector2(17, 13)
+
 [node name="Circuit Bug" type="CharacterBody2D" groups=["Enemy"]]
-collision_mask = 3
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_pjp8a")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -235,9 +239,11 @@ shape = SubResource("RectangleShape2D_8ritr")
 [node name="GroundRay" type="RayCast2D" parent="." groups=["Enemy"]]
 position = Vector2(-13, 7)
 target_position = Vector2(0, 11)
+collision_mask = 4
 
 [node name="WallRay" type="RayCast2D" parent="."]
 target_position = Vector2(-14, 1)
+collision_mask = 4
 
 [node name="PlayerRay" type="RayCast2D" parent="."]
 position = Vector2(-6, 2)
@@ -255,3 +261,11 @@ stream = ExtResource("5_r7yx0")
 
 [node name="Hurt" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("6_hl3up")
+
+[node name="Hit Box" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Collider" type="CollisionShape2D" parent="Hit Box"]
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_hl3up")

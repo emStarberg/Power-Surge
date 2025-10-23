@@ -8,6 +8,7 @@ using Godot;
 //------------------------------------------------------------------------------
 public abstract partial class GameLevel : Node2D
 {
+	[Export] public bool GlowEnabled = false;
 	protected bool optionsOpen = false;
 	protected Player player;
 	protected float levelTimer = 0;
@@ -24,6 +25,7 @@ public abstract partial class GameLevel : Node2D
 		camera = GetNode<Camera>("Camera");
 		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
 		GameData.Instance.LevelEnemyCount = GetEnemiesRemaining();
+		GameData.Instance.GlowEnabled = GlowEnabled;
 	}
 	
 	protected void checkOptionsMenu()
@@ -99,8 +101,9 @@ public abstract partial class GameLevel : Node2D
 		int count = 0;
 		foreach (Node node in GetNode<Node2D>("Enemies").GetChildren())
 		{
-			if (node is Enemy enemy)
+			if (node is Enemy)
 			{
+				if(node is not LabBoss)
 				count++;
 			}
 		}

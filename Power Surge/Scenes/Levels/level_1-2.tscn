@@ -52,7 +52,8 @@ texture = ExtResource("3_lfndu")
 1:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_d4pdi"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
 sources/2 = SubResource("TileSetAtlasSource_lg2bv")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
@@ -231,8 +232,8 @@ size = Vector2(2.27703, 14.7307)
 script = ExtResource("1_tkstn")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(3, -18)
-scale = Vector2(1.08203, 1.13281)
+position = Vector2(29.7452, -44.0001)
+scale = Vector2(1.1865, 1.24219)
 texture = ExtResource("1_g2k4b")
 script = ExtResource("2_tkstn")
 cameraPath = NodePath("../Camera")
@@ -497,6 +498,8 @@ scale = Vector2(1.1, 1.1)
 script = ExtResource("21_8d318")
 
 [node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile"]
 position = Vector2(0, -26)
@@ -517,6 +520,8 @@ stream = ExtResource("23_yv68g")
 
 [node name="Tile2" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(16, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile2"]
 position = Vector2(0, -26)
@@ -537,6 +542,8 @@ stream = ExtResource("23_yv68g")
 
 [node name="Tile3" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(32, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile3"]
 position = Vector2(0, -26)
@@ -557,6 +564,8 @@ stream = ExtResource("23_yv68g")
 
 [node name="Tile4" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(48, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile4"]
 position = Vector2(0, -26)
@@ -577,6 +586,8 @@ stream = ExtResource("23_yv68g")
 
 [node name="Tile5" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(64, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile5"]
 position = Vector2(0, -26)
@@ -597,6 +608,8 @@ stream = ExtResource("23_yv68g")
 
 [node name="Tile6" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(80, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile6"]
 position = Vector2(0, -26)
@@ -617,6 +630,8 @@ stream = ExtResource("23_yv68g")
 
 [node name="Tile7" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(96, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile7"]
 position = Vector2(0, -26)
@@ -637,6 +652,8 @@ stream = ExtResource("23_yv68g")
 
 [node name="Tile8" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(111.818, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile8"]
 position = Vector2(0, -26)
@@ -657,6 +674,8 @@ stream = ExtResource("23_yv68g")
 
 [node name="Tile9" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(127.818, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile9"]
 position = Vector2(0, -26)
@@ -677,6 +696,8 @@ stream = ExtResource("23_yv68g")
 
 [node name="Tile10" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(143.636, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile10"]
 position = Vector2(0, -26)
@@ -697,6 +718,8 @@ stream = ExtResource("23_yv68g")
 
 [node name="Tile11" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(159.636, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile11"]
 position = Vector2(0, -26)

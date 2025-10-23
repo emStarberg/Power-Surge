@@ -41,7 +41,8 @@ texture = ExtResource("2_sghjv")
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_ckfad"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_qfmmv")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
@@ -298,8 +299,8 @@ size = Vector2(20, 27)
 script = ExtResource("1_xj3ld")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(-14, -2)
-scale = Vector2(1.12024, 1.12024)
+position = Vector2(-1, -4)
+scale = Vector2(1.43512, 1.43512)
 texture = ExtResource("1_sghjv")
 script = ExtResource("1_mnia5")
 cameraPath = NodePath("../Camera")
@@ -627,5 +628,8 @@ position = Vector2(3124, -232)
 
 [node name="ScreenResolution" type="Node" parent="."]
 script = ExtResource("12_o863f")
+
+[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("28_xj3ld")
 
 [connection signal="body_entered" from="Objects/Flag" to="Objects/Flag" method="OnBodyEntered"]

@@ -9,7 +9,6 @@ using System.Collections.Generic;
 //------------------------------------------------------------------------------
 public partial class End : Area2D
 {
-
 	private Player player;
 
 	public override void _Ready()
@@ -22,7 +21,8 @@ public partial class End : Area2D
 		// Move to end screen when player passes through
 		if (body is Player player)
 		{
-			GameData.Instance.CurrentLevel = GetParent().Name; ;
+
+			GameData.Instance.CurrentLevel = GetParent().Name; 
 			GameData.Instance.LevelFragments = player.GetFragmentCount();
 			GameData.Instance.LevelPower = player.GetPower();
 			if (GetParent() is GameLevel gameLevel)
@@ -31,8 +31,8 @@ public partial class End : Area2D
 				GameData.Instance.LevelExpectedTime = gameLevel.GetExpectedTime();
 				GameData.Instance.LevelEnemyCountFinal = gameLevel.GetEnemiesRemaining();
 			}
-			CallDeferred(nameof(DeferredChangeScene), "res://Scenes/Screens/end_screen.tscn");
 
+			CallDeferred(nameof(DeferredChangeScene), "res://Scenes/Screens/end_screen.tscn");
 		}
 	}
 	

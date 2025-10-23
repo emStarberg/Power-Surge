@@ -93,7 +93,8 @@ texture = ExtResource("3_urlj5")
 
 [sub_resource type="TileSet" id="TileSet_t7515"]
 occlusion_layer_0/light_mask = 1
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_t0a37")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
@@ -268,12 +269,13 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_me7ub"]
 size = Vector2(3.783, 28.11)
 
-[node name="Node2D" type="Node2D"]
+[node name="2-1" type="Node2D"]
 script = ExtResource("1_1oq1o")
+GlowEnabled = true
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(3, -18)
-scale = Vector2(1.08203, 1.13281)
+position = Vector2(29.7452, -44.0001)
+scale = Vector2(1.1865, 1.24219)
 texture = ExtResource("1_ivgmt")
 script = ExtResource("2_1oq1o")
 cameraPath = NodePath("../Camera")
@@ -511,6 +513,8 @@ position = Vector2(272, 375)
 script = ExtResource("21_g2sel")
 
 [node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile"]
 position = Vector2(0, -26)
@@ -531,6 +535,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile2" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(16, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile2"]
 position = Vector2(0, -26)
@@ -551,6 +557,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile3" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(32, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile3"]
 position = Vector2(0, -26)
@@ -571,6 +579,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile4" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(48, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile4"]
 position = Vector2(0, -26)
@@ -591,6 +601,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile5" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(64, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile5"]
 position = Vector2(0, -26)
@@ -611,6 +623,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile6" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(80, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile6"]
 position = Vector2(0, -26)
@@ -631,6 +645,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile7" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(96, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile7"]
 position = Vector2(0, -26)
@@ -651,6 +667,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile8" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(112, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile8"]
 position = Vector2(0, -26)
@@ -671,6 +689,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile9" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(128, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile9"]
 position = Vector2(0, -26)
@@ -691,6 +711,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile10" type="StaticBody2D" parent="Objects/Stone Bridge"]
 position = Vector2(144, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge/Tile10"]
 position = Vector2(0, -26)
@@ -714,6 +736,8 @@ position = Vector2(792, 408)
 script = ExtResource("21_g2sel")
 
 [node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge2"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge2/Tile"]
 position = Vector2(0, -26)
@@ -734,6 +758,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile2" type="StaticBody2D" parent="Objects/Stone Bridge2"]
 position = Vector2(16, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge2/Tile2"]
 position = Vector2(0, -26)
@@ -757,6 +783,8 @@ position = Vector2(936, 408)
 script = ExtResource("21_g2sel")
 
 [node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge3"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge3/Tile"]
 position = Vector2(0, -26)
@@ -777,6 +805,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile2" type="StaticBody2D" parent="Objects/Stone Bridge3"]
 position = Vector2(16, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge3/Tile2"]
 position = Vector2(0, -26)
@@ -809,6 +839,8 @@ position = Vector2(1064, 368)
 script = ExtResource("21_g2sel")
 
 [node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge4"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge4/Tile"]
 position = Vector2(0, -26)
@@ -829,6 +861,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile2" type="StaticBody2D" parent="Objects/Stone Bridge4"]
 position = Vector2(16, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge4/Tile2"]
 position = Vector2(0, -26)
@@ -852,6 +886,8 @@ position = Vector2(3736, 1880)
 script = ExtResource("21_g2sel")
 
 [node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge5"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge5/Tile"]
 position = Vector2(0, -26)
@@ -872,6 +908,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile2" type="StaticBody2D" parent="Objects/Stone Bridge5"]
 position = Vector2(16, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge5/Tile2"]
 position = Vector2(0, -26)
@@ -895,6 +933,8 @@ position = Vector2(3768, 1832)
 script = ExtResource("21_g2sel")
 
 [node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge6"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge6/Tile"]
 position = Vector2(0, -26)
@@ -915,6 +955,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile2" type="StaticBody2D" parent="Objects/Stone Bridge6"]
 position = Vector2(16, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge6/Tile2"]
 position = Vector2(0, -26)
@@ -938,6 +980,8 @@ position = Vector2(3704, 1792)
 script = ExtResource("21_g2sel")
 
 [node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge7"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge7/Tile"]
 position = Vector2(0, -26)
@@ -958,6 +1002,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile2" type="StaticBody2D" parent="Objects/Stone Bridge7"]
 position = Vector2(16, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge7/Tile2"]
 position = Vector2(0, -26)
@@ -981,6 +1027,8 @@ position = Vector2(3800, 1768)
 script = ExtResource("21_g2sel")
 
 [node name="Tile" type="StaticBody2D" parent="Objects/Stone Bridge8"]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge8/Tile"]
 position = Vector2(0, -26)
@@ -1001,6 +1049,8 @@ stream = ExtResource("23_ge76m")
 
 [node name="Tile2" type="StaticBody2D" parent="Objects/Stone Bridge8"]
 position = Vector2(16, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="Player Detection" type="Area2D" parent="Objects/Stone Bridge8/Tile2"]
 position = Vector2(0, -26)
@@ -1149,7 +1199,8 @@ parameters/looping = true
 script = ExtResource("20_c1o0o")
 
 [node name="End" parent="." instance=ExtResource("21_phi1q")]
-position = Vector2(4496, 1832)
+position = Vector2(4496, 1742)
+scale = Vector2(1.66278, 16.2389)
 
 [connection signal="body_entered" from="Checkpoints/Camera Changes/1" to="Checkpoints/Camera Changes/1" method="OnBodyEntered"]
 [connection signal="body_entered" from="Checkpoints/Camera Changes/2" to="Checkpoints/Camera Changes/2" method="OnBodyEntered"]

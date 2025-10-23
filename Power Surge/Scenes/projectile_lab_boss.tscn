@@ -1,0 +1,148 @@
+[gd_scene load_steps=21 format=3 uid="uid://df5tc3tjx1mlm"]
+
+[ext_resource type="Script" uid="uid://bvkuge0m2jfnn" path="res://Scripts/Enemies/ProjectileLabBoss.cs" id="1_2wevr"]
+[ext_resource type="Texture2D" uid="uid://d1s3bfp45bogj" path="res://Assets/Characters/Enemies/Lab Boss/Lab Boss Projectile (Explode) - Spritesheet.png" id="1_svtkc"]
+[ext_resource type="Texture2D" uid="uid://dbs2gpw50q6u3" path="res://Assets/Characters/Enemies/Lab Boss/Lab Boss Projectile - Spritesheet.png" id="2_2wevr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5j5bi"]
+atlas = ExtResource("1_svtkc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkqde"]
+atlas = ExtResource("1_svtkc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vpcr"]
+atlas = ExtResource("1_svtkc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcwt5"]
+atlas = ExtResource("1_svtkc")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0xo1"]
+atlas = ExtResource("1_svtkc")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pxqq"]
+atlas = ExtResource("1_svtkc")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghw5c"]
+atlas = ExtResource("2_2wevr")
+region = Rect2(0, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w88cy"]
+atlas = ExtResource("2_2wevr")
+region = Rect2(0, 64, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmkbd"]
+atlas = ExtResource("2_2wevr")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sfwn"]
+atlas = ExtResource("2_2wevr")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18adn"]
+atlas = ExtResource("2_2wevr")
+region = Rect2(0, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20soc"]
+atlas = ExtResource("2_2wevr")
+region = Rect2(0, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wup32"]
+atlas = ExtResource("2_2wevr")
+region = Rect2(0, 64, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8buv8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5j5bi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkqde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vpcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcwt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0xo1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pxqq")
+}],
+"loop": false,
+"name": &"contact",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghw5c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w88cy")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmkbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sfwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18adn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20soc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wup32")
+}],
+"loop": false,
+"name": &"start",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wkqde"]
+radius = 6.08276
+
+[sub_resource type="Gradient" id="Gradient_igrcy"]
+offsets = PackedFloat32Array(0, 0.754601)
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1vpcr"]
+gradient = SubResource("Gradient_igrcy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Projectile Lab Boss" type="Area2D"]
+script = ExtResource("1_2wevr")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+position = Vector2(10, 0)
+sprite_frames = SubResource("SpriteFrames_8buv8")
+animation = &"start"
+frame = 4
+frame_progress = 1.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wkqde")
+
+[node name="Light" type="PointLight2D" parent="."]
+scale = Vector2(1.06474, 1.05603)
+color = Color(0.141176, 0.619608, 0.678431, 0.403922)
+energy = 3.0
+texture = SubResource("GradientTexture2D_1vpcr")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="animation_finished" from="Animations" to="." method="OnAnimFinished"]

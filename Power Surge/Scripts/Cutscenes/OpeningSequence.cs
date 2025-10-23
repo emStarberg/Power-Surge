@@ -227,6 +227,7 @@ public partial class OpeningSequence : Node2D
 					videoTimer = 0;
 					fadeImage.Texture = GD.Load<Texture2D>("res://Assets/UI/Lab Computer.png");
 				}
+				// trigger when finishing line 47 (before advancing to 48)
 				else if (dialogueBox.GetLineNumber() == 48 && !dialogueBox.IsTyping())
 				{
 					// Zoom in on computer before fading out

@@ -55,15 +55,16 @@ public partial class WeakPulse : Node2D, IPlayerAttack
 		QueueFree();
 	}
 
+
 	/// <summary>
 	/// Handles collision with other bodies, applies damage to enemies.
 	/// Calls Hurt on enemy if applicable.
 	/// </summary>
-	public void OnBodyEntered(Node2D body)
+	public void OnAreaEntered(Node2D area)
 	{
-		if (body.Name != "Player" && !hurtCalled)
+		if (area.Name != "Player" && !hurtCalled)
 		{
-			if (body is Enemy enemy)
+			if (area.GetParent() is Enemy enemy)
 			{
 				GD.Print("hurt called");
 				enemy.Hurt(damage);

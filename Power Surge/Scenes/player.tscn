@@ -434,6 +434,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 6
 script = ExtResource("1_3smsa")
 
 [node name="Player Collision" type="CollisionShape2D" parent="."]
@@ -483,6 +484,7 @@ text = "10"
 horizontal_alignment = 1
 
 [node name="Light" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(-3.8147e-06, 0)
 scale = Vector2(0.864941, 0.857863)
 color = Color(0.241298, 0.81349, 0.886432, 0.403922)

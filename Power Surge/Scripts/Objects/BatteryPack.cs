@@ -13,6 +13,7 @@ public partial class BatteryPack : Area2D, IWorldObject
 	public override void _Ready()
 	{
 		pickUpSound = GetNode<AudioStreamPlayer2D>("Sound");
+		Visible = true;
 	}
 	/// <summary>
 	/// Add 20% power when colliding with player
