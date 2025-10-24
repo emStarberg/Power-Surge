@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cy3q6p77ai3a5"]
+[gd_scene load_steps=37 format=4 uid="uid://cy3q6p77ai3a5"]
 
 [ext_resource type="Script" uid="uid://cdtv6vx2g7h88" path="res://Scripts/Levels/Level1_1.cs" id="1_bcykt"]
 [ext_resource type="Texture2D" uid="uid://rm38mbfvgswb" path="res://Assets/Backgrounds/Luminescent Plains.png" id="1_booo5"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="7_t3yd5"]
 [ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="8_ebuj1"]
 [ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="9_2kucg"]
-[ext_resource type="FontFile" uid="uid://du2man675mp5b" path="res://Assets/Fonts/Roboto_Mono/static/RobotoMono-Bold.ttf" id="10_vo021"]
 [ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="11_axncg"]
 [ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="12_4yllm"]
 [ext_resource type="PackedScene" uid="uid://bignn7lsbeest" path="res://Scenes/fragment.tscn" id="13_2egns"]
@@ -141,7 +140,7 @@ tile_map_data = PackedByteArray("AADm/wMAAgABAAAAAADn/wMAAgABAAAAAADo/wMAAgABAAA
 tile_set = SubResource("TileSet_gv0h3")
 
 [node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("4_3rrt1")]
-position = Vector2(-131, 16)
+position = Vector2(-103, 16)
 PowerMeter = NodePath("../UI/Control/Power Meter")
 percentageLabel = NodePath("../UI/Control/Percentage Label")
 FragmentSlots = NodePath("../UI/Control/Fragment Slots")
@@ -164,36 +163,24 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Power Meter" type="TextureProgressBar" parent="UI/Control" node_paths=PackedStringArray("Camera")]
 layout_mode = 0
-offset_left = 505.0
-offset_top = 571.0
-offset_right = 553.0
-offset_bottom = 611.0
-scale = Vector2(3.5, 3.533)
+offset_left = 540.0
+offset_top = 560.0
+offset_right = 614.0
+offset_bottom = 600.0
+scale = Vector2(2.6, 2.6)
+pivot_offset = Vector2(29, 0)
 texture_under = ExtResource("6_3lm4w")
 texture_progress = ExtResource("7_t3yd5")
 script = ExtResource("8_ebuj1")
 Camera = NodePath("../../../Camera")
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 14.536
-anchor_top = 7.268
-anchor_right = 14.536
-anchor_bottom = 7.268
-offset_left = -682.933
-offset_top = -292.952
-offset_right = -667.933
-offset_bottom = -285.952
-scale = Vector2(1.00417, 1.00375)
-color = Color(0.223103, 0.223103, 0.223103, 1)
-metadata/_edit_use_anchors_ = true
-
 [node name="Power Surge" type="AnimatedSprite2D" parent="UI/Control/Power Meter"]
 visible = false
-position = Vector2(22.2142, 8.0218)
+position = Vector2(36.5, 13.0769)
+scale = Vector2(1.4363, 1)
 sprite_frames = SubResource("SpriteFrames_pprxb")
+frame_progress = 0.143193
 
 [node name="Percentage Label" type="Label" parent="UI/Control"]
 layout_mode = 1
@@ -202,20 +189,20 @@ anchor_left = 14.75
 anchor_top = 14.275
 anchor_right = 14.75
 anchor_bottom = 14.275
-offset_left = 563.0
-offset_top = 564.0
-offset_right = 605.0
-offset_bottom = 587.0
-scale = Vector2(1.08018, 1.15144)
-theme_override_fonts/font = ExtResource("10_vo021")
-theme_override_font_sizes/font_size = 16
+offset_left = 566.0
+offset_top = 556.0
+offset_right = 727.0
+offset_bottom = 664.0
+scale = Vector2(0.325213, 0.325213)
+theme_override_fonts/font = ExtResource("18_2egns")
+theme_override_font_sizes/font_size = 100
 text = "100%"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Attacks-ui" type="Sprite2D" parent="UI/Control"]
-position = Vector2(102, 593)
-scale = Vector2(4, 4)
+position = Vector2(469, 593)
+scale = Vector2(2.11287, 2.11287)
 texture = ExtResource("11_axncg")
 
 [node name="Attack Sprite" type="Sprite2D" parent="UI/Control/Attacks-ui"]

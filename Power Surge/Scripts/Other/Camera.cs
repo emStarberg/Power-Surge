@@ -29,7 +29,7 @@ public partial class Camera : Camera2D
 
 	public override void _Ready()
 	{
-		Zoom = new Vector2(2.1f, 2.1f);
+		Zoom = new Vector2(2.2f, 2.2f);
 		_player = GetParent().GetNode<Player>("Player");
 		Offset = baseOffset;
 		MakeCurrent();
