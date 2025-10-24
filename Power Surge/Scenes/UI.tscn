@@ -1,50 +1,54 @@
-[gd_scene load_steps=18 format=3 uid="uid://t07iyauo0h2s"]
+[gd_scene load_steps=27 format=3 uid="uid://t07iyauo0h2s"]
 
-[ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="1_xjg7p"]
-[ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="2_mg6lk"]
-[ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="3_wunin"]
-[ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="4_j04uc"]
-[ext_resource type="FontFile" uid="uid://du2man675mp5b" path="res://Assets/Fonts/Roboto_Mono/static/RobotoMono-Bold.ttf" id="5_vqx31"]
-[ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="6_b1goy"]
-[ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="7_n04ve"]
+[ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="1_g0wmg"]
+[ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="2_4vbiv"]
+[ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="3_3r70p"]
+[ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="4_8fs27"]
+[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="5_whq80"]
+[ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="6_kuui0"]
+[ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="7_smy1h"]
+[ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="8_lkjmk"]
+[ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="9_d42i4"]
+[ext_resource type="Texture2D" uid="uid://b8ulvofnby7aw" path="res://Assets/Objects/Fragment - Filled Slot.png" id="10_fcexb"]
+[ext_resource type="Texture2D" uid="uid://dxjb13hojjw0x" path="res://Assets/UI/Button - Highlighted.png" id="11_v4f2e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
-atlas = ExtResource("4_j04uc")
+atlas = ExtResource("4_8fs27")
 region = Rect2(0, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_po4dr"]
-atlas = ExtResource("4_j04uc")
+atlas = ExtResource("4_8fs27")
 region = Rect2(64, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_khk2e"]
-atlas = ExtResource("4_j04uc")
+atlas = ExtResource("4_8fs27")
 region = Rect2(128, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ur40f"]
-atlas = ExtResource("4_j04uc")
+atlas = ExtResource("4_8fs27")
 region = Rect2(192, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lw600"]
-atlas = ExtResource("4_j04uc")
+atlas = ExtResource("4_8fs27")
 region = Rect2(256, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g3ymf"]
-atlas = ExtResource("4_j04uc")
+atlas = ExtResource("4_8fs27")
 region = Rect2(0, 16, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y1xml"]
-atlas = ExtResource("4_j04uc")
+atlas = ExtResource("4_8fs27")
 region = Rect2(64, 16, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmvv5"]
-atlas = ExtResource("4_j04uc")
+atlas = ExtResource("4_8fs27")
 region = Rect2(128, 16, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4akcd"]
-atlas = ExtResource("4_j04uc")
+atlas = ExtResource("4_8fs27")
 region = Rect2(192, 16, 64, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_mf1d6"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_pprxb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -79,7 +83,56 @@ animations = [{
 "speed": 16.0
 }]
 
-[node name="Control" type="Control"]
+[sub_resource type="Gradient" id="Gradient_igrcy"]
+offsets = PackedFloat32Array(0, 0.754601)
+colors = PackedColorArray(0.868985, 0.868985, 0.868985, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vo021"]
+gradient = SubResource("Gradient_igrcy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_vo021"]
+resource_name = "red_flash"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_axncg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4yllm"]
+_data = {
+&"RESET": SubResource("Animation_axncg"),
+&"red_flash": SubResource("Animation_vo021")
+}
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -5.0
@@ -88,95 +141,184 @@ offset_right = -5.0
 offset_bottom = -24.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Power Meter" type="TextureProgressBar" parent="."]
+[node name="Power Meter" type="TextureProgressBar" parent="Control" node_paths=PackedStringArray("Camera")]
 layout_mode = 0
-offset_left = 505.0
-offset_top = 571.0
-offset_right = 553.0
-offset_bottom = 611.0
-scale = Vector2(3.5, 3.533)
-texture_under = ExtResource("1_xjg7p")
-texture_progress = ExtResource("2_mg6lk")
-script = ExtResource("3_wunin")
+offset_left = 540.0
+offset_top = 560.0
+offset_right = 614.0
+offset_bottom = 600.0
+scale = Vector2(2.6, 2.6)
+pivot_offset = Vector2(29, 0)
+texture_under = ExtResource("1_g0wmg")
+texture_progress = ExtResource("2_4vbiv")
+script = ExtResource("3_3r70p")
+Camera = NodePath("")
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="Power Meter"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 14.536
-anchor_top = 7.268
-anchor_right = 14.536
-anchor_bottom = 7.268
-offset_left = -682.933
-offset_top = -292.952
-offset_right = -667.933
-offset_bottom = -285.952
-scale = Vector2(1.00417, 1.00375)
-color = Color(0.223103, 0.223103, 0.223103, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="Power Surge" type="AnimatedSprite2D" parent="Power Meter"]
+[node name="Power Surge" type="AnimatedSprite2D" parent="Control/Power Meter"]
 visible = false
-position = Vector2(22.2142, 8.0218)
-sprite_frames = SubResource("SpriteFrames_mf1d6")
+position = Vector2(36.5, 13.0769)
+scale = Vector2(1.4363, 1)
+sprite_frames = SubResource("SpriteFrames_pprxb")
+frame_progress = 0.143193
 
-[node name="Percentage Label" type="Label" parent="."]
+[node name="Light" type="PointLight2D" parent="Control/Power Meter"]
+position = Vector2(35.9231, 11.9231)
+scale = Vector2(1.68662, 0.494824)
+color = Color(0.905269, 3.34509e-06, 1.15514e-06, 0.403922)
+energy = 0.0
+texture = SubResource("GradientTexture2D_vo021")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Power Meter"]
+libraries = {
+&"": SubResource("AnimationLibrary_4yllm")
+}
+
+[node name="Percentage Label" type="Label" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 14.75
 anchor_top = 14.275
 anchor_right = 14.75
 anchor_bottom = 14.275
-offset_left = 563.0
-offset_top = 564.0
-offset_right = 605.0
-offset_bottom = 587.0
-scale = Vector2(1.08018, 1.15144)
-theme_override_fonts/font = ExtResource("5_vqx31")
-theme_override_font_sizes/font_size = 16
+offset_left = 566.0
+offset_top = 556.0
+offset_right = 727.0
+offset_bottom = 664.0
+scale = Vector2(0.325213, 0.325213)
+theme_override_fonts/font = ExtResource("5_whq80")
+theme_override_font_sizes/font_size = 100
 text = "100%"
+horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Attacks-ui" type="Sprite2D" parent="."]
-position = Vector2(102, 593)
-scale = Vector2(4, 4)
-texture = ExtResource("6_b1goy")
+[node name="Attacks-ui" type="Sprite2D" parent="Control"]
+position = Vector2(469, 593)
+scale = Vector2(2.11287, 2.11287)
+texture = ExtResource("6_kuui0")
 
-[node name="Attack Sprite" type="Sprite2D" parent="Attacks-ui"]
+[node name="Attack Sprite" type="Sprite2D" parent="Control/Attacks-ui"]
 position = Vector2(0, -0.25)
 
-[node name="Fragment Slots" type="Control" parent="."]
+[node name="Fragment Slots" type="Control" parent="Control"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot 1" type="TextureRect" parent="Fragment Slots"]
+[node name="Slot 1" type="TextureRect" parent="Control/Fragment Slots"]
 layout_mode = 0
 offset_left = 31.0
 offset_top = 50.0
 offset_right = 71.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("7_n04ve")
+texture = ExtResource("7_smy1h")
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot 2" type="TextureRect" parent="Fragment Slots"]
+[node name="Slot 2" type="TextureRect" parent="Control/Fragment Slots"]
 layout_mode = 0
 offset_left = 91.0
 offset_top = 50.0
 offset_right = 131.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("7_n04ve")
+texture = ExtResource("7_smy1h")
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot 3" type="TextureRect" parent="Fragment Slots"]
+[node name="Slot 3" type="TextureRect" parent="Control/Fragment Slots"]
 layout_mode = 0
 offset_left = 151.0
 offset_top = 50.0
 offset_right = 191.0
 offset_bottom = 90.0
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("7_n04ve")
+texture = ExtResource("7_smy1h")
 metadata/_edit_use_anchors_ = true
+
+[node name="DialogueBox" parent="." instance=ExtResource("8_lkjmk")]
+visible = false
+offset_left = 315.0
+offset_top = 66.0
+offset_right = 355.0
+offset_bottom = 106.0
+scale = Vector2(2, 2)
+
+[node name="Pop-up" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -125.0
+offset_top = -88.0
+offset_right = -85.0
+offset_bottom = -48.0
+scale = Vector2(1.20593, 1.20593)
+
+[node name="ColorRect" type="ColorRect" parent="Pop-up"]
+layout_mode = 0
+offset_left = 357.0
+offset_top = 212.0
+offset_right = 809.0
+offset_bottom = 453.0
+color = Color(0.136826, 0.136826, 0.136826, 0.839216)
+
+[node name="Title" type="Label" parent="Pop-up"]
+layout_mode = 0
+offset_left = 395.0
+offset_top = 238.0
+offset_right = 859.0
+offset_bottom = 261.0
+scale = Vector2(0.820161, 0.820161)
+theme_override_fonts/font = ExtResource("9_d42i4")
+text = "You've discovered a fragment!"
+
+[node name="Fragment-FilledSlot" type="Sprite2D" parent="Pop-up"]
+position = Vector2(583, 297)
+scale = Vector2(2.23797, 2.23797)
+texture = ExtResource("10_fcexb")
+
+[node name="Label" type="Label" parent="Pop-up"]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 344.0
+offset_right = 1159.0
+offset_bottom = 398.0
+scale = Vector2(0.532068, 0.532068)
+theme_override_fonts/font = ExtResource("9_d42i4")
+text = "There are three fragments to find in every level, 
+collecting them all will refill your power meter."
+horizontal_alignment = 1
+
+[node name="Button" type="Control" parent="Pop-up"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 586.0
+offset_top = 412.0
+offset_right = 586.0
+offset_bottom = 412.0
+scale = Vector2(0.72383, 0.72383)
+
+[node name="Sprite" type="Sprite2D" parent="Pop-up/Button"]
+position = Vector2(-0.879944, -0.73999)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("11_v4f2e")
+
+[node name="Label" type="Label" parent="Pop-up/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -25.0
+offset_right = 157.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.460858, 0.460858)
+theme_override_fonts/font = ExtResource("5_whq80")
+theme_override_font_sizes/font_size = 80
+text = "OK"
+horizontal_alignment = 1
+vertical_alignment = 1

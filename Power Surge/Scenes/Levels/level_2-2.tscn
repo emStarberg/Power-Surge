@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://dhh7dbti7avtb"]
+[gd_scene load_steps=37 format=4 uid="uid://dhh7dbti7avtb"]
 
 [ext_resource type="Script" uid="uid://dh14lhu8ll8vl" path="res://Scripts/Levels/Level2_2.cs" id="1_sd6v3"]
 [ext_resource type="Texture2D" uid="uid://c7txmddfg8iy3" path="res://Assets/Backgrounds/Cave.png" id="2_0obw8"]
@@ -8,12 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bwvj50vhjjac7" path="res://Scenes/player.tscn" id="4_no63c"]
 [ext_resource type="Texture2D" uid="uid://blgy4qkifs4pk" path="res://Assets/Tilemaps/Circuit Labs - Tileset.png" id="5_xhps1"]
 [ext_resource type="Script" uid="uid://rfodace5xyiq" path="res://Scripts/Other/Camera.cs" id="5_yux1w"]
-[ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="6_ly465"]
-[ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="7_e5apt"]
-[ext_resource type="Script" uid="uid://cd8m3rphwt56m" path="res://Scripts/UI/PowerMeter.cs" id="8_wvtxn"]
-[ext_resource type="Texture2D" uid="uid://br1ddwenge4uv" path="res://Assets/UI/Power Meter - Power Surge - Spritesheet.png" id="9_13eah"]
-[ext_resource type="FontFile" uid="uid://du2man675mp5b" path="res://Assets/Fonts/Roboto_Mono/static/RobotoMono-Bold.ttf" id="10_2vyir"]
+[ext_resource type="PackedScene" uid="uid://dpin6ugvtl2vw" path="res://Scenes/power_meter.tscn" id="8_2vyir"]
 [ext_resource type="Texture2D" uid="uid://bqx1fl8178ruu" path="res://Assets/UI/Attacks-UI.png" id="11_3sdf5"]
+[ext_resource type="Texture2D" uid="uid://br821f6n1k2ds" path="res://Assets/UI/Fragment Container.png" id="11_js8qt"]
 [ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="12_js8qt"]
 [ext_resource type="PackedScene" uid="uid://ddm7mroixav47" path="res://Scenes/dialogue_box.tscn" id="13_xhps1"]
 [ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="14_22yts"]
@@ -101,77 +98,6 @@ sources/2 = SubResource("TileSetAtlasSource_xhps1")
 sources/0 = SubResource("TileSetAtlasSource_js8qt")
 sources/1 = SubResource("TileSetAtlasSource_22yts")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tuf5v"]
-atlas = ExtResource("9_13eah")
-region = Rect2(0, 0, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_po4dr"]
-atlas = ExtResource("9_13eah")
-region = Rect2(64, 0, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_khk2e"]
-atlas = ExtResource("9_13eah")
-region = Rect2(128, 0, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ur40f"]
-atlas = ExtResource("9_13eah")
-region = Rect2(192, 0, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lw600"]
-atlas = ExtResource("9_13eah")
-region = Rect2(256, 0, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g3ymf"]
-atlas = ExtResource("9_13eah")
-region = Rect2(0, 16, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y1xml"]
-atlas = ExtResource("9_13eah")
-region = Rect2(64, 16, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wmvv5"]
-atlas = ExtResource("9_13eah")
-region = Rect2(128, 16, 64, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4akcd"]
-atlas = ExtResource("9_13eah")
-region = Rect2(192, 16, 64, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kgoj0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tuf5v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_po4dr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_khk2e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ur40f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lw600")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g3ymf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y1xml")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wmvv5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4akcd")
-}],
-"loop": true,
-"name": &"default",
-"speed": 16.0
-}]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ly465"]
 size = Vector2(20, 193)
 
@@ -200,6 +126,40 @@ script = ExtResource("5_yux1w")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="Power Meter" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Power Meter" parent="UI/Power Meter" instance=ExtResource("8_2vyir")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1
+anchor_top = -0.625
+anchor_right = -0.1
+anchor_bottom = -0.625
+offset_top = 545.0
+offset_bottom = 585.0
+
+[node name="Percentage Label" type="Label" parent="UI/Power Meter"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1
+anchor_top = -0.65
+anchor_right = -0.1
+anchor_bottom = -0.65
+offset_left = 566.0
+offset_top = 541.0
+offset_right = 727.0
+offset_bottom = 649.0
+scale = Vector2(0.325213, 0.325213)
+theme_override_fonts/font = ExtResource("17_1tj3q")
+theme_override_font_sizes/font_size = 100
+text = "100%"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
@@ -209,60 +169,9 @@ offset_right = -5.0
 offset_bottom = -24.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Power Meter" type="TextureProgressBar" parent="UI/Control" node_paths=PackedStringArray("Camera")]
-layout_mode = 0
-offset_left = 505.0
-offset_top = 571.0
-offset_right = 553.0
-offset_bottom = 611.0
-scale = Vector2(3.5, 3.533)
-texture_under = ExtResource("6_ly465")
-texture_progress = ExtResource("7_e5apt")
-script = ExtResource("8_wvtxn")
-Camera = NodePath("../../../Camera")
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect" type="ColorRect" parent="UI/Control/Power Meter"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 14.536
-anchor_top = 7.268
-anchor_right = 14.536
-anchor_bottom = 7.268
-offset_left = -682.933
-offset_top = -292.952
-offset_right = -667.933
-offset_bottom = -285.952
-scale = Vector2(1.00417, 1.00375)
-color = Color(0.223103, 0.223103, 0.223103, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="Power Surge" type="AnimatedSprite2D" parent="UI/Control/Power Meter"]
-visible = false
-position = Vector2(22.2142, 8.0218)
-sprite_frames = SubResource("SpriteFrames_kgoj0")
-
-[node name="Percentage Label" type="Label" parent="UI/Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 14.75
-anchor_top = 14.275
-anchor_right = 14.75
-anchor_bottom = 14.275
-offset_left = 563.0
-offset_top = 564.0
-offset_right = 605.0
-offset_bottom = 587.0
-scale = Vector2(1.08018, 1.15144)
-theme_override_fonts/font = ExtResource("10_2vyir")
-theme_override_font_sizes/font_size = 16
-text = "100%"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="Attacks-ui" type="Sprite2D" parent="UI/Control"]
-position = Vector2(102, 593)
-scale = Vector2(4, 4)
+position = Vector2(467, 579)
+scale = Vector2(2.4, 2.4)
 texture = ExtResource("11_3sdf5")
 
 [node name="Attack Sprite" type="Sprite2D" parent="UI/Control/Attacks-ui"]
@@ -270,49 +179,67 @@ position = Vector2(0, -0.25)
 
 [node name="Fragment Slots" type="Control" parent="UI/Control"]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 500.0
+offset_top = 585.0
+offset_right = 540.0
+offset_bottom = 625.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot 1" type="TextureRect" parent="UI/Control/Fragment Slots"]
+[node name="Backing" type="TextureRect" parent="UI/Control/Fragment Slots"]
 layout_mode = 0
-offset_left = 31.0
+offset_left = 43.0
+offset_top = 5.97496
+offset_right = 107.0
+offset_bottom = 33.975
+scale = Vector2(1.47699, 1.0856)
+texture = ExtResource("11_js8qt")
+
+[node name="Slot 1" type="TextureRect" parent="UI/Control/Fragment Slots"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.625
+anchor_top = -0.900626
+anchor_right = 0.625
+anchor_bottom = -0.900626
+offset_left = 34.0
 offset_top = 50.0
-offset_right = 71.0
+offset_right = 74.0
 offset_bottom = 90.0
-scale = Vector2(1.5, 1.5)
+scale = Vector2(0.372032, 0.372032)
 texture = ExtResource("12_js8qt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot 2" type="TextureRect" parent="UI/Control/Fragment Slots"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.2
+anchor_top = -0.900626
+anchor_right = -0.2
+anchor_bottom = -0.900626
 offset_left = 91.0
 offset_top = 50.0
 offset_right = 131.0
 offset_bottom = 90.0
-scale = Vector2(1.5, 1.5)
+scale = Vector2(0.372, 0.372)
 texture = ExtResource("12_js8qt")
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot 3" type="TextureRect" parent="UI/Control/Fragment Slots"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.075
+anchor_top = -0.900626
+anchor_right = -1.075
+anchor_bottom = -0.900626
 offset_left = 151.0
 offset_top = 50.0
 offset_right = 191.0
 offset_bottom = 90.0
-scale = Vector2(1.5, 1.5)
+scale = Vector2(0.372, 0.372)
 texture = ExtResource("12_js8qt")
 metadata/_edit_use_anchors_ = true
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("13_xhps1")]
-visible = false
-offset_left = 315.0
-offset_top = 66.0
-offset_right = 355.0
-offset_bottom = 106.0
-scale = Vector2(2, 2)
-
-[node name="Wrong Way Dialogue" parent="UI" instance=ExtResource("13_xhps1")]
 visible = false
 offset_left = 315.0
 offset_top = 66.0
@@ -620,11 +547,8 @@ scale = Vector2(1.66125, -17.1968)
 position = Vector2(0, -1.19209e-07)
 shape = SubResource("RectangleShape2D_0obw8")
 
-[node name="Player" parent="." node_paths=PackedStringArray("PowerMeter", "percentageLabel", "FragmentSlots") instance=ExtResource("4_no63c")]
+[node name="Player" parent="." instance=ExtResource("4_no63c")]
 position = Vector2(19, 38)
-PowerMeter = NodePath("../UI/Control/Power Meter")
-percentageLabel = NodePath("../UI/Control/Percentage Label")
-FragmentSlots = NodePath("../UI/Control/Fragment Slots")
 
 [node name="Background Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_fn2ub")
