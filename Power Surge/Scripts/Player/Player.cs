@@ -14,11 +14,11 @@ public partial class Player : CharacterBody2D
 	[Export] public float Gravity = 1000f; // Gravity force      
 	[Export] public float MaxFallSpeed = 500f; // Terminal velocity
 	[Export] public int MaxPower = 200; // Maximum power level 200%
-	[Export] public TextureProgressBar PowerMeter; // Power meter
-	[Export] public Label percentageLabel; // Label under power meter
-	[Export] public Control FragmentSlots;
 	[Export] public bool TutorialMode = false, PowerSurgeEnabled = true;
 
+	private Control fragmentSlotsUI;
+	private PowerMeter powerMeter;
+	private Label percentageLabel;
 	public string VerticalFacing = "down"; // For when camera is in vertical mode
 
 	private int power = 100; // Percentage of power left
@@ -100,12 +100,16 @@ public partial class Player : CharacterBody2D
 
 		camera = GetParent().GetNode<Camera>("Camera");
 
+		fragmentSlotsUI = GetParent().GetNode<Control>("UI/Control/Fragment Slots");
+		powerMeter = GetParent().GetNode<PowerMeter>("UI/Power Meter/Power Meter");
+		percentageLabel = GetParent().GetNode<Label>("UI/Power Meter/Percentage Label");
+
 		UpdateVolume();
 
 		// Load all empty fragment slots
-		foreach (Node child in FragmentSlots.GetChildren())
+		foreach (Node child in fragmentSlotsUI.GetChildren())
 		{
-			if (child is TextureRect t)
+			if (child is TextureRect t && child.Name != "Backing")
 			{
 				fragmentSlots.Add(t);
 			}
@@ -158,54 +162,46 @@ public partial class Player : CharacterBody2D
 			{
 				power = 0;
 			}
-			if (alive)
+			if (power > 100)
 			{
-				// Don't allow negative numbers
-				if (power <= 100)
-				{
-					PowerMeter.Value = power;
-					if (PowerMeter is PowerMeter powerMeter)
-					{
-						if (powerMeter.GetPowerSurgeMode())
-						{
-							powerMeter.SetPowerSurgeMode(false);
-						}
-					}
-					if (powerSurgeActive)
-					{
-						StopPowerSurgeTimer();
-					}
-				}
-				else
-				{
-					// PowerMeter is limited to 100, and displays a new sprite when power is greater than 100
-					PowerMeter.Value = 100;
-					if (PowerMeter is PowerMeter powerMeter && PowerSurgeEnabled)
-					{
-						if (!powerMeter.GetPowerSurgeMode())
-						{
-							powerMeter.SetPowerSurgeMode(true);
-						}
-						if (!powerSurgeActive)
-						{
-							StartPowerSurgeTimer();
-						}
-					}
-
-				}
+				powerMeter.Value = 100;
+				if (!powerMeter.GetPowerSurgeMode())
+					powerMeter.SetPowerSurgeMode(true);
+				if (!powerSurgeActive)
+					StartPowerSurgeTimer();
+			}
+			else
+			{
+				powerMeter.Value = power;
+				if (powerMeter.GetPowerSurgeMode())
+					powerMeter.SetPowerSurgeMode(false);
 				if (powerSurgeActive)
+					StopPowerSurgeTimer();
+			}
+
+			if(power <= 20)
+			{
+				powerMeter.StartLowPowerAnim();
+			}
+			else
+			{
+				powerMeter.StopLowPowerAnim();
+			}
+
+			if (powerSurgeActive)
+			{
+				powerSurgeTime -= (float)delta;
+				if (powerSurgeTime < 0)
+					powerSurgeTime = 0;
+
+				powerSurgeTimer.Text = ((int)Math.Ceiling(powerSurgeTime)).ToString();
+
+				if (powerSurgeTime <= 0)
 				{
-					powerSurgeTime -= (float)delta;
-					if (powerSurgeTime < 0)
-						powerSurgeTime = 0;
-
-					powerSurgeTimer.Text = ((int)Math.Ceiling(powerSurgeTime)).ToString();
-
-					if (powerSurgeTime <= 0)
-					{
-						Die();
-					}
+					Die();
 				}
+			}
+	
 
 				// Check whether to dash
 				if (Input.IsActionJustPressed("input_dash") && !disabledInputs.Contains("input_dash"))
@@ -316,7 +312,6 @@ public partial class Player : CharacterBody2D
 				{
 					canDash = true;
 				}
-			}
 		}
 	}
 

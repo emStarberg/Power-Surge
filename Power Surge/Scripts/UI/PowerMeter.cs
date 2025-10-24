@@ -9,7 +9,6 @@ using System.Collections.Generic;
 //------------------------------------------------------------------------------
 public partial class PowerMeter : TextureProgressBar
 {
-	[Export] public Camera Camera;
 	// All possible animation positions
 	private Vector2 pos1 = new(2, 10);
 	private Vector2 pos2 = new(10, 10);
@@ -26,6 +25,8 @@ public partial class PowerMeter : TextureProgressBar
 	private Timer loopTimer;
 	private AnimatedSprite2D powerSurgeAnim;
 	private bool powerSurgeMode = false;
+	private AnimationPlayer lightAnim;
+	private Camera camera;
 
 	public override void _Ready()
 	{
@@ -44,6 +45,9 @@ public partial class PowerMeter : TextureProgressBar
 		loopTimer.OneShot = true;
 		AddChild(loopTimer);
 		loopTimer.Timeout += OnLoopTimerTimeout;
+
+		lightAnim = GetNode<AnimationPlayer>("AnimationPlayer");
+		camera = GetParent().GetNode<Camera>("Camera");
 	}
 
 	public override void _Process(double delta)
@@ -147,7 +151,7 @@ public partial class PowerMeter : TextureProgressBar
 		{
 			powerSurgeAnim.Visible = true;
 			powerSurgeAnim.Play();
-			Camera.Shake(10, 0.2f);
+			camera.Shake(10, 0.2f);
 		}
 		else
 		{
@@ -159,5 +163,30 @@ public partial class PowerMeter : TextureProgressBar
 	public bool GetPowerSurgeMode()
 	{
 		return powerSurgeMode;
+	}
+
+	/// <summary>
+	/// To be called by player when power is low
+	/// </summary>
+	public void StartLowPowerAnim()
+	{
+		if (!lightAnim.IsPlaying())
+		{
+			lightAnim.CurrentAnimation = "red_flash";
+			lightAnim.Play();
+		}
+
+	}
+	
+	/// <summary>
+	/// To be called by player when power returns to normal level
+	/// </summary>
+	public void StopLowPowerAnim()
+	{
+		if (lightAnim.IsPlaying())
+		{
+			lightAnim.Stop();
+		}
+
 	}
 }
