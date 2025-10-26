@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cxps5eqoy6chu" path="res://Assets/UI/Title.png" id="5_1pj1r"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="5_ogsbk"]
 [ext_resource type="Texture2D" uid="uid://cq4nn00wmjfll" path="res://Assets/Characters/Player/Player-Spritesheet.png" id="6_eo18w"]
-[ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Audio/Zap.mp3" id="9_0575v"]
+[ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Backgrounds/Zap.mp3" id="9_0575v"]
 [ext_resource type="AudioStream" uid="uid://chbwwtavgndk7" path="res://Assets/Audio/DavidKBD - Cosmic Pack 02 - Galactic Pulse-full.ogg" id="10_sb3vm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0575v"]

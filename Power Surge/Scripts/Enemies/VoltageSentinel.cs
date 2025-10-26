@@ -41,6 +41,7 @@ public partial class VoltageSentinel : Enemy
 		animation.Animation = "walk";
 		electricityAnimation = GetNode<AnimatedSprite2D>("Electricity");
 		light = electricityAnimation.GetNode<PointLight2D>("Light");
+		healAmount = 15;
 
 		maxHealth = 30;
 		health = maxHealth;
@@ -55,146 +56,133 @@ public partial class VoltageSentinel : Enemy
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (isAlive)
+		if (!isAlive)
+			return;
+
+		// update detection rays once per physics frame
+		playerRayFront.ForceRaycastUpdate();
+		playerRayBack.ForceRaycastUpdate();
+		groundRay.ForceRaycastUpdate();
+		wallRay.ForceRaycastUpdate();
+
+		// --- apply gravity consistently ---
+		// ensure you have 'gravity' and 'maxFallSpeed' from Enemy base
+		if (!IsOnFloor())
 		{
-			playerRayFront.ForceRaycastUpdate();
-			// Player detection via raycast
-			playerRayFront.ForceRaycastUpdate();
-			if (playerRayFront.IsColliding() && playerRayFront.GetCollider() is Node2D collider && collider.Name == "Player")
-			{
-				if (!playerDetectedForAttack)
-				{
-					if (!attacking)
-						Attack();
-					playerDetectedForAttack = true;
-				}
-			}
-			else
-			{
-				if (playerDetectedForAttack)
-				{
-					playerDetectedForAttack = false;
-				}
-			}
-			if (playerRayFront.IsColliding() && playerRayFront.GetCollider() is Player player && canDamagePlayer)
-			{
-				player.Hurt(25, 2f, 0.2f);
-				canDamagePlayer = false;
-			}
-			else if (playerRayBack.IsColliding() && playerRayBack.GetCollider() is Player player2 && canDamagePlayer)
-			{
-				player2.Hurt(25, 2f, 0.2f);
-				canDamagePlayer = false;
-			}
+			velocity.Y = Mathf.Min(velocity.Y + gravity * (float)delta, maxFallSpeed);
+		}
+		else
+		{
+			// clear small downward velocity when on floor
+			if (velocity.Y > 0f)
+				velocity.Y = 0f;
+		}
 
-			if (!IsOnFloor())
-				velocity += GetGravity() * (float)delta;
-
-			if (!attacking)
+		// Player detection via raycast
+		if (playerRayFront.IsColliding() && playerRayFront.GetCollider() is Node2D colliderNode && colliderNode.Name == "Player")
+		{
+			if (!playerDetectedForAttack)
 			{
-				if (!IsOnFloor())
+				if (!attacking)
+					Attack();
+				playerDetectedForAttack = true;
+			}
+		}
+		else
+		{
+			playerDetectedForAttack = false;
+		}
+
+		// Damage when in attack frames
+		if (playerRayFront.IsColliding() && playerRayFront.GetCollider() is Player player && canDamagePlayer)
+		{
+			player.Hurt(25, 2f, 0.2f);
+			canDamagePlayer = false;
+		}
+		else if (playerRayBack.IsColliding() && playerRayBack.GetCollider() is Player player2 && canDamagePlayer)
+		{
+			player2.Hurt(25, 2f, 0.2f);
+			canDamagePlayer = false;
+		}
+
+		// Movement / AI
+		if (!attacking)
+		{
+			if (isFollowingPlayer && targetPlayer != null && animation.Animation != "attack")
+			{
+				// ensure ground ahead before following
+				if (!groundRay.IsColliding())
 				{
-					velocity += GetGravity() * (float)delta;
-					// apply gravity to vertical velocity and clamp to terminal velocity
-					velocity.Y = Mathf.Min(velocity.Y + gravity * (float)delta, maxFallSpeed);
+					isFollowingPlayer = false;
+					targetPlayer = null;
+					Speed = 15f;
+					animation.Animation = "idle";
+					animation.Play();
+					// leave vertical velocity as-is (gravity already applied)
 				}
 				else
 				{
-					// ensure small downward velocity is cleared when on floor
-					if (velocity.Y > 0)
-						velocity.Y = 0;
-				}
-				if (isFollowingPlayer && targetPlayer != null && animation.Animation != "attack")
-				{
-					groundRay.ForceRaycastUpdate();
-					if (!groundRay.IsColliding())
-					{
-						// Stop following if no ground ahead
-						isFollowingPlayer = false;
-						targetPlayer = null;
-						Speed = 15f;
-						animation.Animation = "idle";
-						animation.Play();
-						return; // Exit early so it doesn't move off the edge
-					}
-
 					Vector2 toPlayer = (targetPlayer.GlobalPosition - GlobalPosition).Normalized();
-					velocity = new Vector2(toPlayer.X * Speed, Velocity.Y);
-					Velocity = velocity;
-					MoveAndSlide();
+					velocity.X = toPlayer.X * Speed;
 				}
+			}
+			else if (isWalking && animation.Animation != "attack")
+			{
+				// Patrol movement
+				velocity.X = (direction == "right") ? Speed : -Speed;
 
-				if (isWalking && animation.Animation != "attack")
+				// Wall check - ignore player bodies
+				if (wallRay.IsColliding())
 				{
-					if (!isFollowingPlayer)
+					var col = wallRay.GetCollider();
+					if (!(col is Node2D node && node.Name == "Player"))
 					{
-						// Move based on direction
-						float moveStep = Speed * (float)delta;
-						if (direction == "right")
-							velocity = new Vector2(Speed, Velocity.Y);
-						else
-							velocity = new Vector2(-Speed, Velocity.Y);
-
-						// Check for wall ahead
-						wallRay.ForceRaycastUpdate();
-						if (wallRay.IsColliding())
-						{
-							var Collider = wallRay.GetCollider();
-							if (!(Collider is Node2D node && node.Name == "Player"))
-							{
-								direction = direction == "right" ? "left" : "right";
-								Scale = new Vector2(-Scale.X, Scale.Y);
-								walkedDistance = 0f;
-								startPosition = GlobalPosition;
-							}
-						}
-
-						// Check for ground ahead
-						groundRay.ForceRaycastUpdate();
-						if (!groundRay.IsColliding())
-						{
-							direction = direction == "right" ? "left" : "right";
-							Scale = new Vector2(-Scale.X, Scale.Y);
-							walkedDistance = 0f;
-							startPosition = GlobalPosition;
-						}
-
-						// Track distance walked
-						walkedDistance = (GlobalPosition - startPosition).Length();
-						if (walkedDistance >= walkDistance)
-						{
-							isWalking = false;
-							animation.Animation = "idle";
-							stopTimer = stopTime;
-						}
-					}
-
-					Velocity = velocity;
-					MoveAndSlide();
-
-
-				}
-				else if (animation.Animation != "attack")
-				{
-					// Stopping phase
-					velocity = new Vector2(0, Velocity.Y);
-					Velocity = velocity;
-					MoveAndSlide();
-
-					stopTimer -= (float)delta;
-					if (stopTimer <= 0f && !isFollowingPlayer)
-					{
-						// Reverse direction and start walking again
 						direction = direction == "right" ? "left" : "right";
 						Scale = new Vector2(-Scale.X, Scale.Y);
-						isWalking = true;
-						animation.Animation = "walk";
 						walkedDistance = 0f;
 						startPosition = GlobalPosition;
 					}
 				}
+
+				// Ground edge check
+				if (!groundRay.IsColliding())
+				{
+					direction = direction == "right" ? "left" : "right";
+					Scale = new Vector2(-Scale.X, Scale.Y);
+					walkedDistance = 0f;
+					startPosition = GlobalPosition;
+				}
+
+				// Track distance walked
+				walkedDistance = (GlobalPosition - startPosition).Length();
+				if (walkedDistance >= walkDistance)
+				{
+					isWalking = false;
+					animation.Animation = "idle";
+					stopTimer = stopTime;
+					velocity.X = 0f;
+				}
+			}
+			else if (animation.Animation != "attack")
+			{
+				// Stopping/idle phase
+				velocity.X = 0f;
+				stopTimer -= (float)delta;
+				if (stopTimer <= 0f && !isFollowingPlayer)
+				{
+					direction = direction == "right" ? "left" : "right";
+					Scale = new Vector2(-Scale.X, Scale.Y);
+					isWalking = true;
+					animation.Animation = "walk";
+					walkedDistance = 0f;
+					startPosition = GlobalPosition;
+				}
 			}
 		}
+
+		Velocity = velocity;
+		if(!attacking)
+		MoveAndSlide();
 	}
 
 

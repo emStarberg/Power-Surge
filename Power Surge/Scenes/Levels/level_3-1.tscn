@@ -34,7 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://dw73ehb3jcjcd" path="res://Assets/Characters/Enemies/Lab Boss/Lab Boss - Shock - Spritesheet.png" id="34_ehw2n"]
 [ext_resource type="Texture2D" uid="uid://cp2kwmfutwrsg" path="res://Assets/Characters/Enemies/Lab Boss/Lab Boss - Shoot - Spritesheet.png" id="35_384r7"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_384r7"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qex3c"]
 texture = ExtResource("7_6t4jb")
 0:0/0 = 0
 1:0/0 = 0
@@ -57,7 +57,7 @@ texture = ExtResource("7_6t4jb")
 3:3/0 = 0
 4:3/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xiwb4"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ehw2n"]
 texture = ExtResource("5_0816u")
 0:0/0 = 0
 1:0/0 = 0
@@ -74,10 +74,10 @@ texture = ExtResource("5_0816u")
 4:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_b3ej1"]
-sources/0 = SubResource("TileSetAtlasSource_384r7")
-sources/1 = SubResource("TileSetAtlasSource_xiwb4")
+sources/0 = SubResource("TileSetAtlasSource_qex3c")
+sources/1 = SubResource("TileSetAtlasSource_ehw2n")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p8yg7"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_384r7"]
 texture = ExtResource("4_wdamg")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.65477, -8, 8, -8, 8, 8, -6.80221, 8)
@@ -99,7 +99,7 @@ texture = ExtResource("4_wdamg")
 2:2/0 = 0
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 6.47491, -8, 6.47491, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0aipc"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xiwb4"]
 texture = ExtResource("5_0816u")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -140,7 +140,7 @@ texture = ExtResource("5_0816u")
 6:3/0 = 0
 7:3/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ulje2"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p8yg7"]
 texture = ExtResource("6_b3ej1")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -161,7 +161,7 @@ texture = ExtResource("6_b3ej1")
 2:3/0 = 0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b3t7g"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0aipc"]
 texture = ExtResource("7_6t4jb")
 0:0/0 = 0
 1:0/0 = 0
@@ -194,18 +194,18 @@ texture = ExtResource("7_6t4jb")
 [sub_resource type="TileSet" id="TileSet_t34my"]
 physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 0
-sources/2 = SubResource("TileSetAtlasSource_ulje2")
-sources/0 = SubResource("TileSetAtlasSource_p8yg7")
-sources/1 = SubResource("TileSetAtlasSource_0aipc")
-sources/3 = SubResource("TileSetAtlasSource_b3t7g")
+sources/2 = SubResource("TileSetAtlasSource_p8yg7")
+sources/0 = SubResource("TileSetAtlasSource_384r7")
+sources/1 = SubResource("TileSetAtlasSource_xiwb4")
+sources/3 = SubResource("TileSetAtlasSource_0aipc")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0816u"]
 size = Vector2(1.7937, 49.0037)
 
-[sub_resource type="Gradient" id="Gradient_jflp6"]
+[sub_resource type="Gradient" id="Gradient_ulje2"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xng2i"]
-gradient = SubResource("Gradient_jflp6")
+gradient = SubResource("Gradient_ulje2")
 fill_from = Vector2(0.444934, 1)
 fill_to = Vector2(0.431718, 0)
 
@@ -704,6 +704,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Power Meter" parent="UI/Power Meter" instance=ExtResource("9_qex3c")]
 layout_mode = 1
@@ -766,6 +767,7 @@ offset_right = 107.0
 offset_bottom = 33.975
 scale = Vector2(1.47699, 1.0856)
 texture = ExtResource("12_ehw2n")
+metadata/_edit_use_anchors_ = true
 
 [node name="Slot 1" type="TextureRect" parent="UI/Control/Fragment Slots"]
 layout_mode = 1

@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://diwq6eaq2306b" path="res://Assets/Characters/Player/Player Idle - Power Surge - Spritesheet.png" id="6_7dp3o"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="7_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bitip81tn2v63" path="res://Assets/Characters/Player/Shield - Spritesheet.png" id="7_ukyrk"]
-[ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Audio/Zap.mp3" id="8_8erm5"]
+[ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Backgrounds/Zap.mp3" id="8_8erm5"]
 [ext_resource type="AudioStream" uid="uid://cro575ta0sjg2" path="res://Assets/Audio/Weak Pulse.mp3" id="8_tx1dd"]
 [ext_resource type="AudioStream" uid="uid://b0j6bpgh0pm7d" path="res://Assets/Audio/laser-14792 (mp3cut.net).mp3" id="9_pu2lt"]
 [ext_resource type="AudioStream" uid="uid://dghc3witth3y7" path="res://Assets/Audio/Hurt.mp3" id="10_gymyn"]

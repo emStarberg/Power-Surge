@@ -47,7 +47,7 @@ public partial class PowerMeter : TextureProgressBar
 		loopTimer.Timeout += OnLoopTimerTimeout;
 
 		lightAnim = GetNode<AnimationPlayer>("AnimationPlayer");
-		camera = GetParent().GetParent().GetNode<Camera>("Camera");
+		camera = GetParent().GetParent().GetParent().GetNode<Camera>("Camera");
 	}
 
 	public override void _Process(double delta)

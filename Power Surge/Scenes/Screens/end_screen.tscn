@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cr8f3adpxwjal" path="res://Scenes/ui_spark.tscn" id="5_jassw"]
 [ext_resource type="Script" uid="uid://houf28qf5ruu" path="res://Scripts/Other/UICamera.cs" id="7_ceyr0"]
 [ext_resource type="AudioStream" uid="uid://8jb3rrfsnj2b" path="res://Assets/Audio/lightning-strike-386161.mp3" id="8_jassw"]
-[ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Audio/Zap.mp3" id="8_s5tx8"]
+[ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Backgrounds/Zap.mp3" id="8_s5tx8"]
 [ext_resource type="AudioStream" uid="uid://b63crk43h6eee" path="res://Assets/Audio/Tutorial.mp3" id="9_jassw"]
 
 [node name="Node2D2" type="Node2D"]

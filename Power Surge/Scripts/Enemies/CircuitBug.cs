@@ -38,6 +38,8 @@ public partial class CircuitBug : Enemy
 		animation.FrameChanged += OnAnimationFrameChanged;
 		animation.AnimationFinished += OnAnimationFinished;
 
+		healAmount = 5;
+
 		maxHealth = 10;
 		health = maxHealth;
 
