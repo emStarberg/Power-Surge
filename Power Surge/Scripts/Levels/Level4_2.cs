@@ -6,8 +6,8 @@ using System.Runtime.CompilerServices;
 public partial class Level4_2 : GameLevel
 {
 	private DialogueBox dialogueBox;
-	private bool dialogueStarted = false, popupShown = false, timerRunning = false, resumedAfterBoss = false;
-	private List<int> lineNumbers = new List<int> { 1 }; // Line numbers to pause dialogue at
+	private bool dialogueStarted = false, popupShown = false, timerRunning = true, resumedAfterBoss = false;
+	private List<int> lineNumbers = new List<int> { 15 }; // Line numbers to pause dialogue at
 	private TileMapLayer fakeGround; // Ground to be removed
 	private AnimationPlayer animationPlayer;
 	private float timer = 0;
@@ -23,7 +23,7 @@ public partial class Level4_2 : GameLevel
 		GameData.Instance.GlowEnabled = false;
 		// Set up dialogue
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
-		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-3-2.txt");
+		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-4-2.txt");
 		camera.LimitLeft = -1175;
 		camera.LimitRight = 3850;
 
@@ -66,9 +66,7 @@ public partial class Level4_2 : GameLevel
 			}
 		}
 
-		camera.Shake(1f, 5);
-		animationPlayer.CurrentAnimation = "Ground Breaking";
-		animationPlayer.Play();
+
 
 	}
 
@@ -100,13 +98,19 @@ public partial class Level4_2 : GameLevel
 			if (lineNumbers.Contains(dialogueBox.GetLineNumber()) && !dialogueBox.IsTyping() && !dialogueBox.IsPaused())
 			{
 				dialogueBox.Pause();
+				if(dialogueBox.GetLineNumber() == 15)
+				{
+					camera.Shake(1f, 5);
+					animationPlayer.CurrentAnimation = "Ground Breaking";
+					animationPlayer.Play();
+				}
 			}
 		}
 
 
 		if (bossPhase == "spawn")
 		{
-			if(enemyCount < 40)
+			if(enemyCount < 1)
 			{
 				// Continue spawning enemies
 				spawnTimer += (float)delta;
@@ -120,10 +124,13 @@ public partial class Level4_2 : GameLevel
 			{
 				// Remove remaining enemies
 				camera.Shake(3, 3);
-				foreach(Node n in GetNode<Node2D>("Enemies").GetChildren())
+				foreach (Node n in GetNode<Node2D>("Spawned Enemies").GetChildren())
 				{
 					n.QueueFree();
 				}
+				animationPlayer.CurrentAnimation = "Platforms";
+				animationPlayer.Play();
+				bossPhase = "platforms";
 			}
 
 		}
@@ -149,6 +156,14 @@ public partial class Level4_2 : GameLevel
 		{
 			string name = checkpoint.Name;
 			dialogueBox.Resume();
+			if (name == "Hammer Phase")
+			{
+
+				camera.ChangeToFixed(new Vector2(2178, -950));
+				camera.Mode = "fixed";
+			}
+
+			checkpoint.QueueFree();
 		}
 	}
 
@@ -190,13 +205,27 @@ public partial class Level4_2 : GameLevel
 			}
 		}
 	}
-	
+
+	/// <summary>
+	/// Called by Animation Player when ground animaiton has finished
+	/// </summary>
 	public void OnGroundAnimFinished()
 	{
 		fakeGround.QueueFree();
 		bossPhase = "spawn";
+		spawnTimer = 6;
 	}
 
+	/// <summary>
+	/// Called by Animation Player when platform animation has finished
+	/// </summary>
+	public void OnPlatformAnimFinished()
+	{
+		GD.Print("method called");
+		// Move to platform phase
+		camera.Mode = "horizontal";
+		player.Position = new Vector2(1550, -1050); // FOR TESTING
+	}
 
 	
 }

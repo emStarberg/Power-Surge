@@ -1,0 +1,149 @@
+[gd_scene load_steps=19 format=3 uid="uid://cf33sju6vhlng"]
+
+[ext_resource type="Script" uid="uid://cypy8h14tqy4j" path="res://Scripts/Objects/StoneBridge.cs" id="1_aal8l"]
+[ext_resource type="Texture2D" uid="uid://k8on6iy7yqcn" path="res://Assets/Objects/Stone Bridge - Animation - Spritesheet.png" id="2_fm03x"]
+[ext_resource type="AudioStream" uid="uid://ctoo0el5qp2tp" path="res://Assets/Audio/dropping-rocks-5996.mp3" id="3_mxrre"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ks6nb"]
+size = Vector2(16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acifj"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(0, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqaec"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(16, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bp46n"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(32, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ojmf"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(48, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3o48"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(64, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh6nn"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(80, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a6ei"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(96, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y63s"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(112, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87f7d"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(128, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xbq8"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(144, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u6u1"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(160, 0, 16, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fb68"]
+atlas = ExtResource("2_fm03x")
+region = Rect2(176, 0, 16, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_djs3l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acifj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqaec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bp46n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ojmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3o48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh6nn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a6ei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y63s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87f7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xbq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u6u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fb68")
+}],
+"loop": false,
+"name": &"default",
+"speed": 16.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crgty"]
+size = Vector2(16, 16)
+
+[node name="Stone Bridge Platform" type="Node2D"]
+script = ExtResource("1_aal8l")
+
+[node name="Tile" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Player Detection" type="Area2D" parent="Tile"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Tile/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_ks6nb")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Tile"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_djs3l")
+
+[node name="Collider" type="CollisionShape2D" parent="Tile"]
+shape = SubResource("RectangleShape2D_crgty")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Tile"]
+stream = ExtResource("3_mxrre")
+
+[node name="Tile2" type="StaticBody2D" parent="."]
+position = Vector2(16, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Player Detection" type="Area2D" parent="Tile2"]
+position = Vector2(0, -26)
+
+[node name="Collider" type="CollisionShape2D" parent="Tile2/Player Detection"]
+position = Vector2(0, 25.5)
+shape = SubResource("RectangleShape2D_ks6nb")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Tile2"]
+position = Vector2(0, 56)
+sprite_frames = SubResource("SpriteFrames_djs3l")
+
+[node name="Collider" type="CollisionShape2D" parent="Tile2"]
+shape = SubResource("RectangleShape2D_crgty")
+
+[node name="Crumble" type="AudioStreamPlayer2D" parent="Tile2"]
+stream = ExtResource("3_mxrre")

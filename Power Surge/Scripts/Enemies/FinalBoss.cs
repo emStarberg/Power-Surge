@@ -87,12 +87,7 @@ public partial class FinalBoss : Node2D
 			if(GetParent() is Level4_2 parentLevel)
 			instance.TreeExited += parentLevel.OnEnemyTreeExited;
 
-			GetParent().GetNode<Node2D>("Enemies").AddChild(instance);
+			GetParent().GetNode<Node2D>("Spawned Enemies").AddChild(instance);
 		}
 	}
 }
-
-
-		//Node attackInstance = strongBlast.Instantiate();
-		//((StrongBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0, -2);
-		//GetTree().Root.AddChild(attackInstance);
