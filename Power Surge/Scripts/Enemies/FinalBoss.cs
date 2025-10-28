@@ -2,16 +2,34 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-
+//------------------------------------------------------------------------------
+// <summary>
+//   Methods for the final boss in level 4-2
+// </summary>
+// <author>Emily Braithwaite</author>
+//------------------------------------------------------------------------------
 public partial class FinalBoss : Node2D
 {
 	private PackedScene circuitBug = GD.Load<PackedScene>("Scenes/circuit_bug.tscn");
 	private PackedScene voltageSentinel = GD.Load<PackedScene>("Scenes/voltage_sentinel.tscn");
-	private bool spawning = false;
+	private bool spawning = false, isAlive = true;
 	private float spawnTimer = 0;
 	private string spawnSide = "right";
 	private int spawnIndex = 0;
 	private string[] enemyArray = new[] { "sentinel", "bug", "bug", "sentinel", "bug" };
+	public List<BossHammer> Hammers = new List<BossHammer>();
+	public override void _Ready()
+	{
+		foreach(Node n in GetChildren())
+		{
+			// Add hammers to list
+			if(n is BossHammer b)
+			{
+				Hammers.Add(b);
+			}
+		}
+	}
+
 
 	public override void _Process(double delta)
 	{
@@ -73,8 +91,8 @@ public partial class FinalBoss : Node2D
 		{
 			return;
 		}
-		
-		if(enemyInstance is Enemy instance)
+
+		if (enemyInstance is Enemy instance)
 		{
 			if (spawnSide == "left")
 			{
@@ -84,10 +102,17 @@ public partial class FinalBoss : Node2D
 			{
 				instance.GlobalPosition = new Godot.Vector2(150, -150);
 			}
-			if(GetParent() is Level4_2 parentLevel)
-			instance.TreeExited += parentLevel.OnEnemyTreeExited;
+			if (GetParent() is Level4_2 parentLevel)
+				instance.TreeExited += parentLevel.OnEnemyTreeExited;
 
 			GetParent().GetNode<Node2D>("Spawned Enemies").AddChild(instance);
 		}
 	}
+
+	public void UseHammer()
+	{
+		Random rng = new();
+		Hammers[rng.Next(0, Hammers.Count-1)].Attack();
+	}
+	
 }

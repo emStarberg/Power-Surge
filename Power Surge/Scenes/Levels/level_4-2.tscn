@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://dk6ckbis3ei0v"]
+[gd_scene load_steps=40 format=4 uid="uid://dk6ckbis3ei0v"]
 
 [ext_resource type="Script" uid="uid://b4fblvmaa86rr" path="res://Scripts/Levels/Level4_2.cs" id="1_1aupy"]
 [ext_resource type="Texture2D" uid="uid://dcmamx3s5hfoa" path="res://Assets/Backgrounds/Lava Cave.png" id="2_1aupy"]
@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://dfojvx6j4khni" path="res://Assets/Audio/earth-rumble-6953.mp3" id="24_0qqth"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="27_xrfmo"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="28_tmbbu"]
+[ext_resource type="PackedScene" uid="uid://brv6mmapaxbfl" path="res://Scenes/boss_hammer.tscn" id="29_xrfmo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgq3e"]
 texture = ExtResource("4_aevdi")
@@ -218,33 +219,6 @@ tracks/3/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_r1280"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Fake Ground:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Objects/Stone Bridge Platform:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(315, 33)]
-}
-
 [sub_resource type="Animation" id="Animation_i0egb"]
 resource_name = "Platforms"
 length = 3.0
@@ -273,6 +247,33 @@ tracks/1/keys = {
 "args": [],
 "method": &"OnPlatformAnimFinished"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_r1280"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fake Ground:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Objects/Stone Bridge Platform:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(315, 33)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0qqth"]
@@ -640,6 +641,12 @@ position = Vector2(1488, -744)
 [node name="Battery Pack2" parent="Objects" instance=ExtResource("27_xrfmo")]
 position = Vector2(490, -254)
 
+[node name="Battery Spawner3" parent="Objects" instance=ExtResource("19_aevdi")]
+position = Vector2(2019, -893)
+
+[node name="Battery Spawner4" parent="Objects" instance=ExtResource("19_aevdi")]
+position = Vector2(2319, -893)
+
 [node name="Enemies" type="Node2D" parent="." groups=["Enemy"]]
 
 [node name="Circuit Bug" parent="Enemies" instance=ExtResource("28_tmbbu")]
@@ -652,15 +659,15 @@ position = Vector2(446, -248)
 [node name="Camera Changes" type="Node2D" parent="Checkpoints"]
 
 [node name="Hammer Phase" type="Area2D" parent="Checkpoints"]
-position = Vector2(2010, -1106)
+position = Vector2(2166, -1049)
 scale = Vector2(1.57222, -22.9062)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/Hammer Phase"]
-position = Vector2(106.855, -2.48841)
+position = Vector2(1.52588e-05, -0.043659)
 shape = SubResource("RectangleShape2D_i0egb")
 
 [node name="Player" parent="." instance=ExtResource("19_lfg1f")]
-position = Vector2(1, 6)
+position = Vector2(0, 9)
 
 [node name="Lights" type="Node2D" parent="."]
 
@@ -689,3 +696,15 @@ volume_db = 10.0
 
 [node name="Final Boss" type="Node2D" parent="."]
 script = ExtResource("23_r1280")
+
+[node name="Boss Hammer" parent="Final Boss" instance=ExtResource("29_xrfmo")]
+position = Vector2(2018, -1133)
+
+[node name="Boss Hammer2" parent="Final Boss" instance=ExtResource("29_xrfmo")]
+position = Vector2(2116, -1133)
+
+[node name="Boss Hammer3" parent="Final Boss" instance=ExtResource("29_xrfmo")]
+position = Vector2(2215, -1133)
+
+[node name="Boss Hammer4" parent="Final Boss" instance=ExtResource("29_xrfmo")]
+position = Vector2(2316, -1133)

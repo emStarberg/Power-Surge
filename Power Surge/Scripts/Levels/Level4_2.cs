@@ -7,13 +7,13 @@ public partial class Level4_2 : GameLevel
 {
 	private DialogueBox dialogueBox;
 	private bool dialogueStarted = false, popupShown = false, timerRunning = true, resumedAfterBoss = false;
-	private List<int> lineNumbers = new List<int> { 15 }; // Line numbers to pause dialogue at
+	private List<int> lineNumbers = new List<int> { 15, 17, 19 }; // Line numbers to pause dialogue at
 	private TileMapLayer fakeGround; // Ground to be removed
 	private AnimationPlayer animationPlayer;
 	private float timer = 0;
 	private string bossPhase;
 	private FinalBoss finalBoss;
-	private float spawnTimer = 0;
+	private float spawnTimer = 0, hammerTimer = 0;
 	private int enemyCount = 0;
 
 	public override void _Ready()
@@ -103,6 +103,11 @@ public partial class Level4_2 : GameLevel
 					camera.Shake(1f, 5);
 					animationPlayer.CurrentAnimation = "Ground Breaking";
 					animationPlayer.Play();
+
+				}else if(dialogueBox.GetLineNumber() == 17)
+				{
+					bossPhase = "hammers";
+					hammerTimer = 4;
 				}
 			}
 		}
@@ -133,6 +138,22 @@ public partial class Level4_2 : GameLevel
 				bossPhase = "platforms";
 			}
 
+		}else if (bossPhase == "hammers")
+		{
+			if (finalBoss.Hammers.Count > 0)
+			{
+				hammerTimer += (float)delta;
+				if (hammerTimer >= 6)
+				{
+					finalBoss.UseHammer();
+					hammerTimer = 0;
+				}
+			}
+			else
+			{
+				// next phase
+			}
+
 		}
 
 	}
@@ -161,6 +182,7 @@ public partial class Level4_2 : GameLevel
 
 				camera.ChangeToFixed(new Vector2(2178, -950));
 				camera.Mode = "fixed";
+
 			}
 
 			checkpoint.QueueFree();

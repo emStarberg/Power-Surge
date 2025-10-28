@@ -1,0 +1,4 @@
+Big%20Hammer%20-%20Spritesheet.png,82,160,7
+Big-Hammer---Spritesheet.png,82,256,8
+Big%20Hammer%20-%20Death%20-%20Spritesheet.png,82,256,9
+Big-Hammer---Death---Spritesheet.png,82,256,9
