@@ -15,6 +15,7 @@ public partial class Level4_2 : GameLevel
 	private FinalBoss finalBoss;
 	private float spawnTimer = 0, hammerTimer = 0;
 	private int enemyCount = 0;
+	private MovingPlatform movingPlatform;
 
 	public override void _Ready()
 	{
@@ -25,7 +26,7 @@ public partial class Level4_2 : GameLevel
 		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-4-2.txt");
 		camera.LimitLeft = -1175;
-		camera.LimitRight = 3850;
+		camera.LimitRight = 6300;
 
 		camera.Mode = "fixed";
 		camera.Position = new Vector2(0, 0);
@@ -35,10 +36,10 @@ public partial class Level4_2 : GameLevel
 		//backgroundMusic.Play();
 
 		animationPlayer = GetNode<AnimationPlayer>("Animation Player");
-
 		fakeGround = GetNode<TileMapLayer>("Fake Ground");
-
 		finalBoss = GetNode<FinalBoss>("Final Boss");
+		movingPlatform = GetNode<MovingPlatform>("Objects/Moving Platform");
+		movingPlatform.UpdateState(false);
 
 		expectedTime = 200;
 
@@ -98,21 +99,26 @@ public partial class Level4_2 : GameLevel
 			if (lineNumbers.Contains(dialogueBox.GetLineNumber()) && !dialogueBox.IsTyping() && !dialogueBox.IsPaused())
 			{
 				dialogueBox.Pause();
-				if(dialogueBox.GetLineNumber() == 15)
+				if (dialogueBox.GetLineNumber() == 15)
 				{
 					camera.Shake(1f, 5);
 					animationPlayer.CurrentAnimation = "Ground Breaking";
 					animationPlayer.Play();
 
-				}else if(dialogueBox.GetLineNumber() == 17)
+				}
+				else if (dialogueBox.GetLineNumber() == 17)
 				{
 					bossPhase = "hammers";
-					hammerTimer = 4;
+					hammerTimer = 3;
+				}else if (dialogueBox.GetLineNumber() == 19)
+				{
+					bossPhase = "final platforms";
+					camera.Mode = "horizontal";
+					movingPlatform.UpdateState(true);
 				}
 			}
 		}
-
-
+		
 		if (bossPhase == "spawn")
 		{
 			if(enemyCount < 1)
@@ -143,7 +149,7 @@ public partial class Level4_2 : GameLevel
 			if (finalBoss.Hammers.Count > 0)
 			{
 				hammerTimer += (float)delta;
-				if (hammerTimer >= 6)
+				if (hammerTimer >= 4)
 				{
 					finalBoss.UseHammer();
 					hammerTimer = 0;
@@ -151,7 +157,9 @@ public partial class Level4_2 : GameLevel
 			}
 			else
 			{
-				// next phase
+				// Next phase
+				bossPhase = "Final Platforms";
+				dialogueBox.Resume();
 			}
 
 		}

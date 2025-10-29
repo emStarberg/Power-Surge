@@ -43,7 +43,7 @@ public partial class VoltageSentinel : Enemy
 		light = electricityAnimation.GetNode<PointLight2D>("Light");
 		healAmount = 15;
 
-		maxHealth = 30;
+		maxHealth = 40;
 		health = maxHealth;
 
 		if (!GameData.Instance.GlowEnabled)

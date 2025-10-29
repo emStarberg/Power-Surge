@@ -11,6 +11,7 @@ public partial class BossHammer : Enemy
 	private AnimationPlayer animationPlayer;
 	private bool attacking = false;
 	private Camera camera;
+	private PackedScene voltageSentinel = GD.Load<PackedScene>("Scenes/voltage_sentinel.tscn");
 
 	public override void _Ready()
 	{
@@ -20,7 +21,7 @@ public partial class BossHammer : Enemy
 		animation = GetNode<AnimatedSprite2D>("Animation");
 		camera = GetParent().GetParent().GetNode<Camera>("Camera");
 		hurtSound = GetNode<AudioStreamPlayer2D>("Hurt Sound");
-		health = 100;
+		health = 1;
 		healAmount = 0;
 	}
 
@@ -72,9 +73,20 @@ public partial class BossHammer : Enemy
 	/// </summary>
 	public void OnDeathFinished()
 	{
-		if(GetParent() is FinalBoss fb)
+		if (GetParent() is FinalBoss fb)
 		{
 			fb.Hammers.Remove(this);
+			if(fb.Hammers.Count > 0)
+			{
+				// Spawn a Voltage Sentinel
+				Node enemyInstance = voltageSentinel.Instantiate();
+				if(enemyInstance is VoltageSentinel v)
+				{
+					v.GlobalPosition = GlobalPosition + new Vector2(0, 50);
+					GetParent().GetParent().GetNode<Node2D>("Spawned Enemies").AddChild(v);
+				}
+			}
 		}
+
 	}
 }
