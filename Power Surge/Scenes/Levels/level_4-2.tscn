@@ -1,6 +1,6 @@
-[gd_scene load_steps=58 format=4 uid="uid://dk6ckbis3ei0v"]
+[gd_scene load_steps=57 format=4 uid="uid://dk6ckbis3ei0v"]
 
-[ext_resource type="Script" uid="uid://b4fblvmaa86rr" path="res://Scripts/Levels/Level4_2.cs" id="1_1aupy"]
+[ext_resource type="Script" uid="uid://bnohxb7oortwh" path="res://Scripts/Levels/Level4_2.cs" id="1_1aupy"]
 [ext_resource type="Texture2D" uid="uid://dcmamx3s5hfoa" path="res://Assets/Backgrounds/Lava Cave.png" id="2_1aupy"]
 [ext_resource type="Script" uid="uid://y6sybq8ywbox" path="res://Scripts/Other/Background.cs" id="3_0qqth"]
 [ext_resource type="Texture2D" uid="uid://gydvuobp86nn" path="res://Assets/Tilemaps/Cave - Tileset.png" id="4_aevdi"]
@@ -24,7 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://cf33sju6vhlng" path="res://Scenes/stone_bridge_platform.tscn" id="20_i0egb"]
 [ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="21_1fiam"]
 [ext_resource type="PackedScene" uid="uid://bpbsoap7kjpfk" path="res://Scenes/moving_platform.tscn" id="22_37djw"]
-[ext_resource type="PackedScene" uid="uid://d0nb488jjdaqg" path="res://Scenes/end.tscn" id="22_gdc8x"]
 [ext_resource type="PackedScene" uid="uid://c5qev7r17xi72" path="res://Scenes/hammer.tscn" id="23_nmkfp"]
 [ext_resource type="Script" uid="uid://cfugenjxaprpn" path="res://Scripts/Enemies/FinalBoss.cs" id="23_r1280"]
 [ext_resource type="AudioStream" uid="uid://dfojvx6j4khni" path="res://Assets/Audio/earth-rumble-6953.mp3" id="24_0qqth"]
@@ -35,7 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="27_xrfmo"]
 [ext_resource type="PackedScene" uid="uid://dso2d7b5ykmol" path="res://Scenes/circuit_bug.tscn" id="28_tmbbu"]
 [ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="29_gdc8x"]
-[ext_resource type="PackedScene" uid="uid://brv6mmapaxbfl" path="res://Scenes/boss_hammer.tscn" id="29_xrfmo"]
+[ext_resource type="PackedScene" uid="uid://mrnsfsrta67x" path="res://Scenes/boss_hammer.tscn" id="29_xrfmo"]
 [ext_resource type="PackedScene" uid="uid://ccbfgvaaf44xg" path="res://Scenes/corrupt_puddle.tscn" id="30_hgq3e"]
 [ext_resource type="Texture2D" uid="uid://cxb37ydikvnb6" path="res://Assets/Objects/Big Gate.png" id="38_nmkfp"]
 [ext_resource type="Texture2D" uid="uid://caw306egtf4xg" path="res://Assets/Characters/Hamster---Talk---Spritesheet.png" id="39_rh0fm"]
@@ -1042,12 +1041,6 @@ parameters/looping = true
 
 [node name="ScreenResolution" type="Node" parent="."]
 script = ExtResource("21_1fiam")
-
-[node name="End" parent="." instance=ExtResource("22_gdc8x")]
-position = Vector2(6003, -1348)
-scale = Vector2(-57.8771, -35.7384)
-collision_layer = 0
-collision_mask = 0
 
 [node name="Animation Player" type="AnimationPlayer" parent="."]
 libraries = {

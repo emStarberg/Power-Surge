@@ -574,7 +574,6 @@ scale = Vector2(1.43601, -11.6263)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/End"]
 position = Vector2(0.110779, 7.42066)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_0obw8")
 
 [node name="Player" parent="." instance=ExtResource("4_no63c")]

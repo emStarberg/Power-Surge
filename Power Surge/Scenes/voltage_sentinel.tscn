@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ch58q6jxnp3qs"]
+[gd_scene load_steps=56 format=3 uid="uid://ch58q6jxnp3qs"]
 
 [ext_resource type="Script" uid="uid://ie77lp106ux2" path="res://Scripts/Enemies/VoltageSentinel.cs" id="1_jwrvh"]
 [ext_resource type="Texture2D" uid="uid://bm3sd3ja7a5n4" path="res://Assets/Characters/Enemies/Voltage Sentinel Idle - Spritesheet.png" id="2_50eub"]
@@ -373,6 +373,9 @@ size = Vector2(160, 33)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbplq"]
 size = Vector2(17, 40)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_722j2"]
+size = Vector2(11, 4)
+
 [node name="Voltage Sentinel" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 5
@@ -446,9 +449,16 @@ collision_mask = 0
 position = Vector2(1.5, 1)
 shape = SubResource("RectangleShape2D_bbplq")
 
+[node name="Floor Check" type="Area2D" parent="."]
+
+[node name="Collider" type="CollisionShape2D" parent="Floor Check"]
+position = Vector2(1.5, 20)
+shape = SubResource("RectangleShape2D_722j2")
+
 [connection signal="animation_changed" from="Animations" to="." method="OnAnimationChanged"]
 [connection signal="animation_finished" from="Animations" to="." method="OnAnimationFinished"]
 [connection signal="frame_changed" from="Animations" to="." method="OnAnimationFrameChanged"]
 [connection signal="animation_finished" from="Electricity" to="." method="OnElectricityAnimFinished"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="OnPlayerDetectionBodyEntered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="OnPlayerDetectionBodyExited"]
+[connection signal="body_entered" from="Floor Check" to="." method="OnFloorCheckBodyEntered"]

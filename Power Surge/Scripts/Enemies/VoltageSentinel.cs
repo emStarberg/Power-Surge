@@ -325,6 +325,18 @@ public partial class VoltageSentinel : Enemy
 		}
 	}
 
+	/// <summary>
+	/// Stops getting stuck on top of player
+	/// </summary>
+	/// <param name="body"></param>
+	public void OnFloorCheckBodyEntered(Node2D body)
+	{
+		if(body is Player)
+		{
+			Position += new Vector2(20, 0);
+		}
+	}
+
 	
 	public override void UpdateVolume()
 	{

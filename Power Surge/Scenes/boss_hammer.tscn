@@ -1,8 +1,8 @@
 [gd_scene load_steps=32 format=3 uid="uid://mrnsfsrta67x"]
 
-[ext_resource type="Script" path="res://Scripts/Enemies/BossHammer.cs" id="1_6tnme"]
-[ext_resource type="Texture2D" path="res://Assets/Characters/Enemies/Big-Hammer---Spritesheet.png" id="1_iqray"]
-[ext_resource type="Texture2D" path="res://Assets/Characters/Enemies/Big-Hammer---Death---Spritesheet.png" id="2_gsaas"]
+[ext_resource type="Script" uid="uid://bq5ymcq6rsug0" path="res://Scripts/Enemies/BossHammer.cs" id="1_6tnme"]
+[ext_resource type="Texture2D" uid="uid://dv0mj80pg8jvs" path="res://Assets/Characters/Enemies/Big-Hammer---Spritesheet.png" id="1_iqray"]
+[ext_resource type="Texture2D" uid="uid://b1mbh4rdcivp2" path="res://Assets/Characters/Enemies/Big-Hammer---Death---Spritesheet.png" id="2_gsaas"]
 [ext_resource type="AudioStream" uid="uid://cjimrlhj0qdfl" path="res://Assets/Audio/Metal Hit.wav" id="3_nx4et"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g67qa"]

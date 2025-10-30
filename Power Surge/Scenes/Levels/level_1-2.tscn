@@ -324,6 +324,7 @@ offset_bottom = 106.0
 scale = Vector2(2, 2)
 
 [node name="Pop-up" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -125.0

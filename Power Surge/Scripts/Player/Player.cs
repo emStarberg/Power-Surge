@@ -477,7 +477,7 @@ public partial class Player : CharacterBody2D
 			if (attackInstance is StrongBlast b)
 			{
 				b.Activate(facing);
-				DecreasePower(10);
+				DecreasePower(8);
 			}
 		}
 	}

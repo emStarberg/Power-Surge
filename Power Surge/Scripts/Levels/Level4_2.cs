@@ -7,7 +7,8 @@ public partial class Level4_2 : GameLevel
 {
 	private DialogueBox dialogueBox;
 	private bool dialogueStarted = false, popupShown = false, timerRunning = true, resumedAfterBoss = false;
-	private List<int> lineNumbers = new List<int> { 15, 17, 19 }; // Line numbers to pause dialogue at
+	private List<int> lineNumbers = new List<int> { 15, 17, 19, 24, 47 }; // Line numbers to pause dialogue at
+	private List<int> hamsterLines = new List<int> { 24, 25, 27, 28, 29, 30, 33, 34, 35, 36, 37, 39, 40, 42};
 	private TileMapLayer fakeGround; // Ground to be removed
 	private AnimationPlayer animationPlayer;
 	private float timer = 0;
@@ -16,6 +17,7 @@ public partial class Level4_2 : GameLevel
 	private float spawnTimer = 0, hammerTimer = 0;
 	private int enemyCount = 0;
 	private MovingPlatform movingPlatform;
+	private AnimatedSprite2D hamster;
 
 	public override void _Ready()
 	{
@@ -33,13 +35,14 @@ public partial class Level4_2 : GameLevel
 		camera.Zoom = new Vector2(2, 2);
 
 		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
-		//backgroundMusic.Play();
+		backgroundMusic.Stop();
 
 		animationPlayer = GetNode<AnimationPlayer>("Animation Player");
 		fakeGround = GetNode<TileMapLayer>("Fake Ground");
 		finalBoss = GetNode<FinalBoss>("Final Boss");
 		movingPlatform = GetNode<MovingPlatform>("Objects/Moving Platform");
 		movingPlatform.UpdateState(false);
+		hamster = GetNode<AnimatedSprite2D>("Hamster");
 
 		expectedTime = 200;
 
@@ -66,8 +69,6 @@ public partial class Level4_2 : GameLevel
 				change.BodyExited += (Node2D body) => OnCameraChangeExited(body, change);
 			}
 		}
-
-
 
 	}
 
@@ -96,6 +97,13 @@ public partial class Level4_2 : GameLevel
 			{
 				popup.Visible = false;
 			}
+			if (hamsterLines.Contains(dialogueBox.GetLineNumber()) && !dialogueBox.IsTyping() && !dialogueBox.IsPaused())
+			{
+				hamster.Animation = "talk";
+				hamster.Play();
+			}
+			else if (!hamsterLines.Contains(dialogueBox.GetLineNumber()))
+				hamster.Stop();
 			if (lineNumbers.Contains(dialogueBox.GetLineNumber()) && !dialogueBox.IsTyping() && !dialogueBox.IsPaused())
 			{
 				dialogueBox.Pause();
@@ -110,12 +118,18 @@ public partial class Level4_2 : GameLevel
 				{
 					bossPhase = "hammers";
 					hammerTimer = 3;
-				}else if (dialogueBox.GetLineNumber() == 19)
+				}
+				else if (dialogueBox.GetLineNumber() == 19)
 				{
 					bossPhase = "final platforms";
 					camera.Mode = "horizontal";
 					movingPlatform.UpdateState(true);
 				}
+				else if (dialogueBox.GetLineNumber() == 47)
+				{
+					GoToEndScreen();
+				}
+				
 			}
 		}
 		
