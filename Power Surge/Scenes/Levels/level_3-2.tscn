@@ -1182,9 +1182,6 @@ position = Vector2(-273, -68)
 [node name="Battery Spawner2" parent="Objects" instance=ExtResource("30_qdt6i")]
 position = Vector2(271, -131)
 
-[node name="Battery Spawner3" parent="Objects" instance=ExtResource("30_qdt6i")]
-position = Vector2(265, -4)
-
 [node name="Battery Spawner4" parent="Objects" instance=ExtResource("30_qdt6i")]
 position = Vector2(120, 92)
 

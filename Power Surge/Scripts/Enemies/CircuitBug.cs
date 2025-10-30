@@ -40,7 +40,7 @@ public partial class CircuitBug : Enemy
 
 		healAmount = 5;
 
-		maxHealth = 15;
+		maxHealth = 20;
 		health = maxHealth;
 
 		UpdateVolume();

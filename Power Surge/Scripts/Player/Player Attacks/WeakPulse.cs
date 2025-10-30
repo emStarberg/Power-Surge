@@ -8,7 +8,7 @@ using System;
 /// <author>Emily Braithwaite</author>
 public partial class WeakPulse : Node2D, IPlayerAttack
 {
-	public float damage = 20;
+	public float damage = 15;
 	private string direction;
 	private AnimatedSprite2D animatedSprite;
 	private Vector2 offset;

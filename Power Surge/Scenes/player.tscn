@@ -491,6 +491,14 @@ color = Color(0.241298, 0.81349, 0.886432, 0.403922)
 energy = 2.5
 texture = SubResource("GradientTexture2D_fs7ks")
 
+[node name="Light - Power Surge" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(1.08322, 1.07436)
+color = Color(0.96, 0.46944, 0.2592, 0.847059)
+energy = 3.09
+texture = SubResource("GradientTexture2D_fs7ks")
+
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="Weak Pulse" type="AudioStreamPlayer2D" parent="Sounds"]

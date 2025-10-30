@@ -184,12 +184,23 @@ public partial class Level4_2 : GameLevel
 		if (body is Player player)
 		{
 			string name = checkpoint.Name;
+			if(name != "End Pt2")
 			dialogueBox.Resume();
 			if (name == "Hammer Phase")
 			{
 
 				camera.ChangeToFixed(new Vector2(2178, -950));
 				camera.Mode = "fixed";
+
+			}else if (name == "End Pt2")
+			{
+				backgroundMusic.Stream = GD.Load<AudioStream>("res://Assets/Audio/Hamster.ogg");
+				backgroundMusic.Play();
+				player.Paused = true;
+				player.DisableAllInputs();
+				AnimationPlayer ap = hamster.GetNode<AnimationPlayer>("Animation Player");
+				ap.CurrentAnimation = "hamster";
+				ap.Play();
 
 			}
 
@@ -237,7 +248,7 @@ public partial class Level4_2 : GameLevel
 	}
 
 	/// <summary>
-	/// Called by Animation Player when ground animaiton has finished
+	/// Called by Animation Player when ground animation has finished
 	/// </summary>
 	public void OnGroundAnimFinished()
 	{
@@ -251,10 +262,40 @@ public partial class Level4_2 : GameLevel
 	/// </summary>
 	public void OnPlatformAnimFinished()
 	{
-		GD.Print("method called");
 		// Move to platform phase
 		camera.Mode = "horizontal";
 		player.Position = new Vector2(1550, -1050); // FOR TESTING
+	}
+
+	/// <summary>
+	/// Called by Animation Player when hamster animation has finished
+	/// </summary>
+	public void OnHamsterAnimFinished()
+	{
+		dialogueBox.Resume();
+	}
+
+
+	/// <summary>
+	/// Switch scenes to the end screen and send correct data to GameData
+	/// </summary>
+	private void GoToEndScreen()
+	{
+		GameData.Instance.CurrentLevel = Name;
+		GameData.Instance.LevelFragments = player.GetFragmentCount();
+		GameData.Instance.LevelPower = player.GetPower();
+
+		GameData.Instance.LevelTime = GetLevelTimer();
+		GameData.Instance.LevelExpectedTime = GetExpectedTime();
+		GameData.Instance.LevelEnemyCountFinal = GetEnemiesRemaining();
+		
+
+		CallDeferred(nameof(DeferredChangeScene), "res://Scenes/Screens/end_screen.tscn");
+	}
+	
+	private void DeferredChangeScene(string path)
+	{
+		GetTree().ChangeSceneToFile(path);
 	}
 
 	

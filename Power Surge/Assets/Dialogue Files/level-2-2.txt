@@ -13,6 +13,5 @@ Lilah|In the meantime, have a go at figuring it out yourself. I would suggest us
 Lilah|Alright [name], I couldn't find much, but...
 Lilah|What?
 Lilah|You've already got it open? How?
-Archie|Nice work there [name]!
 Lilah|Clearly you're more capable than we give you credit for. Keep going, we haven't got time to waste!
-
+Lilah|
