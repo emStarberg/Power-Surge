@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 //------------------------------------------------------------------------------
 // <summary>
@@ -58,7 +59,7 @@ public partial class Activator : Area2D, IWorldObject
 			Activate();
 		}
 	}
-	
+
 	private void Activate()
 	{
 		if (!active)
@@ -73,6 +74,11 @@ public partial class Activator : Area2D, IWorldObject
 			timerStarted = true;
 		}
 
+	}
+	
+	public bool IsActive()
+	{
+		return active;
 	}
 
 }

@@ -13,5 +13,5 @@ Lilah|Here we go, just as I expected. It's left some nasty bugs around to try an
 Lilah|Kill it. NOW.
 Archie|...
 Archie|It looks like destroying that creature restored some of your power, cool!
-Archie|Maybe don't go round killing all of them though, it would fascinating to study them later on.
-Lilah|As I predicted, there's a power source you can use, touching that should restore a good amount of your power.
+Archie|Maybe don't go round killing all of them though, it would be fascinating to study them later on.
+Lilah|As I predicted, there's a power source you can use, touching that should restore a good amount of power.

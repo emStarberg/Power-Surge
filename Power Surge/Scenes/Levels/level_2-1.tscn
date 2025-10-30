@@ -1011,6 +1011,21 @@ position = Vector2(2725, 1187)
 [node name="Battery Pack3" parent="Objects" instance=ExtResource("24_h10du")]
 position = Vector2(4088, 1859)
 
+[node name="Battery Pack4" parent="Objects" instance=ExtResource("24_h10du")]
+position = Vector2(1896, 323)
+
+[node name="Energy Deposit6" parent="Objects" instance=ExtResource("20_a23p3")]
+position = Vector2(2876, 2023)
+
+[node name="Energy Deposit7" parent="Objects" instance=ExtResource("20_a23p3")]
+position = Vector2(3013, 1079)
+
+[node name="Energy Deposit8" parent="Objects" instance=ExtResource("20_a23p3")]
+position = Vector2(2544, 1063)
+
+[node name="Battery Pack5" parent="Objects" instance=ExtResource("24_h10du")]
+position = Vector2(-171, 18)
+
 [node name="Enemies" type="Node2D" parent="." groups=["Enemy"]]
 
 [node name="Circuit Bug" parent="Enemies" instance=ExtResource("23_urlj5")]
@@ -1080,7 +1095,7 @@ position = Vector2(2472, 1080)
 position = Vector2(2496, 1080)
 
 [node name="Corrupt Puddle14" parent="Enemies" instance=ExtResource("22_a23p3")]
-position = Vector2(2528, 1064)
+position = Vector2(2521, 1063)
 
 [node name="Corrupt Puddle15" parent="Enemies" instance=ExtResource("22_a23p3")]
 position = Vector2(2568, 1064)
@@ -1131,6 +1146,9 @@ script = ExtResource("20_c1o0o")
 [node name="End" parent="." instance=ExtResource("21_phi1q")]
 position = Vector2(4496, 1742)
 scale = Vector2(1.66278, 16.2389)
+
+[node name="Battery Pack" parent="." instance=ExtResource("24_h10du")]
+position = Vector2(2789, 515)
 
 [connection signal="body_entered" from="Checkpoints/Camera Changes/1" to="Checkpoints/Camera Changes/1" method="OnBodyEntered"]
 [connection signal="body_entered" from="Checkpoints/Camera Changes/2" to="Checkpoints/Camera Changes/2" method="OnBodyEntered"]

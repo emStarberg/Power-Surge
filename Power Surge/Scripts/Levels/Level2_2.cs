@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 public partial class Level2_2 : GameLevel
 {
+	[Export] public Activator[] Activators;
 	private DialogueBox dialogueBox, wrongWayDialogue;
 	private bool dialogueStarted = false, popupShown = false, resumedAfterPan = false, timerRunning = true;
-	private List<int> lineNumbers = new List<int> { 1, 2, 12, 17 }; // Line numbers to pause dialogue at
+	private List<int> lineNumbers = new List<int> { 1, 2, 12, 16 }; // Line numbers to pause dialogue at
 	private float timer = 0;
 
 	public override void _Ready()
@@ -109,6 +110,19 @@ public partial class Level2_2 : GameLevel
 			if(name == "Wrong Way")
 			{
 				wrongWayDialogue.Start();
+			}else if(name == "End")
+			{
+				int count = 0;
+				foreach (Activator a in Activators)
+				{
+					if (a.IsActive())
+						count++;
+				}
+				if (count == 3)
+				{
+					dialogueBox.Resume();
+					checkpoint.QueueFree();
+				}
 			}
 			else
 			{

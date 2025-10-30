@@ -929,9 +929,6 @@ position = Vector2(2649, 496)
 SwitchObjects = [NodePath("../Elevator2")]
 number = 0
 
-[node name="Battery Pack4" parent="Objects" instance=ExtResource("22_b3ej1")]
-position = Vector2(2484, 596)
-
 [node name="Battery Pack5" parent="Objects" instance=ExtResource("22_b3ej1")]
 position = Vector2(2390, 596)
 
@@ -940,9 +937,6 @@ position = Vector2(2418, 596)
 
 [node name="Battery Pack7" parent="Objects" instance=ExtResource("22_b3ej1")]
 position = Vector2(2553, 596)
-
-[node name="Battery Pack8" parent="Objects" instance=ExtResource("22_b3ej1")]
-position = Vector2(2534, 592)
 
 [node name="Hammer" parent="Objects" instance=ExtResource("25_jpomb")]
 position = Vector2(3387, 96)

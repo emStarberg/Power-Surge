@@ -1,0 +1,317 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+public partial class Level4_2 : GameLevel
+{
+	private DialogueBox dialogueBox;
+	private bool dialogueStarted = false, popupShown = false, timerRunning = true, resumedAfterBoss = false;
+	private List<int> lineNumbers = new List<int> { 15, 17, 19, 24, 47 }; // Line numbers to pause dialogue at
+	private List<int> hamsterLines = new List<int> { 27,26, 28, 29, 30, 33, 34, 35, 36, 37, 38, 40, 43 };
+	private TileMapLayer fakeGround; // Ground to be removed
+	private AnimationPlayer animationPlayer;
+	private float timer = 0;
+	private string bossPhase;
+	private FinalBoss finalBoss;
+	private float spawnTimer = 0, hammerTimer = 0;
+	private int enemyCount = 0;
+	private MovingPlatform movingPlatform;
+	private AnimatedSprite2D hamster;
+
+	public override void _Ready()
+	{
+		
+		StartLevel();
+		GameData.Instance.GlowEnabled = false;
+		// Set up dialogue
+		dialogueBox = GetNode<DialogueBox>("UI/DialogueBox");
+		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/level-4-2.txt");
+		camera.LimitLeft = -1175;
+		camera.LimitRight = 6300;
+
+		camera.Mode = "fixed";
+		camera.Position = new Vector2(0, 0);
+		camera.Zoom = new Vector2(2, 2);
+
+		backgroundMusic = GetNode<AudioStreamPlayer2D>("Background Music");
+		backgroundMusic.Stop();
+		animationPlayer = GetNode<AnimationPlayer>("Animation Player");
+		fakeGround = GetNode<TileMapLayer>("Fake Ground");
+		finalBoss = GetNode<FinalBoss>("Final Boss");
+		movingPlatform = GetNode<MovingPlatform>("Objects/Moving Platform");
+		movingPlatform.UpdateState(false);
+		hamster = GetNode<AnimatedSprite2D>("Hamster");
+
+		expectedTime = 200;
+
+		dialogueBox.Pause();
+
+		UpdateVolume();
+
+		// Set up checkpoints
+		foreach (Node node in GetNode<Node2D>("Checkpoints").GetChildren())
+		{
+			if (node is Area2D checkpoint)
+			{
+				// Connect a signal to each checkpoint
+				checkpoint.BodyEntered += (Node2D body) => OnCheckPointEntered(body, checkpoint);
+			}
+		}
+
+		// Set up camera changes
+		foreach (Node node in GetNode<Node2D>("Checkpoints").GetNode<Node2D>("Camera Changes").GetChildren())
+		{
+			if (node is CameraChange change)
+			{
+				// Connect a signal to each checkpoint
+				change.BodyExited += (Node2D body) => OnCameraChangeExited(body, change);
+			}
+		}
+
+
+
+	}
+
+	public override void _Process(double delta)
+	{
+		levelTimer += (float)delta;
+		checkOptionsMenu();
+		player.Paused = !dialogueBox.IsPaused();
+
+		if (timerRunning)
+		{
+			timer += (float)delta;
+		}
+
+		if (timer > 1f && !dialogueStarted)
+		{
+			dialogueStarted = true;
+			dialogueBox.Start();
+			timerRunning = false;
+			timer = 0;
+		}
+
+		if (Input.IsActionJustPressed("ui_accept"))
+		{
+			hamster.Stop();
+			if (popup.Visible)
+			{
+				popup.Visible = false;
+			}
+			if (lineNumbers.Contains(dialogueBox.GetLineNumber()) && !dialogueBox.IsTyping() && !dialogueBox.IsPaused())
+			{
+				dialogueBox.Pause();
+				if (dialogueBox.GetLineNumber() == 15)
+				{
+					camera.Shake(1f, 5);
+					animationPlayer.CurrentAnimation = "Ground Breaking";
+					animationPlayer.Play();
+
+				}
+				else if (dialogueBox.GetLineNumber() == 17)
+				{
+					bossPhase = "hammers";
+					hammerTimer = 3;
+				}
+				else if (dialogueBox.GetLineNumber() == 19)
+				{
+					bossPhase = "final platforms";
+					camera.Mode = "horizontal";
+					movingPlatform.UpdateState(true);
+
+					player.Position = new Vector2(5600, -1000);
+
+				}else if (dialogueBox.GetLineNumber() == 47)
+				{
+					GoToEndScreen();
+				}
+			}
+			else if (!dialogueBox.IsTyping() && !dialogueBox.IsPaused() && hamsterLines.Contains(dialogueBox.GetLineNumber()))
+			{
+				hamster.Animation = "talk";
+				hamster.Play();
+			}
+		}
+		
+		if (bossPhase == "spawn")
+		{
+			if(enemyCount < 1)
+			{
+				// Continue spawning enemies
+				spawnTimer += (float)delta;
+				if (spawnTimer >= 8)
+				{
+					finalBoss.SpawnEnemies();
+					spawnTimer = 0;
+				}
+			}
+			else
+			{
+				// Remove remaining enemies
+				camera.Shake(3, 3);
+				foreach (Node n in GetNode<Node2D>("Spawned Enemies").GetChildren())
+				{
+					n.QueueFree();
+				}
+				animationPlayer.CurrentAnimation = "Platforms";
+				animationPlayer.Play();
+				bossPhase = "platforms";
+			}
+
+		}else if (bossPhase == "hammers")
+		{
+			if (finalBoss.Hammers.Count > 0)
+			{
+				hammerTimer += (float)delta;
+				if (hammerTimer >= 4)
+				{
+					finalBoss.UseHammer();
+					hammerTimer = 0;
+				}
+			}
+			else
+			{
+				// Next phase
+				bossPhase = "Final Platforms";
+				dialogueBox.Resume();
+			}
+
+		}
+
+	}
+	
+	/// <summary>
+	/// Called when an enemy calls QueueFree() on itself (dies)
+	/// </summary>
+	public void OnEnemyTreeExited()
+	{
+		enemyCount++;
+	}
+
+	/// <summary>
+	/// When a checkpoint is passed by the player
+	/// </summary>
+	/// <param name="body"></param>
+	/// <param name="checkpoint"></param>
+	public void OnCheckPointEntered(Node2D body, Area2D checkpoint)
+	{
+		if (body is Player player)
+		{
+			string name = checkpoint.Name;
+			if(name != "End Pt2")
+			dialogueBox.Resume();
+			if (name == "Hammer Phase")
+			{
+
+				camera.ChangeToFixed(new Vector2(2178, -950));
+				camera.Mode = "fixed";
+
+			}else if (name == "End Pt2")
+			{
+				backgroundMusic.Stream = GD.Load<AudioStream>("res://Assets/Audio/Hamster.ogg");
+				backgroundMusic.Play();
+				player.Paused = true;
+				player.DisableAllInputs();
+				AnimationPlayer ap = hamster.GetNode<AnimationPlayer>("Animation Player");
+				ap.CurrentAnimation = "hamster";
+				ap.Play();
+
+			}
+
+			checkpoint.QueueFree();
+		}
+	}
+
+	/// <summary>
+	/// When a camera change point is passed by the player
+	/// </summary>
+	/// <param name="body"></param>
+	/// <param name="checkpoint"></param>
+	protected override void OnCameraChangeExited(Node2D body, CameraChange change)
+	{
+		if (body is Player player)
+		{
+			if (player.GetDirection() == change.DirectionEnteredFrom)
+			{
+				switch (change.Name)
+				{
+					case "1":
+						if (change.DirectionEnteredFrom == "right")
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(-350f);
+							camera.ChangeToCentered();
+						}
+						else
+						{
+							camera.Mode = "centered";
+							camera.SetCenterY(-470f);
+							camera.ChangeToCentered();
+						}
+						break;
+					case "2":
+						camera.Mode = "fixed";
+						camera.Position = new Vector2(0, -15);
+						camera.Zoom = new Vector2(2, 2);
+
+						player.DisableAllInputs();
+						break;
+				}
+			}
+		}
+	}
+
+	/// <summary>
+	/// Called by Animation Player when ground animation has finished
+	/// </summary>
+	public void OnGroundAnimFinished()
+	{
+		fakeGround.QueueFree();
+		bossPhase = "spawn";
+		spawnTimer = 6;
+	}
+
+	/// <summary>
+	/// Called by Animation Player when platform animation has finished
+	/// </summary>
+	public void OnPlatformAnimFinished()
+	{
+		// Move to platform phase
+		camera.Mode = "horizontal";
+		player.Position = new Vector2(1550, -1050); // FOR TESTING
+	}
+
+	/// <summary>
+	/// Called by Animation Player when hamster animation has finished
+	/// </summary>
+	public void OnHamsterAnimFinished()
+	{
+		dialogueBox.Resume();
+	}
+
+
+	/// <summary>
+	/// Switch scenes to the end screen and send correct data to GameData
+	/// </summary>
+	private void GoToEndScreen()
+	{
+		GameData.Instance.CurrentLevel = Name;
+		GameData.Instance.LevelFragments = player.GetFragmentCount();
+		GameData.Instance.LevelPower = player.GetPower();
+
+		GameData.Instance.LevelTime = GetLevelTimer();
+		GameData.Instance.LevelExpectedTime = GetExpectedTime();
+		GameData.Instance.LevelEnemyCountFinal = GetEnemiesRemaining();
+		
+
+		CallDeferred(nameof(DeferredChangeScene), "res://Scenes/Screens/end_screen.tscn");
+	}
+	
+	private void DeferredChangeScene(string path)
+	{
+		GetTree().ChangeSceneToFile(path);
+	}
+
+	
+}

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using Godot;
 //------------------------------------------------------------------------------
 // <summary>
@@ -129,6 +130,7 @@ public partial class Player : CharacterBody2D
 		if (camera.IsPanning())
 		{
 			Paused = true;
+			invincible = true;
 		}
 		if (alive)
 		{
@@ -261,13 +263,7 @@ public partial class Player : CharacterBody2D
 						// Die after 3 seconds of fall time
 						Die();
 					}
-
-					if (Input.IsActionJustPressed("input_shield") && !disabledInputs.Contains("input_shield"))
-					{
-						// Activate shield
-						/*GetNode<StaticBody2D>("Shield").Visible = true;
-						shield.GetNode<CollisionShape2D>("Collider").Disabled = false;*/
-					}
+					
 					if (Input.IsActionJustReleased("input_shield"))
 					{
 						// Deactivate shield
@@ -429,6 +425,10 @@ public partial class Player : CharacterBody2D
 		if (power > 100 && !PowerSurgeEnabled)
 		{
 			power = 100;
+		}
+		else if (power > 140)
+		{
+			power = 140;
 		}
 	}
 
@@ -608,6 +608,9 @@ public partial class Player : CharacterBody2D
 		powerSurgeTime = 15f;
 		powerSurgeActive = true;
 		powerSurgeTimer.Visible = true;
+
+		if (GameData.Instance.GlowEnabled)
+			GetNode<PointLight2D>("Light - Power Surge").Visible = true;
 	}
 	/// <summary>
 	/// Stop the power surge timer
@@ -628,6 +631,9 @@ public partial class Player : CharacterBody2D
 		powerSurgeMusic.Stop();
 		powerSurgeActive = false;
 		powerSurgeTimer.Visible = false;
+
+		if (GameData.Instance.GlowEnabled)
+			GetNode<PointLight2D>("Light - Power Surge").Visible = false;
 	}
 
 	/// <summary>
@@ -708,15 +714,15 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void PowerSurgeAttack()
 	{
-			powerSurgeAttackSound.Play();
-			Node attackInstance = powerSurgeBlast.Instantiate();
-			((PowerSurgeBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0,5);
-			AddChild(attackInstance);
-			if (attackInstance is PowerSurgeBlast b)
-			{
-				b.Activate(facing);
-				DecreasePower(5);
-			}
+		powerSurgeAttackSound.Play();
+		Node attackInstance = powerSurgeBlast.Instantiate();
+		((PowerSurgeBlast)attackInstance).GlobalPosition = GlobalPosition + new Vector2(0,5);
+		AddChild(attackInstance);
+		if (attackInstance is PowerSurgeBlast b)
+		{
+			b.Activate(facing);
+			DecreasePower(15);
+		}
 	}
 
 	public string GetDirection()

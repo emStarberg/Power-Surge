@@ -293,6 +293,14 @@ public partial class DialogueBox : Control
 		startupSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
 		continueSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
 	}
+
+	/// <summary>
+	/// Returns the name of the current speaker
+	/// </summary>
+	public string GetSpeaker()
+	{
+		return speakerLabel.Text;
+	}
 }
 
 

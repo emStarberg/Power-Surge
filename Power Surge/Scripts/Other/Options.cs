@@ -378,7 +378,10 @@ public partial class Options : Node2D
 
 	private void OnVolumeChanged()
 	{
-		menuSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
+		if (menuSound == null || !menuSound.IsInsideTree())
+			return;
+
+			menuSound.VolumeDb = GameSettings.Instance.GetFinalSfx();
 	}
 
 	/// <summary>

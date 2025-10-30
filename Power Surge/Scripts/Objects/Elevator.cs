@@ -15,12 +15,23 @@ public partial class Elevator : SwitchOperatedObject
 	private string direction = "up";
 	private bool returning = false;
 	private RayCast2D downRay;
+	private Sprite2D sprite;
 
 	public override void _Ready()
 	{
 		minHeight = Position.Y;
 		maxHeight = Position.Y - MaxHeight;
 		downRay = GetNode<RayCast2D>("Down Ray");
+		sprite = GetNode<Sprite2D>("Sprite");
+
+		if (IsOn)
+		{
+			sprite.Texture = GD.Load<Texture2D>("res://Assets/Objects/Elevator - On.png");
+		}
+		else
+		{
+			sprite.Texture = GD.Load<Texture2D>("res://Assets/Objects/Elevator - Off.png");
+		}
 	}
 
 	public override void _Process(double delta)
@@ -83,9 +94,16 @@ public partial class Elevator : SwitchOperatedObject
 	{
 		if (!IsOn)
 		{
+			if(sprite != null)
+			sprite.Texture = GD.Load<Texture2D>("res://Assets/Objects/Elevator - Off.png");
 			// Return to floor
 			direction = "down";
 			returning = true;
+		}
+		else
+		{
+			if(sprite != null)
+			sprite.Texture = GD.Load<Texture2D>("res://Assets/Objects/Elevator - On.png");
 		}
 	}
 
