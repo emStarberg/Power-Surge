@@ -15,7 +15,7 @@ public partial class StrongBlast : Area2D, IPlayerAttack
 	private AnimatedSprite2D animatedSprite;
 	private bool doMove = false;
 	private float speed = 350f;
-	private float damage = 20;
+	private float damage = 10;
 
 	/// <summary>
 	/// Called when the node enters the scene tree.

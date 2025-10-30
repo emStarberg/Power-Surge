@@ -39,7 +39,7 @@ public partial class Player : CharacterBody2D
 	private bool isDashing = false, canDash = false; // Player can't dash again without touching ground in between
 
 	// States
-	private bool alive = true, powerSurgeActive = false, invincible = false;
+	private bool alive = true, powerSurgeActive = false, invincible = false, onHurtCooldown = false;
 
 	// Direction/Movement
 	private float direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
@@ -67,7 +67,7 @@ public partial class Player : CharacterBody2D
 	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound, powerSurgeAttackSound;
 
 	// Timers
-	private float timer = 0, regenTimer = 0;
+	private float timer = 0, regenTimer = 0, hurtCooldown = 0;
 
 	// FOR TUTORIAL
 	public List<String> disabledInputs = new List<string>();
@@ -134,6 +134,14 @@ public partial class Player : CharacterBody2D
 		}
 		if (alive)
 		{
+			if (onHurtCooldown)
+				hurtCooldown += (float)delta;
+
+			if (hurtCooldown > 0.5)
+			{
+				hurtCooldown = 0;
+				onHurtCooldown = false;
+			}
 			// Apply gravity to Y velocity.
 			velocity.Y += Gravity * (float)delta;
 			// Clamp vertical velocity to terminal velocity.
@@ -360,7 +368,7 @@ public partial class Player : CharacterBody2D
 	/// <param name="shakeDuration">Camera shake duration</param>
 	public void Hurt(int damage, float shakeAmount, float shakeDuration)
 	{
-		if (!invincible && alive)
+		if (!invincible && alive &&!onHurtCooldown)
 		{
 			DecreasePower(damage);
 			if(!powerSurgeActive)
@@ -368,7 +376,8 @@ public partial class Player : CharacterBody2D
 			hurtSound.Play();
 			// Camera shake
 			camera.Shake(shakeAmount, shakeDuration);
-			
+			hurtCooldown = 0;
+			onHurtCooldown = true;
 		}
 	}
 

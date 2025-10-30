@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://t07iyauo0h2s"]
+[gd_scene load_steps=27 format=3 uid="uid://ul11wdbvusc0"]
 
 [ext_resource type="Texture2D" uid="uid://cjn0jy73etctw" path="res://Assets/UI/Power Meter - Base.png" id="1_g0wmg"]
 [ext_resource type="Texture2D" uid="uid://dl6thouribt67" path="res://Assets/UI/Power Meter - Fill.png" id="2_4vbiv"]
