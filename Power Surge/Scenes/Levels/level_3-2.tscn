@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://bab3gjcwq4aym"]
+[gd_scene load_steps=58 format=4 uid="uid://bab3gjcwq4aym"]
 
 [ext_resource type="Texture2D" uid="uid://cma4tajk7qt36" path="res://Assets/Tilemaps/Circuit Lab - Background.png" id="1_fhj0x"]
 [ext_resource type="Script" uid="uid://b7wmr48ib3n4y" path="res://Scripts/Levels/Level3_2.cs" id="1_ftj2i"]
@@ -16,6 +16,8 @@
 [ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="16_h1p6c"]
 [ext_resource type="Texture2D" uid="uid://b8ulvofnby7aw" path="res://Assets/Objects/Fragment - Filled Slot.png" id="17_xrsbh"]
 [ext_resource type="Texture2D" uid="uid://dxjb13hojjw0x" path="res://Assets/UI/Button - Highlighted.png" id="18_vr3bx"]
+[ext_resource type="Texture2D" uid="uid://dusgqwx440efb" path="res://Assets/Characters/Enemies/Boss Health Bar - Base.png" id="18_ypnpd"]
+[ext_resource type="Texture2D" uid="uid://rf2dbit86cn7" path="res://Assets/Characters/Enemies/Boss Health Bar - Fill.png" id="19_h1p6c"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="19_hvgas"]
 [ext_resource type="PackedScene" uid="uid://bignn7lsbeest" path="res://Scenes/fragment.tscn" id="20_gpe30"]
 [ext_resource type="PackedScene" uid="uid://bwvj50vhjjac7" path="res://Scenes/player.tscn" id="21_gur83"]
@@ -817,11 +819,24 @@ script = ExtResource("7_y4twr")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="Health Bar" type="TextureProgressBar" parent="UI"]
+visible = false
+offset_left = 384.0
+offset_top = 38.0
+offset_right = 512.0
+offset_bottom = 78.0
+scale = Vector2(3, 3)
+max_value = 200.0
+texture_over = ExtResource("18_ypnpd")
+texture_progress = ExtResource("19_h1p6c")
+
 [node name="Power Meter" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 10.0
+offset_top = 20.0
+offset_right = 50.0
+offset_bottom = 60.0
 
 [node name="Power Meter" parent="UI/Power Meter" instance=ExtResource("9_0h0fy")]
 layout_mode = 1
@@ -854,10 +869,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -5.0
-offset_top = -24.0
-offset_right = -5.0
-offset_bottom = -24.0
+offset_left = 5.0
+offset_top = -4.0
+offset_right = 5.0
+offset_bottom = -4.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Attacks-ui" type="Sprite2D" parent="UI/Control"]
@@ -1022,7 +1037,7 @@ vertical_alignment = 1
 [node name="Lab Boss" parent="Enemies" node_paths=PackedStringArray("HealthBar", "camera") instance=ExtResource("26_671rg")]
 visible = false
 position = Vector2(189, 40)
-HealthBar = NodePath("")
+HealthBar = NodePath("../../UI/Health Bar")
 camera = NodePath("../../Camera")
 
 [node name="Corrupt Puddles" type="Node2D" parent="Enemies"]
@@ -1171,7 +1186,7 @@ position = Vector2(271, -131)
 position = Vector2(265, -4)
 
 [node name="Battery Spawner4" parent="Objects" instance=ExtResource("30_qdt6i")]
-position = Vector2(16, 92)
+position = Vector2(120, 92)
 
 [node name="Checkpoints" type="Node2D" parent="."]
 

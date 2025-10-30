@@ -8,7 +8,7 @@ using System;
 /// <author>Emily Braithwaite</author>
 public partial class PowerSurgeBlast : Node2D, IPlayerAttack
 {
-	public float damage = 25;
+	public float damage = 30;
 	private string direction;
 	private AnimatedSprite2D animatedSprite;
 	private Vector2 offset;

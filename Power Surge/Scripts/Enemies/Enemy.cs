@@ -18,6 +18,7 @@ public abstract partial class Enemy : CharacterBody2D
 	// gravity for the enemy (world units / second^2) and terminal velocity
 	protected float gravity = 1000f;
 	protected float maxFallSpeed = 500f;
+	protected int healAmount;
 
 	/// <summary>
 	/// Called when enemy is hit by an attack
@@ -51,7 +52,7 @@ public abstract partial class Enemy : CharacterBody2D
 		animation.Animation = "death";
 		if (player.GetPower() <= 100)
 		{
-			player.IncreasePower((int)maxHealth);
+			player.IncreasePower(healAmount);
 		}
 		
 	}

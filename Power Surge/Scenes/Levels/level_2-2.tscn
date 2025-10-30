@@ -326,6 +326,14 @@ text = "OK"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Wrong Way Dialogue" parent="UI" instance=ExtResource("13_xhps1")]
+visible = false
+offset_left = 315.0
+offset_top = 66.0
+offset_right = 355.0
+offset_bottom = 106.0
+scale = Vector2(2, 2)
+
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Fragment3" parent="Objects" instance=ExtResource("18_6xm1p")]

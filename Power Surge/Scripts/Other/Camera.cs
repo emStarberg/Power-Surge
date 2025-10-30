@@ -202,6 +202,27 @@ public partial class Camera : Camera2D
 			transitioningToCentered = false;
 		}
 	}
+
+	public void ChangeToFixed(Vector2 fixedPosition, float lerpSpeed = 4.5f, bool immediate = false)
+	{
+
+		if (!isPanning)
+			savedMode = Mode;
+
+		// start a pan toward the explicit world position (not the centered Y-transition)
+		isPanning = true;
+		transitioningToCentered = false;
+		panLerpSpeed = lerpSpeed;
+		panTarget = fixedPosition;
+
+		if (immediate)
+		{
+			Position = panTarget;
+			Mode = "fixed";
+			isPanning = false;
+			transitioningToCentered = false;
+		}
+	}
 	
 	/// <summary>
 	/// Pan the camera smoothly to the given world-space focus position.
