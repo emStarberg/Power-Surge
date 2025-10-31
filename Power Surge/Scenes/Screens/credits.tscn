@@ -1,0 +1,162 @@
+[gd_scene load_steps=7 format=3 uid="uid://docjf5g0xqd0q"]
+
+[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="1_oytxc"]
+[ext_resource type="Script" uid="uid://1cj4dkg63n8v" path="res://Scripts/Other/Credits.cs" id="1_y162n"]
+[ext_resource type="AudioStream" uid="uid://c700bw0ig4tcg" path="res://Assets/Audio/credits.ogg" id="3_jj45f"]
+
+[sub_resource type="Animation" id="Animation_oytxc"]
+resource_name = "credits"
+length = 53.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 52.9667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(156, 759), Vector2(156, -2655)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(52.9667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"OnAnimationFinished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_y162n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(156, 759)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jj45f"]
+_data = {
+&"RESET": SubResource("Animation_y162n"),
+&"credits": SubResource("Animation_oytxc")
+}
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_y162n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -36.0
+offset_top = -21.0
+offset_right = 1266.0
+offset_bottom = 759.0
+color = Color(0.0562916, 0.0562916, 0.0562916, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 759.0
+offset_right = 2390.0
+offset_bottom = 8748.0
+scale = Vector2(0.388612, 0.388612)
+theme_override_fonts/font = ExtResource("1_oytxc")
+theme_override_font_sizes/font_size = 100
+text = "Director: Emily Braithwaite
+Assistant Director: Felix the Cat
+
+
+
+
+ASSETS
+
+
+Tile Sets: Emily Braithwaite
+Backgrounds: Emily Braithwaite
+Still Objects: Emily Braithwaite
+Lighting: Emily Braithwaite
+
+
+
+ANIMATIONS
+
+
+Character Animations: Emily Braithwaite
+Object Animations: Emily Braithwaite
+Attack Animations: Emily Braithwaite
+Opening Cutscene: Emily Braithwaite
+
+
+
+PROGRAMMING
+
+
+Character Scripts: Emily Braithwaite
+Player Script: Emily Braithwaite
+User Interface Scripts: Emily Braithwaite
+Level Scripts: Emily Braithwaite
+
+
+
+GAME DESIGN
+
+
+Head Game Designer: Emily Braithwaite
+Head of Making Up Roles: Emily Braithwaite
+Dialogue Scripts: Emily Braithwaite
+Story: Emily Braithwaite
+
+
+
+AUDIO
+
+
+Sound Effects: Pixabay
+Music: Abstraction Music
+
+(Bet you weren't expecting that!)
+
+
+
+
+
+
+Created for course CGRA359 at Victoria University of Wellington
+
+
+
+
+
+
+
+
+
+
+
+"
+horizontal_alignment = 1
+
+[node name="Animation Player" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jj45f")
+}
+autoplay = "credits"
+
+[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jj45f")
+autoplay = true

@@ -16,9 +16,9 @@ public partial class EndScreen : Node2D
 	private UICamera camera;
 	private Control effects, currentButton, textEffects, alert;
 	private AudioStreamPlayer2D zapSound, backgroundMusic, lightningSound;
-	private List<string> levels = new List<string> { "1-1", "1-2", "2-1", "2-2", "3-1", "3-2"};
+	private List<string> levels = new List<string> { "1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2"};
 	private float timer = 0, enemiesKilled = 0;
-	private bool shownFragments = false, shownPower = false, shownTime = false, shownRank = false, shownEnemies = false, glowing = true;
+	private bool shownFragments = false, shownPower = false, shownTime = false, shownRank = false, shownEnemies = false, glowing = true, atEnd = false;
 	private Label rank;
 	
 
@@ -69,7 +69,7 @@ public partial class EndScreen : Node2D
 		labels[3].Text = enemiesKilled + "/" + GameData.Instance.LevelEnemyCount;
 
 		// Show alert if last available level
-		alert.Visible = levels.IndexOf(GameData.Instance.CurrentLevel) == levels.Count - 1;
+		atEnd = levels.IndexOf(GameData.Instance.CurrentLevel) == levels.Count - 1;
 
 		rank.Text = CalculateRank();
 	}
@@ -145,11 +145,16 @@ public partial class EndScreen : Node2D
 					break;
 				case "NEXT":
 					// Go to next level
-					int index = levels.IndexOf(GameData.Instance.CurrentLevel);
-					string next = levels[index + 1];
-					if (!alert.Visible)
+					
+					if (!atEnd)
 					{
+						int index = levels.IndexOf(GameData.Instance.CurrentLevel);
+						string next = levels[index + 1];
 						LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/level_" + next + ".tscn");
+					}
+					else
+					{
+						LevelLoader.Instance.ChangeLevel("res://Scenes/Screens/Credits.tscn");
 					}					
 					break;
 				default:
