@@ -32,6 +32,7 @@ public partial class Player : CharacterBody2D
 	private int numJumps = 0; // For deciding whether a mid air jump is allowed, resets when ground hit
 	private float fallTime = 0f; // For checking if the player has fallen off the map
 	private PackedScene jumpAnimation = GD.Load<PackedScene>("Scenes/jump_animation.tscn"); // For spawning jump animations
+	
 
 	// Dash
 	private PackedScene dashAnimation = GD.Load<PackedScene>("Scenes/dash_animation.tscn"); // For spawning dash animations
@@ -64,7 +65,7 @@ public partial class Player : CharacterBody2D
 	private float powerSurgeTime = 15f;
 
 	// Audio
-	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound, powerSurgeAttackSound;
+	private AudioStreamPlayer2D jumpSound, weakPulseSound, dashSound, hurtSound, strongBlastSound, powerSurgeMusic, fragmentSound, powerSurgeAttackSound, powerIncreaseSound;
 
 	// Timers
 	private float timer = 0, regenTimer = 0, hurtCooldown = 0;
@@ -74,6 +75,7 @@ public partial class Player : CharacterBody2D
 	private float mileage = 0; // How far the player has moved left/right
 	public bool HasDashed = false, HasJumped = false, HasCycled = false, HasAttacked = false;
 	public bool Paused = false;
+	private bool hasTouchedGround = false;
 
 
 	public override void _Ready()
@@ -88,6 +90,7 @@ public partial class Player : CharacterBody2D
 		fragmentSound = GetNode<AudioStreamPlayer2D>("Sounds/Collect Fragment");
 		powerSurgeAttackSound = GetNode<AudioStreamPlayer2D>("Sounds/Power Surge Attack");
 		backgroundMusic = GetParent().GetNode<AudioStreamPlayer2D>("Background Music");
+		powerIncreaseSound = GetNode<AudioStreamPlayer2D>("Sounds/Power Increase");
 		// Set up animations
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		animation.Play();
@@ -124,6 +127,10 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		// To prevent dying in levels where the player is falling at the start
+		if (IsOnFloor() && !hasTouchedGround)
+			hasTouchedGround = true;
+
 		// Disable glow light for outdoor levels
 		GetNode<PointLight2D>("Light").Visible = GameData.Instance.GlowEnabled;		
 		
@@ -266,7 +273,7 @@ public partial class Player : CharacterBody2D
 					else
 						fallTime = 0f;
 
-					if (fallTime > 2.5f)
+					if (fallTime > 2.5f && hasTouchedGround)
 					{
 						// Die after 3 seconds of fall time
 						Die();
@@ -343,6 +350,10 @@ public partial class Player : CharacterBody2D
 			// Create jump animation
 			Node jumpAnimInstance = jumpAnimation.Instantiate();
 			((Node2D)jumpAnimInstance).GlobalPosition = GlobalPosition;
+			if (jumpAnimInstance is JumpAnimation j && powerSurgeActive)
+			{
+				j.Animation = "power surge";
+			}
 			GetTree().Root.AddChild(jumpAnimInstance);
 			// Increase no. of jumps, for counting double jumps
 			numJumps++;
@@ -405,6 +416,8 @@ public partial class Player : CharacterBody2D
 			{
 				animation.FlipH = false;
 				((Node2D)dashAnimInstance).Scale = new Vector2(-1, 1); // Flip horizontally
+				if (dashAnimInstance is DashAnimation d)
+					d.Animation = "power surge";
 			}
 			else
 			{
@@ -427,8 +440,10 @@ public partial class Player : CharacterBody2D
 	/// Increase player power level
 	/// </summary>
 	/// <param name="amount"></param>
-	public void IncreasePower(int amount)
+	public void IncreasePower(int amount, bool playSound = true)
 	{
+		if(playSound)
+		powerIncreaseSound?.Play();
 		power += amount;
 		camera.Shake(2, 0.2f);
 		if (power > 100 && !PowerSurgeEnabled)

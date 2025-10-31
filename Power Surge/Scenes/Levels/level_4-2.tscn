@@ -425,7 +425,7 @@ _data = {
 &"hamster": SubResource("Animation_rh0fm")
 }
 
-[node name="Node2D" type="Node2D"]
+[node name="4-2" type="Node2D"]
 script = ExtResource("1_1aupy")
 
 [node name="Backgrounds" type="Node2D" parent="."]

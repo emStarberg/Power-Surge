@@ -10,12 +10,13 @@ using System.Collections.Generic;
 public partial class PowerMeter : TextureProgressBar
 {
 	// All possible animation positions
-	private Vector2 pos1 = new(2, 10);
-	private Vector2 pos2 = new(10, 10);
-	private Vector2 pos3 = new(18, 10);
-	private Vector2 pos4 = new(26, 10);
-	private Vector2 pos5 = new(34, 10);
-	private Vector2 pos6 = new(42, 10);
+	private static float yPos = 15;
+	private Vector2 pos1 = new(2, yPos);
+	private Vector2 pos2 = new(14, yPos);
+	private Vector2 pos3 = new(26, yPos);
+	private Vector2 pos4 = new(38, yPos);
+	private Vector2 pos5 = new(50, yPos);
+	private Vector2 pos6 = new(62, yPos);
 	private PackedScene sparkAnimation = GD.Load<PackedScene>("Scenes/ui_spark.tscn");// For spawning animations along the power meter
 	private float loopWaitTime;
 	private List<Vector2> sparkPositions;
@@ -140,7 +141,6 @@ public partial class PowerMeter : TextureProgressBar
 	{
 		Node sparkInstance = sparkAnimation.Instantiate();
 		((Node2D)sparkInstance).Position = pos;
-		((Node2D)sparkInstance).Scale = new Vector2(0.65f, 0.65f);
 		CallDeferred("add_child", sparkInstance);
 	}
 

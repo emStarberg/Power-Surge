@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://oprlrtn4cvna"]
+[gd_scene load_steps=15 format=3 uid="uid://oprlrtn4cvna"]
 
 [ext_resource type="Texture2D" uid="uid://bj415dqfoku71" path="res://Assets/Characters/Player/Jump Animation - Spritesheet.png" id="1_lid85"]
+[ext_resource type="Texture2D" uid="uid://6sk7wv0uulbf" path="res://Assets/Characters/Player/Jump Animation - Power Surge - Spritesheet.png" id="2_108d0"]
 [ext_resource type="Script" uid="uid://bq8oao38ycitj" path="res://Scripts/Player/JumpAnimation.cs" id="2_avhy3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v7t6f"]
@@ -21,6 +22,26 @@ region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tjre"]
 atlas = ExtResource("1_lid85")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mcvp"]
+atlas = ExtResource("2_108d0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hude"]
+atlas = ExtResource("2_108d0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bv0c4"]
+atlas = ExtResource("2_108d0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhbdk"]
+atlas = ExtResource("2_108d0")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x71li"]
+atlas = ExtResource("2_108d0")
 region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_loefu"]
@@ -44,14 +65,32 @@ animations = [{
 "loop": false,
 "name": &"default",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mcvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hude")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bv0c4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhbdk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x71li")
+}],
+"loop": false,
+"name": &"power surge",
+"speed": 12.0
 }]
 
 [node name="Jump Animation" type="AnimatedSprite2D"]
 position = Vector2(170, 128)
 scale = Vector2(1.13, 1.13)
 sprite_frames = SubResource("SpriteFrames_loefu")
-frame = 4
-frame_progress = 1.0
 script = ExtResource("2_avhy3")
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
