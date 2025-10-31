@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://i0bgqucffv6s"]
+[gd_scene load_steps=41 format=4 uid="uid://i0bgqucffv6s"]
 
 [ext_resource type="Script" uid="uid://3adqtjrpwbei" path="res://Scripts/Levels/Level4_1.cs" id="1_sfhgy"]
 [ext_resource type="Texture2D" uid="uid://dcmamx3s5hfoa" path="res://Assets/Backgrounds/Lava Cave.png" id="1_velqd"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://bkt4btwct5snw" path="res://Scenes/switch.tscn" id="19_fa3ss"]
 [ext_resource type="PackedScene" uid="uid://cf33sju6vhlng" path="res://Scenes/stone_bridge_platform.tscn" id="20_fa3ss"]
 [ext_resource type="PackedScene" uid="uid://2h0wurv4vddk" path="res://Scenes/battery_pack.tscn" id="20_mc80x"]
+[ext_resource type="PackedScene" uid="uid://bd8okq273t30m" path="res://Scenes/energy_deposit.tscn" id="22_imemj"]
 [ext_resource type="PackedScene" uid="uid://ch58q6jxnp3qs" path="res://Scenes/voltage_sentinel.tscn" id="23_wpfcf"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1oq1o"]
@@ -420,6 +421,24 @@ position = Vector2(4513, 492)
 
 [node name="Battery Pack6" parent="Objects" instance=ExtResource("20_mc80x")]
 position = Vector2(4830, 788)
+
+[node name="Battery Pack7" parent="Objects" instance=ExtResource("20_mc80x")]
+position = Vector2(2532, -185)
+
+[node name="Battery Pack8" parent="Objects" instance=ExtResource("20_mc80x")]
+position = Vector2(3108, -93)
+
+[node name="Battery Pack9" parent="Objects" instance=ExtResource("20_mc80x")]
+position = Vector2(2972, 115)
+
+[node name="Energy Deposit" parent="Objects" instance=ExtResource("22_imemj")]
+position = Vector2(2546, 119)
+
+[node name="Energy Deposit2" parent="Objects" instance=ExtResource("22_imemj")]
+position = Vector2(2056, -41)
+
+[node name="Energy Deposit3" parent="Objects" instance=ExtResource("22_imemj")]
+position = Vector2(2915, -105)
 
 [node name="Enemies" type="Node2D" parent="." groups=["Enemy"]]
 

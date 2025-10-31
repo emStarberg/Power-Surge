@@ -83,7 +83,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_010gp"]
-size = Vector2(30, 11)
+size = Vector2(28, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8gpf"]
 size = Vector2(26, 32)
@@ -118,14 +118,14 @@ scale = Vector2(0.0800024, 1)
 [node name="StaticBody" type="StaticBody2D" parent="Statics"]
 
 [node name="Collider" type="CollisionShape2D" parent="Statics/StaticBody"]
-position = Vector2(0, -16)
+position = Vector2(-12.4996, -16)
 shape = SubResource("RectangleShape2D_l8gpf")
 
 [node name="StaticBody2" type="StaticBody2D" parent="Statics"]
 position = Vector2(-399.988, 0)
 
 [node name="Collider" type="CollisionShape2D" parent="Statics/StaticBody2"]
-position = Vector2(0, -16)
+position = Vector2(12.4996, -16)
 shape = SubResource("RectangleShape2D_l8gpf")
 
 [connection signal="frame_changed" from="Animation" to="." method="OnAnimationFrameChanged"]

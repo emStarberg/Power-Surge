@@ -112,12 +112,14 @@ public partial class Level4_2 : GameLevel
 					camera.Shake(1f, 5);
 					animationPlayer.CurrentAnimation = "Ground Breaking";
 					animationPlayer.Play();
+					player.DisableAllInputs();
 
 				}
 				else if (dialogueBox.GetLineNumber() == 17)
 				{
 					bossPhase = "hammers";
 					hammerTimer = 3;
+					player.Invincible = false;
 				}
 				else if (dialogueBox.GetLineNumber() == 19)
 				{
@@ -135,7 +137,7 @@ public partial class Level4_2 : GameLevel
 		
 		if (bossPhase == "spawn")
 		{
-			if(enemyCount < 1)
+			if(enemyCount < 30)
 			{
 				// Continue spawning enemies
 				spawnTimer += (float)delta;
@@ -205,6 +207,7 @@ public partial class Level4_2 : GameLevel
 
 				camera.ChangeToFixed(new Vector2(2178, -950));
 				camera.Mode = "fixed";
+				player.Invincible = false;
 
 			}else if (name == "End Pt2")
 			{
@@ -269,6 +272,7 @@ public partial class Level4_2 : GameLevel
 		fakeGround.QueueFree();
 		bossPhase = "spawn";
 		spawnTimer = 6;
+		player.EnableAllInputs();
 	}
 
 	/// <summary>
@@ -278,7 +282,8 @@ public partial class Level4_2 : GameLevel
 	{
 		// Move to platform phase
 		camera.Mode = "horizontal";
-		player.Position = new Vector2(1550, -1050); // FOR TESTING
+		player.Invincible = false;
+		//player.Position = new Vector2(1550, -1050); // FOR TESTING
 	}
 
 	/// <summary>

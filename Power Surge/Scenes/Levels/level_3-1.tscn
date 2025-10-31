@@ -200,7 +200,7 @@ sources/1 = SubResource("TileSetAtlasSource_xiwb4")
 sources/3 = SubResource("TileSetAtlasSource_0aipc")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0816u"]
-size = Vector2(1.7937, 49.0037)
+size = Vector2(3.06808, 49.0037)
 
 [sub_resource type="Gradient" id="Gradient_ulje2"]
 
@@ -956,7 +956,7 @@ position = Vector2(3541, 96)
 position = Vector2(5677, 531)
 
 [node name="Battery Pack9" parent="Objects" instance=ExtResource("22_b3ej1")]
-position = Vector2(5654, 531)
+position = Vector2(4789, 434)
 
 [node name="Battery Pack10" parent="Objects" instance=ExtResource("22_b3ej1")]
 position = Vector2(5712, 516)
@@ -965,7 +965,7 @@ position = Vector2(5712, 516)
 position = Vector2(5765, 450)
 
 [node name="Battery Pack12" parent="Objects" instance=ExtResource("22_b3ej1")]
-position = Vector2(5748, 484)
+position = Vector2(4887, 484)
 
 [node name="Battery Pack13" parent="Objects" instance=ExtResource("22_b3ej1")]
 position = Vector2(5615, 516)
@@ -990,6 +990,15 @@ position = Vector2(4353, 96)
 
 [node name="Hammer8" parent="Objects" instance=ExtResource("25_jpomb")]
 position = Vector2(4285, 96)
+
+[node name="Battery Pack4" parent="Objects" instance=ExtResource("22_b3ej1")]
+position = Vector2(2493, 596)
+
+[node name="Battery Pack8" parent="Objects" instance=ExtResource("22_b3ej1")]
+position = Vector2(2293, 515)
+
+[node name="Battery Pack14" parent="Objects" instance=ExtResource("22_b3ej1")]
+position = Vector2(479, 228)
 
 [node name="Enemies" type="Node2D" parent="." groups=["Enemy"]]
 
@@ -1112,7 +1121,8 @@ scale = Vector2(-4.88906, -18.8109)
 script = ExtResource("23_wdamg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/Camera Changes/3"]
-position = Vector2(35.5491, 4.40244)
+position = Vector2(35.2829, 4.40244)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_0816u")
 
 [node name="4" type="Area2D" parent="Checkpoints/Camera Changes"]
@@ -1231,6 +1241,9 @@ position = Vector2(2322, 2160)
 sprite_frames = SubResource("SpriteFrames_adkqn")
 animation = &"new_animation_1"
 frame_progress = 0.153979
+
+[node name="Battery Pack" parent="." instance=ExtResource("22_b3ej1")]
+position = Vector2(3264, 179)
 
 [connection signal="body_entered" from="Checkpoints/Camera Changes/1" to="Checkpoints/Camera Changes/1" method="OnBodyEntered"]
 [connection signal="body_entered" from="Checkpoints/Camera Changes/2" to="Checkpoints/Camera Changes/2" method="OnBodyEntered"]

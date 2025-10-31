@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://da41vllojx1m0"]
+
+[ext_resource type="Texture2D" uid="uid://dn3sxyhw3ei3o" path="res://Assets/UI/Title Background.png" id="1_8r1iy"]
+[ext_resource type="Texture2D" uid="uid://bn2v5dhr51k84" path="res://Assets/Thumbnails/Tutorial - Thumbnail.png" id="2_8eipu"]
+[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="3_c0t2f"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+process_mode = 3
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 1298.0
+offset_bottom = 649.0
+texture = ExtResource("1_8r1iy")
+
+[node name="Tutorial" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.9, 0.9)
+
+[node name="ColorRect" type="ColorRect" parent="Tutorial"]
+offset_left = 74.0
+offset_top = 61.0
+offset_right = 110.0
+offset_bottom = 97.0
+scale = Vector2(6.14772, 3.97681)
+color = Color(0.10748, 0.10748, 0.10748, 1)
+
+[node name="Image" type="TextureRect" parent="Tutorial"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 69.0
+offset_right = 1283.0
+offset_bottom = 819.0
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("2_8eipu")
+
+[node name="ColorRect" type="ColorRect" parent="Tutorial/Image"]
+layout_mode = 0
+offset_left = -52.9412
+offset_top = 752.941
+offset_right = -12.9412
+offset_bottom = 792.941
+scale = Vector2(32.5909, 3.39087)
+color = Color(0.10748, 0.10748, 0.10748, 1)
+
+[node name="Label" type="Label" parent="Tutorial/Image"]
+layout_mode = 0
+offset_left = 152.632
+offset_top = 757.895
+offset_right = 977.632
+offset_bottom = 865.895
+scale = Vector2(1.10135, 1.10135)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 100
+text = "TUTORIAL"
+horizontal_alignment = 1

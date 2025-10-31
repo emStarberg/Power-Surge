@@ -12,14 +12,11 @@ Archie|You should use this to your advantage.
 Lilah|That's right, and if you need to get away in a hurry, there's also the dash feature.
 Lilah|You can access it by pressing LSHIFT while moving left or right. Give it a try.
 Lilah|Good job. 
-Lilah|Of course, we didn't leave S.U.R.G.E defenseless, you've got 3 attacks to choose from:
-Lilah|Firstly there's the weak pulse, its power cost is low, 
-Lilah|but as the name implies, it is weak and only has a short range.
-Lilah|Secondly, there's the strong blast. 
-Lilah|This one is a long ranged projectile that packs a bit of a punch, but at a high cost.
-Lilah|Lastly, there's the surround blast. This one is reasonably powerful, 
-Lilah|but with a lower cost than the strong blast,
-Lilah|It fires a round of short range projectiles in a ring around you.
+Lilah|Of course, we didn't leave S.U.R.G.E defenseless, you've got 2 attacks to choose from:
+Lilah|Firstly there's the pulse,
+Lilah|it only has a short range but packs a punch.
+Lilah|Secondly, there's the projectile. 
+Lilah|This one is a long ranged, but is slightly weaker and comes at a higher cost.
 Lilah|To cycle between these attacks, use [ and ]. 
 Lilah|You can see your selected attack in the bottom left corner of your screen.
 Lilah|Press SPACE to use your selected attack. There are a few enemies around for you to practice on.

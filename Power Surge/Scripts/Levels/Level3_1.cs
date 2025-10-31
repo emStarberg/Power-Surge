@@ -6,7 +6,7 @@ public partial class Level3_1 : GameLevel
 {
 	private DialogueBox dialogueBox;
 	private bool dialogueStarted = false, popupShown = false, resumedAfterPan = false, timerRunning = true;
-	private List<int> lineNumbers = new List<int> {3 }; // Line numbers to pause dialogue at
+	private List<int> lineNumbers = new List<int> {3}; // Line numbers to pause dialogue at
 	private float timer = 0;
 
 	public override void _Ready()
@@ -100,8 +100,24 @@ public partial class Level3_1 : GameLevel
 	{
 		if (body is Player player)
 		{
+			if(change.Name == "3")
+			{
+				if (player.GlobalPosition.Y > 350 )
+				{
+					camera.Mode = "centered";
+					camera.SetCenterY(536f);
+					camera.ChangeToCentered();
+				}
+				else
+				{
+					camera.Mode = "centered";
+					camera.SetCenterY(136f);
+					camera.ChangeToCentered();
+				}
+			}
 			if (player.GetDirection() == change.DirectionEnteredFrom)
 			{
+
 				switch (change.Name)
 				{
 					case "1":
@@ -120,23 +136,6 @@ public partial class Level3_1 : GameLevel
 							camera.ChangeToCentered();
 						}
 						break;
-					case "3":
-						if (camera.GetCenterY() == 136)
-						{
-							GD.Print("called A");
-							camera.Mode = "centered";
-							camera.SetCenterY(536f);
-							camera.ChangeToCentered();
-						}
-						else
-						{
-							GD.Print("called B");
-							camera.Mode = "centered";
-							camera.SetCenterY(136f);
-							camera.ChangeToCentered();
-						}
-						break;
-
 					case "4":
 						if (camera.GetCenterY() == 136)
 						{

@@ -676,7 +676,7 @@ spawnTime = 24.0
 
 [node name="Battery Spawner2" parent="Objects" instance=ExtResource("19_aevdi")]
 position = Vector2(-152, 18)
-spawnTime = 35.0
+spawnTime = 28.0
 
 [node name="Stone Bridge Platform" parent="Objects" instance=ExtResource("20_i0egb")]
 position = Vector2(315, 33)
@@ -821,7 +821,7 @@ position = Vector2(4332, -960)
 [node name="Elevator" parent="Objects" instance=ExtResource("24_rh0fm")]
 position = Vector2(3937, -680)
 MaxHeight = 505.0
-Speed = 50.0
+Speed = 80.0
 
 [node name="Switch" parent="Objects" node_paths=PackedStringArray("SwitchObjects") instance=ExtResource("25_lfg1f")]
 position = Vector2(4374, -960)
@@ -866,8 +866,38 @@ position = Vector2(5321, -936)
 [node name="Energy Deposit3" parent="Objects" instance=ExtResource("27_1fiam")]
 position = Vector2(5337, -936)
 
+[node name="Battery Pack9" parent="Objects" instance=ExtResource("27_xrfmo")]
+position = Vector2(4931, -539)
+
 [node name="Battery Pack8" parent="Objects" instance=ExtResource("27_xrfmo")]
 position = Vector2(4243, -957)
+
+[node name="Battery Pack10" parent="Objects" instance=ExtResource("27_xrfmo")]
+position = Vector2(3279, -876)
+
+[node name="Energy Deposit4" parent="Objects" instance=ExtResource("27_1fiam")]
+position = Vector2(3320, -856)
+
+[node name="Energy Deposit5" parent="Objects" instance=ExtResource("27_1fiam")]
+position = Vector2(-197, 24)
+
+[node name="Energy Deposit6" parent="Objects" instance=ExtResource("27_1fiam")]
+position = Vector2(163, 24)
+
+[node name="Energy Deposit7" parent="Objects" instance=ExtResource("27_1fiam")]
+position = Vector2(1962, -872)
+
+[node name="Battery Pack11" parent="Objects" instance=ExtResource("27_xrfmo")]
+position = Vector2(2936, -877)
+
+[node name="Battery Pack12" parent="Objects" instance=ExtResource("27_xrfmo")]
+position = Vector2(4102, -941)
+
+[node name="Battery Spawner5" parent="Objects" instance=ExtResource("19_aevdi")]
+position = Vector2(4485, -444)
+
+[node name="Battery Spawner6" parent="Objects" instance=ExtResource("19_aevdi")]
+position = Vector2(3983, -684)
 
 [node name="Enemies" type="Node2D" parent="." groups=["Enemy"]]
 
@@ -1066,9 +1096,6 @@ position = Vector2(2216, -1133)
 [node name="Boss Hammer4" parent="Final Boss" instance=ExtResource("29_xrfmo")]
 position = Vector2(2315, -1133)
 
-[node name="Battery Pack" parent="." instance=ExtResource("27_xrfmo")]
-position = Vector2(4931, -539)
-
 [node name="BigGate" type="Sprite2D" parent="."]
 position = Vector2(6311, -1072)
 texture = ExtResource("38_nmkfp")
@@ -1084,3 +1111,12 @@ frame_progress = 0.763912
 libraries = {
 &"": SubResource("AnimationLibrary_gfkrw")
 }
+
+[node name="Battery Pack" parent="." instance=ExtResource("27_xrfmo")]
+position = Vector2(5113, -828)
+
+[node name="Battery Pack2" parent="." instance=ExtResource("27_xrfmo")]
+position = Vector2(5125, -828)
+
+[node name="Battery Pack3" parent="." instance=ExtResource("27_xrfmo")]
+position = Vector2(1557, -1053)

@@ -112,7 +112,7 @@ public partial class FinalBoss : Node2D
 	public void UseHammer()
 	{
 		Random rng = new();
-		Hammers[rng.Next(0, Hammers.Count-1)].Attack();
+		Hammers[rng.Next(0, Hammers.Count)].Attack();
 	}
 	
 }

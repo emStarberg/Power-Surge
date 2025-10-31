@@ -24,6 +24,8 @@ public partial class Tutorial : GameLevel
 		// Set up dialogue
 		dialogueBox.AddLinesFromFile("res://Assets/Dialogue Files/tutorial.txt");
 		deathDialogue.AddLinesFromFile("res://Assets/Dialogue Files/tutorialdeath.txt");
+
+		GameData.Instance.GlowEnabled = GlowEnabled;
 	}
 
 	public override void _Process(double delta)
@@ -66,7 +68,7 @@ public partial class Tutorial : GameLevel
 				player.EnableInputs("input_dash");
 			}
 			// Attack
-			if (dialogueBox.GetLineNumber() == 25 && !dialogueBox.IsTyping() && !hasAttacked)
+			if (dialogueBox.GetLineNumber() == 22 && !dialogueBox.IsTyping() && !hasAttacked)
 			{
 				dialogueBox.Pause();
 				ShowTutorial("Attack");
@@ -89,7 +91,7 @@ public partial class Tutorial : GameLevel
 				dialogueWasPlaying = false;
 			}
 			// End of dialogue
-			if (dialogueBox.GetLineNumber() == 31 && !dialogueBox.IsTyping())
+			if (dialogueBox.GetLineNumber() == 28 && !dialogueBox.IsTyping())
 			{
 				dialogueBox.Pause();
 				EnableAllInputs();
