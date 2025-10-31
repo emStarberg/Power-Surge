@@ -52,7 +52,7 @@ public abstract partial class Enemy : CharacterBody2D
 		animation.Animation = "death";
 		if (player.GetPower() <= 100)
 		{
-			player.IncreasePower(healAmount);
+			player.IncreasePower(healAmount, false);
 		}
 		
 	}
