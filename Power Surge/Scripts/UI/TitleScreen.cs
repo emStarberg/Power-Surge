@@ -15,9 +15,11 @@ public partial class TitleScreen : Node2D
 	private UICamera camera;
 	private Control effects, currentButton;
 	private AudioStreamPlayer2D zapSound, backgroundMusic;
-	private bool optionsOpen = false, selectorOpen = false;
+	private bool menuOpen = false;
 	public override void _Ready()
 	{
+		GameSettings.Instance.LoadGame();
+
 		buttonOn = GD.Load<Texture2D>("res://Assets/UI/Button - Highlighted.png");
 		buttonOff = GD.Load<Texture2D>("res://Assets/UI/Button.png");
 
@@ -47,7 +49,7 @@ public partial class TitleScreen : Node2D
 	public override void _Process(double delta)
 	{
 		// Switch between buttons
-		if (Input.IsActionJustPressed("input_up") && !optionsOpen && !selectorOpen)
+		if (Input.IsActionJustPressed("input_up") && !menuOpen)
 		{
 			DeselectButton(selected);
 			if (selected > 0)
@@ -60,7 +62,7 @@ public partial class TitleScreen : Node2D
 			}
 			SelectButton(selected);
 		}
-		if (Input.IsActionJustPressed("input_down") && !optionsOpen && !selectorOpen)
+		if (Input.IsActionJustPressed("input_down") && !menuOpen)
 		{
 			DeselectButton(selected);
 			if (selected < buttons.Count - 1)
@@ -75,22 +77,22 @@ public partial class TitleScreen : Node2D
 		}
 
 		// Enter pressed
-		if (Input.IsActionJustPressed("input_accept") && !optionsOpen && !selectorOpen)
+		if (Input.IsActionJustPressed("input_accept") && !menuOpen)
 		{
 			String name = currentButton.Name;
 			if (name == "START")
 			{
 				GetNode<Control>("Control/Buttons").Visible = false;
-				selectorOpen = true;
-				var selectorScene = GD.Load<PackedScene>("res://Scenes/Screens/name_selector.tscn");
-				var selectorInstance = selectorScene.Instantiate();
-				GetTree().CurrentScene.AddChild(selectorInstance);
-				selectorInstance.TreeExited += OnNameSelectorClosed;
+				menuOpen = true;
+				var playOptions = GD.Load<PackedScene>("res://Scenes/Screens/play_options.tscn");
+				var playOptionsInstance = playOptions.Instantiate();
+				GetTree().CurrentScene.AddChild(playOptionsInstance);
+				playOptionsInstance.TreeExited += OnPlayOptionsClosed;
 			}
 			else if (name == "OPTIONS")
 			{
 				GetNode<Control>("Control/Buttons").Visible = false;
-				optionsOpen = true;
+				menuOpen = true;
 				var optionsScene = GD.Load<PackedScene>("res://Scenes/Screens/options_screen.tscn");
 				var optionsInstance = optionsScene.Instantiate();
 				GetTree().CurrentScene.AddChild(optionsInstance);
@@ -98,6 +100,7 @@ public partial class TitleScreen : Node2D
 			}
 			else if (name == "EXIT")
 			{
+				GameSettings.Instance.SaveGame();
 				GetTree().Quit();
 			}
 		}
@@ -105,13 +108,19 @@ public partial class TitleScreen : Node2D
 
 	private void OnOptionsClosed()
 	{
-		optionsOpen = false;
+		menuOpen = false;
 		GetNode<Control>("Control/Buttons").Visible = true;
 	}
 
 	private void OnNameSelectorClosed()
 	{
-		selectorOpen = false;
+		menuOpen = true;
+		//GetNode<Control>("Control/Buttons").Visible = true;
+	}
+
+		private void OnPlayOptionsClosed()
+	{
+		menuOpen = false;
 		GetNode<Control>("Control/Buttons").Visible = true;
 	}
 

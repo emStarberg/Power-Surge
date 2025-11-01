@@ -17,12 +17,12 @@ Lilah| it has to go.
 Archie| Okay, okay… no need to bite my head off.
 Archie| What's that [name]?
 Archie| Yeah, it sounds like you're in the secret lab. That’s supposed to be... well... secret...
-Lilah| The electronic lock must’ve failed. Barricade the door and stay put, but—
-Lilah| Do not touch anything in there, [name]. I repeat, do not touch anything!
+Lilah| The electronic lock must’ve failed. Barricade the door and stay put,
+Lilah| but do not touch anything in there, [name]. I repeat, do not touch anything!
 Archie| Unless…
 Lilah| Unless what?
 Archie| Maybe it’s time.
-Archie| The system’s stable enough—it was just waiting for a proper test run.
+Archie| The system’s stable enough, it was just waiting for a proper test run.
 Lilah| We can’t just play with it like it’s some toy! 
 Lilah| It hasn’t been fully tested, and we need authorization from the boss!
 Archie| You really think he survived the attack? No one else did. There’s nowhere else secure in this building.
@@ -32,17 +32,17 @@ Lilah| …You’re right. I hate that you’re right.
 Lilah| [name], listen carefully. You need to know what’s in that room.
 Lilah| Six months ago, we started seeing strange electrical surges acting like they had a mind of their own.
 Lilah| That’s when our team began developing a device to connect with The World Conductor itself.
-Lilah| Remember that incident last month — the girl and the refrigerator? That was the turning point.
+Lilah| Remember that incident last month, the girl and the refrigerator? That was the turning point.
 Lilah| We realized it could possess machines. So we armed the device.
 Lilah| And now those same machines are destroying everything. They’re what attacked us.
 Archie| The device, code-named S.U.R.G.E., is in there with you. See that blue orb?
 Archie| We need you to pilot it. The controls only work from that lab.
 Archie| Through it, you can reach The World Conductor. It may be humanity’s last shot.
-Archie| I get it — you’re unsure. Anyone would be.
+Archie| I get it, you’re unsure. Anyone would be.
 Lilah| But you’re the only one who can, [name]. Please. Do this.
 Archie| We’ll be with you the whole way. Once S.U.R.G.E. boots up, we’ll see your display feed.
 Lilah| …Thank you, [name]. You don’t know how much this means.
-Lilah| Go to the control panel—I’ll guide you through it.
+Lilah| Go to the control panel, I’ll guide you through it.
 Lilah| Are you there? Good. See the button that says “Run Simulation”?
 Lilah| Tap that — it’ll transport S.U.R.G.E. into a digital environment for training.
 Archie| Don’t worry — it’s a lot at first, but you’ll get the hang of it. Even I managed it once!

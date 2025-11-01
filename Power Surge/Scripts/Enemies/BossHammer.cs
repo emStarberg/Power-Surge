@@ -2,7 +2,8 @@ using Godot;
 using System;
 //------------------------------------------------------------------------------
 // <summary>
-//     Hammer used by final boss
+//  Hammer used by final boss
+//	Inherits from Enemy
 // </summary>
 // <author>Emily Braithwaite</author>
 //------------------------------------------------------------------------------
@@ -21,7 +22,7 @@ public partial class BossHammer : Enemy
 		animation = GetNode<AnimatedSprite2D>("Animation");
 		camera = GetParent().GetParent().GetNode<Camera>("Camera");
 		hurtSound = GetNode<AudioStreamPlayer2D>("Hurt Sound");
-		health = 1;
+		health = 75;
 		healAmount = 0;
 	}
 
@@ -67,7 +68,7 @@ public partial class BossHammer : Enemy
 			player.IncreasePower(healAmount);
 		}
 	}
-	
+
 	/// <summary>
 	/// Called by animation player when death anim has finished
 	/// </summary>
@@ -76,11 +77,11 @@ public partial class BossHammer : Enemy
 		if (GetParent() is FinalBoss fb)
 		{
 			fb.Hammers.Remove(this);
-			if(fb.Hammers.Count > 0)
+			if (fb.Hammers.Count > 0)
 			{
 				// Spawn a Voltage Sentinel
 				Node enemyInstance = voltageSentinel.Instantiate();
-				if(enemyInstance is VoltageSentinel v)
+				if (enemyInstance is VoltageSentinel v)
 				{
 					v.GlobalPosition = GlobalPosition + new Vector2(0, 50);
 					GetParent().GetParent().GetNode<Node2D>("Spawned Enemies").AddChild(v);

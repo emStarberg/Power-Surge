@@ -83,14 +83,15 @@ texture = ExtResource("2_737wf")
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_left = -1.0
+offset_right = 39.0
 offset_bottom = 40.0
 
 [node name="Buttons" type="Control" parent="Control"]
 anchors_preset = 0
-offset_left = 4.0
+offset_left = 7.0
 offset_top = 14.0
-offset_right = 44.0
+offset_right = 47.0
 offset_bottom = 54.0
 
 [node name="START" type="Control" parent="Control/Buttons"]
@@ -126,7 +127,7 @@ grow_vertical = 2
 scale = Vector2(0.460858, 0.460858)
 theme_override_fonts/font = ExtResource("3_ed76m")
 theme_override_font_sizes/font_size = 80
-text = "START"
+text = "PLAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -262,7 +263,7 @@ scale = Vector2(0.587005, 0.587005)
 texture = ExtResource("5_1pj1r")
 
 [node name="Player" type="AnimatedSprite2D" parent="Control"]
-position = Vector2(581, 130)
+position = Vector2(583, 130)
 scale = Vector2(2.8, 2.8)
 sprite_frames = SubResource("SpriteFrames_bqyv2")
 autoplay = "default"

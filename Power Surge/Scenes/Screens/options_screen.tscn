@@ -179,7 +179,7 @@ grow_vertical = 2
 scale = Vector2(0.440215, 0.440215)
 theme_override_fonts/font = ExtResource("1_uadqa")
 theme_override_font_sizes/font_size = 80
-text = "QUIT GAME"
+text = "EXIT LEVEL"
 horizontal_alignment = 1
 vertical_alignment = 1
 

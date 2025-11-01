@@ -92,8 +92,15 @@ public partial class NameSelector : ColorRect
 			if (currentButton.Name == "OK")
 			{
 				if (lineEdit.Text != "")
+
 				{
+					// Set/reset settings
 					GameSettings.Instance.PlayerName = lineEdit.Text;
+					GameSettings.Instance.HasStarted = true;
+					GameSettings.Instance.UnlockedLevels = new string[9];
+					GameSettings.Instance.LevelFragments = [0,0,0,0,0,0,0,0,0];
+					GameSettings.Instance.TutorialComplete = false;
+
 				}
 				GetTree().ChangeSceneToFile("res://Scenes/Cutscenes/opening_sequence.tscn");
 			}

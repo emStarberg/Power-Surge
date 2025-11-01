@@ -89,9 +89,6 @@ animations = [{
 
 [node name="dash_animation" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_au5ly")
-animation = &"power surge"
-frame = 4
-frame_progress = 1.0
 script = ExtResource("2_52rhg")
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

@@ -106,6 +106,7 @@ public partial class Level3_2 : GameLevel
 		if (body is Player player)
 		{
 			string name = checkpoint.Name;
+			checkpoint.QueueFree();
 			dialogueBox.Resume();
 		}
 	}

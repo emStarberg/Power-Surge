@@ -44,5 +44,5 @@ Hamster|Excellent
 Archie|Well that was... anticlimatic?
 Lilah|Yes...
 Lilah|Thank you [name]. You've literally saved the world, at least for another million years.
-Lilah|You can log off your computer now, it should be safe enough now that we can come out an meet you in the lab.
+Lilah|You can log off your computer now, it should be safe enough that we can come out and meet you in the lab.
 Lilah|

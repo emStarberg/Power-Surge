@@ -16,7 +16,7 @@ public partial class EndScreen : Node2D
 	private UICamera camera;
 	private Control effects, currentButton, textEffects, alert;
 	private AudioStreamPlayer2D zapSound, backgroundMusic, lightningSound;
-	private List<string> levels = new List<string> { "1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2"};
+	private List<string> levels = new List<string> { "tutorial", "1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2"};
 	private float timer = 0, enemiesKilled = 0;
 	private bool shownFragments = false, shownPower = false, shownTime = false, shownRank = false, shownEnemies = false, glowing = true, atEnd = false;
 	private Label rank;
@@ -34,6 +34,12 @@ public partial class EndScreen : Node2D
 		lightningSound = GetNode<AudioStreamPlayer2D>("Lightning Sound");
 		rank = GetNode<Label>("Control/Rank");
 		alert = GetNode<Control>("Control/Alert"); // For MVP
+
+		// Get index of next level and unlock it
+		int nextIndex = levels.IndexOf(GameData.Instance.CurrentLevel) + 1;
+		GameSettings.Instance.UnlockedLevels[nextIndex] = levels[nextIndex];
+		// Save
+		GameSettings.Instance.SaveGame();
 
 		// Add buttons to list
 		foreach (Node node in GetNode<Control>("Control/Buttons").GetChildren())
@@ -150,6 +156,7 @@ public partial class EndScreen : Node2D
 					{
 						int index = levels.IndexOf(GameData.Instance.CurrentLevel);
 						string next = levels[index + 1];
+
 						LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/level_" + next + ".tscn");
 					}
 					else

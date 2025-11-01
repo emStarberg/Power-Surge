@@ -40,7 +40,8 @@ public partial class Player : CharacterBody2D
 	private bool isDashing = false, canDash = false; // Player can't dash again without touching ground in between
 
 	// States
-	private bool alive = true, powerSurgeActive = false, invincible = false, onHurtCooldown = false;
+	private bool alive = true, powerSurgeActive = false, onHurtCooldown = false;
+	public bool Invincible = false;
 
 	// Direction/Movement
 	private float direction = 0.0f; // Direction player is facing (-1 = left, 1 = right)
@@ -137,7 +138,7 @@ public partial class Player : CharacterBody2D
 		if (camera.IsPanning())
 		{
 			Paused = true;
-			invincible = true;
+			Invincible = true;
 		}
 		if (alive)
 		{
@@ -379,7 +380,7 @@ public partial class Player : CharacterBody2D
 	/// <param name="shakeDuration">Camera shake duration</param>
 	public void Hurt(int damage, float shakeAmount, float shakeDuration)
 	{
-		if (!invincible && alive &&!onHurtCooldown)
+		if (!Invincible && alive &&!onHurtCooldown)
 		{
 			DecreasePower(damage);
 			if(!powerSurgeActive)
@@ -398,7 +399,7 @@ public partial class Player : CharacterBody2D
 	public void Dash()
 	{
 		fallTime = 0;
-		invincible = true;
+		Invincible = true;
 		// For tutorial
 		if (!HasDashed)
 		{
@@ -412,12 +413,12 @@ public partial class Player : CharacterBody2D
 			isDashing = true;
 			Node dashAnimInstance = dashAnimation.Instantiate();
 			((Node2D)dashAnimInstance).GlobalPosition = GlobalPosition;
+			if (dashAnimInstance is DashAnimation d && powerSurgeActive)
+				d.Animation = "power surge";
 			if (direction == 1)
 			{
 				animation.FlipH = false;
 				((Node2D)dashAnimInstance).Scale = new Vector2(-1, 1); // Flip horizontally
-				if (dashAnimInstance is DashAnimation d)
-					d.Animation = "power surge";
 			}
 			else
 			{
@@ -551,7 +552,7 @@ public partial class Player : CharacterBody2D
 			}
 			if (animation.Animation == "dash")
 			{
-				invincible = false;
+				Invincible = false;
 				isDashing = false;
 				velocity.X = 0; // Stop horizontal movement after dash
 
@@ -605,7 +606,6 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void AddFragment()
 	{
-		var camera = GetParent().GetNode<Camera>("Camera");
 		fragmentSound.Play();
 		fragmentSlots[fragmentCount].Texture = (Texture2D)GD.Load("res://Assets/Objects/Fragment - Filled Slot.png");
 		fragmentCount++;
@@ -615,6 +615,7 @@ public partial class Player : CharacterBody2D
 			power = 100;
 			camera.Shake(6, 0.2f);
 		}
+
 	}
 	/// <summary>
 	/// Start the power surge timer
@@ -625,6 +626,7 @@ public partial class Player : CharacterBody2D
 		animation.Visible = false;
 		animation = GetNode<AnimatedSprite2D>("Animations - Power Surge");
 		animation.Visible = true;
+		animation.Play();
 		Scale = new Vector2(1.3f, 1.3f);
 		Speed = 300f;
 		JumpStrength -= 50;
@@ -649,6 +651,7 @@ public partial class Player : CharacterBody2D
 		animation.Visible = false;
 		animation = GetNode<AnimatedSprite2D>("Animations");
 		animation.Visible = true;
+		animation.Play();
 		Scale = new Vector2(1f, 1f);
 		Speed = 200f;
 		JumpStrength += 50;
