@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://da41vllojx1m0"]
+[gd_scene load_steps=23 format=3 uid="uid://da41vllojx1m0"]
 
 [ext_resource type="Texture2D" uid="uid://dn3sxyhw3ei3o" path="res://Assets/UI/Title Background.png" id="1_8r1iy"]
 [ext_resource type="Script" uid="uid://y86d4db2cut4" path="res://Scripts/UI/LevelSelector.cs" id="1_15olw"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Audio/Zap.mp3" id="18_7khny"]
 [ext_resource type="AudioStream" uid="uid://chbwwtavgndk7" path="res://Assets/Audio/DavidKBD - Cosmic Pack 02 - Galactic Pulse-full.ogg" id="19_xaokl"]
 [ext_resource type="Texture2D" uid="uid://6t78hc5yqo6t" path="res://Assets/UI/Button.png" id="21_xaokl"]
+[ext_resource type="Texture2D" uid="uid://bj2vrb76lxj1v" path="res://Assets/Thumbnails/Frament - Filled.png" id="22_1vcl7"]
 
 [node name="Level Selector" type="Control"]
 layout_mode = 3
@@ -99,6 +100,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="2" type="TextureRect" parent="Levels/tutorial/Fragments"]
+layout_mode = 0
 offset_left = 175.556
 offset_top = 243.333
 offset_right = 215.556
@@ -107,6 +109,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="3" type="TextureRect" parent="Levels/tutorial/Fragments"]
+layout_mode = 0
 offset_left = 196.667
 offset_top = 243.333
 offset_right = 236.667
@@ -194,6 +197,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="2" type="TextureRect" parent="Levels/1-1/Fragments"]
+layout_mode = 0
 offset_left = 175.556
 offset_top = 243.333
 offset_right = 215.556
@@ -202,6 +206,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="3" type="TextureRect" parent="Levels/1-1/Fragments"]
+layout_mode = 0
 offset_left = 196.667
 offset_top = 243.333
 offset_right = 236.667
@@ -287,6 +292,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="2" type="TextureRect" parent="Levels/1-2/Fragments"]
+layout_mode = 0
 offset_left = 175.556
 offset_top = 243.333
 offset_right = 215.556
@@ -295,6 +301,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="3" type="TextureRect" parent="Levels/1-2/Fragments"]
+layout_mode = 0
 offset_left = 196.667
 offset_top = 243.333
 offset_right = 236.667
@@ -382,6 +389,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="2" type="TextureRect" parent="Levels/2-1/Fragments"]
+layout_mode = 0
 offset_left = 175.556
 offset_top = 243.333
 offset_right = 215.556
@@ -390,6 +398,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="3" type="TextureRect" parent="Levels/2-1/Fragments"]
+layout_mode = 0
 offset_left = 196.667
 offset_top = 243.333
 offset_right = 236.667
@@ -476,6 +485,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="2" type="TextureRect" parent="Levels/2-2/Fragments"]
+layout_mode = 0
 offset_left = 175.556
 offset_top = 243.333
 offset_right = 215.556
@@ -484,6 +494,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="3" type="TextureRect" parent="Levels/2-2/Fragments"]
+layout_mode = 0
 offset_left = 196.667
 offset_top = 243.333
 offset_right = 236.667
@@ -570,6 +581,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="2" type="TextureRect" parent="Levels/3-1/Fragments"]
+layout_mode = 0
 offset_left = 175.556
 offset_top = 243.333
 offset_right = 215.556
@@ -578,6 +590,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="3" type="TextureRect" parent="Levels/3-1/Fragments"]
+layout_mode = 0
 offset_left = 196.667
 offset_top = 243.333
 offset_right = 236.667
@@ -664,6 +677,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="2" type="TextureRect" parent="Levels/3-2/Fragments"]
+layout_mode = 0
 offset_left = 175.556
 offset_top = 243.333
 offset_right = 215.556
@@ -672,6 +686,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="3" type="TextureRect" parent="Levels/3-2/Fragments"]
+layout_mode = 0
 offset_left = 196.667
 offset_top = 243.333
 offset_right = 236.667
@@ -758,6 +773,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="2" type="TextureRect" parent="Levels/4-1/Fragments"]
+layout_mode = 0
 offset_left = 175.556
 offset_top = 243.333
 offset_right = 215.556
@@ -766,6 +782,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="3" type="TextureRect" parent="Levels/4-1/Fragments"]
+layout_mode = 0
 offset_left = 196.667
 offset_top = 243.333
 offset_right = 236.667
@@ -852,6 +869,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="2" type="TextureRect" parent="Levels/4-2/Fragments"]
+layout_mode = 0
 offset_left = 175.556
 offset_top = 243.333
 offset_right = 215.556
@@ -860,6 +878,7 @@ scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
 [node name="3" type="TextureRect" parent="Levels/4-2/Fragments"]
+layout_mode = 0
 offset_left = 196.667
 offset_top = 243.333
 offset_right = 236.667
@@ -991,3 +1010,39 @@ theme_override_font_sizes/font_size = 80
 text = "BACK"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Fragment Count Display" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -168.0
+offset_top = 4.0
+offset_right = -128.0
+offset_bottom = 44.0
+
+[node name="ColorRect" type="ColorRect" parent="Fragment Count Display"]
+layout_mode = 0
+offset_left = 1120.0
+offset_top = 487.0
+offset_right = 1183.0
+offset_bottom = 527.0
+scale = Vector2(2.27938, 1.2706)
+color = Color(0.136826, 0.136826, 0.136826, 1)
+
+[node name="Fragment Count" type="Label" parent="Fragment Count Display"]
+layout_mode = 0
+offset_left = 1130.0
+offset_top = 484.0
+offset_right = 1285.0
+offset_bottom = 592.0
+scale = Vector2(0.512899, 0.512899)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 100
+text = "0/18"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Fragment Count Display"]
+layout_mode = 0
+offset_left = 1214.0
+offset_top = 491.0
+offset_right = 1254.0
+offset_bottom = 531.0
+texture = ExtResource("22_1vcl7")

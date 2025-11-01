@@ -16,6 +16,7 @@ public partial class Player : CharacterBody2D
 	[Export] public float MaxFallSpeed = 500f; // Terminal velocity
 	[Export] public int MaxPower = 200; // Maximum power level 200%
 	[Export] public bool TutorialMode = false, PowerSurgeEnabled = true;
+	[Export] public bool InvincibilityCheat = false;
 
 	private Control fragmentSlotsUI;
 	private PowerMeter powerMeter;
@@ -380,7 +381,7 @@ public partial class Player : CharacterBody2D
 	/// <param name="shakeDuration">Camera shake duration</param>
 	public void Hurt(int damage, float shakeAmount, float shakeDuration)
 	{
-		if (!Invincible && alive &&!onHurtCooldown)
+		if (!Invincible && alive &&!onHurtCooldown && !InvincibilityCheat)
 		{
 			DecreasePower(damage);
 			if(!powerSurgeActive)
@@ -435,6 +436,7 @@ public partial class Player : CharacterBody2D
 	/// <param name="amount">Amount to decrease by</param>
 	public void DecreasePower(int amount)
 	{
+		if(!InvincibilityCheat)
 		power -= amount;
 	}
 	/// <summary>
@@ -451,9 +453,9 @@ public partial class Player : CharacterBody2D
 		{
 			power = 100;
 		}
-		else if (power > 140)
+		else if (power > 150)
 		{
-			power = 140;
+			power = 150;
 		}
 	}
 
@@ -748,7 +750,7 @@ public partial class Player : CharacterBody2D
 		if (attackInstance is PowerSurgeBlast b)
 		{
 			b.Activate(facing);
-			DecreasePower(15);
+			DecreasePower(12);
 		}
 	}
 

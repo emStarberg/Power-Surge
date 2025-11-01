@@ -49,7 +49,7 @@ public partial class LabBoss : Enemy
 
 		wallRay = GetNode<RayCast2D>("VisualRoot/Wall Ray");
 
-		health = 260;
+		health = 220;
 
 		animationPlayer.CurrentAnimation = "Idle";
 		animationPlayer.Play();

@@ -142,7 +142,7 @@ public partial class PlayOptions : Node2D
 					GD.PrintErr("PlayOptions: unable to get SceneTree to open name selector.");
 				}
 			}
-			else if (name == "LEVELS" && GameSettings.Instance != null && GameSettings.Instance.HasStarted)
+			else if (name == "LEVELS" && GameSettings.Instance != null)
 			{
 				GetTree()?.ChangeSceneToFile("res://Scenes/Screens/level_selector.tscn");
 			}

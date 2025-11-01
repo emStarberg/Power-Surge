@@ -685,10 +685,10 @@ shape = SubResource("RectangleShape2D_nx4et")
 stream = ExtResource("3_nx4et")
 
 [node name="Light" type="PointLight2D" parent="."]
-position = Vector2(0, 27)
+position = Vector2(0, 29)
 scale = Vector2(1.85559, 0.857863)
 color = Color(0.4498, 0.052, 0.52, 0.87451)
-energy = 2.5
+energy = 8.22
 texture = SubResource("GradientTexture2D_gsaas")
 
 [node name="Smash Sound" type="AudioStreamPlayer2D" parent="."]

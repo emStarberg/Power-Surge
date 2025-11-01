@@ -22,9 +22,11 @@ public partial class GameSettings : Node
     }
 
     public int[] LevelFragments = { 0, 0, 0, 0, 0, 0, 0, 0 }; // In order of levels, how many fragments have been collected
-    public bool HasStarted; // Whether the game has been started on this save file
-    public bool TutorialComplete; // Whether the tutorial has been completed
+    public bool HasStarted = false; // Whether the game has been started on this save file
+    public bool TutorialComplete = false; // Whether the tutorial has been completed
+    public bool CoreComplete = false; // Whether the second to last level has been completed
     public string[] UnlockedLevels = new string[9];
+
     private float volume = 1f;
     private float musicVolume = 1f;
     private float sfxVolume = 1f;
@@ -113,6 +115,8 @@ public partial class GameSettings : Node
         config.SaveData("LevelFragments", LevelFragments);
         config.SaveData("HasStarted", HasStarted);
         config.SaveData("UnlockedLevels", UnlockedLevels);
+        config.SaveData("CoreComplete", CoreComplete);
+        config.SaveData("TutorialComplete", TutorialComplete);
 
         // Save key bindings
         var bindings = new Godot.Collections.Dictionary<string, Godot.Collections.Array>();
@@ -141,7 +145,8 @@ public partial class GameSettings : Node
         LevelFragments = (int[])config.LoadData("LevelFragments", new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0});
         HasStarted = (bool)config.LoadData("HasStarted", false);
         TutorialComplete = (bool)config.LoadData("TutorialComplete", false);
-        UnlockedLevels = (string[])config.LoadData("UnlockedLevels", new string[8]);
+        UnlockedLevels = (string[])config.LoadData("UnlockedLevels", new string[9]);
+        CoreComplete = (bool)config.LoadData("CoreComplete", false);
 
         var defaultBindings = new Godot.Collections.Dictionary<string, Godot.Collections.Array>();
         object savedBindingsObj = ConfigManager.Instance.LoadData("InputBindings", defaultBindings);

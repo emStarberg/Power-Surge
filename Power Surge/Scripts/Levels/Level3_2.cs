@@ -120,32 +120,27 @@ public partial class Level3_2 : GameLevel
 	{
 		if (body is Player player)
 		{
-			if (player.GetDirection() == change.DirectionEnteredFrom)
-			{
-				switch (change.Name)
+			if (player.GetDirection() == change.DirectionEnteredFrom && change.Name == "1")
+			{									
+				if (change.DirectionEnteredFrom == "right")
 				{
-					case "1":
-						if (change.DirectionEnteredFrom == "right")
-						{
-							camera.Mode = "centered";
-							camera.SetCenterY(-350f);
-							camera.ChangeToCentered();
-						}
-						else
-						{
-							camera.Mode = "centered";
-							camera.SetCenterY(-470f);
-							camera.ChangeToCentered();
-						}
-						break;
-					case "2":
-						camera.Mode = "fixed";
-						camera.Position = new Vector2(0, -15);
-						camera.Zoom = new Vector2(2, 2);
-
-						player.DisableAllInputs();
-						break;
+					camera.Mode = "centered";
+					camera.SetCenterY(-350f);
+					camera.ChangeToCentered();
 				}
+				else
+				{
+					camera.Mode = "centered";
+					camera.SetCenterY(-470f);
+					camera.ChangeToCentered();
+				}										
+			}else if (change.Name == "2")
+			{
+				camera.Mode = "fixed";
+				camera.Position = new Vector2(0, -15);
+				camera.Zoom = new Vector2(2, 2);
+
+				player.DisableAllInputs();
 			}
 		}
 	}
