@@ -77,8 +77,7 @@ offset_bottom = 8748.0
 scale = Vector2(0.388612, 0.388612)
 theme_override_fonts/font = ExtResource("1_oytxc")
 theme_override_font_sizes/font_size = 100
-text = "Director: Emily Braithwaite
-Assistant Director: Felix the Cat
+text = "Created By: Emily Braithwaite
 
 
 
@@ -129,7 +128,8 @@ AUDIO
 Sound Effects: Pixabay
 Music: Abstraction Music
 
-(Bet you weren't expecting that!)
+
+
 
 
 

@@ -104,6 +104,13 @@ public partial class TitleScreen : Node2D
 				GetTree().Quit();
 			}
 		}
+
+		// For marking purposes - unlocks all levels
+		if (Input.IsActionJustPressed("input_cheat_code"))
+		{
+			camera.Shake(5f, 0.5f);
+			GameSettings.Instance.UnlockedLevels = ["tutorial", "1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2"];
+		}
 	}
 
 	private void OnOptionsClosed()

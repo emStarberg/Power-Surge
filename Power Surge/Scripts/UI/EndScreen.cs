@@ -34,10 +34,37 @@ public partial class EndScreen : Node2D
 		lightningSound = GetNode<AudioStreamPlayer2D>("Lightning Sound");
 		rank = GetNode<Label>("Control/Rank");
 		alert = GetNode<Control>("Control/Alert"); // For MVP
+		atEnd = levels.IndexOf(GameData.Instance.CurrentLevel) == levels.Count - 1;
 
-		// Get index of next level and unlock it
-		int nextIndex = levels.IndexOf(GameData.Instance.CurrentLevel) + 1;
-		GameSettings.Instance.UnlockedLevels[nextIndex] = levels[nextIndex];
+		var gameSettings = GameSettings.Instance;
+
+
+		if (!atEnd)
+		{
+			// Get index of next level and unlock it
+			int levelIndex = levels.IndexOf(GameData.Instance.CurrentLevel);
+			if (levels[levelIndex] == "4-1")
+				gameSettings.CoreComplete = true;
+			int nextIndex = levelIndex + 1;
+			if (levels[nextIndex] != "4-2")
+			{
+
+				gameSettings.UnlockedLevels[nextIndex] = levels[nextIndex];
+			}
+			else
+			{
+				if (gameSettings.GetTotalFragments() >= 18)
+				{
+					gameSettings.UnlockedLevels[nextIndex] = levels[nextIndex];
+				}
+			}
+
+
+			// Update with higher fragment count if needed
+			if (gameSettings.LevelFragments[levelIndex] < GameData.Instance.LevelFragments)
+				gameSettings.LevelFragments[levelIndex] = GameData.Instance.LevelFragments;
+
+		}
 		// Save
 		GameSettings.Instance.SaveGame();
 
@@ -73,10 +100,7 @@ public partial class EndScreen : Node2D
 		labels[2].Text = $"{minutes:D2}:{seconds:D2}";
 		enemiesKilled = GameData.Instance.LevelEnemyCount - GameData.Instance.LevelEnemyCountFinal;
 		labels[3].Text = enemiesKilled + "/" + GameData.Instance.LevelEnemyCount;
-
-		// Show alert if last available level
-		atEnd = levels.IndexOf(GameData.Instance.CurrentLevel) == levels.Count - 1;
-
+	
 		rank.Text = CalculateRank();
 	}
 
@@ -151,13 +175,27 @@ public partial class EndScreen : Node2D
 					break;
 				case "NEXT":
 					// Go to next level
-					
+					GameSettings.Instance.SaveGame();
 					if (!atEnd)
 					{
 						int index = levels.IndexOf(GameData.Instance.CurrentLevel);
 						string next = levels[index + 1];
 
-						LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/level_" + next + ".tscn");
+						if (next == "4-2")
+						{
+							if (GameSettings.Instance.GetTotalFragments() < 18)
+							{
+								GetTree().ChangeSceneToFile("res://Scenes/Screens/level_selector.tscn");
+							}
+							else
+							{
+								LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/level_" + next + ".tscn");
+							}
+						}
+						else
+						{
+							LevelLoader.Instance.ChangeLevel("res://Scenes/Levels/level_" + next + ".tscn");
+						}
 					}
 					else
 					{
@@ -246,8 +284,6 @@ public partial class EndScreen : Node2D
 	/// <returns>Final letter grade</returns>
 	private string CalculateRank()
 	{
-		GD.Print("RESULTS:");
-		GD.Print("-------------------------------");
 		string finalRank = "F";
 		int points = 0;
 
@@ -257,12 +293,10 @@ public partial class EndScreen : Node2D
 		if (power >= 70)
 		{
 			points++;
-			GD.Print("+ 1 for power >= 80");
 		}
 		if (power >= 110)
 		{
 			points++;
-			GD.Print("+ 1 for power >= 110");
 		}
 		
 		float levelTime = GameData.Instance.LevelTime;
@@ -273,45 +307,24 @@ public partial class EndScreen : Node2D
 			if ((expectedTime - levelTime) > 15)
 			{
 				points++;
-				GD.Print("+ 1 for 15s faster than expected time");
 			}
 			if ((expectedTime - levelTime) > 5)
 			{
 				points++;
-				GD.Print("+ 1 for 5s faster than expected time");
 			}
 		}
 		float enemyPercentage = (enemiesKilled / GameData.Instance.LevelEnemyCount) * 100;
 		// Max 2
 		if (enemyPercentage >= 50) { 
 			points++;
-			GD.Print("+1 for 70% of enemies defeated");
 		}
 		if (enemyPercentage >= 100) {
 			points++;
-			GD.Print("+1 for 100% of enemies defeated");
 		}
 
 		List<string> ranks = new List<string> { "F", "E", "D", "C", "C+", "B", "B+", "A", "A+", "S" }; // The maximum 9 points is needed for 'S' rank
 
 		finalRank = ranks[points];
-
-		GD.Print("-------------------------------");
-		GD.Print("Time: " + levelTime);
-		GD.Print("Fragments: " + GameData.Instance.LevelFragments);
-		GD.Print("Power: " + power);
-		GD.Print("Enemies Defeated: " + enemiesKilled);
-
-		GD.Print("-------------------------------");
-		GD.Print("Final Rank: " + finalRank);
-		GD.Print("Points: " + points);
-		GD.Print("-------------------------------");
-		GD.Print("EnemyCount: " + GameData.Instance.LevelEnemyCount);
-		GD.Print("EnemyCountFinal: " + GameData.Instance.LevelEnemyCountFinal);
-
 		return finalRank;
-
-
-		
 	}
 }

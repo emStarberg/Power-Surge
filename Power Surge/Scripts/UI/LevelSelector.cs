@@ -17,6 +17,7 @@ public partial class LevelSelector : Control
 	private UICamera camera;
 	private Control effects, currentLevel, backButton;
 	private bool buttonSelected = true;
+	private Control fragmentCountDisplay;
 
 	public override void _Ready()
 	{
@@ -30,6 +31,22 @@ public partial class LevelSelector : Control
 		effects = GetNode<Control>("Levels/Effects");
 		camera = GetNode<UICamera>("UI Camera");
 		backButton = GetNode<Control>("BACK");
+		fragmentCountDisplay = GetNode<Control>("Fragment Count Display");
+
+		int displayCount = GameSettings.Instance.GetTotalFragments();
+		if(displayCount < 18)
+		{
+			fragmentCountDisplay.GetNode<Label>("Fragment Count").Text = displayCount + "/18";
+
+		}
+		else
+		{
+			fragmentCountDisplay.Visible = false;
+			if (GameSettings.Instance.CoreComplete)
+			{
+				GameSettings.Instance.UnlockedLevels[8] = "4-2";
+			}
+		}
 
 		// Get audio
 		zapSound = GetNode<AudioStreamPlayer2D>("Zap Sound");
@@ -44,13 +61,25 @@ public partial class LevelSelector : Control
 			{
 				if (c.Name != "Effects")
 				{
-					
 					c.GetNode<Control>("Fragments").Position = new Vector2(0, -33);
 
 					if (GameSettings.Instance.UnlockedLevels.Contains<string>(c.Name))
 					{
+			
 						levels.Add(c);
 						c.GetNode<Control>("Locked").Visible = false;
+
+						int fragments = GetFragmentCount(c.Name);
+
+						int count = 0;
+						foreach(Node node in c.GetNode<Control>("Fragments").GetChildren())
+						{
+							if(node is TextureRect t && count < fragments)
+							{
+								count++;
+								t.Texture = GD.Load<Texture2D>("res://Assets/Objects/Fragment - Filled Slot.png");
+							}
+						}
 					}
 	
 				}
@@ -198,6 +227,22 @@ public partial class LevelSelector : Control
 	}
 
 
+	private int GetFragmentCount(string name)
+	{
+		var gameSettings = GameSettings.Instance;
+		int index = 0;
+
+		for (int i = 0; i < gameSettings.UnlockedLevels.Length; i++)
+		{
+			if (gameSettings.UnlockedLevels[i] == name)
+			{
+				index = i;
+			}
+		}
+		
+		return gameSettings.LevelFragments[index];
+	}
+	
 	private void OnVolumeChanged()
 	{
 		backgroundMusic.VolumeDb = GameSettings.Instance.GetFinalMusic();

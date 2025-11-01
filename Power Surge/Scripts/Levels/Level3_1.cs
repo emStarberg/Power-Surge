@@ -100,9 +100,9 @@ public partial class Level3_1 : GameLevel
 	{
 		if (body is Player player)
 		{
-			if(change.Name == "3")
+			if (change.Name == "3")
 			{
-				if (player.GlobalPosition.Y > 350 )
+				if (player.GlobalPosition.Y > 350)
 				{
 					camera.Mode = "centered";
 					camera.SetCenterY(536f);
@@ -115,6 +115,15 @@ public partial class Level3_1 : GameLevel
 					camera.ChangeToCentered();
 				}
 			}
+			
+			if(change.Name == "7")
+			{
+				camera.Mode = "centered";
+				camera.SetCenterY(490f);
+				camera.ChangeToCentered();
+			}
+
+
 			if (player.GetDirection() == change.DirectionEnteredFrom)
 			{
 
@@ -167,12 +176,6 @@ public partial class Level3_1 : GameLevel
 							camera.SetCenterY(232f);
 							camera.ChangeToCentered();
 						}
-						break;
-
-					case "7":
-						camera.Mode = "centered";
-						camera.SetCenterY(490f);
-						camera.ChangeToCentered();
 						break;
 
 					case "8":
