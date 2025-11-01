@@ -1,40 +1,60 @@
-[gd_scene load_steps=4 format=3 uid="uid://da41vllojx1m0"]
+[gd_scene load_steps=22 format=3 uid="uid://da41vllojx1m0"]
 
 [ext_resource type="Texture2D" uid="uid://dn3sxyhw3ei3o" path="res://Assets/UI/Title Background.png" id="1_8r1iy"]
+[ext_resource type="Script" uid="uid://y86d4db2cut4" path="res://Scripts/UI/LevelSelector.cs" id="1_15olw"]
 [ext_resource type="Texture2D" uid="uid://bn2v5dhr51k84" path="res://Assets/Thumbnails/Tutorial - Thumbnail.png" id="2_8eipu"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="3_c0t2f"]
+[ext_resource type="Texture2D" uid="uid://ke0b42ohvsyk" path="res://Assets/Thumbnails/Thumbnail Frame - Selected.png" id="3_nggch"]
+[ext_resource type="Texture2D" uid="uid://dyhi2ee4eyfqn" path="res://Assets/Thumbnails/1-1 - Thumbnail.png" id="5_nggch"]
+[ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="6_7khny"]
+[ext_resource type="Texture2D" uid="uid://daeeij14tckmh" path="res://Assets/Thumbnails/1-2 - Tumbnail.png" id="6_20a6y"]
+[ext_resource type="Texture2D" uid="uid://c6b0ucyijqhvc" path="res://Assets/Thumbnails/Thumbnail Frame.png" id="6_qcdvb"]
+[ext_resource type="Texture2D" uid="uid://r8ekqasnpv4c" path="res://Assets/Thumbnails/2-1 - Thumbnail.png" id="7_tvrfm"]
+[ext_resource type="Texture2D" uid="uid://ci4viq02vot6h" path="res://Assets/Thumbnails/2-2 - Thumbnail.png" id="8_l0xq6"]
+[ext_resource type="Texture2D" uid="uid://c1etnlv6wxxlq" path="res://Assets/Thumbnails/3-1 - Thumbnail.png" id="9_8432l"]
+[ext_resource type="Texture2D" uid="uid://cbf8u0w5bys6t" path="res://Assets/Thumbnails/3-2 - Thumbnail.png" id="10_12jf6"]
+[ext_resource type="Texture2D" uid="uid://b7a86s22umns6" path="res://Assets/Thumbnails/4-1 - Thumbnail.png" id="11_1k5co"]
+[ext_resource type="Texture2D" uid="uid://cat4xa387tjix" path="res://Assets/Thumbnails/4-2 - Thumbnail.png" id="13_15olw"]
+[ext_resource type="Script" uid="uid://houf28qf5ruu" path="res://Scripts/Other/UICamera.cs" id="15_l52pc"]
+[ext_resource type="PackedScene" uid="uid://cr8f3adpxwjal" path="res://Scenes/ui_spark.tscn" id="15_suhhj"]
+[ext_resource type="Script" uid="uid://koqrval3oon0" path="res://Scripts/Other/ScreenResolution.cs" id="16_26rji"]
+[ext_resource type="AudioStream" uid="uid://dlfa405wfvls8" path="res://Assets/Audio/Zap.mp3" id="18_7khny"]
+[ext_resource type="AudioStream" uid="uid://chbwwtavgndk7" path="res://Assets/Audio/DavidKBD - Cosmic Pack 02 - Galactic Pulse-full.ogg" id="19_xaokl"]
+[ext_resource type="Texture2D" uid="uid://6t78hc5yqo6t" path="res://Assets/UI/Button.png" id="21_xaokl"]
 
-[node name="Control" type="Control"]
+[node name="Level Selector" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_15olw")
 
 [node name="Background" type="TextureRect" parent="."]
 process_mode = 3
+layout_mode = 0
 offset_left = 2.0
 offset_top = 1.0
 offset_right = 1298.0
 offset_bottom = 649.0
 texture = ExtResource("1_8r1iy")
 
-[node name="Tutorial" type="Control" parent="."]
+[node name="Levels" type="Control" parent="."]
 anchors_preset = 0
+offset_left = 17.0
+offset_top = -27.0
+offset_right = 57.0
+offset_bottom = 13.0
+
+[node name="tutorial" type="Control" parent="Levels"]
+anchors_preset = 0
+offset_top = 13.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 53.0
 scale = Vector2(0.9, 0.9)
 
-[node name="ColorRect" type="ColorRect" parent="Tutorial"]
-offset_left = 74.0
-offset_top = 61.0
-offset_right = 110.0
-offset_bottom = 97.0
-scale = Vector2(6.14772, 3.97681)
-color = Color(0.10748, 0.10748, 0.10748, 1)
-
-[node name="Image" type="TextureRect" parent="Tutorial"]
+[node name="Image" type="TextureRect" parent="Levels/tutorial"]
 layout_mode = 0
 offset_left = 83.0
 offset_top = 69.0
@@ -43,23 +63,716 @@ offset_bottom = 819.0
 scale = Vector2(0.17, 0.17)
 texture = ExtResource("2_8eipu")
 
-[node name="ColorRect" type="ColorRect" parent="Tutorial/Image"]
+[node name="Frame" type="TextureRect" parent="Levels/tutorial"]
 layout_mode = 0
-offset_left = -52.9412
-offset_top = 752.941
-offset_right = -12.9412
-offset_bottom = 792.941
-scale = Vector2(32.5909, 3.39087)
-color = Color(0.10748, 0.10748, 0.10748, 1)
+offset_left = 73.3333
+offset_top = 60.0
+offset_right = 293.333
+offset_bottom = 208.0
+texture = ExtResource("3_nggch")
 
-[node name="Label" type="Label" parent="Tutorial/Image"]
+[node name="Label" type="Label" parent="Levels/tutorial"]
+visible = false
 layout_mode = 0
-offset_left = 152.632
-offset_top = 757.895
-offset_right = 977.632
-offset_bottom = 865.895
-scale = Vector2(1.10135, 1.10135)
+offset_left = 97.7778
+offset_top = 210.0
+offset_right = 820.778
+offset_bottom = 318.0
+scale = Vector2(0.236125, 0.236125)
 theme_override_fonts/font = ExtResource("3_c0t2f")
 theme_override_font_sizes/font_size = 100
 text = "TUTORIAL"
 horizontal_alignment = 1
+
+[node name="Fragments" type="Control" parent="Levels/tutorial"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="TextureRect" parent="Levels/tutorial/Fragments"]
+layout_mode = 0
+offset_left = 154.444
+offset_top = 243.333
+offset_right = 194.444
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2" type="TextureRect" parent="Levels/tutorial/Fragments"]
+offset_left = 175.556
+offset_top = 243.333
+offset_right = 215.556
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3" type="TextureRect" parent="Levels/tutorial/Fragments"]
+offset_left = 196.667
+offset_top = 243.333
+offset_right = 236.667
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="1-1" type="Control" parent="Levels"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 280.0
+offset_top = 13.0
+offset_right = 320.0
+offset_bottom = 53.0
+scale = Vector2(0.9, 0.9)
+
+[node name="Image" type="TextureRect" parent="Levels/1-1"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 69.0
+offset_right = 1283.0
+offset_bottom = 819.0
+scale = Vector2(0.154751, 0.154751)
+texture = ExtResource("5_nggch")
+
+[node name="Frame" type="TextureRect" parent="Levels/1-1"]
+layout_mode = 0
+offset_left = 73.3333
+offset_top = 60.0
+offset_right = 293.333
+offset_bottom = 208.0
+texture = ExtResource("6_qcdvb")
+
+[node name="Label" type="Label" parent="Levels/1-1"]
+visible = false
+layout_mode = 0
+offset_left = 97.7778
+offset_top = 210.0
+offset_right = 820.778
+offset_bottom = 318.0
+scale = Vector2(0.236125, 0.236125)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 100
+text = "LUMINESCENT PLAINS I"
+horizontal_alignment = 1
+
+[node name="Fragments" type="Control" parent="Levels/1-1"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -33.3333
+offset_right = 40.0
+offset_bottom = 6.66666
+
+[node name="1" type="TextureRect" parent="Levels/1-1/Fragments"]
+layout_mode = 0
+offset_left = 154.444
+offset_top = 243.333
+offset_right = 194.444
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2" type="TextureRect" parent="Levels/1-1/Fragments"]
+offset_left = 175.556
+offset_top = 243.333
+offset_right = 215.556
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3" type="TextureRect" parent="Levels/1-1/Fragments"]
+offset_left = 196.667
+offset_top = 243.333
+offset_right = 236.667
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="1-2" type="Control" parent="Levels"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 13.0
+offset_right = 600.0
+offset_bottom = 53.0
+scale = Vector2(0.9, 0.9)
+
+[node name="Image" type="TextureRect" parent="Levels/1-2"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 69.0
+offset_right = 1283.0
+offset_bottom = 819.0
+scale = Vector2(0.154751, 0.154751)
+texture = ExtResource("6_20a6y")
+
+[node name="Frame" type="TextureRect" parent="Levels/1-2"]
+layout_mode = 0
+offset_left = 73.3333
+offset_top = 60.0
+offset_right = 293.333
+offset_bottom = 208.0
+texture = ExtResource("6_qcdvb")
+
+[node name="Label" type="Label" parent="Levels/1-2"]
+visible = false
+layout_mode = 0
+offset_left = 97.7778
+offset_top = 210.0
+offset_right = 820.778
+offset_bottom = 318.0
+scale = Vector2(0.236125, 0.236125)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 100
+text = "LUMINESCENT PLAINS II"
+horizontal_alignment = 1
+
+[node name="Fragments" type="Control" parent="Levels/1-2"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="TextureRect" parent="Levels/1-2/Fragments"]
+layout_mode = 0
+offset_left = 154.444
+offset_top = 243.333
+offset_right = 194.444
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2" type="TextureRect" parent="Levels/1-2/Fragments"]
+offset_left = 175.556
+offset_top = 243.333
+offset_right = 215.556
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3" type="TextureRect" parent="Levels/1-2/Fragments"]
+offset_left = 196.667
+offset_top = 243.333
+offset_right = 236.667
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2-1" type="Control" parent="Levels"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 840.0
+offset_top = 13.0
+offset_right = 880.0
+offset_bottom = 53.0
+scale = Vector2(0.9, 0.9)
+
+[node name="Image" type="TextureRect" parent="Levels/2-1"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 69.0
+offset_right = 1334.0
+offset_bottom = 851.0
+scale = Vector2(0.154751, 0.154751)
+texture = ExtResource("7_tvrfm")
+
+[node name="Frame" type="TextureRect" parent="Levels/2-1"]
+layout_mode = 0
+offset_left = 73.3333
+offset_top = 60.0
+offset_right = 293.333
+offset_bottom = 208.0
+texture = ExtResource("6_qcdvb")
+
+[node name="Label" type="Label" parent="Levels/2-1"]
+visible = false
+layout_mode = 0
+offset_left = 97.7778
+offset_top = 210.0
+offset_right = 820.778
+offset_bottom = 318.0
+scale = Vector2(0.236125, 0.236125)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 100
+text = "CAVES"
+horizontal_alignment = 1
+
+[node name="Fragments" type="Control" parent="Levels/2-1"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -33.3333
+offset_right = 40.0
+offset_bottom = 6.66666
+
+[node name="1" type="TextureRect" parent="Levels/2-1/Fragments"]
+layout_mode = 0
+offset_left = 154.444
+offset_top = 243.333
+offset_right = 194.444
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2" type="TextureRect" parent="Levels/2-1/Fragments"]
+offset_left = 175.556
+offset_top = 243.333
+offset_right = 215.556
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3" type="TextureRect" parent="Levels/2-1/Fragments"]
+offset_left = 196.667
+offset_top = 243.333
+offset_right = 236.667
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2-2" type="Control" parent="Levels"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 280.0
+offset_top = 220.0
+offset_right = 320.0
+offset_bottom = 260.0
+scale = Vector2(0.9, 0.9)
+
+[node name="Image" type="TextureRect" parent="Levels/2-2"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 69.0
+offset_right = 1334.0
+offset_bottom = 851.0
+scale = Vector2(0.154751, 0.154751)
+texture = ExtResource("8_l0xq6")
+
+[node name="Frame" type="TextureRect" parent="Levels/2-2"]
+layout_mode = 0
+offset_left = 73.3333
+offset_top = 60.0
+offset_right = 293.333
+offset_bottom = 208.0
+texture = ExtResource("6_qcdvb")
+
+[node name="Label" type="Label" parent="Levels/2-2"]
+visible = false
+layout_mode = 0
+offset_left = 97.7778
+offset_top = 210.0
+offset_right = 820.778
+offset_bottom = 318.0
+scale = Vector2(0.236125, 0.236125)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 100
+text = "THE LAB ENTRANCE"
+horizontal_alignment = 1
+
+[node name="Fragments" type="Control" parent="Levels/2-2"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="TextureRect" parent="Levels/2-2/Fragments"]
+layout_mode = 0
+offset_left = 154.444
+offset_top = 243.333
+offset_right = 194.444
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2" type="TextureRect" parent="Levels/2-2/Fragments"]
+offset_left = 175.556
+offset_top = 243.333
+offset_right = 215.556
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3" type="TextureRect" parent="Levels/2-2/Fragments"]
+offset_left = 196.667
+offset_top = 243.333
+offset_right = 236.667
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3-1" type="Control" parent="Levels"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 220.0
+offset_right = 600.0
+offset_bottom = 260.0
+scale = Vector2(0.9, 0.9)
+
+[node name="Image" type="TextureRect" parent="Levels/3-1"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 69.0
+offset_right = 1334.0
+offset_bottom = 851.0
+scale = Vector2(0.154751, 0.154751)
+texture = ExtResource("9_8432l")
+
+[node name="Frame" type="TextureRect" parent="Levels/3-1"]
+layout_mode = 0
+offset_left = 73.3333
+offset_top = 60.0
+offset_right = 293.333
+offset_bottom = 208.0
+texture = ExtResource("6_qcdvb")
+
+[node name="Label" type="Label" parent="Levels/3-1"]
+visible = false
+layout_mode = 0
+offset_left = 97.7778
+offset_top = 210.0
+offset_right = 820.778
+offset_bottom = 318.0
+scale = Vector2(0.236125, 0.236125)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 100
+text = "THE CIRCUIT LABS"
+horizontal_alignment = 1
+
+[node name="Fragments" type="Control" parent="Levels/3-1"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="TextureRect" parent="Levels/3-1/Fragments"]
+layout_mode = 0
+offset_left = 154.444
+offset_top = 243.333
+offset_right = 194.444
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2" type="TextureRect" parent="Levels/3-1/Fragments"]
+offset_left = 175.556
+offset_top = 243.333
+offset_right = 215.556
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3" type="TextureRect" parent="Levels/3-1/Fragments"]
+offset_left = 196.667
+offset_top = 243.333
+offset_right = 236.667
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3-2" type="Control" parent="Levels"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 840.0
+offset_top = 220.0
+offset_right = 880.0
+offset_bottom = 260.0
+scale = Vector2(0.9, 0.9)
+
+[node name="Image" type="TextureRect" parent="Levels/3-2"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 69.0
+offset_right = 1334.0
+offset_bottom = 851.0
+scale = Vector2(0.154751, 0.154751)
+texture = ExtResource("10_12jf6")
+
+[node name="Frame" type="TextureRect" parent="Levels/3-2"]
+layout_mode = 0
+offset_left = 73.3333
+offset_top = 60.0
+offset_right = 293.333
+offset_bottom = 208.0
+texture = ExtResource("6_qcdvb")
+
+[node name="Label" type="Label" parent="Levels/3-2"]
+visible = false
+layout_mode = 0
+offset_left = 97.7778
+offset_top = 210.0
+offset_right = 820.778
+offset_bottom = 318.0
+scale = Vector2(0.236125, 0.236125)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 100
+text = "LAB BOSS"
+horizontal_alignment = 1
+
+[node name="Fragments" type="Control" parent="Levels/3-2"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="TextureRect" parent="Levels/3-2/Fragments"]
+layout_mode = 0
+offset_left = 154.444
+offset_top = 243.333
+offset_right = 194.444
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2" type="TextureRect" parent="Levels/3-2/Fragments"]
+offset_left = 175.556
+offset_top = 243.333
+offset_right = 215.556
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3" type="TextureRect" parent="Levels/3-2/Fragments"]
+offset_left = 196.667
+offset_top = 243.333
+offset_right = 236.667
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="4-1" type="Control" parent="Levels"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 420.0
+offset_right = 600.0
+offset_bottom = 460.0
+scale = Vector2(0.9, 0.9)
+
+[node name="Image" type="TextureRect" parent="Levels/4-1"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 69.0
+offset_right = 1495.0
+offset_bottom = 913.0
+scale = Vector2(0.143242, 0.143242)
+texture = ExtResource("11_1k5co")
+
+[node name="Frame" type="TextureRect" parent="Levels/4-1"]
+layout_mode = 0
+offset_left = 73.3333
+offset_top = 60.0
+offset_right = 293.333
+offset_bottom = 208.0
+texture = ExtResource("6_qcdvb")
+
+[node name="Label" type="Label" parent="Levels/4-1"]
+visible = false
+layout_mode = 0
+offset_left = 97.7778
+offset_top = 210.0
+offset_right = 820.778
+offset_bottom = 318.0
+scale = Vector2(0.236125, 0.236125)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 100
+text = "THE CORE"
+horizontal_alignment = 1
+
+[node name="Fragments" type="Control" parent="Levels/4-1"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="TextureRect" parent="Levels/4-1/Fragments"]
+layout_mode = 0
+offset_left = 154.444
+offset_top = 243.333
+offset_right = 194.444
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2" type="TextureRect" parent="Levels/4-1/Fragments"]
+offset_left = 175.556
+offset_top = 243.333
+offset_right = 215.556
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3" type="TextureRect" parent="Levels/4-1/Fragments"]
+offset_left = 196.667
+offset_top = 243.333
+offset_right = 236.667
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="4-2" type="Control" parent="Levels"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 840.0
+offset_top = 420.0
+offset_right = 880.0
+offset_bottom = 460.0
+scale = Vector2(0.9, 0.9)
+
+[node name="Image" type="TextureRect" parent="Levels/4-2"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 69.0
+offset_right = 1495.0
+offset_bottom = 913.0
+scale = Vector2(0.143242, 0.143242)
+texture = ExtResource("13_15olw")
+
+[node name="Frame" type="TextureRect" parent="Levels/4-2"]
+layout_mode = 0
+offset_left = 73.3333
+offset_top = 60.0
+offset_right = 293.333
+offset_bottom = 208.0
+texture = ExtResource("6_qcdvb")
+
+[node name="Label" type="Label" parent="Levels/4-2"]
+visible = false
+layout_mode = 0
+offset_left = 93.3334
+offset_top = 210.0
+offset_right = 859.333
+offset_bottom = 318.0
+scale = Vector2(0.236125, 0.236125)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 100
+text = "THE WORLD CONDUCTOR"
+horizontal_alignment = 1
+
+[node name="Fragments" type="Control" parent="Levels/4-2"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="TextureRect" parent="Levels/4-2/Fragments"]
+layout_mode = 0
+offset_left = 154.444
+offset_top = 243.333
+offset_right = 194.444
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="2" type="TextureRect" parent="Levels/4-2/Fragments"]
+offset_left = 175.556
+offset_top = 243.333
+offset_right = 215.556
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="3" type="TextureRect" parent="Levels/4-2/Fragments"]
+offset_left = 196.667
+offset_top = 243.333
+offset_right = 236.667
+offset_bottom = 283.333
+scale = Vector2(0.356898, 0.356898)
+texture = ExtResource("6_7khny")
+
+[node name="Effects" type="Control" parent="Levels"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 142.0
+offset_top = 122.0
+offset_right = 182.0
+offset_bottom = 162.0
+
+[node name="UI Spark" parent="Levels/Effects" instance=ExtResource("15_suhhj")]
+position = Vector2(146, 61)
+rotation = -1.16726
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark2" parent="Levels/Effects" instance=ExtResource("15_suhhj")]
+position = Vector2(213, 62)
+rotation = 0.939397
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark3" parent="Levels/Effects" instance=ExtResource("15_suhhj")]
+position = Vector2(177, 178)
+rotation = -0.882684
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark4" parent="Levels/Effects" instance=ExtResource("15_suhhj")]
+position = Vector2(75, 73)
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark5" parent="Levels/Effects" instance=ExtResource("15_suhhj")]
+position = Vector2(75, 125)
+rotation = -2.54797
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark6" parent="Levels/Effects" instance=ExtResource("15_suhhj")]
+position = Vector2(97, 178)
+rotation = -4.45951
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Spark7" parent="Levels/Effects" instance=ExtResource("15_suhhj")]
+position = Vector2(256, 147)
+rotation = -2.54797
+scale = Vector2(3, 3)
+script = null
+
+[node name="UI Camera" type="Camera2D" parent="."]
+position = Vector2(610, 323)
+script = ExtResource("15_l52pc")
+
+[node name="ScreenResolution" type="Node" parent="."]
+script = ExtResource("16_26rji")
+
+[node name="Zap Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_7khny")
+
+[node name="Background Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_xaokl")
+volume_db = -10.0
+autoplay = true
+
+[node name="BACK" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 182.0
+offset_top = 351.0
+offset_right = 182.0
+offset_bottom = 351.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite" type="Sprite2D" parent="BACK"]
+position = Vector2(-0.879959, -0.739986)
+scale = Vector2(5.32, 5.32)
+texture = ExtResource("21_xaokl")
+
+[node name="Label" type="Label" parent="BACK"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -626.0
+offset_top = -349.0
+offset_right = -407.0
+offset_bottom = -241.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.460858, 0.460858)
+theme_override_fonts/font = ExtResource("3_c0t2f")
+theme_override_font_sizes/font_size = 80
+text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1

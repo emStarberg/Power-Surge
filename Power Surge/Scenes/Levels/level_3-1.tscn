@@ -1122,7 +1122,6 @@ script = ExtResource("23_wdamg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/Camera Changes/3"]
 position = Vector2(35.2829, 4.40244)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_0816u")
 
 [node name="4" type="Area2D" parent="Checkpoints/Camera Changes"]

@@ -1,17 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://c4yoyys55f7bk"]
+[gd_scene load_steps=8 format=3 uid="uid://c74r0av81wnb7"]
 
-[ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_bpa1g"]
-[ext_resource type="Script" uid="uid://sknoq2ltap0a" path="res://Scripts/Other/Options.cs" id="1_g3f7p"]
-[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="1_uadqa"]
-[ext_resource type="Texture2D" uid="uid://6t78hc5yqo6t" path="res://Assets/UI/Button.png" id="3_g3f7p"]
-[ext_resource type="PackedScene" uid="uid://cr8f3adpxwjal" path="res://Scenes/ui_spark.tscn" id="5_2fkhl"]
-[ext_resource type="AudioStream" uid="uid://w3o11ne75jbx" path="res://Assets/Audio/Menu Select.mp3" id="7_2fkhl"]
-[ext_resource type="Script" uid="uid://houf28qf5ruu" path="res://Scripts/Other/UICamera.cs" id="7_hwt8o"]
+[ext_resource type="FontFile" uid="uid://ce6wk0g1lp84a" path="res://Assets/Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_0n30l"]
+[ext_resource type="Script" uid="uid://cvw04cf3t7730" path="res://Scripts/Other/PlayOptions.cs" id="1_7dtis"]
+[ext_resource type="Texture2D" uid="uid://6t78hc5yqo6t" path="res://Assets/UI/Button.png" id="2_7dtis"]
+[ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="3_dcvhs"]
+[ext_resource type="PackedScene" uid="uid://cr8f3adpxwjal" path="res://Scenes/ui_spark.tscn" id="4_4vabd"]
+[ext_resource type="Script" uid="uid://houf28qf5ruu" path="res://Scripts/Other/UICamera.cs" id="5_yeff7"]
+[ext_resource type="AudioStream" uid="uid://w3o11ne75jbx" path="res://Assets/Audio/Menu Select.mp3" id="6_hpyq2"]
 
-[node name="OptionsScreen" type="Node2D"]
-process_mode = 3
-z_index = 1
-script = ExtResource("1_g3f7p")
+[node name="PlayOptions" type="Node2D"]
+script = ExtResource("1_7dtis")
 
 [node name="Overlay" type="ColorRect" parent="."]
 offset_left = 195.0
@@ -38,9 +36,9 @@ offset_top = 74.0
 offset_right = 1045.0
 offset_bottom = 182.0
 scale = Vector2(0.687646, 0.687646)
-theme_override_fonts/font = ExtResource("1_bpa1g")
+theme_override_fonts/font = ExtResource("1_0n30l")
 theme_override_font_sizes/font_size = 50
-text = "OPTIONS"
+text = "PLAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -51,7 +49,7 @@ offset_top = 8.0
 offset_right = 45.0
 offset_bottom = 48.0
 
-[node name="AUDIO" type="Control" parent="Menus/Main/Buttons"]
+[node name="CONTINUE" type="Control" parent="Menus/Main/Buttons"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 582.0
@@ -59,32 +57,32 @@ offset_top = 223.0
 offset_right = 582.0
 offset_bottom = 223.0
 
-[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/AUDIO"]
+[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/CONTINUE"]
 position = Vector2(-0.879959, -0.739986)
 scale = Vector2(5.32, 5.32)
-texture = ExtResource("3_g3f7p")
+texture = ExtResource("2_7dtis")
 
-[node name="Label" type="Label" parent="Menus/Main/Buttons/AUDIO"]
+[node name="Label" type="Label" parent="Menus/Main/Buttons/CONTINUE"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.0
+offset_left = -60.5
 offset_top = -25.0
-offset_right = 157.0
+offset_right = 192.5
 offset_bottom = 83.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.460858, 0.460858)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 80
-text = "AUDIO"
+text = "CONTINUE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CONTROLS" type="Control" parent="Menus/Main/Buttons"]
+[node name="NEW GAME" type="Control" parent="Menus/Main/Buttons"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 582.0
@@ -92,12 +90,12 @@ offset_top = 314.0
 offset_right = 582.0
 offset_bottom = 314.0
 
-[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/CONTROLS"]
+[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/NEW GAME"]
 position = Vector2(-0.879959, -0.739986)
 scale = Vector2(5.32, 5.32)
-texture = ExtResource("3_g3f7p")
+texture = ExtResource("2_7dtis")
 
-[node name="Label" type="Label" parent="Menus/Main/Buttons/CONTROLS"]
+[node name="Label" type="Label" parent="Menus/Main/Buttons/NEW GAME"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -111,13 +109,13 @@ offset_bottom = 83.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.460858, 0.460858)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 80
-text = "CONTROLS"
+text = "NEW GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BACK" type="Control" parent="Menus/Main/Buttons"]
+[node name="LEVELS" type="Control" parent="Menus/Main/Buttons"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 582.0
@@ -125,32 +123,32 @@ offset_top = 407.0
 offset_right = 582.0
 offset_bottom = 407.0
 
-[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/BACK"]
+[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/LEVELS"]
 position = Vector2(-0.879959, -0.739986)
 scale = Vector2(5.32, 5.32)
-texture = ExtResource("3_g3f7p")
+texture = ExtResource("2_7dtis")
 
-[node name="Label" type="Label" parent="Menus/Main/Buttons/BACK"]
+[node name="Label" type="Label" parent="Menus/Main/Buttons/LEVELS"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.0
+offset_left = -81.0
 offset_top = -25.0
-offset_right = 157.0
+offset_right = 266.0
 offset_bottom = 83.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.460858, 0.460858)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 80
-text = "BACK"
+text = "LEVELS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QUIT" type="Control" parent="Menus/Main/Buttons"]
+[node name="BACK" type="Control" parent="Menus/Main/Buttons"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 582.0
@@ -158,12 +156,12 @@ offset_top = 500.0
 offset_right = 582.0
 offset_bottom = 500.0
 
-[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/QUIT"]
+[node name="Sprite" type="Sprite2D" parent="Menus/Main/Buttons/BACK"]
 position = Vector2(-0.879959, -0.739986)
 scale = Vector2(5.32, 5.32)
-texture = ExtResource("3_g3f7p")
+texture = ExtResource("2_7dtis")
 
-[node name="Label" type="Label" parent="Menus/Main/Buttons/QUIT"]
+[node name="Label" type="Label" parent="Menus/Main/Buttons/BACK"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -177,9 +175,9 @@ offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.440215, 0.440215)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 80
-text = "EXIT LEVEL"
+text = "BACK"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -191,42 +189,42 @@ offset_top = 247.0
 offset_right = 611.0
 offset_bottom = 287.0
 
-[node name="UI Spark" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+[node name="UI Spark" parent="Menus/Main/Buttons/Effects" instance=ExtResource("4_4vabd")]
 position = Vector2(-19, -21)
 rotation = -1.16726
 scale = Vector2(3, 3)
 script = null
 
-[node name="UI Spark2" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+[node name="UI Spark2" parent="Menus/Main/Buttons/Effects" instance=ExtResource("4_4vabd")]
 position = Vector2(45, -19)
 rotation = 0.939397
 scale = Vector2(3, 3)
 script = null
 
-[node name="UI Spark3" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+[node name="UI Spark3" parent="Menus/Main/Buttons/Effects" instance=ExtResource("4_4vabd")]
 position = Vector2(-62, -13)
 rotation = -0.882684
 scale = Vector2(3, 3)
 script = null
 
-[node name="UI Spark4" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+[node name="UI Spark4" parent="Menus/Main/Buttons/Effects" instance=ExtResource("4_4vabd")]
 position = Vector2(69, -2)
 scale = Vector2(3, 3)
 script = null
 
-[node name="UI Spark5" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+[node name="UI Spark5" parent="Menus/Main/Buttons/Effects" instance=ExtResource("4_4vabd")]
 position = Vector2(-68, 18)
 rotation = -2.54797
 scale = Vector2(3, 3)
 script = null
 
-[node name="UI Spark6" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+[node name="UI Spark6" parent="Menus/Main/Buttons/Effects" instance=ExtResource("4_4vabd")]
 position = Vector2(-12, 22)
 rotation = -4.45951
 scale = Vector2(3, 3)
 script = null
 
-[node name="UI Spark7" parent="Menus/Main/Buttons/Effects" instance=ExtResource("5_2fkhl")]
+[node name="UI Spark7" parent="Menus/Main/Buttons/Effects" instance=ExtResource("4_4vabd")]
 position = Vector2(50, 19)
 rotation = -2.54797
 scale = Vector2(3, 3)
@@ -245,7 +243,7 @@ offset_top = 66.0
 offset_right = 1014.0
 offset_bottom = 174.0
 scale = Vector2(0.759001, 0.759001)
-theme_override_fonts/font = ExtResource("1_bpa1g")
+theme_override_fonts/font = ExtResource("1_0n30l")
 theme_override_font_sizes/font_size = 50
 text = "AUDIO"
 horizontal_alignment = 1
@@ -275,7 +273,7 @@ offset_top = 64.0
 offset_right = 407.0
 offset_bottom = 172.0
 scale = Vector2(0.476614, 0.476614)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "MASTER"
 
@@ -310,7 +308,7 @@ offset_top = 64.0
 offset_right = 437.0
 offset_bottom = 172.0
 scale = Vector2(0.476614, 0.476614)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "MUSIC"
 
@@ -345,7 +343,7 @@ offset_top = 64.0
 offset_right = 474.0
 offset_bottom = 172.0
 scale = Vector2(0.476614, 0.476614)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "SFX"
 
@@ -377,7 +375,7 @@ offset_top = 475.0
 offset_right = 772.0
 offset_bottom = 583.0
 scale = Vector2(0.476614, 0.476614)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "BACK"
 
@@ -411,7 +409,7 @@ offset_top = 40.0
 offset_right = 1014.0
 offset_bottom = 148.0
 scale = Vector2(0.759001, 0.759001)
-theme_override_fonts/font = ExtResource("1_bpa1g")
+theme_override_fonts/font = ExtResource("1_0n30l")
 theme_override_font_sizes/font_size = 50
 text = "CONTROLS"
 horizontal_alignment = 1
@@ -444,7 +442,7 @@ offset_top = 69.0
 offset_right = 487.0
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "MOVE LEFT"
 
@@ -464,7 +462,7 @@ offset_top = 8.0
 offset_right = 381.0
 offset_bottom = 116.0
 scale = Vector2(0.280737, 0.280737)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "A"
 
@@ -492,7 +490,7 @@ offset_top = 69.0
 offset_right = 511.0
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "MOVE RIGHT"
 
@@ -512,7 +510,7 @@ offset_top = 8.0
 offset_right = 381.0
 offset_bottom = 116.0
 scale = Vector2(0.280737, 0.280737)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "D"
 
@@ -540,7 +538,7 @@ offset_top = 69.0
 offset_right = 590.0
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "JUMP"
 
@@ -560,7 +558,7 @@ offset_top = 8.0
 offset_right = 381.0
 offset_bottom = 116.0
 scale = Vector2(0.280737, 0.280737)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "W"
 
@@ -588,7 +586,7 @@ offset_top = 69.0
 offset_right = 592.0
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "DASH"
 
@@ -608,7 +606,7 @@ offset_top = 8.0
 offset_right = 381.0
 offset_bottom = 116.0
 scale = Vector2(0.280737, 0.280737)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "LSHIFT"
 
@@ -636,7 +634,7 @@ offset_top = 69.0
 offset_right = 588.574
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "CYCLE ATTK F"
 
@@ -656,7 +654,7 @@ offset_top = 8.0
 offset_right = 381.0
 offset_bottom = 116.0
 scale = Vector2(0.280737, 0.280737)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "LEFTBRACKET"
 
@@ -684,7 +682,7 @@ offset_top = 69.0
 offset_right = 586.364
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "CYCLE ATTK B"
 
@@ -704,7 +702,7 @@ offset_top = 8.0
 offset_right = 381.0
 offset_bottom = 116.0
 scale = Vector2(0.280737, 0.280737)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "RIGHTBRACKET"
 
@@ -732,7 +730,7 @@ offset_top = 69.0
 offset_right = 665.0
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "ATTACK"
 
@@ -752,7 +750,7 @@ offset_top = 8.0
 offset_right = 381.0
 offset_bottom = 116.0
 scale = Vector2(0.280737, 0.280737)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "SPACE"
 
@@ -780,7 +778,7 @@ offset_top = 69.0
 offset_right = 675.0
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "SHIELD"
 
@@ -800,7 +798,7 @@ offset_top = 8.0
 offset_right = 381.0
 offset_bottom = 116.0
 scale = Vector2(0.280737, 0.280737)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "RSHIFT"
 
@@ -828,7 +826,7 @@ offset_top = 69.0
 offset_right = 665.0
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "ACCEPT"
 
@@ -848,7 +846,7 @@ offset_top = 8.0
 offset_right = 381.0
 offset_bottom = 116.0
 scale = Vector2(0.280737, 0.280737)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "ENTER"
 
@@ -876,7 +874,7 @@ offset_top = 69.0
 offset_right = 695.939
 offset_bottom = 177.0
 scale = Vector2(0.388348, 0.388348)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "BACK"
 
@@ -898,7 +896,7 @@ offset_top = 8.0
 offset_right = 381.0
 offset_bottom = 116.0
 scale = Vector2(0.280737, 0.280737)
-theme_override_fonts/font = ExtResource("1_uadqa")
+theme_override_fonts/font = ExtResource("3_dcvhs")
 theme_override_font_sizes/font_size = 100
 text = "ENTER"
 
@@ -912,11 +910,7 @@ scale = Vector2(0.0173839, 11.6011)
 
 [node name="UI Camera" type="Camera2D" parent="."]
 position = Vector2(577, 325)
-script = ExtResource("7_hwt8o")
+script = ExtResource("5_yeff7")
 
 [node name="Menu Sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_2fkhl")
-
-[connection signal="value_changed" from="Menus/Audio/Sliders/MASTER/HSlider" to="." method="VolumeChanged"]
-[connection signal="value_changed" from="Menus/Audio/Sliders/MUSIC/HSlider" to="." method="MusicVolumeChanged"]
-[connection signal="value_changed" from="Menus/Audio/Sliders/SFX/HSlider" to="." method="SfxVolumeChanged"]
+stream = ExtResource("6_hpyq2")

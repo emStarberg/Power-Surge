@@ -40,8 +40,19 @@ public partial class Options : Node2D
 		{
 			if (node is Control button)
 			{
+				if(button.Name == "QUIT")
+				{
+					if(GetParent().Name == "TitleScreen")
+					{
+						button.Visible = false;
+					}
+					else
+					{
+						menuItems.Add(button);
+					}
+				}
 				// Don't add effects to list
-				if (button.Name != "Effects")
+				else if (button.Name != "Effects")
 				{
 					menuItems.Add(button);
 				}
@@ -200,7 +211,8 @@ public partial class Options : Node2D
 			}
 			else if (name == "QUIT")
 			{
-				GetTree().Quit();
+				GetTree().Paused = false;
+				GetTree().ChangeSceneToFile("res://Scenes/Screens/title_screen.tscn");
 			}
 		}
 	}
