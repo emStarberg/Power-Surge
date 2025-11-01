@@ -21,7 +21,7 @@ There’s not much to say about communication as I was working by myself, but wh
 
 **Version Control**
 
-I used GitHub for my version control; I made a branch for each feature I was developing and then merged that into main through a pull request. It was difficult to use GitHub to its full potential without any teammates. I used issues to keep track of what needed doing, this really helped me to remember bugs that I discovered or ideas I thought of while working on something else.
+I used GitHub for my version control; I made a branch for each feature I was developing and then merged that into main through a pull request. It was difficult to use GitHub to its full potential without any teammates. I used issues to keep track of what needed doing, this really helped me to remember bugs that I discovered or ideas I thought of while working on something else. I also made references to my issues in commits rather than updating/closing them manually. I used a milestone for the MVP.
 
 **The Best Parts**
 
