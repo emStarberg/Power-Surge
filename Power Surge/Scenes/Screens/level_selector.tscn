@@ -4,12 +4,12 @@
 [ext_resource type="Script" uid="uid://y86d4db2cut4" path="res://Scripts/UI/LevelSelector.cs" id="1_15olw"]
 [ext_resource type="Texture2D" uid="uid://bn2v5dhr51k84" path="res://Assets/Thumbnails/Tutorial - Thumbnail.png" id="2_8eipu"]
 [ext_resource type="FontFile" uid="uid://5nenxasxttag" path="res://Assets/Fonts/Jersey_10/Jersey10-Regular.ttf" id="3_c0t2f"]
-[ext_resource type="Texture2D" uid="uid://ke0b42ohvsyk" path="res://Assets/Thumbnails/Thumbnail Frame - Selected.png" id="3_nggch"]
 [ext_resource type="Texture2D" uid="uid://dyhi2ee4eyfqn" path="res://Assets/Thumbnails/1-1 - Thumbnail.png" id="5_nggch"]
 [ext_resource type="Texture2D" uid="uid://mwoblcc55eke" path="res://Assets/Objects/Fragment - Empty Slot.png" id="6_7khny"]
 [ext_resource type="Texture2D" uid="uid://daeeij14tckmh" path="res://Assets/Thumbnails/1-2 - Tumbnail.png" id="6_20a6y"]
 [ext_resource type="Texture2D" uid="uid://c6b0ucyijqhvc" path="res://Assets/Thumbnails/Thumbnail Frame.png" id="6_qcdvb"]
 [ext_resource type="Texture2D" uid="uid://r8ekqasnpv4c" path="res://Assets/Thumbnails/2-1 - Thumbnail.png" id="7_tvrfm"]
+[ext_resource type="Texture2D" uid="uid://byyim7leyl2fv" path="res://Assets/Thumbnails/Lock.png" id="7_xaokl"]
 [ext_resource type="Texture2D" uid="uid://ci4viq02vot6h" path="res://Assets/Thumbnails/2-2 - Thumbnail.png" id="8_l0xq6"]
 [ext_resource type="Texture2D" uid="uid://c1etnlv6wxxlq" path="res://Assets/Thumbnails/3-1 - Thumbnail.png" id="9_8432l"]
 [ext_resource type="Texture2D" uid="uid://cbf8u0w5bys6t" path="res://Assets/Thumbnails/3-2 - Thumbnail.png" id="10_12jf6"]
@@ -69,7 +69,7 @@ offset_left = 73.3333
 offset_top = 60.0
 offset_right = 293.333
 offset_bottom = 208.0
-texture = ExtResource("3_nggch")
+texture = ExtResource("6_qcdvb")
 
 [node name="Label" type="Label" parent="Levels/tutorial"]
 visible = false
@@ -113,6 +113,30 @@ offset_right = 236.667
 offset_bottom = 283.333
 scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
+
+[node name="Locked" type="Control" parent="Levels/tutorial"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 311.111
+offset_right = 351.111
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Levels/tutorial/Locked"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 80.0
+offset_right = -38.0
+offset_bottom = 189.0
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.921569)
+
+[node name="TextureRect" type="TextureRect" parent="Levels/tutorial/Locked"]
+layout_mode = 0
+offset_left = -166.667
+offset_top = 90.0
+offset_right = -126.667
+offset_bottom = 130.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_xaokl")
 
 [node name="1-1" type="Control" parent="Levels"]
 layout_mode = 3
@@ -185,6 +209,29 @@ offset_bottom = 283.333
 scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
+[node name="Locked" type="Control" parent="Levels/1-1"]
+anchors_preset = 0
+offset_left = 311.111
+offset_right = 351.111
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Levels/1-1/Locked"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 80.0
+offset_right = -38.0
+offset_bottom = 189.0
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.921569)
+
+[node name="TextureRect" type="TextureRect" parent="Levels/1-1/Locked"]
+layout_mode = 0
+offset_left = -166.667
+offset_top = 90.0
+offset_right = -126.667
+offset_bottom = 130.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_xaokl")
+
 [node name="1-2" type="Control" parent="Levels"]
 layout_mode = 3
 anchors_preset = 0
@@ -254,6 +301,30 @@ offset_right = 236.667
 offset_bottom = 283.333
 scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
+
+[node name="Locked" type="Control" parent="Levels/1-2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 311.111
+offset_right = 351.111
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Levels/1-2/Locked"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 80.0
+offset_right = -38.0
+offset_bottom = 189.0
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.921569)
+
+[node name="TextureRect" type="TextureRect" parent="Levels/1-2/Locked"]
+layout_mode = 0
+offset_left = -166.667
+offset_top = 90.0
+offset_right = -126.667
+offset_bottom = 130.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_xaokl")
 
 [node name="2-1" type="Control" parent="Levels"]
 layout_mode = 3
@@ -326,6 +397,30 @@ offset_bottom = 283.333
 scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
+[node name="Locked" type="Control" parent="Levels/2-1"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 311.111
+offset_right = 351.111
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Levels/2-1/Locked"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 80.0
+offset_right = -38.0
+offset_bottom = 189.0
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.921569)
+
+[node name="TextureRect" type="TextureRect" parent="Levels/2-1/Locked"]
+layout_mode = 0
+offset_left = -166.667
+offset_top = 90.0
+offset_right = -126.667
+offset_bottom = 130.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_xaokl")
+
 [node name="2-2" type="Control" parent="Levels"]
 layout_mode = 3
 anchors_preset = 0
@@ -395,6 +490,30 @@ offset_right = 236.667
 offset_bottom = 283.333
 scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
+
+[node name="Locked" type="Control" parent="Levels/2-2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 311.111
+offset_right = 351.111
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Levels/2-2/Locked"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 80.0
+offset_right = -38.0
+offset_bottom = 189.0
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.921569)
+
+[node name="TextureRect" type="TextureRect" parent="Levels/2-2/Locked"]
+layout_mode = 0
+offset_left = -166.667
+offset_top = 90.0
+offset_right = -126.667
+offset_bottom = 130.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_xaokl")
 
 [node name="3-1" type="Control" parent="Levels"]
 layout_mode = 3
@@ -466,6 +585,30 @@ offset_bottom = 283.333
 scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
+[node name="Locked" type="Control" parent="Levels/3-1"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 311.111
+offset_right = 351.111
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Levels/3-1/Locked"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 80.0
+offset_right = -38.0
+offset_bottom = 189.0
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.921569)
+
+[node name="TextureRect" type="TextureRect" parent="Levels/3-1/Locked"]
+layout_mode = 0
+offset_left = -166.667
+offset_top = 90.0
+offset_right = -126.667
+offset_bottom = 130.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_xaokl")
+
 [node name="3-2" type="Control" parent="Levels"]
 layout_mode = 3
 anchors_preset = 0
@@ -535,6 +678,30 @@ offset_right = 236.667
 offset_bottom = 283.333
 scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
+
+[node name="Locked" type="Control" parent="Levels/3-2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 311.111
+offset_right = 351.111
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Levels/3-2/Locked"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 80.0
+offset_right = -38.0
+offset_bottom = 189.0
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.921569)
+
+[node name="TextureRect" type="TextureRect" parent="Levels/3-2/Locked"]
+layout_mode = 0
+offset_left = -166.667
+offset_top = 90.0
+offset_right = -126.667
+offset_bottom = 130.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_xaokl")
 
 [node name="4-1" type="Control" parent="Levels"]
 layout_mode = 3
@@ -606,6 +773,30 @@ offset_bottom = 283.333
 scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
 
+[node name="Locked" type="Control" parent="Levels/4-1"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 311.111
+offset_right = 351.111
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Levels/4-1/Locked"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 80.0
+offset_right = -38.0
+offset_bottom = 189.0
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.921569)
+
+[node name="TextureRect" type="TextureRect" parent="Levels/4-1/Locked"]
+layout_mode = 0
+offset_left = -166.667
+offset_top = 90.0
+offset_right = -126.667
+offset_bottom = 130.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_xaokl")
+
 [node name="4-2" type="Control" parent="Levels"]
 layout_mode = 3
 anchors_preset = 0
@@ -675,6 +866,30 @@ offset_right = 236.667
 offset_bottom = 283.333
 scale = Vector2(0.356898, 0.356898)
 texture = ExtResource("6_7khny")
+
+[node name="Locked" type="Control" parent="Levels/4-2"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 311.111
+offset_right = 351.111
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Levels/4-2/Locked"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 80.0
+offset_right = -38.0
+offset_bottom = 189.0
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.921569)
+
+[node name="TextureRect" type="TextureRect" parent="Levels/4-2/Locked"]
+layout_mode = 0
+offset_left = -166.667
+offset_top = 90.0
+offset_right = -126.667
+offset_bottom = 130.0
+scale = Vector2(2, 2)
+texture = ExtResource("7_xaokl")
 
 [node name="Effects" type="Control" parent="Levels"]
 layout_mode = 3

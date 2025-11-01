@@ -20,6 +20,7 @@ config/icon="res://Assets/Default/icon.svg"
 GameSettings="*res://Scripts/Other/GameSettings.cs"
 GameData="*res://Scripts/Other/GameData.cs"
 LevelLoader="*res://Scripts/Other/LevelLoader.cs"
+ConfigManager="*res://Scripts/Other/ConfigManager.cs"
 
 [display]
 

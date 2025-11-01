@@ -606,7 +606,6 @@ public partial class Player : CharacterBody2D
 	/// </summary>
 	public void AddFragment()
 	{
-		var camera = GetParent().GetNode<Camera>("Camera");
 		fragmentSound.Play();
 		fragmentSlots[fragmentCount].Texture = (Texture2D)GD.Load("res://Assets/Objects/Fragment - Filled Slot.png");
 		fragmentCount++;
@@ -616,6 +615,7 @@ public partial class Player : CharacterBody2D
 			power = 100;
 			camera.Shake(6, 0.2f);
 		}
+
 	}
 	/// <summary>
 	/// Start the power surge timer

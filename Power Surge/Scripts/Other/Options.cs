@@ -212,6 +212,7 @@ public partial class Options : Node2D
 			else if (name == "QUIT")
 			{
 				GetTree().Paused = false;
+				GameSettings.Instance.SaveGame();
 				GetTree().ChangeSceneToFile("res://Scenes/Screens/title_screen.tscn");
 			}
 		}

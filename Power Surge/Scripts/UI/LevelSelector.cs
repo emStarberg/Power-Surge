@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 //------------------------------------------------------------------------------
 // <summary>
 //   Handles the level select screen
@@ -15,7 +16,7 @@ public partial class LevelSelector : Control
 	private AudioStreamPlayer2D zapSound, backgroundMusic;
 	private UICamera camera;
 	private Control effects, currentLevel, backButton;
-	private bool buttonSelected = false;
+	private bool buttonSelected = true;
 
 	public override void _Ready()
 	{
@@ -36,23 +37,32 @@ public partial class LevelSelector : Control
 
 		GameSettings.Instance.VolumeChanged += OnVolumeChanged;
 		OnVolumeChanged(); // Set initial volume
-						   // Add levels to list
+		// Add levels to list
 		foreach (Node n in GetNode<Control>("Levels").GetChildren())
 		{
 			if (n is Control c)
 			{
 				if (c.Name != "Effects")
 				{
-					levels.Add(c);
+					
 					c.GetNode<Control>("Fragments").Position = new Vector2(0, -33);
+
+					if (GameSettings.Instance.UnlockedLevels.Contains<string>(c.Name))
+					{
+						levels.Add(c);
+						c.GetNode<Control>("Locked").Visible = false;
+					}
+	
 				}
 				if (c.Name == "tutorial")
 					c.GetNode<Control>("Fragments").Visible = false;
+
 			}
 		}
 
-		SelectLevel(selected);
+		SelectButton();
 	}
+
 
 	public override void _Process(double delta)
 	{
@@ -83,12 +93,16 @@ public partial class LevelSelector : Control
 			}
 			SelectLevel(selected);
 		}
-
-		if (Input.IsActionJustPressed("input_down") && currentLevel.Name == "tutorial" && !buttonSelected)
-			SelectButton();
-
-		if (Input.IsActionJustPressed("input_up") && buttonSelected)
+		if (!buttonSelected)
+		{
+			if (Input.IsActionJustPressed("input_down") && currentLevel.Name == "tutorial")
+				SelectButton();
+		}
+		if (Input.IsActionJustPressed("input_up") && buttonSelected && GameSettings.Instance.UnlockedLevels.Contains<string>("tutorial"))
+		{
 			DeselectButton();
+			SelectLevel(0);
+		}
 
 
 		// Enter pressed
@@ -104,15 +118,15 @@ public partial class LevelSelector : Control
 				{
 					GetTree().ChangeSceneToFile("res://Scenes/Levels/level_" + currentLevel.Name + ".tscn");
 				}
-			}else
+			}
+			else
 			{
+				GameSettings.Instance.SaveGame();
 				GetTree().ChangeSceneToFile("res://Scenes/Screens/title_screen.tscn");
 			}
 		}
-		
+
 	}
-
-
 
 	/// <summary>
 	/// Select a level by highlighting it
@@ -143,9 +157,9 @@ public partial class LevelSelector : Control
 	private void DeselectLevel(int index)
 	{
 		Control level = levels[index];
-		currentLevel.GetNode<TextureRect>("Frame").Texture = deselectedFrame;
-		currentLevel.GetNode<Label>("Label").Visible = false;
-		currentLevel.GetNode<Control>("Fragments").Position = new Vector2(0, -33);
+		level.GetNode<TextureRect>("Frame").Texture = deselectedFrame;
+		level.GetNode<Label>("Label").Visible = false;
+		level.GetNode<Control>("Fragments").Position = new Vector2(0, -33);
 	}
 
 	/// <summary>
@@ -158,6 +172,8 @@ public partial class LevelSelector : Control
 		zapSound.Play();
 		camera.Shake(7, 0.1f);
 		backButton.GetNode<Sprite2D>("Sprite").Texture = buttonOn;
+		if (GameSettings.Instance.UnlockedLevels.Contains<string>("tutorial"))
+		DeselectLevel(0);	
 	}
 
 	/// <summary>

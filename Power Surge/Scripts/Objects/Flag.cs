@@ -13,6 +13,8 @@ public partial class Flag : Area2D, IWorldObject
 	{
 		if (body is Player player)
 		{
+			GameSettings.Instance.TutorialComplete = true;
+			GameSettings.Instance.SaveGame();
 			GetTree().ChangeSceneToFile("res://Scenes/Cutscenes/post_tutorial.tscn");
 		}
 	}
