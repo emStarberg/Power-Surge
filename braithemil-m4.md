@@ -38,3 +38,39 @@ I needed a way to easily connect switches to gates and elevators when designing 
 Any object that can be turned on/off by a [Switch](https://github.com/emStarberg/Power-Surge/blob/main/Power%20Surge/Scripts/Objects/Switch.cs) inherits SwitchOperatedObject. This means that a Switch can just be given a list of SwitchOperatedObjects and be instructed to iterate through and turn them on/off, with no concern for the nature of the actual objects. When I needed to add moving platforms into a later level, it only took me 5 minutes thanks to this already being set up.
 
 
+
+## Bad Code
+
+**#1 - Camera**
+
+[Camera.cs](https://github.com/emStarberg/Power-Surge/blob/main/Power%20Surge/Scripts/Other/Camera.cs) is the script attached to the camera in each level. 
+
+I think that the end result from this script is good, the camera transitions between modes smoothly to give the player a better field of view depending on the environment. Unfortunately the code is not great. I basically just threw another thing in there every time I needed a new camera mode without integrating it properly, modes work very differently from each other and worst of all, calling a mode change from another script is different between modes. If you want to use the horizontal camera mode you simply write:
+
+- camera.Mode = “horizontal”,
+
+but if you want the camera to remain centered on the y axis you write: 
+
+- camera.Mode = “centered”;  
+
+- camera.SetCenterY(-350f); 
+
+- camera.ChangeToCentered(); 
+
+Centered is also a terrible name for that mode because it sounds like it would center both the x and y axis.
+
+**#2 - Player**
+
+[Player.cs](https://github.com/emStarberg/Power-Surge/blob/main/Power%20Surge/Scripts/Player/Player.cs) is the script used for player movements… and some other stuff that really should’ve been put in a separate script.
+
+Player.cs is a pretty large file at 780 lines. It has methods for every player action: move left/right, jump, dash, attack, switch attack, hurt, die. This is already a lot, but on top of that I had it manage the power meter as well. In an ideal world, the power meter would’ve been handled in its own script, making use of public methods in player to retrieve the required data.
+
+Because it was one of the first scripts created and was worked on in pieces throughout the whole project, it turned into a bit of an inconsistent mess my as code quality and style improved overtime.
+
+**#3 - GameData**
+
+[GameData.cs](https://github.com/emStarberg/Power-Surge/blob/main/Power%20Surge/Scripts/Other/GameData.cs) is perfectly functional but a pretty awful bit of code as half of it is useless. I had an old system for making objects glow depending on the level which I scrapped but forgot to remove here.
+
+
+
+
